@@ -1,0 +1,44 @@
+{
+  "navigation": {
+    "home": "Home",
+    "services": "Servizi",
+    "projects": "Progetti",
+    "about": "Chi sono",
+    "bookACall": "Prenota una call"
+  },
+  "footer": {
+    "tagline": "Aiuto startup e aziende a costruire prodotti digitali solidi e scalabili, focalizzati sulla crescita",
+    "sections": {
+      "general": "Generale",
+      "services": "Servizi",
+      "projects": "Progetti"
+    },
+    "links": {
+      "homepage": "Homepage",
+      "validationMvp": "Validazione & MVP",
+      "auditConsulting": "Audit & Consulenza",
+      "fractionalCto": "Fractional CTO",
+      "technicalMentorship": "Mentorship Tecnica",
+      "productDevelopment": "Sviluppo Prodotto",
+      "personalIdeas": "Personali & Idee",
+      "forClients": "Per clienti"
+    },
+    "cta": {
+      "title": "Hai già deciso?",
+      "description": "Non preoccuparti, prenditi il tuo tempo... nel frattempo, dai un voto a questo gatto"
+    },
+    "featuredProjects": "Progetti in evidenza",
+    "copyright": "Copyright © 2018 - {year} Andrea Losavio. Tutti i diritti riservati.",
+    "vat": "P.IVA: {vatNumber}"
+  },
+  "social": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "cv": "Curriculum Vitae"
+  },
+  "accessibility": {
+    "homeLink": "Andrea Losavio - Home",
+    "openMenu": "Apri menu",
+    "closeMenu": "Chiudi menu"
+  }
+}

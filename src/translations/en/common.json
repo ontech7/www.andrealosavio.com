@@ -1,0 +1,44 @@
+{
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "projects": "Projects",
+    "about": "About",
+    "bookACall": "Book a call"
+  },
+  "footer": {
+    "tagline": "Helping startups and companies build solid, scalable digital products focused on growth",
+    "sections": {
+      "general": "General",
+      "services": "Services",
+      "projects": "Projects"
+    },
+    "links": {
+      "homepage": "Homepage",
+      "validationMvp": "Validation & MVP",
+      "auditConsulting": "Audit & Consulting",
+      "fractionalCto": "Fractional CTO",
+      "technicalMentorship": "Technical Mentorship",
+      "productDevelopment": "Product Development",
+      "personalIdeas": "Personal & Ideas",
+      "forClients": "For clients"
+    },
+    "cta": {
+      "title": "Did you decide yet?",
+      "description": "Don't worry, take your time... in the meantime, give this cat a vote"
+    },
+    "featuredProjects": "Featured projects",
+    "copyright": "Copyright © 2018 - {year} Andrea Losavio. All rights reserved.",
+    "vat": "VAT: {vatNumber}"
+  },
+  "social": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "cv": "Curriculum Vitae"
+  },
+  "accessibility": {
+    "homeLink": "Andrea Losavio - Home",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  }
+}

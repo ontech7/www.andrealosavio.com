@@ -1,0 +1,27 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_217_758)">
+<rect width="256" height="256" fill="#111111"/>
+<mask id="mask0_217_758" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-113" y="-53" width="449" height="388">
+<circle cx="130.275" cy="140.8" r="193.6" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_217_758)">
+<line x1="-275.325" y1="128.087" x2="493.475" y2="128.087" stroke="#BFBFBF" stroke-opacity="0.06" stroke-width="1.00856"/>
+<line x1="-275.325" y1="192.087" x2="493.475" y2="192.087" stroke="#BFBFBF" stroke-opacity="0.06" stroke-width="1.00856"/>
+<line x1="-275.325" y1="63.2868" x2="493.475" y2="63.2868" stroke="#BFBFBF" stroke-opacity="0.06" stroke-width="1.00856"/>
+<line x1="128.257" y1="-204.533" x2="128.257" y2="365.067" stroke="#BFBFBF" stroke-opacity="0.06" stroke-width="1.00856"/>
+<line x1="63.4575" y1="-204.533" x2="63.4575" y2="365.067" stroke="#BFBFBF" stroke-opacity="0.06" stroke-width="1.00856"/>
+<line x1="193.058" y1="-204.533" x2="193.057" y2="365.067" stroke="#BFBFBF" stroke-opacity="0.06" stroke-width="1.00856"/>
+</g>
+<g clip-path="url(#clip1_217_758)">
+<path d="M220.16 202.205L35.8399 202.205L128.018 42.5599L166.59 109.389L144.149 146.26L187.862 146.26L198.321 164.376L111.886 164.376L145 109.991L145.496 109.141L128.018 78.7929L67.2158 184.088L209.701 184.088L220.16 202.205Z" fill="white"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_217_758">
+<rect width="256" height="256" fill="white"/>
+</clipPath>
+<clipPath id="clip1_217_758">
+<rect width="184.32" height="184.32" fill="white" transform="translate(35.84 31.04)"/>
+</clipPath>
+</defs>
+</svg>

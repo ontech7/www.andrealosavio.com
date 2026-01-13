@@ -1,0 +1,123 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ================================================
+   DESIGN SYSTEM - Andrea Losavio Portfolio
+   ================================================ */
+
+@theme inline {
+  /* Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-gradient: var(--primary-gradient);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-gradient: var(--secondary-gradient);
+  --color-secondary-gradient-light: var(--secondary-gradient-light);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+  --color-border-gradient: var(--border-gradient);
+  --color-border-gradient-light: var(--border-gradient-light);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Typography */
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-dm-mono);
+
+  /* Border Radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+:root {
+  --radius: 12px;
+
+  /* Gradients */
+  --primary-gradient: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.75) 50%,
+    rgba(255, 255, 255, 0.6) 100%
+  );
+  --secondary-gradient: linear-gradient(
+    to top,
+    rgba(4, 38, 73, 0.4) 0%,
+    rgba(4, 38, 73, 0.6) 20%,
+    rgba(4, 38, 73, 0.8) 50%,
+    rgba(4, 38, 73, 0.6) 80%,
+    rgba(4, 38, 73, 0.4) 100%
+  );
+  --secondary-gradient-light: linear-gradient(
+    to top,
+    rgba(51, 152, 255, 1) 0%,
+    rgba(51, 152, 255, 0.75) 50%,
+    rgba(51, 152, 255, 0.5) 100%
+  );
+  --border-gradient: linear-gradient(
+    to top right,
+    rgba(191, 191, 191, 0.07) 0%,
+    rgba(191, 191, 191, 0.15) 20%,
+    rgba(191, 191, 191, 0.4) 50%,
+    rgba(191, 191, 191, 0.15) 80%,
+    rgba(191, 191, 191, 0.07) 100%
+  );
+  --border-gradient-light: linear-gradient(
+    to top right,
+    rgba(191, 191, 191, 0.1) 0%,
+    rgba(191, 191, 191, 0.3) 20%,
+    rgba(191, 191, 191, 0.7) 50%,
+    rgba(191, 191, 191, 0.3) 80%,
+    rgba(191, 191, 191, 0.1) 100%
+  );
+
+  /* Colors */
+  --background: #111111;
+  --foreground: #ffffff;
+  --card: #111111;
+  --card-foreground: #ffffff;
+  --popover: #111111;
+  --popover-foreground: #ffffff;
+  --primary: #111111;
+  --primary-foreground: #ffffff;
+  --secondary: #0d7ef2;
+  --secondary-foreground: #042649;
+  --muted: #1f1f1f;
+  --muted-foreground: #bfbfbf;
+  --accent: #0d7ef2;
+  --accent-foreground: #042649;
+  --destructive: #dc2626;
+  --border: #333333;
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #0d7ef2;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
