@@ -1,6 +1,26 @@
 {
-  "placeholder": {
-    "title": "Homepage Content",
-    "description": "Header and Footer are now set up. Homepage content coming soon."
+  "hero": {
+    "title": "Andrea Losavio",
+    "subtitle": "Software Engineer & Tech Partner",
+    "description": "Helping startups and companies build solid, scalable digital products focused on growth",
+    "ctaDiscussVision": "Let's discuss your vision",
+    "ctaMoreAboutMe": "More about me",
+    "ctaZeroToOne": "Zero to One",
+    "social": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "cv": "Curriculum Vitae"
+    }
+  },
+  "makingAnImpact": {
+    "title": "Making an impact",
+    "subtitle": "How I supported teams and clients grow, build, and move forward",
+    "items": {
+      "brandIdentity": "Helped a client develop a <highlight>strong brand identity</highlight> that allowed them to reach a wider audience and attract more customers",
+      "infrastructure": "Supported a company in building a <highlight>robust infrastructure</highlight>, laying solid foundations for future projects",
+      "platforms": "Collaborated long-term with a company to develop some of the most <highlight>widely used platforms</highlight> today",
+      "transition": "Assisted a startup during a <highlight>critical product transition</highlight> phase, ensuring a smooth evolution",
+      "investment": "Helped a startup secure a <highlight>€1.6M investment</highlight> round through product development and technical strategy"
+    }
   }
 }

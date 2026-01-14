@@ -15,7 +15,7 @@ export function Header() {
 
   return (
     <header className="bg-background/80 fixed top-0 right-0 left-0 z-50 backdrop-blur-xl">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" aria-label={t("accessibility.homeLink")}>
@@ -32,7 +32,7 @@ export function Header() {
                     key={link.href}
                     href={link.href}
                     className={cn(
-                      "text-foreground rounded-lg px-4 py-2 text-base transition-colors",
+                      "text-foreground rounded-lg px-4 py-1.5 text-base transition-colors",
                       isActive ? "bg-muted" : "hover:bg-muted/60"
                     )}
                   >

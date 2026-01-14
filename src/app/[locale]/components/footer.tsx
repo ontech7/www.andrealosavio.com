@@ -9,7 +9,7 @@ export async function Footer() {
 
   return (
     <footer className="border-border bg-background border-t">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-12 lg:py-16">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
@@ -22,8 +22,9 @@ export async function Footer() {
                 <p className="text-muted-foreground text-xs leading-tight">
                   {t("footer.tagline")}
                 </p>
+
                 {/* Social Links */}
-                <div className="mt-4 flex items-center gap-3">
+                <div className="mt-4 flex items-center gap-4">
                   {SOCIAL_LINKS.map((social) => (
                     <a
                       key={social.labelKey}
@@ -141,7 +142,7 @@ export async function Footer() {
   );
 }
 
-export function FastMemoFeaturedProject() {
+function FastMemoFeaturedProject() {
   return (
     <svg
       width="135"
