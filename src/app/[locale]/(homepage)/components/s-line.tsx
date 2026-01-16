@@ -1,4 +1,8 @@
+"use client";
+
 import { cn } from "@/utils/cn";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 
 export function SLine({
   inverted,
@@ -7,13 +11,32 @@ export function SLine({
   inverted?: boolean;
   className?: string;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.7", "start 0.5"],
+  });
+
+  const clipPath = useTransform(
+    scrollYProgress,
+    [0, 1],
+    inverted
+      ? ["inset(100% 0 0 0)", "inset(0% 0 0 0)"]
+      : ["inset(0 0 100% 0)", "inset(0 0 0% 0)"]
+  );
+
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+
   return (
-    <div
+    <motion.div
+      ref={ref}
       className={cn(
         "flex h-20 items-center justify-center md:h-25",
         inverted && "scale-y-[-1]",
         className
       )}
+      style={{ clipPath, opacity }}
     >
       <SLineCurve position="bottom" className="self-start" />
       <div
@@ -31,7 +54,7 @@ export function SLine({
         }}
       />
       <SLineCurve position="top" className="self-end" />
-    </div>
+    </motion.div>
   );
 }
 
