@@ -22,5 +22,69 @@
       "transition": "Assisted a startup during a <highlight>critical product transition</highlight> phase, ensuring a smooth evolution",
       "investment": "Helped a startup secure almost <highlight>€2M investment</highlight> round through product development and technical strategy"
     }
+  },
+  "feedback": {
+    "clients": {
+      "recrowd": {
+        "name": "Recrowd S.r.l.",
+        "description": "real-estate crowdfunding",
+        "quote": "\"Our collaboration with Andrea was consistently solid from start to finish. Over time, he became a key contributor to the platform's evolution — improving performance, refining the platform, and ensuring a smooth, reliable user experience.\""
+      },
+      "quido": {
+        "name": "Quido S.r.l.",
+        "description": "artificial intelligence for private equity and M&A",
+        "quote": "\"Andrea managed to make sense of a highly complex product like Quido — where finance meets AI — with impressive clarity. He helped shape a sophisticated yet accessible interface that highlights the intelligence behind the platform. A professional who understands both data logic and the importance of design and user experience.\""
+      },
+      "ravenn": {
+        "name": "Ravenn S.r.l.",
+        "description": "event logistics and hospitality management platform",
+        "quote": "\"Our collaboration was short but impactful. Andrea handled the entire platform end-to-end, delivering a smooth and intuitive experience for managing logistics, check-ins, and hospitality.\""
+      },
+      "studioBargiggia": {
+        "name": "Studio Bargiggia",
+        "description": "condominium management",
+        "quote": "\"Our previous website suffered from poor design, confusing navigation, mismatched colors, and performance issues. He completely rebuilt it from the ground up, creating a clean, fast, and modern showcase site that truly represents our firm. Thanks to his work, our online presence finally matches the professionalism of our studio.\""
+      },
+      "brainplatform": {
+        "name": "Brainplatform S.r.l.",
+        "description": "digital product consulting",
+        "quote": "\"Worked on a short-term collaboration to support our digital product initiatives.\""
+      },
+      "anonymous": {
+        "name": "Anonymous",
+        "description": "management platform for tobacconists",
+        "quote": "\"He built a platform that completely transformed how we work: interactive maps, tobacconist management, agent assignments, and an admin dashboard — all in one place. He perfectly balanced a fast and user-friendly interface. His focus on performance and user experience is what truly set his work apart.\""
+      }
+    }
+  },
+  "quote": {
+    "text": "Every moment in business happens only once. The next Bill Gates will not build an operating system. The next Larry Page or Sergey Brin won't make a search engine. And the next Mark Zuckerberg won't create a social network. If you are copying these guys, you aren't learning from them.",
+    "author": "Peter Thiel",
+    "book": "Zero to One: Notes on Startups, or How to Build the Future"
+  },
+  "youCouldBeNext": {
+    "title": "You could be next.",
+    "subtitle": "Every great digital product in that timeline started with a single conversation",
+    "leftText": {
+      "line1": "You've seen what I've helped others achieve — now I'm ready to discover",
+      "line1Highlight": "what we can build together",
+      "line2": "Whether you need to validate an idea, scale a product, or tackle a complex technical challenge, I have the experience to guide you there."
+    },
+    "notReadyYet": "Not ready yet?",
+    "keepScrolling": "Keep scrolling to read what clients say about working with me.",
+    "challengeBox": {
+      "title": "What's your main challenge?",
+      "subtitle": "Choose a service designed to solve it.",
+      "services": {
+        "fractionalCto": "Fractional CTO",
+        "validationMvp": "Validation & MVP",
+        "technicalMentorship": "Technical Mentorship",
+        "auditConsulting": "Audit & Consulting",
+        "productDevelopment": "Product Development",
+        "collaboration": "Collaboration"
+      },
+      "or": "or",
+      "contactMe": "Contact me"
+    }
   }
 }

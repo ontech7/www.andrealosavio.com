@@ -5,8 +5,8 @@ import { Link, usePathname } from "@/libs/i18n/navigation";
 import { cn } from "@/utils/cn";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { Logo } from "../logo";
 import { LanguageSwitcher } from "./language-switcher";
-import { Logo } from "./logo";
 
 export function Header() {
   const pathname = usePathname();

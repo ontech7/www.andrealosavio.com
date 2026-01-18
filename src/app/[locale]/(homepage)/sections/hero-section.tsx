@@ -8,7 +8,7 @@ import { cn } from "@/utils/cn";
 import { ArrowDownIcon, ArrowRightIcon, CodeIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
-import { HeroDecoration } from "../components/hero-decoration";
+import { HomepageHeroDecoration } from "../components/hero-decoration";
 
 interface HeroSectionProps {
   id: string;
@@ -48,16 +48,16 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         <motion.h1
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
-          className="mb-0.5 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-4xl font-bold text-transparent md:text-7xl"
+          className="-mb-0.5 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-4xl font-bold text-transparent md:mb-0 md:text-7xl"
         >
           {t("hero.title")}
         </motion.h1>
         <motion.h4
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
-          className="mb-5 flex items-center gap-1.5 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text pb-1.5 text-lg leading-0 text-transparent md:text-xl"
+          className="text-md mb-5 flex items-center gap-1.5 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text pb-1.5 leading-0 text-transparent md:text-xl"
         >
-          <CodeIcon className="-mb-0.5 size-5.5 text-white" />
+          <CodeIcon className="size-5 text-white md:-mb-0.5 md:size-5.5" />
           {t("hero.subtitle")}
         </motion.h4>
 
@@ -77,11 +77,20 @@ export function HeroSection({ id, className }: HeroSectionProps) {
             onClick={() => {
               document
                 .getElementById("making-an-impact")
-                ?.scrollIntoView({ behavior: "smooth" });
+                ?.scrollIntoView({ behavior: "smooth", block: "start" });
             }}
           >
             {t("hero.ctaZeroToOne")}
-            <ArrowDownIcon className="size-4 animate-bounce" />
+            <motion.span
+              animate={{ y: [-2, 2, -2] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <ArrowDownIcon className="size-4" />
+            </motion.span>
           </Button>
           <Button asChild variant="primary">
             <Link href="/about">{t("hero.ctaMoreAboutMe")}</Link>
@@ -118,7 +127,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           "lg:top-1/2 lg:-right-30 lg:bottom-auto lg:-translate-y-1/2 lg:opacity-100"
         )}
       >
-        <HeroDecoration />
+        <HomepageHeroDecoration />
       </div>
     </section>
   );

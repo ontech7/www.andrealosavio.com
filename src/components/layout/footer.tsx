@@ -132,9 +132,9 @@ export async function Footer() {
 
       {/* Copyright Bar */}
       <div className="border-border border-t py-8">
-        <p className="text-muted-foreground mx-auto flex max-w-67.5 flex-col gap-3 text-center text-sm font-normal sm:max-w-max sm:flex-row">
+        <p className="text-muted-foreground mx-auto flex max-w-67.5 flex-col gap-3 text-center text-sm font-normal md:max-w-max md:flex-row">
           {t("footer.copyright", { year: currentYear })}
-          <span className="text-border">―</span>
+          <span className="text-muted-foreground">―</span>
           {t("footer.vat", { vatNumber: "12705460967" })}
         </p>
       </div>

@@ -5,7 +5,6 @@ export const NAV_LINKS = [
   { href: "/services", labelKey: "navigation.services" },
   { href: "/projects", labelKey: "navigation.projects" },
   { href: "/about", labelKey: "navigation.about" },
-  { href: "/book-a-call", labelKey: "navigation.bookACall" },
 ] as const;
 
 export const FOOTER_LINKS = {
@@ -16,7 +15,6 @@ export const FOOTER_LINKS = {
       { href: "/services", labelKey: "navigation.services" },
       { href: "/projects", labelKey: "navigation.projects" },
       { href: "/about", labelKey: "navigation.about" },
-      { href: "/book-a-call", labelKey: "navigation.bookACall" },
     ],
   },
   services: {

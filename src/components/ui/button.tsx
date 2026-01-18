@@ -21,8 +21,19 @@ const buttonVariants = cva(
         primary: "bg-muted text-foreground hover:bg-muted/80",
         "gradient-primary":
           "bg-linear-to-r from-secondary-foreground to-secondary-foreground/0 rounded-full text-foreground",
-        "gradient-outline":
-          "[background:var(--secondary-gradient)] text-foreground",
+        "gradient-outline": [
+          // Base settings
+          "relative isolate overflow-hidden bg-transparent text-foreground border border-transparent",
+
+          // Layer 1: Background Base
+          "before:absolute before:inset-0 before:-z-20 before:[background:var(--outline-gradient)]",
+
+          // Layer 2: Background Hover
+          "after:absolute after:inset-0 after:-z-10",
+          "after:[background:var(--outline-gradient-hover)]",
+          "after:opacity-0 after:transition-opacity after:duration-300",
+          "hover:after:opacity-100",
+        ].join(" "),
       },
       size: {
         default: "h-10 px-5 py-2",
@@ -57,7 +68,7 @@ function Button({
   if (variant === "gradient-outline") {
     return (
       <span
-        className={cn("relative inline-flex rounded-lg p-px", className)}
+        className={cn("relative inline-flex rounded-lg", className)}
         style={{ background: "var(--border-gradient)" }}
       >
         <Comp

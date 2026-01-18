@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 
-export function HeroDecoration() {
+export function HomepageHeroDecoration() {
   return (
     <svg
       width="625"

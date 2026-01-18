@@ -19,11 +19,11 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-primary-gradient: var(--primary-gradient);
+  --color-text-gradient: var(--text-gradient);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary-gradient: var(--secondary-gradient);
-  --color-secondary-gradient-light: var(--secondary-gradient-light);
+  --color-outline-gradient: var(--outline-gradient);
+  --color-outline-gradient-light: var(--outline-gradient-light);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
@@ -57,13 +57,13 @@
   --radius: 12px;
 
   /* Gradients */
-  --primary-gradient: linear-gradient(
+  --text-gradient: linear-gradient(
     to top,
     rgba(255, 255, 255, 1) 0%,
     rgba(255, 255, 255, 0.75) 50%,
     rgba(255, 255, 255, 0.6) 100%
   );
-  --secondary-gradient: linear-gradient(
+  --outline-gradient: linear-gradient(
     to top left,
     rgba(12, 25, 39, 1) 0%,
     rgba(9, 29, 49, 1) 30%,
@@ -71,7 +71,15 @@
     rgba(9, 29, 49, 1) 70%,
     rgba(12, 25, 39, 1) 100%
   );
-  --secondary-gradient-light: linear-gradient(
+  --outline-gradient-hover: linear-gradient(
+    to top left,
+    rgba(12, 25, 39, 1) 0%,
+    rgba(9, 29, 60, 1) 20%,
+    rgba(6, 32, 80, 1) 50%,
+    rgba(9, 29, 60, 1) 80%,
+    rgba(12, 25, 39, 1) 100%
+  );
+  --outline-gradient-light: linear-gradient(
     to top,
     rgba(51, 152, 255, 1) 0%,
     rgba(51, 152, 255, 0.75) 50%,

@@ -23,7 +23,7 @@ export function MakingAnImpactSection({
   return (
     <section
       id={id}
-      className={cn("mx-auto max-w-5xl px-6 py-24 md:py-32", className)}
+      className={cn("mx-auto max-w-5xl scroll-mt-20 px-6", className)}
     >
       {/* Title */}
       <motion.div
@@ -56,7 +56,7 @@ export function MakingAnImpactSection({
           <Fragment key={item.textKey}>
             <ImpactCard item={item} />
             {index !== IMPACT_ITEMS.length - 1 && (
-              <SLine inverted={index % 2 === 1} className="w-145" />
+              <SLine inverted={index % 2 === 1} className="w-40 md:w-145" />
             )}
           </Fragment>
         ))}

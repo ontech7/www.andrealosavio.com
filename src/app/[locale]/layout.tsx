@@ -1,13 +1,12 @@
 import "../globals.css";
 
+import { Layout } from "@/components/layout/layout";
 import { routing } from "@/libs/i18n/routing";
 import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { DM_Mono, DM_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
-import { Footer } from "./components/footer";
-import { Header } from "./components/header";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -61,9 +60,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className={`${dmSans.variable} ${dmMono.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          <Header />
-          <main className="min-h-screen pt-16">{children}</main>
-          <Footer />
+          <Layout>{children}</Layout>
         </NextIntlClientProvider>
       </body>
     </html>

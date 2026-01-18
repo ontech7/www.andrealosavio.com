@@ -22,5 +22,69 @@
       "transition": "Ho assistito una startup durante una fase di <highlight>transizione critica del prodotto</highlight>, garantendo un'evoluzione fluida",
       "investment": "Ho aiutato una startup a ottenere un round di <highlight>investimento di quasi €2M</highlight> attraverso lo sviluppo del prodotto e la strategia tecnica"
     }
+  },
+  "feedback": {
+    "clients": {
+      "recrowd": {
+        "name": "Recrowd S.r.l.",
+        "description": "crowdfunding immobiliare",
+        "quote": "\"La nostra collaborazione con Andrea è stata solida dall'inizio alla fine. Nel tempo, è diventato un contributore chiave nell'evoluzione della piattaforma — migliorando le performance, raffinando la piattaforma e garantendo un'esperienza utente fluida e affidabile.\""
+      },
+      "quido": {
+        "name": "Quido S.r.l.",
+        "description": "intelligenza artificiale per private equity e M&A",
+        "quote": "\"Andrea è riuscito a dare senso a un prodotto altamente complesso come Quido — dove la finanza incontra l'AI — con notevole chiarezza. Ha contribuito a plasmare un'interfaccia sofisticata ma accessibile che valorizza l'intelligenza dietro la piattaforma. Un professionista che comprende sia la logica dei dati che l'importanza del design e dell'esperienza utente.\""
+      },
+      "ravenn": {
+        "name": "Ravenn S.r.l.",
+        "description": "logistica eventi e hospitality",
+        "quote": "\"La nostra collaborazione è stata breve ma d'impatto. Andrea ha gestito l'intera piattaforma end-to-end, offrendo un'esperienza fluida e intuitiva per la gestione di logistica, check-in e hospitality.\""
+      },
+      "studioBargiggia": {
+        "name": "Studio Bargiggia",
+        "description": "amministrazione condominiale",
+        "quote": "\"Il nostro precedente sito web soffriva di design scadente, navigazione confusa, colori non coordinati e problemi di performance. Lui l'ha ricostruito completamente da zero, creando un sito vetrina pulito, veloce e moderno che rappresenta davvero il nostro studio. Grazie al suo lavoro, la nostra presenza online finalmente rispecchia la professionalità del nostro studio.\""
+      },
+      "brainplatform": {
+        "name": "Brainplatform S.r.l.",
+        "description": "consulenza per prodotti digitali",
+        "quote": "\"Ho lavorato a una collaborazione a breve termine per supportare le nostre iniziative di prodotto digitale.\""
+      },
+      "anonymous": {
+        "name": "Anonimo",
+        "description": "gestionale per tabaccai",
+        "quote": "\"Ha costruito una piattaforma che ha completamente trasformato il nostro modo di lavorare: mappe interattive, gestione tabaccai, assegnazione agenti e una dashboard amministrativa — tutto in un unico posto. Ha bilanciato perfettamente velocità e facilità d'uso dell'interfaccia. La sua attenzione alle performance e all'esperienza utente è ciò che distingue davvero il suo lavoro.\""
+      }
+    }
+  },
+  "quote": {
+    "text": "Nel mondo del business ogni evento accade una volta sola. Il prossimo Bill Gates non costruirà un sistema operativo. Il prossimo Larry Page o Sergey Brin non realizzerà un motore di ricerca. E il prossimo Mark Zuckerberg non creerà un social network. Se state copiando le loro imprese, non state imparando molto da loro.",
+    "author": "Peter Thiel",
+    "book": "Da zero a uno: I segreti delle startup, ovvero come si costruisce il futuro"
+  },
+  "youCouldBeNext": {
+    "title": "Potresti essere il prossimo.",
+    "subtitle": "Ogni grande prodotto digitale in quella timeline è iniziato con una singola conversazione",
+    "leftText": {
+      "line1": "Hai visto cosa ho aiutato gli altri a raggiungere — ora sono pronto a scoprire",
+      "line1Highlight": "cosa possiamo costruire insieme",
+      "line2": "Che tu debba validare un'idea, scalare un prodotto o affrontare una sfida tecnica complessa, ho l'esperienza per guidarti."
+    },
+    "notReadyYet": "Non sei ancora pronto?",
+    "keepScrolling": "Continua a scorrere per leggere cosa dicono i clienti che hanno lavorato con me.",
+    "challengeBox": {
+      "title": "Qual è la tua sfida principale?",
+      "subtitle": "Scegli un servizio pensato per risolverla.",
+      "services": {
+        "fractionalCto": "Fractional CTO",
+        "validationMvp": "Validazione & MVP",
+        "technicalMentorship": "Mentorship Tecnica",
+        "auditConsulting": "Audit & Consulting",
+        "productDevelopment": "Sviluppo Prodotto",
+        "collaboration": "Collaborazione"
+      },
+      "or": "oppure",
+      "contactMe": "Contattami"
+    }
   }
 }
