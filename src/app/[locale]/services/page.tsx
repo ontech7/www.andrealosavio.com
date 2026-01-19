@@ -1,3 +1,9 @@
+import { HeroSection } from "./sections/hero-section";
+
 export default async function ServicesPage() {
-  return null;
+  return (
+    <>
+      <HeroSection id="hero" />
+    </>
+  );
 }

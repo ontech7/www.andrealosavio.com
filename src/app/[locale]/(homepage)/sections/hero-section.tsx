@@ -48,14 +48,14 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         <motion.h1
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
-          className="-mb-0.5 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-4xl font-bold text-transparent md:mb-0 md:text-7xl"
+          className="-mb-0.5 bg-(image:--text-gradient) bg-clip-text text-4xl font-bold text-transparent md:mb-0 md:text-7xl"
         >
           {t("hero.title")}
         </motion.h1>
         <motion.h4
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
-          className="text-md mb-5 flex items-center gap-1.5 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text pb-1.5 leading-0 text-transparent md:text-xl"
+          className="text-md mb-5 flex items-center gap-1.5 bg-(image:--text-gradient) bg-clip-text pb-1.5 leading-0 text-transparent md:text-xl"
         >
           <CodeIcon className="size-5 text-white md:-mb-0.5 md:size-5.5" />
           {t("hero.subtitle")}

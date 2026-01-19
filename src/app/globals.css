@@ -60,8 +60,8 @@
   --text-gradient: linear-gradient(
     to top,
     rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0.75) 50%,
-    rgba(255, 255, 255, 0.6) 100%
+    rgba(194, 194, 194, 1) 50%,
+    rgba(187, 187, 187, 1) 100%
   );
   --outline-gradient: linear-gradient(
     to top left,
@@ -82,8 +82,8 @@
   --outline-gradient-light: linear-gradient(
     to top,
     rgba(51, 152, 255, 1) 0%,
-    rgba(51, 152, 255, 0.75) 50%,
-    rgba(51, 152, 255, 0.5) 100%
+    rgba(39, 103, 168, 1) 50%,
+    rgba(25, 65, 106, 1) 100%
   );
   --border-gradient: linear-gradient(
     to top right,
