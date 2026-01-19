@@ -1,12 +1,29 @@
 {
   "name": "Andrea Losavio",
   "short_name": "Andrea Losavio",
-  "theme_color": "#ffffff",
+  "theme_color": "#111111",
   "background_color": "#111111",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "scope": "/",
   "start_url": "/",
   "icons": [
+    {
+      "src": "/icons/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "apple touch icon"
+    },
     {
       "src": "/icons/android-chrome-192x192.png",
       "sizes": "192x192",
@@ -18,9 +35,10 @@
       "type": "image/png"
     },
     {
-      "src": "/icons/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png"
+      "src": "/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
