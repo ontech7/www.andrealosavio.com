@@ -2,7 +2,7 @@ import { hasLocale, Locale } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 import { routing } from "./routing";
 
-const namespaces = ["common", "homepage", "services"] as const;
+const namespaces = ["common", "homepage", "services", "projects"] as const;
 
 async function loadMessages(locale: Locale) {
   const messages: Record<string, Record<string, string>> = {};

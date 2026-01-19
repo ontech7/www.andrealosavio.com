@@ -20,7 +20,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         primary: "bg-muted text-foreground hover:bg-muted/80",
         "gradient-primary":
-          "bg-linear-to-r from-secondary-foreground to-secondary-foreground/0 rounded-full text-foreground",
+          "bg-linear-to-r from-secondary-foreground to-secondary-foreground/0 rounded-l-full text-foreground",
         "gradient-outline": [
           // Base settings
           "relative isolate overflow-hidden bg-transparent text-foreground border border-transparent",

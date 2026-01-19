@@ -70,7 +70,7 @@ export function QuoteSection({ id, className }: QuoteSectionProps) {
 
         {/* Author */}
         <motion.p
-          className="text-muted-foreground mt-8 text-xs md:text-sm"
+          className="text-muted-foreground mt-10 max-w-100 text-center text-xs md:max-w-200 md:text-sm"
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
         >

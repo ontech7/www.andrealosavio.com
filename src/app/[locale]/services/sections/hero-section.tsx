@@ -20,14 +20,14 @@ export function HeroSection({ id, className }: HeroSectionProps) {
     <section
       id={id}
       className={cn(
-        "relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-5xl items-start overflow-hidden px-6 pt-40",
+        "relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-5xl items-start overflow-hidden px-6 pt-40 md:min-h-[calc(70vh-4rem)]",
         "lg:items-center lg:pt-0",
         className
       )}
     >
       {/* Main */}
       <motion.div
-        className="relative z-10 max-w-150"
+        className="relative z-10 max-w-lg"
         variants={staggerContainerAnim}
         initial="hidden"
         animate="visible"
