@@ -11,11 +11,11 @@ export const config: ProxyConfig = {
      * - api (API routes)
      * - trcp (tRPC routes)
      * - _next (static files)
-     * - favicon.ico, favicon.png (browser icons)
+     * - favicon.ico, favicon.png, favicon.svg (browser icons)
      * - images/videos/documents/icons (assets in public folder)
      * - .well-known (devtools)
      * - manifest.json, robots.txt (metadata files)
      */
-    "/((?!api|trcp|_next/static|_next|icons|videos|images|documents|.well-known|favicon.ico|favicon.png|robots.txt|manifest.json).*)",
+    "/((?!api|trcp|_next/static|_next|icons|videos|images|documents|.well-known|favicon.ico|favicon.png|favicon.svg|robots.txt|manifest.json).*)",
   ],
 };

@@ -1,0 +1,27 @@
+{
+  "hero": {
+    "title": "About <highlight>me</highlight>",
+    "subtitle": "Who I am, my journey, skills, and creative vision",
+    "name": "Andrea Losavio",
+    "role": "Software Engineer & Tech Partner (Freelance)",
+    "bio1": "I am a <bold>Computer Engineer</bold> who graduated from <bold>Politecnico di Milano</bold> in 2019, registered with the professional board under number <link>34249</link>, section B. I have been passionate about programming since 2009, fascinated from an early age by the logic and structure behind software — exploring the fundamentals of programming, computer architecture, and algorithms.",
+    "bio2": "I began my professional journey in the IT consulting sector in 2018 and started working as a <bold>freelancer</bold> in early 2023. Today, I collaborate with companies and startups as a <bold>Software Engineer & Tech Partner</bold>, helping them develop high-quality digital products and grow through tailored technological solutions.",
+    "bio3": "In 2023, I designed and developed the <link>Fast Memo</link> app and website, currently available on both Android and iOS stores."
+  },
+  "beyondCode": {
+    "title": "<highlight>Beyond</highlight> code",
+    "subtitle": "What I do in my freetime when I'm not coding",
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "hobbies": {
+      "photography": "Photography",
+      "coffeeBrewing": "Coffee Brewing",
+      "indoorClimbing": "Indoor Climbing",
+      "customKeyboards": "Custom Keyboards",
+      "3dPrinting": "3D Printing",
+      "electronicMusic": "Electronic Music",
+      "watchVideo": "Watch Video",
+      "goTo500px": "Go to 500px"
+    }
+  }
+}

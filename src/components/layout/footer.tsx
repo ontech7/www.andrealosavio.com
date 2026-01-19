@@ -120,7 +120,10 @@ export async function Footer() {
                   <h5 className="text-foreground mb-3 text-xl font-bold">
                     {t("footer.featuredProjects")}
                   </h5>
-                  <Link href="https://fastmemo.vercel.app?utm_source=andrealosavio.com&utm_medium=referral">
+                  <Link
+                    href="https://fastmemo.vercel.app?utm_source=andrealosavio.com&utm_medium=referral"
+                    target="_blank"
+                  >
                     <FastMemoFeaturedProject />
                   </Link>
                 </div>

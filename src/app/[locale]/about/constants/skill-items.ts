@@ -1,0 +1,16 @@
+export const SKILL_ITEMS = [
+  { name: "Next.js", icon: "/icons/skills/nextjs.svg" },
+  { name: "React", icon: "/icons/skills/react.svg" },
+  { name: "Tailwind CSS", icon: "/icons/skills/tailwind.svg" },
+  { name: "TypeScript", icon: "/icons/skills/typescript.svg" },
+  { name: "Node.js", icon: "/icons/skills/nodejs.svg" },
+  { name: "Express.js", icon: "/icons/skills/express.svg" },
+  { name: "Prisma", icon: "/icons/skills/prisma.svg" },
+  { name: "MongoDB", icon: "/icons/skills/mongodb.svg" },
+  { name: "React Native", icon: "/icons/skills/react-native.svg" },
+  { name: "Expo", icon: "/icons/skills/expo.svg" },
+  { name: "Firebase", icon: "/icons/skills/firebase.svg" },
+  { name: "Supabase", icon: "/icons/skills/supabase.svg" },
+  { name: "PostgreSQL", icon: "/icons/skills/postgres.svg" },
+  { name: "Figma", icon: "/icons/skills/figma.svg" },
+] as const;
