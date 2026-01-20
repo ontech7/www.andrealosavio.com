@@ -49,7 +49,7 @@ export async function Footer() {
                   <h4 className="text-foreground mb-3 text-sm font-semibold">
                     {t(FOOTER_LINKS.general.titleKey)}
                   </h4>
-                  <ul className="space-y-2">
+                  <ul className="space-y-2 p-0">
                     {FOOTER_LINKS.general.links.map((link) => (
                       <li key={link.href}>
                         <Link
@@ -68,7 +68,7 @@ export async function Footer() {
                   <h4 className="text-foreground mb-3 text-sm font-semibold">
                     {t(FOOTER_LINKS.services.titleKey)}
                   </h4>
-                  <ul className="space-y-2">
+                  <ul className="space-y-2 p-0">
                     {FOOTER_LINKS.services.links.map((link) => (
                       <li key={link.href}>
                         <Link
@@ -87,7 +87,7 @@ export async function Footer() {
                   <h4 className="text-foreground mb-3 text-sm font-semibold">
                     {t(FOOTER_LINKS.projects.titleKey)}
                   </h4>
-                  <ul className="space-y-2">
+                  <ul className="space-y-2 p-0">
                     {FOOTER_LINKS.projects.links.map((link) => (
                       <li key={link.href}>
                         <Link
