@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import * as TooltipPrimitive from "@radix-ui/react-tooltip"
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import * as React from "react";
 
-import { cn } from "@/utils/cn"
+import { cn } from "@/utils/cn";
 
 function TooltipProvider({
   delayDuration = 0,
@@ -15,19 +15,19 @@ function TooltipProvider({
       delayDuration={delayDuration}
       {...props}
     />
-  )
+  );
 }
 
 function Tooltip({
   children,
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Root>) {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
 
   const handleTriggerClick = (e: React.MouseEvent | React.TouchEvent) => {
-    e.preventDefault()
-    setOpen((prev) => !prev)
-  }
+    e.preventDefault();
+    setOpen((prev) => !prev);
+  };
 
   return (
     <TooltipProvider>
@@ -41,24 +41,24 @@ function Tooltip({
           if (React.isValidElement(child) && child.type === TooltipTrigger) {
             return React.cloneElement(
               child as React.ReactElement<{
-                onClick?: (e: React.MouseEvent) => void
+                onClick?: (e: React.MouseEvent) => void;
               }>,
               {
                 onClick: handleTriggerClick,
               }
-            )
+            );
           }
-          return child
+          return child;
         })}
       </TooltipPrimitive.Root>
     </TooltipProvider>
-  )
+  );
 }
 
 function TooltipTrigger({
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Trigger>) {
-  return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />
+  return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
 }
 
 function TooltipContent({
@@ -79,10 +79,10 @@ function TooltipContent({
         {...props}
       >
         {children}
-        <TooltipPrimitive.Arrow className="bg-foreground fill-foreground z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]" />
+        <TooltipPrimitive.Arrow className="bg-foreground fill-foreground z-50 size-2.5 translate-y-[calc(-50%-2px)] rotate-45 rounded-[2px]" />
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Portal>
-  )
+  );
 }
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }
+export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger };

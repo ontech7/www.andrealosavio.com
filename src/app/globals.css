@@ -138,4 +138,13 @@
   body {
     @apply bg-background text-foreground overflow-x-hidden;
   }
+
+  ul,
+  ol {
+    @apply py-3 pl-2;
+  }
+
+  li + li {
+    @apply mt-1;
+  }
 }

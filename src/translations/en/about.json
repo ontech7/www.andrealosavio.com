@@ -23,5 +23,82 @@
       "watchVideo": "Watch Video",
       "goTo500px": "Go to 500px"
     }
+  },
+  "experiences": {
+    "title": "<highlight>Experiences</highlight>",
+    "subtitle": "An overview of my professional background",
+    "present": "PRESENT",
+    "contractTypes": {
+      "freelance": "Freelance",
+      "permanent": "Permanent contract",
+      "apprenticeship": "Apprenticeship"
+    },
+    "workModes": {
+      "remote": "Remote",
+      "hybrid": "Hybrid",
+      "onsite": "On-site"
+    },
+    "roles": {
+      "softwareEngineerTechPartner": "Software Engineer & Tech Partner",
+      "fullStackAemDeveloper": "Full-stack AEM Developer",
+      "backEndAemDeveloper": "Back-end AEM Developer",
+      "juniorAemDeveloper": "Junior AEM Developer",
+      "itSpecialist": "IT Specialist"
+    },
+    "items": {
+      "andrealosavio": {
+        "description": "As a freelance Software Engineer & Tech Partner, I work across web and mobile. I build modern frontend apps with React/Next.js, robust backends with Node.js and Express, and mobile apps with React Native and Expo SDK. I also design high-level architectures and help teams make strong technical decisions.",
+        "achievements": [
+          "Developed Fast Memo, a cross-platform memo application built with React Native and Expo, featuring rich-text notes, checklists, category organization, Firebase cloud sync, and other lots of features. Open-source, available in 7 languages, and downloaded by over 1,000 users.",
+          "Built and maintained multiple open-source libraries—such as react-native-dialog and figma-node-query—providing reliable, developer-friendly tools adopted across the community.",
+          "Helped a client develop a strong brand identity that allowed them to reach a wider audience and attract more customers.",
+          "Supported a company in building a robust infrastructure, laying solid foundations for future projects.",
+          "Collaborated long-term with a company to develop some of the most widely used platforms today.",
+          "Assisted a startup during a critical product transition phase, ensuring a smooth evolution.",
+          "Helped a startup secure a €1.6M investment round through product development and technical strategy."
+        ],
+        "note": "(Helped 10+ clients reach next level <highlight>⚡</highlight>)"
+      },
+      "minsait": {
+        "description": "During my time as an Adobe Experience Manager Developer, I contributed end-to-end to large-scale digital projects for major multinational clients. My work involved full-stack development across AEM, combining modern front-end engineering (HTML, CSS, JavaScript, jQuery) with robust back-end development using Java Sling and AEM core technologies.",
+        "achievements": [
+          "Built scalable AEM components using HTML, CSS, JavaScript/jQuery, and Java Sling.",
+          "Improved UI performance and collaborated directly with clients on technical solutions.",
+          "Worked across Agile/Waterfall environments and supported technical decision-making.",
+          "Managed AEM Dispatchers and contributed to CI/CD pipelines (GitLab, Jenkins)."
+        ],
+        "note": ""
+      },
+      "doing": {
+        "description": "During my time as an Adobe Experience Manager Developer, I focused on backend development with Java Sling, building and extending CIF components for a high-traffic e-commerce platform. I collaborated closely with the tech lead to make key architectural decisions and managed multi-site development using AEM's multitenant capabilities.",
+        "achievements": [
+          "Implemented backend features in Java Sling and extended CIF components for a large e-commerce platform.",
+          "Supported architectural decisions with the tech lead and worked on multi-site AEM structures.",
+          "Handled AEM Dispatcher configuration and troubleshooting."
+        ],
+        "note": ""
+      },
+      "deloitte": {
+        "description": "During my time working with Adobe Experience Manager, I engineered both front-end experiences and backend systems that supported large-scale content platforms. I specialized in AEM 6.4, Java Sling, and CRM integrations, building reliable, high-performing components used daily by enterprise teams.",
+        "achievements": [
+          "Delivered scalable CMS components using AEM (frontend + backend).",
+          "Collaborated closely with an international client, including periodic on-site work.",
+          "Built SPAs/MPAs with JavaScript, Handlebars, HTML/CSS, and HTL.",
+          "Managed testing, debugging, and integrations (CRM, SOQL).",
+          "Configured components, templates, workflows, and content authoring tools."
+        ],
+        "note": ""
+      },
+      "ibm": {
+        "description": "In this role, I contributed to both front-end and backend development across multiple projects and platforms, supporting application delivery and system migrations. I worked with several technologies and databases, helping improve internal tools and streamline existing workflows. I also participated in analysis, testing, and debugging to ensure stable, high-quality releases.",
+        "achievements": [
+          "Developed Cordova-based mobile/desktop applications (JavaScript, HTML5, CSS3).",
+          "Supported backend migrations in C, C++, Java, and C#, and worked with Oracle DB.",
+          "Performed PDF manipulation with FrameMaker and executed multi-level testing.",
+          "Built internal dealer-facing applications and contributed to technical analysis."
+        ],
+        "note": ""
+      }
+    }
   }
 }
