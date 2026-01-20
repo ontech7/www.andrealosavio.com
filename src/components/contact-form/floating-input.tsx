@@ -44,7 +44,7 @@ export function FloatingInput({
             ? icon
               ? "top-0 left-3 px-1 text-xs"
               : "top-0 px-1 text-xs"
-            : "top-1/2 left-10 -translate-y-1/2"
+            : "top-1/2 left-11 -translate-y-1/2"
         )}
       >
         {label}
@@ -56,13 +56,13 @@ export function FloatingInput({
       >
         <div className="bg-muted flex rounded-lg">
           {icon && (
-            <span className="text-muted-foreground shrink-0 py-3 pl-3">
+            <span className="text-muted-foreground shrink-0 py-3 pr-1 pl-3">
               {icon}
             </span>
           )}
           <input
             id={inputId}
-            className="text-foreground w-full bg-transparent p-3 text-sm outline-none"
+            className="text-foreground w-full bg-transparent p-2 text-sm outline-none"
             onFocus={() => setIsFocused(true)}
             onBlur={(e) => {
               setIsFocused(false);

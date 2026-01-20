@@ -52,7 +52,7 @@ export function ContactForm({
         <form className="mx-auto max-w-xl space-y-6">
           <FloatingInput
             label={t("fullname")}
-            icon={<UserIcon className="size-5" />}
+            icon={<UserIcon className="size-4" />}
             name="fullname"
             required
           />
@@ -60,7 +60,7 @@ export function ContactForm({
           <FloatingInput
             label={t("email")}
             type="email"
-            icon={<MailIcon className="size-5" />}
+            icon={<MailIcon className="size-4" />}
             name="email"
             required
           />
