@@ -1,17 +1,19 @@
 "use client";
 
-import { NAV_LINKS } from "@/constants/navigation";
+import { NAV_LINKS, SOCIAL_LINKS } from "@/constants/navigation";
 import { Link, usePathname } from "@/libs/i18n/navigation";
 import { cn } from "@/utils/cn";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { Logo } from "../logo";
 import { LanguageSwitcher } from "./language-switcher";
 
 export function Header() {
-  const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = useTranslations("common");
+  const pathname = usePathname();
+  const locale = useLocale();
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className="bg-background/80 fixed top-0 right-0 left-0 z-50 backdrop-blur-xl">
@@ -91,26 +93,44 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <nav className="border-border border-t py-4 md:hidden">
-            <div className="flex flex-col gap-1">
-              {NAV_LINKS.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={cn(
-                      "text-foreground rounded-lg px-4 py-3 text-base transition-colors",
-                      isActive ? "bg-muted" : "hover:bg-muted/60"
-                    )}
-                  >
-                    {t(link.labelKey)}
-                  </Link>
-                );
-              })}
+          <div>
+            <nav className="border-border border-t py-4 md:hidden">
+              <div className="flex flex-col gap-1">
+                {NAV_LINKS.map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={cn(
+                        "text-foreground rounded-lg px-4 py-3 text-base transition-colors",
+                        isActive ? "bg-muted" : "hover:bg-muted/60"
+                      )}
+                    >
+                      {t(link.labelKey)}
+                    </Link>
+                  );
+                })}
+              </div>
+            </nav>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-4 px-4 pb-6">
+              {SOCIAL_LINKS.map((social) => (
+                <a
+                  key={social.labelKey}
+                  href={social.href.replace("{lang}", locale)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={t(social.labelKey)}
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <social.Icon className="stroke-1" />
+                </a>
+              ))}
             </div>
-          </nav>
+          </div>
         )}
       </div>
     </header>

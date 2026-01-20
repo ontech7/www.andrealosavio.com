@@ -9,12 +9,7 @@
     "description": "Helping startups and companies build solid, scalable digital products focused on growth",
     "ctaDiscussVision": "Let's discuss your vision",
     "ctaMoreAboutMe": "More about me",
-    "ctaZeroToOne": "Zero to One",
-    "social": {
-      "github": "GitHub",
-      "linkedin": "LinkedIn",
-      "cv": "Curriculum Vitae"
-    }
+    "ctaZeroToOne": "Zero to One"
   },
   "makingAnImpact": {
     "title": "Making an impact",

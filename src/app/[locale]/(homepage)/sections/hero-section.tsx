@@ -16,7 +16,7 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ id, className }: HeroSectionProps) {
-  const t = useTranslations("homepage");
+  const t = useTranslations();
   const locale = useLocale();
 
   return (
@@ -39,7 +39,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         <motion.div variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
           <Button variant="gradient-primary" size="lg" className="mb-6">
             <div className="bg-secondary size-2.5 shrink-0 animate-pulse rounded-full shadow-(--shadow-secondary)" />
-            {t("hero.ctaDiscussVision")}
+            {t("homepage.hero.ctaDiscussVision")}
             <ArrowRightIcon className="size-4" />
           </Button>
         </motion.div>
@@ -50,7 +50,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           transition={{ duration: 0.5 }}
           className="-mb-0.5 bg-(image:--text-gradient) bg-clip-text text-4xl font-bold text-transparent md:mb-0 md:text-7xl"
         >
-          {t("hero.title")}
+          {t("homepage.hero.title")}
         </motion.h1>
         <motion.h4
           variants={fadeInUpAnim}
@@ -58,7 +58,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           className="text-md mb-5 flex items-center gap-1.5 bg-(image:--text-gradient) bg-clip-text pb-1.5 leading-0 text-transparent md:text-xl"
         >
           <CodeIcon className="size-5 text-white md:-mb-0.5 md:size-5.5" />
-          {t("hero.subtitle")}
+          {t("homepage.hero.subtitle")}
         </motion.h4>
 
         <motion.p
@@ -66,7 +66,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           transition={{ duration: 0.5 }}
           className="text-muted-foreground mb-10 max-w-md"
         >
-          {t("hero.description")}
+          {t("homepage.hero.description")}
         </motion.p>
 
         {/* CTAs (2) */}
@@ -80,7 +80,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
                 ?.scrollIntoView({ behavior: "smooth", block: "start" });
             }}
           >
-            {t("hero.ctaZeroToOne")}
+            {t("homepage.hero.ctaZeroToOne")}
             <motion.span
               animate={{ y: [-2, 2, -2] }}
               transition={{
@@ -93,7 +93,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
             </motion.span>
           </Button>
           <Button asChild variant="primary">
-            <Link href="/about">{t("hero.ctaMoreAboutMe")}</Link>
+            <Link href="/about">{t("homepage.hero.ctaMoreAboutMe")}</Link>
           </Button>
         </motion.div>
 
@@ -109,7 +109,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
               href={social.href.replace("{lang}", locale)}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={t(`hero.${social.labelKey}`)}
+              aria-label={t(`common.${social.labelKey}`)}
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               <social.Icon className="stroke-1" />
