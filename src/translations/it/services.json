@@ -7,5 +7,44 @@
     "title": "Servizi per <highlight>startup</highlight> e <highlight>aziende</highlight>",
     "description": "Offro competenze, strategie e soluzioni pratiche per aiutare startup e aziende a crescere con fiducia",
     "ctaCheckOut": "Dai un'occhiata"
+  },
+  "availableServices": {
+    "collaboration": {
+      "title": "Collaborazione",
+      "description": "Mi integro nel tuo team con un approccio orientato al prodotto. Non mi limito a scrivere codice: porto esperienza, propongo soluzioni e contribuisco attivamente a costruire un prodotto solido che faccia crescere la tua azienda.",
+      "highlight": "approccio orientato al prodotto",
+      "cta": "Prezzo: <price>Discutiamone</price>"
+    },
+    "validationMvp": {
+      "title": "Validazione & MVP",
+      "description": "Trasforma rapidamente la tua idea in un Minimum Viable Product (MVP) funzionale. Definisco lo scope essenziale, elimino le funzionalità superflue e fornisco uno strumento concreto per testare il mercato, raccogliere feedback reali e ottenere il prossimo round di finanziamento con il minimo sforzo e rischio.",
+      "highlight": "Minimum Viable Product (MVP)",
+      "cta": "Prezzo: <price>5.000€+/progetto</price>"
+    },
+    "auditConsulting": {
+      "title": "Audit & Consulenza",
+      "description": "Conduco analisi approfondite della tua architettura, codice e workflow del team. Fornisco un report dettagliato su Technical Debt, colli di bottiglia e rischi, insieme a un piano d'azione prioritizzato per aumentare stabilità, velocità di sviluppo ed efficienza operativa.",
+      "highlight": "Technical Debt",
+      "cta": "Prezzo: <price>60€/ora</price>"
+    },
+    "fractionalCto": {
+      "title": "Fractional CTO",
+      "description": "Ottieni una Leadership Tecnica di Livello Executive senza il peso di un dirigente a tempo pieno. Guida strategica, gestione delle risorse, assunzioni tecniche e allineamento della roadmap IT con gli obiettivi aziendali per garantire una direzione solida e scalabile.",
+      "highlight": "Leadership Tecnica di Livello Executive",
+      "cta": "Prezzo: <price>1000€+/mese</price>"
+    },
+    "technicalMentorship": {
+      "title": "Technical Mentorship",
+      "description": "Offro guida personalizzata e supporto pratico per aiutare i team a rafforzare le competenze tecniche, adottare best practices, migliorare i workflow e prendere decisioni ingegneristiche informate, garantendo prodotti scalabili, mantenibili e di alta qualità.",
+      "highlight": "supporto pratico",
+      "cta": "Prezzo: <price>60€/ora</price>"
+    },
+    "productDevelopment": {
+      "title": "Product Development",
+      "description": "Servizio Full-Stack per la creazione completa di prodotti digitali. Dalla progettazione UX/UI al deployment in cloud, gestisco l'intero ciclo di sviluppo per applicazioni web e mobile robuste, scalabili e orientate ai risultati.",
+      "highlight": "Servizio Full-Stack",
+      "cta": "Prezzo: <price>Discutiamone*</price>",
+      "ctaNote": "*minimo 10.000€"
+    }
   }
 }

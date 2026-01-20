@@ -4,11 +4,11 @@ import { GridLayers } from "@/components/grid-layers";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";
+import { SERVICES } from "@/constants/services";
 import { cn } from "@/utils/cn";
 import { ChevronDown, Send } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { SERVICES_ITEMS } from "../constants/services-items";
 
 interface YouCouldBeNextSectionProps {
   id: string;
@@ -128,7 +128,7 @@ export function YouCouldBeNextSection({
 
                 {/* Services Grid */}
                 <div className="mt-2 grid grid-cols-2 gap-3">
-                  {SERVICES_ITEMS.map((service) => (
+                  {SERVICES.map((service) => (
                     <Button key={service.id} variant="primary">
                       {t(`youCouldBeNext.challengeBox.services.${service.id}`)}
                     </Button>

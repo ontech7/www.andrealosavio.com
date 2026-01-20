@@ -21,23 +21,27 @@ export const FOOTER_LINKS = {
     titleKey: "footer.sections.services",
     links: [
       {
-        href: "/services#validation-mvp",
+        href: "/services#collaboration",
+        labelKey: "footer.links.collaboration",
+      },
+      {
+        href: "/services#validationMvp",
         labelKey: "footer.links.validationMvp",
       },
       {
-        href: "/services#audit-consulting",
+        href: "/services#auditConsulting",
         labelKey: "footer.links.auditConsulting",
       },
       {
-        href: "/services#fractional-cto",
+        href: "/services#fractionalCto",
         labelKey: "footer.links.fractionalCto",
       },
       {
-        href: "/services#technical-mentorship",
+        href: "/services#technicalMentorship",
         labelKey: "footer.links.technicalMentorship",
       },
       {
-        href: "/services#product-development",
+        href: "/services#productDevelopment",
         labelKey: "footer.links.productDevelopment",
       },
     ],

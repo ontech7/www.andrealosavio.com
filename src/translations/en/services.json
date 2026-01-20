@@ -7,5 +7,44 @@
     "title": "Services for <highlight>startups</highlight> and <highlight>companies</highlight>",
     "description": "Offering expertise, strategy, and practical solutions to help startups and companies grow confidently",
     "ctaCheckOut": "Check out"
+  },
+  "availableServices": {
+    "collaboration": {
+      "title": "Collaboration",
+      "description": "I integrate into your team with a product-oriented mindset. I don't just write code: I bring experience, propose solutions, and actively contribute to building a solid product that drives your company's growth.",
+      "highlight": "product-oriented mindset",
+      "cta": "Pricing: <price>Let's discuss</price>"
+    },
+    "validationMvp": {
+      "title": "Validation & MVP",
+      "description": "Rapidly transform your idea into a functional Minimum Viable Product (MVP). I define the essential scope, eliminate superfluous features, and provide a concrete tool for market testing, real feedback collection, and securing your next funding round with minimal effort and risk.",
+      "highlight": "Minimum Viable Product (MVP)",
+      "cta": "Pricing: <price>5.000€+/project</price>"
+    },
+    "auditConsulting": {
+      "title": "Audit & Consulting",
+      "description": "I conduct in-depth analysis of your architecture, code, and team workflows. I provide a detailed report on Technical Debt, bottlenecks, and risks, along with a prioritized action plan to increase stability, development speed, and operational cost efficiency.",
+      "highlight": "Technical Debt",
+      "cta": "Pricing: <price>60€/hour</price>"
+    },
+    "fractionalCto": {
+      "title": "Fractional CTO",
+      "description": "Gain Executive-Level Technical Leadership without the burden of a full-time executive. Strategic guidance, resource management, technical hiring, and alignment of the IT roadmap with business goals to ensure a solid and scalable direction.",
+      "highlight": "Executive-Level Technical Leadership",
+      "cta": "Pricing: <price>1000€+/month</price>"
+    },
+    "technicalMentorship": {
+      "title": "Technical Mentorship",
+      "description": "Offering personalized guidance and hands-on support to help teams strengthen their technical skills, adopt best practices, improve workflows, and make informed engineering decisions, ensuring scalable, maintainable, and high-quality products.",
+      "highlight": "hands-on support",
+      "cta": "Pricing: <price>60€/hour</price>"
+    },
+    "productDevelopment": {
+      "title": "Product Development",
+      "description": "Full-Stack Service for the complete creation of digital products. From UX/UI design to cloud deployment, I manage the entire development lifecycle for robust, scalable, and results-oriented web and mobile applications.",
+      "highlight": "Full-Stack Service",
+      "cta": "Pricing: <price>Let's discuss*</price>",
+      "ctaNote": "*minimum 10.000€"
+    }
   }
 }

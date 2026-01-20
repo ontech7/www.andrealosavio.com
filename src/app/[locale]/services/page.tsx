@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { AvailableServicesSection } from "./sections/available-services-section";
 import { HeroSection } from "./sections/hero-section";
 
 interface PageProps {
@@ -22,6 +23,7 @@ export default async function ServicesPage() {
   return (
     <>
       <HeroSection id="hero" />
+      <AvailableServicesSection id="service-list" />
     </>
   );
 }
