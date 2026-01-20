@@ -21,9 +21,6 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Andrea Losavio | Software Engineer & Tech Partner",
-  description:
-    "Aiuto startup e aziende a costruire prodotti digitali solidi e scalabili, focalizzati sulla crescita",
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
