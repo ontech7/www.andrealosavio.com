@@ -57,7 +57,7 @@ export function ProjectsFilter({
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
-              className="bg-background text-foreground flex items-center gap-2 rounded-lg px-4 py-2 text-sm"
+              className="bg-muted text-foreground flex items-center gap-2 rounded-lg px-4 py-2 text-sm"
             >
               <span>
                 {sortOrder === "none"
@@ -85,10 +85,10 @@ export function ProjectsFilter({
                   setIsOpen(false);
                 }}
                 className={cn(
-                  "flex w-full cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
+                  "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
                   sortOrder === "none"
                     ? "bg-muted text-foreground"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer"
                 )}
               >
                 {t("sortOrderNone")}
@@ -100,10 +100,10 @@ export function ProjectsFilter({
                   setIsOpen(false);
                 }}
                 className={cn(
-                  "flex w-full cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
+                  "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
                   sortOrder === "asc"
                     ? "bg-muted text-foreground"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer"
                 )}
               >
                 {t("sortOrderAsc")}
@@ -118,7 +118,7 @@ export function ProjectsFilter({
                   "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
                   sortOrder === "desc"
                     ? "bg-muted text-foreground"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer"
                 )}
               >
                 {t("sortOrderDesc")}
