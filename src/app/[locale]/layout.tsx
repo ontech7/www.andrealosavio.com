@@ -1,5 +1,6 @@
 import "../globals.css";
 
+import { NuqsProvider } from "@/app/nuqs-provider";
 import { Layout } from "@/components/layout/layout";
 import { routing } from "@/libs/i18n/routing";
 import type { Metadata } from "next";
@@ -56,9 +57,11 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={`${dmSans.variable} ${dmMono.variable} antialiased`}>
-        <NextIntlClientProvider messages={messages}>
-          <Layout>{children}</Layout>
-        </NextIntlClientProvider>
+        <NuqsProvider>
+          <NextIntlClientProvider messages={messages}>
+            <Layout>{children}</Layout>
+          </NextIntlClientProvider>
+        </NuqsProvider>
       </body>
     </html>
   );

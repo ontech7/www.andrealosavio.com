@@ -5,9 +5,10 @@ import { PROJECTS } from "@/constants/projects";
 import { cn } from "@/utils/cn";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { parseAsArrayOf, parseAsString, parseAsStringLiteral, useQueryState } from "nuqs";
+import { useMemo } from "react";
 import { ProjectCard } from "../components/project-card";
-import { ProjectsFilter, type SortOrder } from "../components/projects-filter";
+import { ProjectsFilter } from "../components/projects-filter";
 
 interface ProjectsSectionProps {
   id: string;
@@ -17,11 +18,14 @@ interface ProjectsSectionProps {
 // Extract all unique tags from projects
 const ALL_TAGS = [...new Set(PROJECTS.flatMap((p) => p.tags))].sort();
 
+const sortOrderParser = parseAsStringLiteral(["none", "asc", "desc"] as const).withDefault("none");
+const tagsParser = parseAsArrayOf(parseAsString, ",").withDefault([]);
+
 export function ProjectsSection({ id, className }: ProjectsSectionProps) {
   const t = useTranslations("projects.items");
 
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [sortOrder, setSortOrder] = useState<SortOrder>("none");
+  const [selectedTags, setSelectedTags] = useQueryState("tags", tagsParser);
+  const [sortOrder, setSortOrder] = useQueryState("sort", sortOrderParser);
 
   const handleTagToggle = (tag: string) => {
     setSelectedTags((prev) =>

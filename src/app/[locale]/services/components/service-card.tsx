@@ -21,6 +21,7 @@ export function ServiceCard({ service, reversed = false }: ServiceCardProps) {
   return (
     <motion.div
       id={service.id}
+      className="scroll-mt-24"
       variants={fadeInUpAnim}
       initial="hidden"
       whileInView="visible"

@@ -49,8 +49,8 @@ export const FOOTER_LINKS = {
   projects: {
     titleKey: "footer.sections.projects",
     links: [
-      { href: "/projects#personal", labelKey: "footer.links.personalIdeas" },
-      { href: "/projects#clients", labelKey: "footer.links.forClients" },
+      { href: "/projects?tags=personal", labelKey: "footer.links.personalIdeas" },
+      { href: "/projects?tags=customer", labelKey: "footer.links.forClients" },
     ],
   },
 } as const;
