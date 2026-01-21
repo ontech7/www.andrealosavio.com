@@ -37,10 +37,12 @@ export function HeroSection({ id, className }: HeroSectionProps) {
       >
         {/* CTAs (1) */}
         <motion.div variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
-          <Button variant="gradient-primary" size="lg" className="mb-6">
-            <div className="bg-secondary size-2.5 shrink-0 animate-pulse rounded-full shadow-(--shadow-secondary)" />
-            {t("homepage.hero.ctaDiscussVision")}
-            <ArrowRightIcon className="size-4" />
+          <Button variant="gradient-primary" size="lg" asChild>
+            <Link href="/services" className="flex items-center gap-2">
+              <div className="bg-secondary size-2.5 shrink-0 animate-pulse rounded-full shadow-(--shadow-secondary)" />
+              {t("homepage.hero.ctaDiscussVision")}
+              <ArrowRightIcon className="size-4" />
+            </Link>
           </Button>
         </motion.div>
 
@@ -48,7 +50,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         <motion.h1
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
-          className="-mb-0.5 bg-(image:--text-gradient) bg-clip-text text-4xl font-bold text-transparent md:mb-0 md:text-7xl"
+          className="mt-6 -mb-0.5 bg-(image:--text-gradient) bg-clip-text text-4xl font-bold text-transparent md:mb-0 md:text-7xl"
         >
           {t("homepage.hero.title")}
         </motion.h1>
