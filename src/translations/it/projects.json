@@ -7,7 +7,14 @@
     "title": "Lavori <highlight>per clienti</highlight> e <highlight>progetti personali</highlight>",
     "description": "Sviluppo soluzioni personalizzate per clienti e progetti personali per offrire valore ed esplorare nuove idee"
   },
+  "filter": {
+    "sortLabel": "Ordinamento",
+    "sortOrderAsc": "Ordina A-Z",
+    "sortOrderDesc": "Ordina Z-A",
+    "tagsLabel": "Scegli i tag"
+  },
   "items": {
+    "noResults": "Nessun progetto trovato con i filtri selezionati",
     "quido": {
       "name": "Quido S.r.l.",
       "description": "Quido.ai è una piattaforma di intelligenza artificiale dedicata al mondo del private equity e delle operazioni M&A in Italia, progettata per fornire analisi affidabili e insight a professionisti e investitori."
