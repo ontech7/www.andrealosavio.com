@@ -150,11 +150,7 @@ export function YouCouldBeNextSection({
                 </div>
 
                 {/* Contact Button */}
-                <Button
-                  variant="gradient-outline"
-                  className="[&_a]:w-full"
-                  asChild
-                >
+                <Button variant="gradient-outline" asChild>
                   <Link href={`/services#contactForm`}>
                     {t("youCouldBeNext.challengeBox.contactMe")}
                     <Send className="size-4" />

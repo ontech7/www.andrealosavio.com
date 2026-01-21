@@ -68,7 +68,7 @@ function Button({
   if (variant === "gradient-outline") {
     return (
       <span
-        className={cn("relative inline-flex rounded-lg", className)}
+        className={cn("relative inline-flex rounded-lg *:w-full", className)}
         style={{ background: "var(--border-gradient)" }}
       >
         <Comp

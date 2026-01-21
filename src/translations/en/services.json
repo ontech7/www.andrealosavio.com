@@ -50,7 +50,7 @@
   "contactForm": {
     "divider": "or",
     "title": "Looking for something else?",
-    "description": "Let me know what you're looking for—I'm happy to help or <highlight>discuss custom solutions</highlight>",
+    "description": "Let me know what you're looking for. I'm happy to help or discuss custom solutions",
     "fullname": "Fullname",
     "fullnamePlaceholder": "Andrea Losavio",
     "email": "E-mail",
@@ -58,6 +58,10 @@
     "challenge": "What's your challenge?",
     "challengePlaceholder": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
     "consent": "I consent to the processing of my personal data for the purpose of receiving a response to my message",
-    "submit": "Send me an email"
+    "submit": "Send me an email",
+    "sending": "Sending...",
+    "successTitle": "Message sent!",
+    "successMessage": "Thank you for reaching out! I'll get back to you within 24-48 hours.",
+    "errorMessage": "Something went wrong. Please try again or contact me directly."
   }
 }

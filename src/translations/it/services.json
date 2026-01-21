@@ -55,6 +55,10 @@
     "email": "E-mail",
     "challenge": "Qual è la tua sfida?",
     "consent": "Acconsento al trattamento dei miei dati personali al fine di ricevere una risposta al mio messaggio",
-    "submit": "Inviami un'email"
+    "submit": "Inviami un'email",
+    "sending": "Invio in corso...",
+    "successTitle": "Messaggio inviato!",
+    "successMessage": "Grazie per avermi contattato! Ti risponderò entro 24-48 ore.",
+    "errorMessage": "Qualcosa è andato storto. Riprova o contattami direttamente."
   }
 }
