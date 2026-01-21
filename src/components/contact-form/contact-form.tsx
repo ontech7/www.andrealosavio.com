@@ -13,12 +13,14 @@ import { FloatingInput } from "./floating-input";
 import { FloatingTextarea } from "./floating-textarea";
 
 interface ContactFormProps {
+  id?: string;
   title: string;
   description: string;
   className?: string;
 }
 
 export function ContactForm({
+  id,
   title,
   description,
   className,
@@ -29,6 +31,7 @@ export function ContactForm({
 
   return (
     <motion.div
+      id={id}
       variants={fadeInUpAnim}
       initial="hidden"
       whileInView="visible"

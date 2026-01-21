@@ -56,8 +56,10 @@ export function AvailableServicesSection({
         </motion.div>
 
         <ContactForm
+          id="contactForm"
           title={t("contactForm.title")}
           description={t("contactForm.description")}
+          className="scroll-mt-24"
         />
       </motion.div>
     </section>

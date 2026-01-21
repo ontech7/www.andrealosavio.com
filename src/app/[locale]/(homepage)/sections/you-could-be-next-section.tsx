@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";
 import { SERVICES } from "@/constants/services";
+import { Link } from "@/libs/i18n/navigation";
 import { cn } from "@/utils/cn";
 import { ChevronDown, Send } from "lucide-react";
 import { motion } from "motion/react";
@@ -129,8 +130,12 @@ export function YouCouldBeNextSection({
                 {/* Services Grid */}
                 <div className="mt-2 grid grid-cols-2 gap-3">
                   {SERVICES.map((service) => (
-                    <Button key={service.id} variant="primary">
-                      {t(`youCouldBeNext.challengeBox.services.${service.id}`)}
+                    <Button key={service.id} variant="primary" asChild>
+                      <Link href={`/services#${service.id}`}>
+                        {t(
+                          `youCouldBeNext.challengeBox.services.${service.id}`
+                        )}
+                      </Link>
                     </Button>
                   ))}
                 </div>
@@ -147,10 +152,13 @@ export function YouCouldBeNextSection({
                 {/* Contact Button */}
                 <Button
                   variant="gradient-outline"
-                  className="[&_button]:w-full"
+                  className="[&_a]:w-full"
+                  asChild
                 >
-                  {t("youCouldBeNext.challengeBox.contactMe")}
-                  <Send className="size-4" />
+                  <Link href={`/services#contactForm`}>
+                    {t("youCouldBeNext.challengeBox.contactMe")}
+                    <Send className="size-4" />
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
