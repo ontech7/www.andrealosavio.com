@@ -60,5 +60,12 @@
     "successTitle": "Messaggio inviato!",
     "successMessage": "Grazie per avermi contattato! Ti risponderò entro 24-48 ore.",
     "errorMessage": "Qualcosa è andato storto. Riprova o contattami direttamente."
+  },
+  "serviceDialog": {
+    "title": "Interessato a {service}?",
+    "description": "Compila il form qui sotto e ti risponderò entro 24-48 ore per discutere le tue esigenze.",
+    "selectedService": "Servizio:",
+    "messageLabel": "Parlami del tuo progetto",
+    "submit": "Invia richiesta"
   }
 }

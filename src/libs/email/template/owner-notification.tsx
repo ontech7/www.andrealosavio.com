@@ -2,12 +2,14 @@ interface OwnerNotificationEmailProps {
   fullname: string;
   email: string;
   challenge: string;
+  service?: string;
 }
 
 export function OwnerNotificationEmail({
   fullname,
   email,
   challenge,
+  service,
 }: OwnerNotificationEmailProps) {
   return (
     <div
@@ -67,6 +69,31 @@ export function OwnerNotificationEmail({
             {email}
           </a>
         </div>
+
+        {service && (
+          <div style={{ marginBottom: "20px" }}>
+            <p
+              style={{
+                color: "#888",
+                margin: "0 0 4px 0",
+                fontSize: "12px",
+                textTransform: "uppercase",
+              }}
+            >
+              Service Interested In
+            </p>
+            <p
+              style={{
+                margin: 0,
+                fontSize: "16px",
+                color: "#0d7ef2",
+                fontWeight: "600",
+              }}
+            >
+              {service}
+            </p>
+          </div>
+        )}
 
         <div style={{ marginBottom: "20px" }}>
           <p

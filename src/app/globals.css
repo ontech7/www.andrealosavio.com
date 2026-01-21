@@ -148,3 +148,28 @@
     @apply mt-1;
   }
 }
+
+/* Custom Scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted-foreground) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--muted-foreground);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--muted-foreground);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--muted);
+}

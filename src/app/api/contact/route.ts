@@ -7,13 +7,14 @@ interface ContactFormData {
   fullname: string;
   email: string;
   challenge: string;
+  service?: string;
   locale: "it" | "en";
 }
 
 export async function POST(request: NextRequest) {
   try {
     const body: ContactFormData = await request.json();
-    const { fullname, email, challenge, locale } = body;
+    const { fullname, email, challenge, service, locale } = body;
 
     // Validate required fields
     if (!fullname || !email || !challenge) {
@@ -67,12 +68,16 @@ export async function POST(request: NextRequest) {
     }
 
     // Send notification email to owner
+    const ownerSubject = service
+      ? `New Contact: ${fullname} - ${service}`
+      : `New Contact: ${fullname}`;
+
     const { error: ownerError } = await resend.emails.send({
       from: `Contact Form <${fromEmail}>`,
       to: ownerEmail,
       replyTo: email,
-      subject: `New Contact: ${fullname}`,
-      react: OwnerNotificationEmail({ fullname, email, challenge }),
+      subject: ownerSubject,
+      react: OwnerNotificationEmail({ fullname, email, challenge, service }),
     });
 
     if (ownerError) {
