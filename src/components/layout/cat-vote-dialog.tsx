@@ -197,6 +197,18 @@ export function CatVoteDialog({ children }: CatVoteDialogProps) {
               </div>
             </div>
           )}
+
+          <p className="text-muted-foreground/70 text-xs">
+            powered by{" "}
+            <a
+              href="https://thecatapi.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-muted-foreground underline transition-colors"
+            >
+              The Cat API
+            </a>
+          </p>
         </div>
       </DialogContent>
     </Dialog>
