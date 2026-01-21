@@ -6,5 +6,39 @@
   "hero": {
     "title": "Works <highlight>for clients</highlight> and <highlight>side projects</highlight>",
     "description": "Developing custom solutions for clients and personal projects to deliver value and explore new ideas"
+  },
+  "items": {
+    "quido": {
+      "name": "Quido S.r.l.",
+      "description": "Quido.ai is an artificial intelligence platform dedicated to the world of private equity and M&A transactions in Italy, designed to provide reliable analysis and insights to professionals and investors."
+    },
+    "forfettarioControl": {
+      "name": "Forfettario Control",
+      "description": "This mobile app helps freelancers under the regime forfettario manage their business autonomously. Users can create invoices, upload fiscal documents, and receive reminders for deadlines, including pension contributions. The design focuses on simplicity and clarity, making complex administrative tasks easy to handle directly from their smartphone."
+    },
+    "fastmemo": {
+      "name": "Fast Memo - Notes in one click",
+      "description": "An application for taking notes that aims to condense everything you need for organization, security, and reliability, with full data transparency and self-managed storage, without relying on third-party services."
+    },
+    "anonymous": {
+      "name": "Anonymous",
+      "description": "A platform to manage tobacconists and agents, featuring an interactive map of over 7000 tobacconists in Lombardy."
+    },
+    "ravenn": {
+      "name": "Ravenn S.r.l.",
+      "description": "Ravenn.io is an intuitive platform for managing logistics and hospitality in events: it identifies suitable accommodation for participants and streamlines hotel bookings, cancellations, and modifications in a simplified and efficient way."
+    },
+    "recrowd": {
+      "name": "Recrowd S.r.l.",
+      "description": "Recrowd is a real estate crowdfunding platform that allows you to invest your savings in an alternative way, even if you don't have large amounts of capital."
+    },
+    "brainplatform": {
+      "name": "Brainplatform S.r.l.",
+      "description": "Brain S.R.L. transforms your website or app into a powerful marketing asset, combining eye-catching design with high performance and communicating your brand's values with authority to keep you ahead of the competition. With many years of experience in the industry, the company is skilled in a wide range of technologies suitable for every type of client."
+    },
+    "studioBargiggia": {
+      "name": "Studio Bargiggia",
+      "description": "Studio Bargiggia is a condominium management firm that combines expertise, availability, and passion to ensure the best possible administration of your building."
+    }
   }
 }

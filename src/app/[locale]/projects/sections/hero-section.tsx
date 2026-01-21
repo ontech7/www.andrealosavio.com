@@ -60,7 +60,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           "pointer-events-none absolute",
           "-right-50 translate-y-5/7 opacity-60",
           "md:-right-30 md:opacity-80",
-          "lg:top-1/2 lg:right-0 lg:bottom-auto lg:-translate-y-1/2 lg:opacity-100"
+          "lg:top-1/2 lg:right-6 lg:bottom-auto lg:-translate-y-1/2 lg:opacity-100"
         )}
       >
         <ProjectsHeroDecoration />

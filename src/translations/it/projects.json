@@ -6,5 +6,39 @@
   "hero": {
     "title": "Lavori <highlight>per clienti</highlight> e <highlight>progetti personali</highlight>",
     "description": "Sviluppo soluzioni personalizzate per clienti e progetti personali per offrire valore ed esplorare nuove idee"
+  },
+  "items": {
+    "quido": {
+      "name": "Quido S.r.l.",
+      "description": "Quido.ai è una piattaforma di intelligenza artificiale dedicata al mondo del private equity e delle operazioni M&A in Italia, progettata per fornire analisi affidabili e insight a professionisti e investitori."
+    },
+    "forfettarioControl": {
+      "name": "Forfettario Control",
+      "description": "Questa app mobile aiuta i freelancer in regime forfettario a gestire la propria attività in autonomia. Gli utenti possono creare fatture, caricare documenti fiscali e ricevere promemoria per le scadenze, inclusi i contributi pensionistici. Il design si concentra su semplicità e chiarezza, rendendo facile gestire attività amministrative complesse direttamente dallo smartphone."
+    },
+    "fastmemo": {
+      "name": "Fast Memo - Note in un click",
+      "description": "Un'applicazione per prendere appunti che mira a condensare tutto ciò di cui hai bisogno per organizzazione, sicurezza e affidabilità, con totale trasparenza dei dati e archiviazione autogestita, senza affidarsi a servizi di terze parti."
+    },
+    "anonymous": {
+      "name": "Anonimo",
+      "description": "Una piattaforma per gestire tabacchini e agenti, con una mappa interattiva di oltre 7000 tabacchini della Lombardia."
+    },
+    "ravenn": {
+      "name": "Ravenn S.r.l.",
+      "description": "Ravenn.io è una piattaforma intuitiva per gestire la logistica e l'ospitalità negli eventi: identifica alloggi adatti per i partecipanti e semplifica prenotazioni, cancellazioni e modifiche alberghiere in modo semplificato ed efficiente."
+    },
+    "recrowd": {
+      "name": "Recrowd S.r.l.",
+      "description": "Recrowd è una piattaforma di crowdfunding immobiliare che ti permette di investire i tuoi risparmi in modo alternativo, anche se non disponi di grandi capitali."
+    },
+    "brainplatform": {
+      "name": "Brainplatform S.r.l.",
+      "description": "Brain S.R.L. trasforma il tuo sito web o app in un potente asset di marketing, combinando un design accattivante con alte prestazioni e comunicando i valori del tuo brand con autorevolezza per tenerti un passo avanti rispetto alla concorrenza. Con molti anni di esperienza nel settore, l'azienda è esperta in un'ampia gamma di tecnologie adatte a ogni tipo di cliente."
+    },
+    "studioBargiggia": {
+      "name": "Studio Bargiggia",
+      "description": "Studio Bargiggia è uno studio di amministrazione condominiale che combina competenza, disponibilità e passione per garantire la migliore amministrazione possibile del tuo edificio."
+    }
   }
 }

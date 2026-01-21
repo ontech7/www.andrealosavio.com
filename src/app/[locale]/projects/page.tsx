@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { HeroSection } from "./sections/hero-section";
+import { ProjectsSection } from "./sections/projects-section";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -22,6 +23,7 @@ export default async function ProjectsPage() {
   return (
     <>
       <HeroSection id="hero" />
+      <ProjectsSection id="projects" />
     </>
   );
 }
