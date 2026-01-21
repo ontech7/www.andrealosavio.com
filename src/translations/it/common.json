@@ -25,7 +25,9 @@
     },
     "cta": {
       "title": "Hai già deciso?",
-      "description": "Non preoccuparti, prenditi il tuo tempo... nel frattempo, dai un voto a questo gatto"
+      "descriptionPart1": "Non preoccuparti, prenditi il tuo tempo... nel frattempo, dai un voto a ",
+      "descriptionLink": "questo gatto",
+      "descriptionPart2": ""
     },
     "featuredProjects": "Progetti in evidenza",
     "copyright": "Copyright © 2018 - {year} Andrea Losavio. Tutti i diritti riservati.",
@@ -40,5 +42,22 @@
     "homeLink": "Andrea Losavio - Home",
     "openMenu": "Apri menu",
     "closeMenu": "Chiudi menu"
+  },
+  "catVote": {
+    "title": "Dai un voto a questo gatto!",
+    "description": "Tutti i gatti sono belli, quindi puoi dare solo voti positivi!",
+    "catAlt": "Un gatto carino",
+    "like": "Mi piace",
+    "love": "Mi piace!!!",
+    "thankYou": {
+      "title": "Grazie!",
+      "description": "Il tuo voto è stato registrato. Già che sei qui, perché non esplori il resto del sito?"
+    },
+    "anotherCat": "Mostrami un altro gatto",
+    "explore": {
+      "services": "Servizi",
+      "projects": "Progetti",
+      "about": "Chi sono"
+    }
   }
 }

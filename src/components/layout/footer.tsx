@@ -1,6 +1,7 @@
 import { FOOTER_LINKS, SOCIAL_LINKS } from "@/constants/navigation";
 import { Link } from "@/libs/i18n/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
+import { FooterCatCta } from "./footer-cat-cta";
 
 export async function Footer() {
   const locale = await getLocale();
@@ -110,9 +111,7 @@ export async function Footer() {
                   <h4 className="text-foreground mb-3 text-xl font-bold">
                     {t("footer.cta.title")}
                   </h4>
-                  <p className="text-muted-foreground text-sm">
-                    {t("footer.cta.description")} 🐱
-                  </p>
+                  <FooterCatCta />
                 </div>
 
                 {/* Featured Projects */}

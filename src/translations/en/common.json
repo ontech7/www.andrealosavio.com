@@ -25,7 +25,9 @@
     },
     "cta": {
       "title": "Did you decide yet?",
-      "description": "Don't worry, take your time... in the meantime, give this cat a vote"
+      "descriptionPart1": "Don't worry, take your time... in the meantime, give ",
+      "descriptionLink": "this cat",
+      "descriptionPart2": " a vote"
     },
     "featuredProjects": "Featured projects",
     "copyright": "Copyright © 2018 - {year} Andrea Losavio. All rights reserved.",
@@ -40,5 +42,22 @@
     "homeLink": "Andrea Losavio - Home",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
+  },
+  "catVote": {
+    "title": "Rate this cat!",
+    "description": "All cats are beautiful, so you can only give positive votes!",
+    "catAlt": "A cute cat",
+    "like": "I like it",
+    "love": "I love it!",
+    "thankYou": {
+      "title": "Thank you!",
+      "description": "Your vote has been recorded. While you're here, why not explore the rest of the site?"
+    },
+    "anotherCat": "Show me another cat",
+    "explore": {
+      "services": "Services",
+      "projects": "Projects",
+      "about": "About me"
+    }
   }
 }
