@@ -50,6 +50,13 @@ export const PROJECTS: Project[] = [
     website: "https://recrowd.com",
   },
   {
+    id: "andreaLosavio",
+    logo: "/images/clients/old-andrea-losavio.svg",
+    image: "/images/projects/old-andrea-losavio.png",
+    tags: ["personal", "nextjs", "react"],
+    website: "https://old.andrealosavio.com",
+  },
+  {
     id: "brainplatform",
     logo: "/images/clients/brainplatform.svg",
     image: "/images/projects/brainplatform.png",

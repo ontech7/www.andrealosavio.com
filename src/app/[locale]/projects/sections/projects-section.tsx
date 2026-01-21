@@ -4,13 +4,10 @@ import { staggerContainerAnim } from "@/constants/motion";
 import { PROJECTS } from "@/constants/projects";
 import { cn } from "@/utils/cn";
 import { motion } from "motion/react";
-import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useMemo, useState } from "react";
 import { ProjectCard } from "../components/project-card";
-import {
-  ProjectsFilter,
-  type SortOrder,
-} from "../components/projects-filter";
+import { ProjectsFilter, type SortOrder } from "../components/projects-filter";
 
 interface ProjectsSectionProps {
   id: string;
@@ -22,8 +19,9 @@ const ALL_TAGS = [...new Set(PROJECTS.flatMap((p) => p.tags))].sort();
 
 export function ProjectsSection({ id, className }: ProjectsSectionProps) {
   const t = useTranslations("projects.items");
+
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("none");
 
   const handleTagToggle = (tag: string) => {
     setSelectedTags((prev) =>
@@ -39,6 +37,10 @@ export function ProjectsSection({ id, className }: ProjectsSectionProps) {
       filtered = filtered.filter((project) =>
         selectedTags.every((tag) => project.tags.includes(tag))
       );
+    }
+
+    if (sortOrder === "none") {
+      return filtered;
     }
 
     // Sort alphabetically by name
@@ -57,7 +59,7 @@ export function ProjectsSection({ id, className }: ProjectsSectionProps) {
   return (
     <section
       id={id}
-      className={cn("mx-auto max-w-5xl px-6 pb-20 md:pb-30", className)}
+      className={cn("mx-auto max-w-5xl px-6 pb-10 lg:pt-0 lg:pb-14", className)}
     >
       <ProjectsFilter
         tags={ALL_TAGS}

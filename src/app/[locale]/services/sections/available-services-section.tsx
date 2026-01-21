@@ -22,10 +22,7 @@ export function AvailableServicesSection({
   return (
     <section
       id={id}
-      className={cn(
-        "mx-auto max-w-5xl px-6 pb-10 lg:pt-20 lg:pb-14",
-        className
-      )}
+      className={cn("mx-auto max-w-5xl px-6 pb-10 lg:pt-0 lg:pb-14", className)}
     >
       <motion.div
         className="flex flex-col gap-6"

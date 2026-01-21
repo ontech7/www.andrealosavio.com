@@ -9,8 +9,9 @@
   },
   "filter": {
     "sortLabel": "Ordinamento",
-    "sortOrderAsc": "Ordina A-Z",
-    "sortOrderDesc": "Ordina Z-A",
+    "sortOrderNone": "Nessun ordinamento",
+    "sortOrderAsc": "Ordina da A a Z",
+    "sortOrderDesc": "Ordina da Z a A",
     "tagsLabel": "Scegli i tag"
   },
   "items": {
@@ -38,6 +39,10 @@
     "recrowd": {
       "name": "Recrowd S.r.l.",
       "description": "Recrowd è una piattaforma di crowdfunding immobiliare che ti permette di investire i tuoi risparmi in modo alternativo, anche se non disponi di grandi capitali."
+    },
+    "andreaLosavio": {
+      "name": "Andrea Losavio (old)",
+      "description": "La versione precedente del mio sito personale, che mostra i miei progetti e le mie competenze come sviluppatore."
     },
     "brainplatform": {
       "name": "Brainplatform S.r.l.",

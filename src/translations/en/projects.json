@@ -9,6 +9,7 @@
   },
   "filter": {
     "sortLabel": "Sorting",
+    "sortOrderNone": "No sorting",
     "sortOrderAsc": "Sort A to Z",
     "sortOrderDesc": "Sort Z to A",
     "tagsLabel": "Choose tags"
@@ -38,6 +39,10 @@
     "recrowd": {
       "name": "Recrowd S.r.l.",
       "description": "Recrowd is a real estate crowdfunding platform that allows you to invest your savings in an alternative way, even if you don't have large amounts of capital."
+    },
+    "andreaLosavio": {
+      "name": "Andrea Losavio (old)",
+      "description": "The previous version of my personal website, showcasing my projects and skills as a developer."
     },
     "brainplatform": {
       "name": "Brainplatform S.r.l.",
