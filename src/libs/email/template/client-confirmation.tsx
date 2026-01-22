@@ -82,12 +82,11 @@ export function ClientConfirmationEmail({
           }}
         >
           <img
-            src={`${SITE_URL}/favicon.png`}
+            src={`${SITE_URL}/icons/android-chrome-192x192.png`}
             alt="Andrea Losavio"
             width="64"
             height="64"
             style={{
-              borderRadius: "12px",
               marginBottom: "16px",
             }}
           />
@@ -310,6 +309,7 @@ export function ClientConfirmationEmail({
           <p
             style={{
               color: colors.textMuted,
+              opacity: 0.8,
               fontSize: "12px",
               margin: 0,
             }}
