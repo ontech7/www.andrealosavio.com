@@ -72,7 +72,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
       <div className="flex-start flex flex-col lg:flex-row lg:gap-8">
         {/* Image */}
         <motion.div
-          className="relative mb-10 shrink-0 self-center lg:-mt-2.5 lg:mb-0 lg:self-auto"
+          className="relative mb-10 w-full max-w-103.25 shrink-0 self-center lg:-mt-2.5 lg:mb-0 lg:w-auto lg:max-w-none lg:self-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
