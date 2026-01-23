@@ -55,7 +55,7 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} style={{ colorScheme: "dark" }}>
       <body className={`${dmSans.variable} ${dmMono.variable} antialiased`}>
         <NuqsProvider>
           <NextIntlClientProvider messages={messages}>

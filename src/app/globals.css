@@ -54,6 +54,7 @@
 }
 
 :root {
+  color-scheme: dark;
   --radius: 12px;
 
   /* Gradients */
