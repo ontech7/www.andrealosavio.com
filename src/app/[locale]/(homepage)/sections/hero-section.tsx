@@ -23,7 +23,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
     <section
       id={id}
       className={cn(
-        "relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-5xl items-start overflow-hidden px-6 pt-40",
+        "relative mx-auto flex h-[calc(100vh-4rem)] min-h-220 max-w-5xl items-start overflow-hidden px-6 pt-40",
         "lg:items-center lg:pt-0",
         className
       )}
@@ -124,7 +124,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
       <div
         className={cn(
           "pointer-events-none absolute",
-          "-right-65 translate-y-1/4 opacity-60",
+          "-right-65 translate-y-1/3 opacity-60",
           "md:-right-30 md:translate-y-1/6 md:opacity-80",
           "lg:top-1/2 lg:-right-30 lg:bottom-auto lg:-translate-y-1/2 lg:opacity-100"
         )}

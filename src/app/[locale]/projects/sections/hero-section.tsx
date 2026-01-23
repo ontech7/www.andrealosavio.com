@@ -1,7 +1,9 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";
 import { cn } from "@/utils/cn";
+import { ArrowDownIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { ProjectsHeroDecoration } from "../components/hero-decoration";
@@ -18,7 +20,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
     <section
       id={id}
       className={cn(
-        "relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-5xl items-start overflow-hidden px-6 pt-40 md:min-h-[calc(70vh-4rem)]",
+        "relative mx-auto flex h-[calc(100vh-4rem)] min-h-200 max-w-5xl items-start overflow-hidden px-6 pt-40 md:min-h-[calc(70vh-4rem)]",
         "lg:items-center lg:pt-0",
         className
       )}
@@ -52,13 +54,37 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         >
           {t("hero.description")}
         </motion.p>
+
+        {/* CTA */}
+        <motion.div variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
+          <Button
+            variant="primary"
+            onClick={() => {
+              document
+                .getElementById("projects")
+                ?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+          >
+            {t("hero.ctaCheckOut")}
+            <motion.span
+              animate={{ y: [-2, 2, -2] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <ArrowDownIcon className="size-4" />
+            </motion.span>
+          </Button>
+        </motion.div>
       </motion.div>
 
       {/* Decoration */}
       <div
         className={cn(
           "pointer-events-none absolute",
-          "-right-50 translate-y-5/7 opacity-60",
+          "-right-50 translate-y-full opacity-60",
           "md:-right-30 md:opacity-80",
           "lg:top-1/2 lg:right-6 lg:bottom-auto lg:-translate-y-1/2 lg:opacity-100"
         )}

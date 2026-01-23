@@ -5,7 +5,8 @@
   },
   "hero": {
     "title": "Lavori <highlight>per clienti</highlight> e <highlight>progetti personali</highlight>",
-    "description": "Sviluppo soluzioni personalizzate per clienti e progetti personali per offrire valore ed esplorare nuove idee"
+    "description": "Sviluppo soluzioni personalizzate per clienti e progetti personali per offrire valore ed esplorare nuove idee",
+    "ctaCheckOut": "Dai un'occhiata"
   },
   "filter": {
     "sortLabel": "Ordinamento",

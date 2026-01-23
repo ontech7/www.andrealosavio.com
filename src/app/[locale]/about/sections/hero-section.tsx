@@ -31,7 +31,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
     <section
       id={id}
       className={cn(
-        "relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-5xl flex-col items-start overflow-hidden px-6 pt-16 md:min-h-[calc(70vh-4rem)]",
+        "relative mx-auto flex max-w-5xl flex-col items-start overflow-hidden px-6 pt-16 md:min-h-[calc(70vh-4rem)]",
         className
       )}
     >

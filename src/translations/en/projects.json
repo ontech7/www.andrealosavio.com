@@ -5,7 +5,8 @@
   },
   "hero": {
     "title": "Works <highlight>for clients</highlight> and <highlight>side projects</highlight>",
-    "description": "Developing custom solutions for clients and personal projects to deliver value and explore new ideas"
+    "description": "Developing custom solutions for clients and personal projects to deliver value and explore new ideas",
+    "ctaCheckOut": "Check out"
   },
   "filter": {
     "sortLabel": "Sorting",
