@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function AboutHeroDecoration() {
   return (
-    <div className="relative aspect-square w-full lg:w-103.25 transition-transform duration-300 hover:rotate-2">
+    <div className="relative aspect-square w-full transition-transform duration-300 hover:rotate-2 lg:w-103.25">
       {/* Grid lines */}
       <div className="pointer-events-none absolute inset-0">
         {/* Vertical lines */}
@@ -18,8 +18,8 @@ export function AboutHeroDecoration() {
         <Image
           src="/images/about/me.png"
           alt="Andrea Losavio"
-          width={370 * 3}
-          height={370 * 3}
+          width={740}
+          height={740}
           priority
           className="h-full w-full object-cover object-top"
         />
