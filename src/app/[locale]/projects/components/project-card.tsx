@@ -72,15 +72,24 @@ export function ProjectCard({ project }: ProjectCardProps) {
             />
           </div>
 
-          {(project.website || project.designUrl) && (
+          {(project.websiteUrl || project.designUrl || project.githubUrl) && (
             <Button variant="primary" className="self-end" asChild>
               <Link
-                href={project.website || project.designUrl || "#"}
+                href={
+                  project.websiteUrl ||
+                  project.designUrl ||
+                  project.githubUrl ||
+                  "#"
+                }
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <LinkIcon className="size-4" />
-                {project.designUrl ? "Check design" : "Check website"}
+                {project.designUrl
+                  ? t("common.checkDesign")
+                  : project.githubUrl
+                    ? t("common.checkGitHub")
+                    : t("common.checkWebsite")}
               </Link>
             </Button>
           )}

@@ -5,7 +5,12 @@ import { PROJECTS } from "@/constants/projects";
 import { cn } from "@/utils/cn";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { parseAsArrayOf, parseAsString, parseAsStringLiteral, useQueryState } from "nuqs";
+import {
+  parseAsArrayOf,
+  parseAsString,
+  parseAsStringLiteral,
+  useQueryState,
+} from "nuqs";
 import { useMemo } from "react";
 import { ProjectCard } from "../components/project-card";
 import { ProjectsFilter } from "../components/projects-filter";
@@ -18,7 +23,11 @@ interface ProjectsSectionProps {
 // Extract all unique tags from projects
 const ALL_TAGS = [...new Set(PROJECTS.flatMap((p) => p.tags))].sort();
 
-const sortOrderParser = parseAsStringLiteral(["none", "asc", "desc"] as const).withDefault("none");
+const sortOrderParser = parseAsStringLiteral([
+  "none",
+  "asc",
+  "desc",
+] as const).withDefault("none");
 const tagsParser = parseAsArrayOf(parseAsString, ",").withDefault([]);
 
 export function ProjectsSection({ id, className }: ProjectsSectionProps) {
@@ -85,7 +94,7 @@ export function ProjectsSection({ id, className }: ProjectsSectionProps) {
       >
         {filteredAndSortedProjects.length === 0 ? (
           <p className="text-muted-foreground col-span-2 py-12 text-center">
-            {t("noResults")}
+            {t("common.noResults")}
           </p>
         ) : (
           <>

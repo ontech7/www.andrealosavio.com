@@ -3,17 +3,25 @@ export interface Project {
   logo: string | null;
   image: string;
   tags: readonly string[];
-  website?: string | null;
+  websiteUrl?: string | null;
+  githubUrl?: string | null;
   designUrl?: string | null;
 }
 
 export const PROJECTS: Project[] = [
   {
+    id: "coolifyManager",
+    logo: "/images/clients/coolify-manager.svg",
+    image: "/images/projects/coolify-manager.png",
+    tags: ["personal", "design", "javascript", "extension"],
+    githubUrl: "https://github.com/ontech7/coolify-manager-extension",
+  },
+  {
     id: "quido",
     logo: "/images/clients/quido.svg",
     image: "/images/projects/quido.png",
     tags: ["customer", "design", "nextjs", "react"],
-    website: "https://quido.ai",
+    websiteUrl: "https://quido.ai",
   },
   {
     id: "forfettarioControl",
@@ -25,9 +33,9 @@ export const PROJECTS: Project[] = [
   {
     id: "fastmemo",
     logo: "/images/clients/fastmemo.svg",
-    image: "/images/projects/fastmemo.png",
-    tags: ["mobile", "personal", "design", "react-native", "expo-sdk"],
-    website: "https://fastmemo.vercel.app",
+    image: "/images/projects/fastmemo_v2.png",
+    tags: ["mobile", "personal", "design", "react-native", "expo-sdk", "tauri"],
+    websiteUrl: "https://fastmemo.vercel.app",
   },
   {
     id: "anonymous",
@@ -40,34 +48,34 @@ export const PROJECTS: Project[] = [
     logo: "/images/clients/ravenn.svg",
     image: "/images/projects/ravenn.png",
     tags: ["customer", "nextjs", "react", "prisma", "postgresql"],
-    website: "https://ravenn.io",
+    websiteUrl: "https://ravenn.io",
   },
   {
     id: "recrowd",
     logo: "/images/clients/recrowd.svg",
     image: "/images/projects/recrowd.png",
     tags: ["customer", "nextjs", "react", "nodejs", "prisma", "postgresql"],
-    website: "https://recrowd.com",
+    websiteUrl: "https://recrowd.com",
   },
   {
     id: "andreaLosavio",
     logo: "/images/clients/old-andrea-losavio.svg",
     image: "/images/projects/old-andrea-losavio.png",
     tags: ["personal", "nextjs", "react"],
-    website: "https://old.andrealosavio.com",
+    websiteUrl: "https://old.andrealosavio.com",
   },
   {
     id: "brainplatform",
     logo: "/images/clients/brainplatform.svg",
     image: "/images/projects/brainplatform.png",
     tags: ["customer", "react", "nextjs"],
-    website: "https://brainplatform.it",
+    websiteUrl: "https://brainplatform.it",
   },
   {
     id: "studioBargiggia",
     logo: "/images/clients/studio-bargiggia.svg",
     image: "/images/projects/studiobargiggia.png",
     tags: ["customer", "design", "react", "nextjs", "strapi"],
-    website: "https://studiobargiggia.com",
+    websiteUrl: "https://studiobargiggia.com",
   },
 ];

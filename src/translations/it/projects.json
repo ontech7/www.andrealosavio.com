@@ -16,7 +16,16 @@
     "tagsLabel": "Scegli i tag"
   },
   "items": {
-    "noResults": "Nessun progetto trovato con i filtri selezionati",
+    "common": {
+      "noResults": "Nessun progetto trovato con i filtri selezionati",
+      "checkDesign": "Guarda il design",
+      "checkWebsite": "Visita il sito",
+      "checkGitHub": "Vai su GitHub"
+    },
+    "coolifyManager": {
+      "name": "Coolify Manager",
+      "description": "Coolify Manager è un'estensione per Chrome che ti permette di gestire il tuo server Coolify self-hosted direttamente dalla barra degli strumenti del browser."
+    },
     "quido": {
       "name": "Quido S.r.l.",
       "description": "Quido.ai è una piattaforma di intelligenza artificiale dedicata al mondo del private equity e delle operazioni M&A in Italia, progettata per fornire analisi affidabili e insight a professionisti e investitori."
