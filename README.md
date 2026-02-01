@@ -5,14 +5,15 @@ clients.
 
 ## Tech Stack
 
-- **Next.js 16.1.1** (App Router)
-- **React 19**
-- **TypeScript**
+- **Next.js 16.1.6** (App Router)
+- **React 19.2**
+- **TypeScript 5**
 - **Tailwind CSS 4**
 - **shadcn/ui** for UI components
 - **next-intl** for internationalization (IT / EN)
 - **Motion** for animations
 - **Zod** + **React Hook Form** for form validation
+- **nuqs** for query params state management
 
 ## Getting Started
 
