@@ -45,10 +45,15 @@ export function ProjectsSection({ id, className }: ProjectsSectionProps) {
   const filteredAndSortedProjects = useMemo(() => {
     let filtered = PROJECTS;
 
+    // Filter out empty strings and non-existent tags from malformed URLs
+    const validTags = selectedTags.filter(
+      (tag) => tag.trim() !== "" && ALL_TAGS.includes(tag)
+    );
+
     // Filter by selected tags (show projects that have ALL selected tags)
-    if (selectedTags.length > 0) {
+    if (validTags.length > 0) {
       filtered = filtered.filter((project) =>
-        selectedTags.every((tag) => project.tags.includes(tag))
+        validTags.every((tag) => project.tags.includes(tag))
       );
     }
 
