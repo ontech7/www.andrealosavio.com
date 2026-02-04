@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "title": "Privacy Policy",
+    "description": "Informativa sulla privacy e sul trattamento dei dati personali per andrealosavio.com"
+  },
+  "title": "Privacy Policy",
+  "lastUpdated": "Ultimo aggiornamento: 4 Febbraio 2025",
+  "sections": {
+    "controller": {
+      "title": "1. Titolare del trattamento",
+      "content": "Il titolare del trattamento dei dati è Andrea Losavio, P.IVA 12705460967. Per qualsiasi domanda relativa al trattamento dei tuoi dati personali, puoi contattarmi all'indirizzo info@andrealosavio.com."
+    },
+    "dataCollected": {
+      "title": "2. Dati raccolti",
+      "content": "Attraverso il modulo di contatto presente su questo sito, raccogliamo i seguenti dati personali:",
+      "items": {
+        "fullname": "Nome e cognome",
+        "email": "Indirizzo email",
+        "message": "Contenuto del messaggio (descrizione della tua sfida o richiesta)"
+      },
+      "note": "Questi dati vengono forniti volontariamente dall'utente al momento della compilazione e dell'invio del modulo di contatto."
+    },
+    "purpose": {
+      "title": "3. Finalità del trattamento",
+      "content": "I tuoi dati personali vengono trattati esclusivamente per le seguenti finalità:",
+      "items": {
+        "respond": "Rispondere alla tua richiesta di contatto",
+        "confirmation": "Inviarti un'email di conferma della ricezione del tuo messaggio"
+      }
+    },
+    "legalBasis": {
+      "title": "4. Base giuridica",
+      "content": "Il trattamento dei tuoi dati si basa sul tuo consenso esplicito, fornito selezionando la casella di consenso prima dell'invio del modulo di contatto (Art. 6(1)(a) GDPR)."
+    },
+    "dataProcessing": {
+      "title": "5. Modalità di trattamento",
+      "content": "I dati inviati tramite il modulo di contatto vengono elaborati utilizzando Resend, un servizio di terze parti per l'invio di email, che viene utilizzato per inviare l'email di conferma all'utente e l'email di notifica al titolare del trattamento. Resend tratta i dati in conformità con la propria informativa sulla privacy e agisce come responsabile del trattamento per nostro conto."
+    },
+    "retention": {
+      "title": "6. Conservazione dei dati",
+      "content": "I tuoi dati personali vengono conservati solo per il tempo strettamente necessario a soddisfare la finalità per cui sono stati raccolti (ovvero rispondere alla tua richiesta). Una volta soddisfatta la finalità, i dati verranno cancellati, salvo che la conservazione sia richiesta per legge."
+    },
+    "rights": {
+      "title": "7. I tuoi diritti",
+      "content": "Ai sensi del GDPR, hai i seguenti diritti:",
+      "items": {
+        "access": "Diritto di accesso – per sapere quali dati abbiamo su di te",
+        "rectification": "Diritto di rettifica – per correggere dati inesatti",
+        "erasure": "Diritto alla cancellazione – per richiedere la cancellazione dei tuoi dati",
+        "restriction": "Diritto alla limitazione del trattamento",
+        "portability": "Diritto alla portabilità dei dati",
+        "objection": "Diritto di opposizione al trattamento dei tuoi dati",
+        "withdraw": "Diritto di revocare il consenso in qualsiasi momento"
+      },
+      "contact": "Per esercitare uno qualsiasi di questi diritti, contattami all'indirizzo info@andrealosavio.com."
+    },
+    "cookies": {
+      "title": "8. Cookie",
+      "content": "Questo sito non utilizza cookie di profilazione. Possono essere utilizzati esclusivamente cookie tecnici strettamente necessari per il corretto funzionamento del sito web."
+    },
+    "changes": {
+      "title": "9. Modifiche a questa informativa",
+      "content": "Questa informativa sulla privacy potrebbe essere aggiornata di tanto in tanto. Eventuali modifiche saranno pubblicate su questa pagina con una data di revisione aggiornata."
+    }
+  }
+}

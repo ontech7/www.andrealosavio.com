@@ -8,6 +8,7 @@ const namespaces = [
   "services",
   "projects",
   "about",
+  "privacy",
 ] as const;
 
 async function loadMessages(locale: Locale) {

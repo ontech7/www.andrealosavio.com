@@ -12,9 +12,10 @@ export const FOOTER_LINKS = {
     titleKey: "footer.sections.general",
     links: [
       { href: "/", labelKey: "footer.links.homepage" },
-      { href: "/services", labelKey: "navigation.services" },
-      { href: "/projects", labelKey: "navigation.projects" },
-      { href: "/about", labelKey: "navigation.about" },
+      { href: "/services", labelKey: "footer.links.services" },
+      { href: "/projects", labelKey: "footer.links.projects" },
+      { href: "/about", labelKey: "footer.links.about" },
+      { href: "/privacy", labelKey: "footer.links.privacyPolicy" },
     ],
   },
   services: {
@@ -49,7 +50,10 @@ export const FOOTER_LINKS = {
   projects: {
     titleKey: "footer.sections.projects",
     links: [
-      { href: "/projects?tags=personal", labelKey: "footer.links.personalIdeas" },
+      {
+        href: "/projects?tags=personal",
+        labelKey: "footer.links.personalIdeas",
+      },
       { href: "/projects?tags=customer", labelKey: "footer.links.forClients" },
     ],
   },

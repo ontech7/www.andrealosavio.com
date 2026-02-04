@@ -14,6 +14,10 @@
     },
     "links": {
       "homepage": "Homepage",
+      "services": "Servizi",
+      "projects": "Progetti",
+      "about": "Chi sono",
+      "privacyPolicy": "Privacy Policy",
       "collaboration": "Collaborazione",
       "validationMvp": "Validazione & MVP",
       "auditConsulting": "Audit & Consulenza",
@@ -31,7 +35,8 @@
     },
     "featuredProjects": "Progetti in evidenza",
     "copyright": "Copyright © 2018 - {year} Andrea Losavio. Tutti i diritti riservati.",
-    "vat": "P.IVA: {vatNumber}"
+    "vat": "P.IVA: {vatNumber}",
+    "privacyPolicy": "Privacy Policy"
   },
   "social": {
     "github": "GitHub",

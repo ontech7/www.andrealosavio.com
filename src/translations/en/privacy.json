@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "title": "Privacy Policy",
+    "description": "Privacy policy and personal data processing information for andrealosavio.com"
+  },
+  "title": "Privacy Policy",
+  "lastUpdated": "Last updated: 4th February 2025",
+  "sections": {
+    "controller": {
+      "title": "1. Data Controller",
+      "content": "The data controller is Andrea Losavio, VAT number 12705460967. For any questions regarding the processing of your personal data, you can contact me at info@andrealosavio.com."
+    },
+    "dataCollected": {
+      "title": "2. Data Collected",
+      "content": "Through the contact form on this website, we collect the following personal data:",
+      "items": {
+        "fullname": "Full name",
+        "email": "Email address",
+        "message": "Message content (description of your challenge or request)"
+      },
+      "note": "This data is provided voluntarily by the user when filling out and submitting the contact form."
+    },
+    "purpose": {
+      "title": "3. Purpose of Data Processing",
+      "content": "Your personal data is processed exclusively for the following purposes:",
+      "items": {
+        "respond": "Responding to your contact request",
+        "confirmation": "Sending a confirmation email that your message has been received"
+      }
+    },
+    "legalBasis": {
+      "title": "4. Legal Basis",
+      "content": "The processing of your data is based on your explicit consent, provided by checking the consent checkbox before submitting the contact form (Art. 6(1)(a) GDPR)."
+    },
+    "dataProcessing": {
+      "title": "5. How Data is Processed",
+      "content": "The data submitted through the contact form is processed using Resend, a third-party email delivery service, which is used to send the confirmation email to you and the notification email to the data controller. Resend processes data in accordance with its own privacy policy and acts as a data processor on our behalf."
+    },
+    "retention": {
+      "title": "6. Data Retention",
+      "content": "Your personal data is retained only for the time strictly necessary to fulfill the purpose for which it was collected (i.e., responding to your request). Once the purpose has been fulfilled, the data will be deleted unless retention is required by law."
+    },
+    "rights": {
+      "title": "7. Your Rights",
+      "content": "Under the GDPR, you have the following rights:",
+      "items": {
+        "access": "Right of access – to know what data we hold about you",
+        "rectification": "Right to rectification – to correct inaccurate data",
+        "erasure": "Right to erasure – to request deletion of your data",
+        "restriction": "Right to restriction of processing",
+        "portability": "Right to data portability",
+        "objection": "Right to object to the processing of your data",
+        "withdraw": "Right to withdraw consent at any time"
+      },
+      "contact": "To exercise any of these rights, please contact me at info@andrealosavio.com."
+    },
+    "cookies": {
+      "title": "8. Cookies",
+      "content": "This website does not use profiling cookies. Only technical cookies strictly necessary for the proper functioning of the website may be used."
+    },
+    "changes": {
+      "title": "9. Changes to This Policy",
+      "content": "This privacy policy may be updated from time to time. Any changes will be published on this page with an updated revision date."
+    }
+  }
+}

@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/services", priority: 0.9 },
     { path: "/projects", priority: 0.8 },
     { path: "/about", priority: 0.7 },
+    { path: "/privacy", priority: 0.3 },
   ];
 
   return routes.flatMap((route) => ({
