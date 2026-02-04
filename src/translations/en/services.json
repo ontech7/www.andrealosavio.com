@@ -13,36 +13,66 @@
       "title": "Collaboration",
       "description": "I integrate into your team with a product-oriented mindset. I don't just write code: I bring experience, propose solutions, and actively contribute to building a solid product that drives your company's growth.",
       "highlight": "product-oriented mindset",
+      "useCasesLabel": "When is it needed?",
+      "useCase1": "Startups looking for a senior developer",
+      "useCase2": "Teams wanting to scale quickly",
+      "useCase3": "Projects requiring product vision",
+      "useCase4": "Companies seeking quality, not just code",
       "cta": "Pricing: <price>Let's discuss</price>"
     },
     "validationMvp": {
       "title": "Validation & MVP",
       "description": "Rapidly transform your idea into a functional Minimum Viable Product (MVP). I define the essential scope, eliminate superfluous features, and provide a concrete tool for market testing, real feedback collection, and securing your next funding round with minimal effort and risk.",
       "highlight": "Minimum Viable Product (MVP)",
+      "useCasesLabel": "When is it needed?",
+      "useCase1": "Ideas to validate on the market",
+      "useCase2": "Pre-seed or seed stage startups",
+      "useCase3": "Founders seeking product-market fit",
+      "useCase4": "Projects with limited budget and timeline",
       "cta": "Pricing: <price>5.000€+/project</price>"
     },
     "auditConsulting": {
       "title": "Audit & Consulting",
       "description": "I conduct in-depth analysis of your architecture, code, and team workflows. I provide a detailed report on Technical Debt, bottlenecks, and risks, along with a prioritized action plan to increase stability, development speed, and operational cost efficiency.",
       "highlight": "Technical Debt",
+      "useCasesLabel": "When is it needed?",
+      "useCase1": "Legacy codebase hard to maintain",
+      "useCase2": "Performance or scalability issues",
+      "useCase3": "Growing teams wanting to standardize",
+      "useCase4": "Before a funding round",
       "cta": "Pricing: <price>60€/hour</price>"
     },
     "fractionalCto": {
       "title": "Fractional CTO",
       "description": "Gain Executive-Level Technical Leadership without the burden of a full-time executive. Strategic guidance, resource management, technical hiring, and alignment of the IT roadmap with business goals to ensure a solid and scalable direction.",
       "highlight": "Executive-Level Technical Leadership",
+      "useCasesLabel": "When is it needed?",
+      "useCase1": "Startups without an in-house CTO",
+      "useCase2": "Non-technical founders",
+      "useCase3": "Companies in growth phase",
+      "useCase4": "Tech teams needing leadership",
       "cta": "Pricing: <price>1000€+/month</price>"
     },
     "technicalMentorship": {
       "title": "Technical Mentorship",
       "description": "Offering personalized guidance and hands-on support to help teams strengthen their technical skills, adopt best practices, improve workflows, and make informed engineering decisions, ensuring scalable, maintainable, and high-quality products.",
       "highlight": "hands-on support",
+      "useCasesLabel": "When is it needed?",
+      "useCase1": "Junior developers to level up",
+      "useCase2": "Teams wanting to adopt best practices",
+      "useCase3": "Transitioning to new technologies",
+      "useCase4": "Code review and continuous improvement",
       "cta": "Pricing: <price>60€/hour</price>"
     },
     "productDevelopment": {
       "title": "Product Development",
       "description": "Full-Stack Service for the complete creation of digital products. From UX/UI design to cloud deployment, I manage the entire development lifecycle for robust, scalable, and results-oriented web and mobile applications.",
       "highlight": "Full-Stack Service",
+      "useCasesLabel": "When is it needed?",
+      "useCase1": "Digital products to build from scratch",
+      "useCase2": "Complete redesign of existing apps",
+      "useCase3": "Startups looking for a tech partner",
+      "useCase4": "Companies wanting to go digital",
       "cta": "Pricing: <price>Let's discuss*</price>",
       "ctaNote": "*minimum 10.000€"
     }

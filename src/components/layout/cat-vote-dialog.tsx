@@ -134,7 +134,7 @@ export function CatVoteDialog({ children }: CatVoteDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="w-[calc(100%-24px)] max-w-lg">
         <DialogHeader>
           <DialogTitle>
             {hasVoted ? t("thankYou.title") : t("title")}
@@ -146,9 +146,9 @@ export function CatVoteDialog({ children }: CatVoteDialogProps) {
 
         <div className="flex flex-col items-center gap-4">
           {isLoading ? (
-            <Skeleton className="aspect-square h-80 w-full max-w-xs rounded-lg" />
+            <Skeleton className="h-70 w-full max-w-xs rounded-lg" />
           ) : !hasVoted && cat ? (
-            <div className="relative aspect-square w-full max-w-xs overflow-hidden rounded-lg">
+            <div className="relative h-70 w-full max-w-xs overflow-hidden rounded-lg">
               <Image
                 src={cat.url}
                 alt={t("catAlt")}

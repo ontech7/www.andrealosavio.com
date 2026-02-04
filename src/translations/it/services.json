@@ -13,36 +13,66 @@
       "title": "Collaborazione",
       "description": "Mi integro nel tuo team con un approccio orientato al prodotto. Non mi limito a scrivere codice: porto esperienza, propongo soluzioni e contribuisco attivamente a costruire un prodotto solido che faccia crescere la tua azienda.",
       "highlight": "approccio orientato al prodotto",
+      "useCasesLabel": "Quando serve?",
+      "useCase1": "Startup che cercano un senior developer",
+      "useCase2": "Team che vogliono scalare velocemente",
+      "useCase3": "Progetti che richiedono visione di prodotto",
+      "useCase4": "Aziende che cercano qualità, non solo codice",
       "cta": "Prezzo: <price>Discutiamone</price>"
     },
     "validationMvp": {
       "title": "Validazione & MVP",
       "description": "Trasforma rapidamente la tua idea in un Minimum Viable Product (MVP) funzionale. Definisco lo scope essenziale, elimino le funzionalità superflue e fornisco uno strumento concreto per testare il mercato, raccogliere feedback reali e ottenere il prossimo round di finanziamento con il minimo sforzo e rischio.",
       "highlight": "Minimum Viable Product (MVP)",
+      "useCasesLabel": "Quando serve?",
+      "useCase1": "Idee da validare sul mercato",
+      "useCase2": "Startup in fase pre-seed o seed",
+      "useCase3": "Founder che cercano il product-market fit",
+      "useCase4": "Progetti con budget e tempi limitati",
       "cta": "Prezzo: <price>5.000€+/progetto</price>"
     },
     "auditConsulting": {
       "title": "Audit & Consulenza",
       "description": "Conduco analisi approfondite della tua architettura, codice e workflow del team. Fornisco un report dettagliato su Technical Debt, colli di bottiglia e rischi, insieme a un piano d'azione prioritizzato per aumentare stabilità, velocità di sviluppo ed efficienza operativa.",
       "highlight": "Technical Debt",
+      "useCasesLabel": "Quando serve?",
+      "useCase1": "Codebase legacy difficile da mantenere",
+      "useCase2": "Problemi di performance o scalabilità",
+      "useCase3": "Team in crescita che vuole standardizzare",
+      "useCase4": "Prima di un round di investimento",
       "cta": "Prezzo: <price>60€/ora</price>"
     },
     "fractionalCto": {
       "title": "Fractional CTO",
       "description": "Ottieni una Leadership Tecnica di Livello Executive senza il peso di un dirigente a tempo pieno. Guida strategica, gestione delle risorse, assunzioni tecniche e allineamento della roadmap IT con gli obiettivi aziendali per garantire una direzione solida e scalabile.",
       "highlight": "Leadership Tecnica di Livello Executive",
+      "useCasesLabel": "Quando serve?",
+      "useCase1": "Startup senza CTO interno",
+      "useCase2": "Founder non tecnici",
+      "useCase3": "Aziende in fase di crescita",
+      "useCase4": "Team tech che hanno bisogno di guida",
       "cta": "Prezzo: <price>1000€+/mese</price>"
     },
     "technicalMentorship": {
       "title": "Mentorship Tecnica",
       "description": "Offro guida personalizzata e supporto pratico per aiutare i team a rafforzare le competenze tecniche, adottare best practices, migliorare i workflow e prendere decisioni ingegneristiche informate, garantendo prodotti scalabili, mantenibili e di alta qualità.",
       "highlight": "supporto pratico",
+      "useCasesLabel": "Quando serve?",
+      "useCase1": "Developer junior da far crescere",
+      "useCase2": "Team che vogliono adottare best practices",
+      "useCase3": "Transizione verso nuove tecnologie",
+      "useCase4": "Code review e miglioramento continuo",
       "cta": "Prezzo: <price>60€/ora</price>"
     },
     "productDevelopment": {
       "title": "Sviluppo Prodotto",
       "description": "Servizio Full-Stack per la creazione completa di prodotti digitali. Dalla progettazione UX/UI al deployment in cloud, gestisco l'intero ciclo di sviluppo per applicazioni web e mobile robuste, scalabili e orientate ai risultati.",
       "highlight": "Servizio Full-Stack",
+      "useCasesLabel": "Quando serve?",
+      "useCase1": "Prodotti digitali da costruire da zero",
+      "useCase2": "Redesign completo di app esistenti",
+      "useCase3": "Startup che cercano un partner tecnico",
+      "useCase4": "Aziende che vogliono digitalizzarsi",
       "cta": "Prezzo: <price>Discutiamone*</price>",
       "ctaNote": "*minimo 10.000€"
     }

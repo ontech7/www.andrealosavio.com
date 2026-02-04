@@ -92,7 +92,7 @@ export function ServiceContactDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="bg-background max-h-[90vh] overflow-y-auto sm:max-w-lg">
+      <DialogContent className="bg-background max-h-[90vh] w-[calc(100%-24px)] max-w-lg overflow-y-auto">
         {status === "success" ? (
           <div className="flex flex-col items-center justify-center py-8 text-center">
             <CheckCircleIcon className="mb-4 size-16 text-green-500" />

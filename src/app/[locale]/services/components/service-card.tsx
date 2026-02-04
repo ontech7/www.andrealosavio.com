@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { fadeInUpAnim } from "@/constants/motion";
 import { SERVICES } from "@/constants/services";
 import { cn } from "@/utils/cn";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon, CheckIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -77,6 +77,30 @@ export function ServiceCard({ service, reversed = false }: ServiceCardProps) {
                     t(`${service.id}.description`)
                   )}
                 </p>
+
+                <div className="mt-4">
+                  <p className="text-muted-foreground mb-2 text-sm font-medium">
+                    {t(`${service.id}.useCasesLabel`)}
+                  </p>
+                  <ul className="space-y-1.5">
+                    {(
+                      [
+                        "useCase1",
+                        "useCase2",
+                        "useCase3",
+                        "useCase4",
+                      ] as const
+                    ).map((key) => (
+                      <li
+                        key={key}
+                        className="text-muted-foreground flex items-center gap-2 text-sm"
+                      >
+                        <CheckIcon className="text-secondary size-3.5 shrink-0" />
+                        {t(`${service.id}.${key}`)}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
               <div className="mt-6">

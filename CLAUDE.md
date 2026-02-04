@@ -19,12 +19,14 @@ code quality and long-term maintainability.
 
 ## Tech Stack
 
-- **Next.js 16.1.1** (App Router)
+- **Next.js 16.1.6** (App Router)
 - **TypeScript**
 - **Tailwind CSS**
 - **shadcn/ui** (only required components)
 - **next-intl** for internationalization (IT / EN)
 - **Resend API** for contact form emails
+- **Motion** for animations
+- **nuqs** for query params state management
 
 ## Project Architecture
 

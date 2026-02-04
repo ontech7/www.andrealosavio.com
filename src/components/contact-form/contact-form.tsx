@@ -5,7 +5,13 @@ import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { fadeInUpAnim } from "@/constants/motion";
 import { cn } from "@/utils/cn";
-import { CheckCircleIcon, LoaderIcon, MailIcon, SendIcon, UserIcon } from "lucide-react";
+import {
+  CheckCircleIcon,
+  LoaderIcon,
+  MailIcon,
+  SendIcon,
+  UserIcon,
+} from "lucide-react";
 import { motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import { useId, useState } from "react";
@@ -76,7 +82,7 @@ export function ContactForm({
         transition={{ duration: 0.5 }}
         className={cn(className)}
       >
-        <Card className="bg-background p-8">
+        <Card className="bg-background p-4 md:p-8">
           <div className="flex flex-col items-center justify-center py-8 text-center">
             <CheckCircleIcon className="mb-4 size-16 text-green-500" />
             <h3 className="mb-3 bg-(image:--text-gradient) bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-4xl">
@@ -102,7 +108,7 @@ export function ContactForm({
       className={cn(className)}
     >
       {/* Form Card */}
-      <Card className="bg-background p-8">
+      <Card className="bg-background p-4 md:p-8">
         {/* Header */}
         <div className="mb-6 text-center">
           <h3 className="mb-3 bg-(image:--text-gradient) bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-4xl">
