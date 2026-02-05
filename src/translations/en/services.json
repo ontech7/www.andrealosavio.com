@@ -14,10 +14,10 @@
       "description": "I integrate into your team with a product-oriented mindset. I don't just write code: I bring experience, propose solutions, and actively contribute to building a solid product that drives your company's growth.",
       "highlight": "product-oriented mindset",
       "useCasesLabel": "When is it needed?",
-      "useCase1": "Startups looking for a senior developer",
-      "useCase2": "Teams wanting to scale quickly",
-      "useCase3": "Projects requiring product vision",
-      "useCase4": "Companies seeking quality, not just code",
+      "useCase1": "Companies wanting to build solid and scalable foundations",
+      "useCase2": "Growing teams needing to raise the technical bar",
+      "useCase3": "Products requiring strategic technology choices",
+      "useCase4": "Teams looking for an active contributor",
       "cta": "Pricing: <price>Let's discuss</price>"
     },
     "validationMvp": {
@@ -29,7 +29,7 @@
       "useCase2": "Pre-seed or seed stage startups",
       "useCase3": "Founders seeking product-market fit",
       "useCase4": "Projects with limited budget and timeline",
-      "cta": "Pricing: <price>5.000€+/project</price>"
+      "cta": "Pricing: <price>2.500€+/project</price>"
     },
     "auditConsulting": {
       "title": "Audit & Consulting",
@@ -51,7 +51,7 @@
       "useCase2": "Non-technical founders",
       "useCase3": "Companies in growth phase",
       "useCase4": "Tech teams needing leadership",
-      "cta": "Pricing: <price>1000€+/month</price>"
+      "cta": "Pricing: <price>800€+/month</price>"
     },
     "technicalMentorship": {
       "title": "Technical Mentorship",
@@ -61,8 +61,7 @@
       "useCase1": "Junior developers to level up",
       "useCase2": "Teams wanting to adopt best practices",
       "useCase3": "Transitioning to new technologies",
-      "useCase4": "Code review and continuous improvement",
-      "cta": "Pricing: <price>60€/hour</price>"
+      "cta": "Pricing: <price>55€/hour</price>"
     },
     "productDevelopment": {
       "title": "Product Development",
@@ -71,10 +70,9 @@
       "useCasesLabel": "When is it needed?",
       "useCase1": "Digital products to build from scratch",
       "useCase2": "Complete redesign of existing apps",
-      "useCase3": "Startups looking for a tech partner",
-      "useCase4": "Companies wanting to go digital",
+      "useCase3": "Companies wanting to go digital",
       "cta": "Pricing: <price>Let's discuss*</price>",
-      "ctaNote": "*minimum 10.000€"
+      "ctaNote": "*minimum 7.000€"
     }
   },
   "contactForm": {

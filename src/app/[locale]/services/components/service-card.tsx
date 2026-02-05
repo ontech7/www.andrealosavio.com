@@ -3,7 +3,7 @@
 import { ServiceContactDialog } from "@/components/contact-form";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { fadeInUpAnim } from "@/constants/motion";
+import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";
 import { SERVICES } from "@/constants/services";
 import { cn } from "@/utils/cn";
 import { ArrowRightIcon, CheckIcon } from "lucide-react";
@@ -82,28 +82,33 @@ export function ServiceCard({ service, reversed = false }: ServiceCardProps) {
                   <p className="text-muted-foreground mb-2 text-sm font-medium">
                     {t(`${service.id}.useCasesLabel`)}
                   </p>
-                  <ul className="space-y-1.5">
+                  <motion.ul
+                    variants={staggerContainerAnim}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 1 }}
+                    className="space-y-1.5"
+                  >
                     {(
-                      [
-                        "useCase1",
-                        "useCase2",
-                        "useCase3",
-                        "useCase4",
-                      ] as const
-                    ).map((key) => (
-                      <li
-                        key={key}
-                        className="text-muted-foreground flex items-center gap-2 text-sm"
-                      >
-                        <CheckIcon className="text-secondary size-3.5 shrink-0" />
-                        {t(`${service.id}.${key}`)}
-                      </li>
-                    ))}
-                  </ul>
+                      ["useCase1", "useCase2", "useCase3", "useCase4"] as const
+                    ).map((key) =>
+                      t.has(`${service.id}.${key}`) ? (
+                        <motion.li
+                          key={key}
+                          variants={fadeInUpAnim}
+                          transition={{ duration: 0.5 }}
+                          className="text-muted-foreground flex items-center gap-2 text-sm"
+                        >
+                          <CheckIcon className="text-secondary size-3.5 shrink-0" />
+                          {t(`${service.id}.${key}`)}
+                        </motion.li>
+                      ) : null
+                    )}
+                  </motion.ul>
                 </div>
               </div>
 
-              <div className="mt-6">
+              <div className="mt-4">
                 <Button
                   variant="gradient-primary"
                   size="default"

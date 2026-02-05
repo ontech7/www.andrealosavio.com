@@ -14,10 +14,10 @@
       "description": "Mi integro nel tuo team con un approccio orientato al prodotto. Non mi limito a scrivere codice: porto esperienza, propongo soluzioni e contribuisco attivamente a costruire un prodotto solido che faccia crescere la tua azienda.",
       "highlight": "approccio orientato al prodotto",
       "useCasesLabel": "Quando serve?",
-      "useCase1": "Startup che cercano un senior developer",
-      "useCase2": "Team che vogliono scalare velocemente",
-      "useCase3": "Progetti che richiedono visione di prodotto",
-      "useCase4": "Aziende che cercano qualità, non solo codice",
+      "useCase1": "Aziende che vogliono costruire fondamenta solide e scalabili",
+      "useCase2": "Team in crescita che devono alzare il livello tecnico",
+      "useCase3": "Prodotti che necessitano di scelte tecnologiche strategiche",
+      "useCase4": "Team che cercano un contributor attivo",
       "cta": "Prezzo: <price>Discutiamone</price>"
     },
     "validationMvp": {
@@ -29,7 +29,7 @@
       "useCase2": "Startup in fase pre-seed o seed",
       "useCase3": "Founder che cercano il product-market fit",
       "useCase4": "Progetti con budget e tempi limitati",
-      "cta": "Prezzo: <price>5.000€+/progetto</price>"
+      "cta": "Prezzo: <price>2.500€+/progetto</price>"
     },
     "auditConsulting": {
       "title": "Audit & Consulenza",
@@ -51,7 +51,7 @@
       "useCase2": "Founder non tecnici",
       "useCase3": "Aziende in fase di crescita",
       "useCase4": "Team tech che hanno bisogno di guida",
-      "cta": "Prezzo: <price>1000€+/mese</price>"
+      "cta": "Prezzo: <price>800€+/mese</price>"
     },
     "technicalMentorship": {
       "title": "Mentorship Tecnica",
@@ -61,8 +61,7 @@
       "useCase1": "Developer junior da far crescere",
       "useCase2": "Team che vogliono adottare best practices",
       "useCase3": "Transizione verso nuove tecnologie",
-      "useCase4": "Code review e miglioramento continuo",
-      "cta": "Prezzo: <price>60€/ora</price>"
+      "cta": "Prezzo: <price>55€/ora</price>"
     },
     "productDevelopment": {
       "title": "Sviluppo Prodotto",
@@ -71,10 +70,9 @@
       "useCasesLabel": "Quando serve?",
       "useCase1": "Prodotti digitali da costruire da zero",
       "useCase2": "Redesign completo di app esistenti",
-      "useCase3": "Startup che cercano un partner tecnico",
-      "useCase4": "Aziende che vogliono digitalizzarsi",
+      "useCase3": "Aziende che vogliono digitalizzarsi",
       "cta": "Prezzo: <price>Discutiamone*</price>",
-      "ctaNote": "*minimo 10.000€"
+      "ctaNote": "*minimo 7.000€"
     }
   },
   "contactForm": {
