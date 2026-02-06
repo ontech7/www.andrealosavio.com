@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 
 export function ProjectsHeroDecoration() {
   return (
-    <div className="opacity-40">
+    <div className="opacity-40" aria-hidden="true">
       <motion.div
         className="flex gap-5"
         variants={staggerContainerAnim}

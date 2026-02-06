@@ -6,6 +6,7 @@ export function GridLayers() {
       viewBox="0 0 1417 884"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
     >
       <mask
         id="mask0_81_477"

@@ -34,6 +34,7 @@ export function FloatingTextarea({
 
       {/* Floating Line */}
       <div
+        aria-hidden="true"
         className={cn(
           "bg-muted pointer-events-none absolute z-1 h-1 text-sm text-transparent transition-all duration-200",
           isFloating

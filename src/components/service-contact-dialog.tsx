@@ -20,8 +20,8 @@ import {
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useId, useState } from "react";
-import { FloatingInput } from "./floating-input";
-import { FloatingTextarea } from "./floating-textarea";
+import { FloatingInput } from "./ui/floating-input";
+import { FloatingTextarea } from "./ui/floating-textarea";
 
 type ServiceId = (typeof SERVICES)[number]["id"];
 type FormStatus = "idle" | "loading" | "success" | "error";
@@ -38,6 +38,7 @@ export function ServiceContactDialog({
   onOpenChange,
 }: ServiceContactDialogProps) {
   const t = useTranslations("services");
+  const tCommon = useTranslations("common");
   const locale = useLocale() as "it" | "en";
   const checkboxId = useId();
   const [consent, setConsent] = useState(false);
@@ -92,10 +93,16 @@ export function ServiceContactDialog({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="bg-background max-h-[90vh] w-[calc(100%-24px)] max-w-lg overflow-y-auto">
+      <DialogContent
+        className="bg-background max-h-[90vh] w-[calc(100%-24px)] max-w-lg overflow-y-auto"
+        closeLabel={tCommon("accessibility.closeDialog")}
+      >
         {status === "success" ? (
           <div className="flex flex-col items-center justify-center py-8 text-center">
-            <CheckCircleIcon className="mb-4 size-16 text-green-500" />
+            <CheckCircleIcon
+              className="mb-4 size-16 text-green-500"
+              aria-hidden="true"
+            />
             <DialogTitle className="mb-3 bg-(image:--text-gradient) bg-clip-text text-2xl font-bold tracking-tight text-transparent">
               {t("contactForm.successTitle")}
             </DialogTitle>
@@ -114,7 +121,12 @@ export function ServiceContactDialog({
               </DialogDescription>
             </DialogHeader>
 
-            <form onSubmit={handleSubmit} className="mt-4 space-y-5">
+            <form
+              onSubmit={handleSubmit}
+              className="mt-4 space-y-5"
+              aria-busy={status === "loading"}
+              noValidate
+            >
               {/* Service Badge */}
               <div className="flex items-center gap-2">
                 <span className="text-muted-foreground text-sm">
@@ -130,6 +142,8 @@ export function ServiceContactDialog({
                 icon={<UserIcon className="size-4" />}
                 name="fullname"
                 required
+                aria-required="true"
+                autoComplete="name"
                 disabled={status === "loading"}
               />
 
@@ -139,6 +153,8 @@ export function ServiceContactDialog({
                 icon={<MailIcon className="size-4" />}
                 name="email"
                 required
+                aria-required="true"
+                autoComplete="email"
                 disabled={status === "loading"}
               />
 
@@ -147,6 +163,7 @@ export function ServiceContactDialog({
                 name="challenge"
                 rows={4}
                 required
+                aria-required="true"
                 disabled={status === "loading"}
               />
 
@@ -170,7 +187,11 @@ export function ServiceContactDialog({
 
               {/* Error Message */}
               {status === "error" && errorMessage && (
-                <p className="text-center text-sm text-red-500">
+                <p
+                  className="text-center text-sm text-red-500"
+                  role="alert"
+                  aria-live="assertive"
+                >
                   {errorMessage}
                 </p>
               )}
@@ -185,12 +206,15 @@ export function ServiceContactDialog({
                   {status === "loading" ? (
                     <>
                       {t("contactForm.sending")}
-                      <LoaderIcon className="size-4 animate-spin" />
+                      <LoaderIcon
+                        className="size-4 animate-spin"
+                        aria-hidden="true"
+                      />
                     </>
                   ) : (
                     <>
                       {t("serviceDialog.submit")}
-                      <SendIcon className="size-4" />
+                      <SendIcon className="size-4" aria-hidden="true" />
                     </>
                   )}
                 </Button>

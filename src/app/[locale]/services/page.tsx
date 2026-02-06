@@ -12,10 +12,31 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "services.metadata" });
+  const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
 
   return {
     title: t("title"),
     description: t("description"),
+    alternates: {
+      canonical: `${siteUrl}/${locale}/services`,
+      languages: {
+        en: `${siteUrl}/en/services`,
+        it: `${siteUrl}/it/services`,
+      },
+    },
+    openGraph: {
+      title: t("title"),
+      description: t("description"),
+      url: `${siteUrl}/${locale}/services`,
+      type: "website",
+      locale: locale === "it" ? "it_IT" : "en_US",
+      siteName: "Andrea Losavio",
+    },
+    twitter: {
+      card: "summary",
+      title: t("title"),
+      description: t("description"),
+    },
   };
 }
 

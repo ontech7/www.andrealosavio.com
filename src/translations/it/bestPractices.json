@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "title": "Best Practices | Andrea Losavio",
+    "description": "Scopri perché questo portfolio ottiene 100/100 su Google Lighthouse. L'eccellenza ingegneristica, gli standard di accessibilità e la qualità del codice dietro ogni pagina."
+  },
+  "hero": {
+    "title": "Costruito con un'attenzione <highlight>maniacale</highlight> ai dettagli",
+    "subtitle": "Questo sito non è solo un portfolio — è una dimostrazione di eccellenza ingegneristica. Ogni pixel, ogni interazione, ogni riga di codice segue i più alti standard del settore."
+  },
+  "scores": {
+    "title": "Punteggi Lighthouse <highlight>perfetti</highlight>",
+    "subtitle": "Misurati con Google Lighthouse, lo standard di riferimento per l'audit della qualità web.",
+    "performance": "Performance",
+    "accessibility": "Accessibilità",
+    "bestPractices": "Best Practices",
+    "seo": "SEO",
+    "buildTime": "<pages>17 pagine</pages> generate in <time>304.9ms</time>"
+  },
+  "practices": {
+    "title": "Cosa rende questo sito <highlight>eccezionale</highlight>",
+    "subtitle": "Un'analisi dei principi ingegneristici e degli standard applicati in tutto il codebase.",
+    "accessibility": {
+      "title": "Accessibilità",
+      "items": {
+        "item1": "Design pattern conformi a WCAG 2.2",
+        "item2": "Navigazione completa da tastiera",
+        "item3": "Ottimizzato per screen reader con label ARIA",
+        "item4": "Struttura HTML semantica in tutto il sito",
+        "item5": "Skip link per accesso rapido ai contenuti",
+        "item6": "Rispetta le preferenze di riduzione del movimento"
+      }
+    },
+    "performance": {
+      "title": "Performance",
+      "items": {
+        "item1": "Architettura server-first (React Server Components)",
+        "item2": "Core Web Vitals completamente ottimizzati",
+        "item3": "Ottimizzazione automatica delle immagini con Next.js",
+        "item4": "Code splitting e lazy loading",
+        "item5": "Pronto per l'edge con generazione statica",
+        "item6": "JavaScript client-side ridotto al minimo"
+      }
+    },
+    "seo": {
+      "title": "SEO",
+      "items": {
+        "item1": "Markup semantico con gerarchia heading corretta",
+        "item2": "Metadata dinamici per ogni pagina",
+        "item3": "Internazionalizzazione completa (IT/EN)",
+        "item4": "Struttura URL pulita e crawlabile",
+        "item5": "Dati strutturati e tag Open Graph",
+        "item6": "Generazione automatica della sitemap"
+      }
+    },
+    "security": {
+      "title": "Sicurezza",
+      "items": {
+        "item1": "HTTPS applicato su tutto il sito",
+        "item2": "Validazione e sanitizzazione form lato server",
+        "item3": "Nessun tracker o analytics di terze parti",
+        "item4": "Form di contatto protetto da CSRF",
+        "item5": "Audit e aggiornamento delle dipendenze",
+        "item6": "Content Security Policy rigorosa"
+      }
+    },
+    "codeQuality": {
+      "title": "Qualità del Codice",
+      "items": {
+        "item1": "TypeScript con type checking rigoroso",
+        "item2": "Stack moderno: Next.js 16, React 19, Tailwind CSS v4",
+        "item3": "Architettura pulita con chiara separazione delle responsabilità",
+        "item4": "ESLint + Prettier per uno stile di codice consistente",
+        "item5": "Sviluppo component-driven con shadcn/ui",
+        "item6": "Nessun tipo any — codebase completamente tipizzato"
+      }
+    },
+    "uxDesign": {
+      "title": "UX & Design",
+      "items": {
+        "item1": "Completamente responsive: mobile, tablet e desktop",
+        "item2": "Dark mode nativo — progettato, non adattato",
+        "item3": "Animazioni fluide e intenzionali con Motion",
+        "item4": "Design system coerente da Figma",
+        "item5": "Navigazione intuitiva e architettura dell'informazione",
+        "item6": "Implementazione pixel-perfect"
+      }
+    }
+  },
+  "cta": {
+    "title": "Vuoi la stessa <highlight>qualità</highlight> per il tuo progetto?",
+    "subtitle": "Costruisco prodotti digitali con la stessa cura maniacale che hai visto su questo sito. Parliamo della tua visione.",
+    "button": "Scopri i miei servizi"
+  }
+}

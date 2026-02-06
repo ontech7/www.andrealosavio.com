@@ -29,7 +29,7 @@ interface CatVoteDialogProps {
 }
 
 export function CatVoteDialog({ children }: CatVoteDialogProps) {
-  const t = useTranslations("common.catVote");
+  const t = useTranslations("common");
 
   const [cat, setCat] = useState<CatImage | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -134,13 +134,18 @@ export function CatVoteDialog({ children }: CatVoteDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="w-[calc(100%-24px)] max-w-lg">
+      <DialogContent
+        className="w-[calc(100%-24px)] max-w-lg"
+        closeLabel={t("accessibility.closeDialog")}
+      >
         <DialogHeader>
           <DialogTitle>
-            {hasVoted ? t("thankYou.title") : t("title")}
+            {hasVoted ? t("catVote.thankYou.title") : t("catVote.title")}
           </DialogTitle>
           <DialogDescription>
-            {hasVoted ? t("thankYou.description") : t("description")}
+            {hasVoted
+              ? t("catVote.thankYou.description")
+              : t("catVote.description")}
           </DialogDescription>
         </DialogHeader>
 
@@ -151,7 +156,7 @@ export function CatVoteDialog({ children }: CatVoteDialogProps) {
             <div className="relative h-70 w-full max-w-xs overflow-hidden rounded-lg">
               <Image
                 src={cat.url}
-                alt={t("catAlt")}
+                alt={t("catVote.catAlt")}
                 fill
                 className="object-cover"
                 sizes="(max-width: 320px) 100vw, 320px"
@@ -169,7 +174,7 @@ export function CatVoteDialog({ children }: CatVoteDialogProps) {
                 className="flex-1"
               >
                 <Heart className="text-pink-500" />
-                {t("like")}
+                {t("catVote.like")}
               </Button>
               <Button
                 variant="primary"
@@ -179,20 +184,20 @@ export function CatVoteDialog({ children }: CatVoteDialogProps) {
                 className="flex-1"
               >
                 <Sparkles className="text-yellow-500" />
-                {t("love")}
+                {t("catVote.love")}
               </Button>
             </div>
           ) : (
             <div className="mt-4 flex w-full flex-col gap-3">
               <div className="flex flex-col flex-wrap justify-center gap-2">
                 <Button variant="primary" asChild onClick={handleLinkClick}>
-                  <Link href="/services">{t("explore.services")}</Link>
+                  <Link href="/services">{t("catVote.explore.services")}</Link>
                 </Button>
                 <Button variant="primary" asChild onClick={handleLinkClick}>
-                  <Link href="/projects">{t("explore.projects")}</Link>
+                  <Link href="/projects">{t("catVote.explore.projects")}</Link>
                 </Button>
                 <Button variant="primary" asChild onClick={handleLinkClick}>
-                  <Link href="/about">{t("explore.about")}</Link>
+                  <Link href="/about">{t("catVote.explore.about")}</Link>
                 </Button>
               </div>
             </div>

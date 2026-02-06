@@ -9,6 +9,7 @@ export function ServicesHeroDecoration() {
       viewBox="0 0 405 327"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
     >
       <motion.g
         clipPath="url(#clip0_161_2650)"

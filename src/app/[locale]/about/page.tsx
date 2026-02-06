@@ -16,10 +16,31 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "about.metadata" });
+  const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
 
   return {
     title: t("title"),
     description: t("description"),
+    alternates: {
+      canonical: `${siteUrl}/${locale}/about`,
+      languages: {
+        en: `${siteUrl}/en/about`,
+        it: `${siteUrl}/it/about`,
+      },
+    },
+    openGraph: {
+      title: t("title"),
+      description: t("description"),
+      url: `${siteUrl}/${locale}/about`,
+      type: "website",
+      locale: locale === "it" ? "it_IT" : "en_US",
+      siteName: "Andrea Losavio",
+    },
+    twitter: {
+      card: "summary",
+      title: t("title"),
+      description: t("description"),
+    },
   };
 }
 

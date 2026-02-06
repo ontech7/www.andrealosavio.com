@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { FeedbackSection } from "./sections/feedback-section";
+import { BestPracticesSection } from "./sections/best-practices-section";
+import { CtaSection } from "./sections/cta-section";
 import { HeroSection } from "./sections/hero-section";
-import { MakingAnImpactSection } from "./sections/making-an-impact-section";
-import { QuoteSection } from "./sections/quote-section";
-import { YouCouldBeNextSection } from "./sections/you-could-be-next-section";
+import { ScoresSection } from "./sections/scores-section";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -14,23 +13,27 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "homepage.metadata" });
+  const t = await getTranslations({
+    locale,
+    namespace: "bestPractices.metadata",
+  });
+
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
 
   return {
     title: t("title"),
     description: t("description"),
     alternates: {
-      canonical: `${siteUrl}/${locale}`,
+      canonical: `${siteUrl}/${locale}/best-practices`,
       languages: {
-        en: `${siteUrl}/en`,
-        it: `${siteUrl}/it`,
+        en: `${siteUrl}/en/best-practices`,
+        it: `${siteUrl}/it/best-practices`,
       },
     },
     openGraph: {
       title: t("title"),
       description: t("description"),
-      url: `${siteUrl}/${locale}`,
+      url: `${siteUrl}/${locale}/best-practices`,
       type: "website",
       locale: locale === "it" ? "it_IT" : "en_US",
       siteName: "Andrea Losavio",
@@ -43,14 +46,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function HomePage() {
+export default function BestPracticesPage() {
   return (
     <>
       <HeroSection id="hero" />
-      <MakingAnImpactSection id="making-an-impact" />
-      <YouCouldBeNextSection id="you-could-be-next" />
-      <FeedbackSection id="feedback" />
-      <QuoteSection id="quote" />
+      <ScoresSection id="scores" />
+      <BestPracticesSection id="practices" />
+      <CtaSection id="cta" />
     </>
   );
 }

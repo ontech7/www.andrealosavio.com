@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "title": "Best Practices | Andrea Losavio",
+    "description": "See why this portfolio scores 100/100 on Google Lighthouse. Explore the engineering excellence, accessibility standards, and code quality behind every page."
+  },
+  "hero": {
+    "title": "Built with <highlight>obsessive</highlight> attention to detail",
+    "subtitle": "This website isn't just a portfolio — it's a proof of engineering excellence. Every pixel, every interaction, every line of code follows the highest industry standards."
+  },
+  "scores": {
+    "title": "Lighthouse <highlight>perfect scores</highlight>",
+    "subtitle": "Measured with Google Lighthouse, the industry standard for web quality auditing.",
+    "performance": "Performance",
+    "accessibility": "Accessibility",
+    "bestPractices": "Best Practices",
+    "seo": "SEO",
+    "buildTime": "<pages>17 pages</pages> built in <time>304.9ms</time>"
+  },
+  "practices": {
+    "title": "What makes this site <highlight>stand out</highlight>",
+    "subtitle": "A breakdown of the engineering principles and standards applied throughout the entire codebase.",
+    "accessibility": {
+      "title": "Accessibility",
+      "items": {
+        "item1": "WCAG 2.2 compliant design patterns",
+        "item2": "Full keyboard navigation support",
+        "item3": "Screen reader optimized with ARIA labels",
+        "item4": "Semantic HTML structure throughout",
+        "item5": "Skip links for quick content access",
+        "item6": "Respects prefers-reduced-motion"
+      }
+    },
+    "performance": {
+      "title": "Performance",
+      "items": {
+        "item1": "Server-first architecture (React Server Components)",
+        "item2": "Core Web Vitals fully optimized",
+        "item3": "Automatic image optimization with Next.js",
+        "item4": "Code splitting and lazy loading",
+        "item5": "Edge-ready with static generation",
+        "item6": "Minimal client-side JavaScript"
+      }
+    },
+    "seo": {
+      "title": "SEO",
+      "items": {
+        "item1": "Semantic markup with proper heading hierarchy",
+        "item2": "Dynamic metadata for every page",
+        "item3": "Full internationalization (IT/EN)",
+        "item4": "Clean, crawlable URL structure",
+        "item5": "Structured data and Open Graph tags",
+        "item6": "Automatic sitemap generation"
+      }
+    },
+    "security": {
+      "title": "Security",
+      "items": {
+        "item1": "HTTPS enforced across the entire site",
+        "item2": "Server-side form validation and sanitization",
+        "item3": "No third-party trackers or analytics",
+        "item4": "CSRF-protected contact form",
+        "item5": "Dependency auditing and updates",
+        "item6": "Strict Content Security Policy"
+      }
+    },
+    "codeQuality": {
+      "title": "Code Quality",
+      "items": {
+        "item1": "TypeScript with strict type checking",
+        "item2": "Modern stack: Next.js 16, React 19, Tailwind CSS v4",
+        "item3": "Clean architecture with clear separation of concerns",
+        "item4": "ESLint + Prettier for consistent code style",
+        "item5": "Component-driven development with shadcn/ui",
+        "item6": "No any types — fully typed codebase"
+      }
+    },
+    "uxDesign": {
+      "title": "UX & Design",
+      "items": {
+        "item1": "Fully responsive: mobile, tablet, and desktop",
+        "item2": "Dark mode native — designed for it, not adapted",
+        "item3": "Smooth, purposeful animations with Motion",
+        "item4": "Consistent design system from Figma",
+        "item5": "Intuitive navigation and information architecture",
+        "item6": "Pixel-perfect implementation"
+      }
+    }
+  },
+  "cta": {
+    "title": "Want the same <highlight>quality</highlight> for your project?",
+    "subtitle": "I build digital products with the same obsessive care you've seen on this site. Let's talk about your vision.",
+    "button": "Explore my services"
+  }
+}

@@ -26,7 +26,8 @@
       "electronicMusic": "Musica Elettronica",
       "watchVideo": "Guarda Video",
       "goTo500px": "Vai su 500px"
-    }
+    },
+    "externalLink": "si apre in una nuova scheda"
   },
   "experiences": {
     "title": "<highlight>Esperienze</highlight>",

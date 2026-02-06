@@ -25,7 +25,8 @@
       "technicalMentorship": "Mentorship Tecnica",
       "productDevelopment": "Sviluppo Prodotto",
       "personalIdeas": "Personali & Idee",
-      "forClients": "Per clienti"
+      "forClients": "Per clienti",
+      "bestPractices": "Best Practices"
     },
     "cta": {
       "title": "Hai già deciso?",
@@ -46,7 +47,22 @@
   "accessibility": {
     "homeLink": "Andrea Losavio - Home",
     "openMenu": "Apri menu",
-    "closeMenu": "Chiudi menu"
+    "closeMenu": "Chiudi menu",
+    "skipToContent": "Vai al contenuto principale",
+    "mainNavigation": "Navigazione principale",
+    "mobileNavigation": "Navigazione mobile",
+    "languageSwitcher": "Selettore lingua",
+    "switchToEnglish": "Cambia in inglese",
+    "switchToItalian": "Cambia in italiano",
+    "footerNavigation": "Navigazione a piè di pagina",
+    "socialLinks": "Link social",
+    "closeDialog": "Chiudi finestra",
+    "sortDropdown": "Ordine di ordinamento",
+    "filterByTag": "Filtra per {tag}",
+    "featuredProject": "FastMemo - Progetto in evidenza (si apre in una nuova scheda)",
+    "externalLink": "Si apre in una nuova scheda",
+    "requiredField": "obbligatorio",
+    "formSubmitting": "Invio del modulo in corso"
   },
   "catVote": {
     "title": "Dai un voto a questo gatto!",

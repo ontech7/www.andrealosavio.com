@@ -18,6 +18,7 @@
       "projects": "Projects",
       "about": "About me",
       "privacyPolicy": "Privacy Policy",
+      "bestPractices": "Best Practices",
       "collaboration": "Collaboration",
       "validationMvp": "Validation & MVP",
       "auditConsulting": "Audit & Consulting",
@@ -46,7 +47,22 @@
   "accessibility": {
     "homeLink": "Andrea Losavio - Home",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to main content",
+    "mainNavigation": "Main navigation",
+    "mobileNavigation": "Mobile navigation",
+    "languageSwitcher": "Language switcher",
+    "switchToEnglish": "Switch to English",
+    "switchToItalian": "Switch to Italian",
+    "footerNavigation": "Footer navigation",
+    "socialLinks": "Social links",
+    "closeDialog": "Close dialog",
+    "sortDropdown": "Sort order",
+    "filterByTag": "Filter by {tag}",
+    "featuredProject": "FastMemo - Featured project (opens in new tab)",
+    "externalLink": "Opens in new tab",
+    "requiredField": "required",
+    "formSubmitting": "Submitting form"
   },
   "catVote": {
     "title": "Rate this cat!",

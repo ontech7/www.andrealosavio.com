@@ -14,20 +14,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
 
   const routes = [
-    { path: "", priority: 1.0 },
-    { path: "/services", priority: 0.9 },
-    { path: "/projects", priority: 0.8 },
-    { path: "/about", priority: 0.7 },
-    { path: "/privacy", priority: 0.3 },
+    { path: "", priority: 1.0, changeFrequency: "weekly" as const },
+    { path: "/services", priority: 0.9, changeFrequency: "monthly" as const },
+    { path: "/projects", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/about", priority: 0.7, changeFrequency: "monthly" as const },
+    {
+      path: "/best-practices",
+      priority: 0.5,
+      changeFrequency: "monthly" as const,
+    },
+    { path: "/privacy", priority: 0.3, changeFrequency: "yearly" as const },
   ];
 
   return routes.flatMap((route) => ({
     url: `https://${SITE_URL}${route.path}`,
+    lastModified: new Date(),
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
     alternates: {
       languages: Object.fromEntries(
         routing.locales.map((altLocale) => [
           altLocale,
-          `http://${SITE_URL}/${altLocale}${route.path}`,
+          `https://${SITE_URL}/${altLocale}${route.path}`,
         ])
       ),
     },

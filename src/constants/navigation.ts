@@ -15,6 +15,7 @@ export const FOOTER_LINKS = {
       { href: "/services", labelKey: "footer.links.services" },
       { href: "/projects", labelKey: "footer.links.projects" },
       { href: "/about", labelKey: "footer.links.about" },
+      { href: "/best-practices", labelKey: "footer.links.bestPractices" },
       { href: "/privacy", labelKey: "footer.links.privacyPolicy" },
     ],
   },

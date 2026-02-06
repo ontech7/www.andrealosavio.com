@@ -1,6 +1,6 @@
 "use client";
 
-import { ServiceContactDialog } from "@/components/contact-form";
+import { ServiceContactDialog } from "@/components/service-contact-dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";

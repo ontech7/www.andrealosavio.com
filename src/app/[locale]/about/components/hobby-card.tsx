@@ -24,10 +24,16 @@ export function HobbyCard({ hobby, animateDirectly }: HobbyCardProps) {
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
       />
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
+      <div
+        className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"
+        aria-hidden="true"
+      />
       {/* External Link Icon */}
       {hasLink && (
-        <div className="absolute top-4 right-4 flex items-center gap-2 rounded-full bg-black/50 p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div
+          className="absolute top-4 right-4 flex items-center gap-2 rounded-full bg-black/50 p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          aria-hidden="true"
+        >
           {hobby.hrefDescription && (
             <span className="text-xs">
               {t(`beyondCode.hobbies.${hobby.hrefDescription}`)}
@@ -63,6 +69,7 @@ export function HobbyCard({ hobby, animateDirectly }: HobbyCardProps) {
         href={hobby.href}
         target="_blank"
         rel="noopener noreferrer"
+        aria-label={`${t(`beyondCode.hobbies.${hobby.id}`)} — ${t("beyondCode.externalLink")}`}
         className="group relative block h-63.75 cursor-pointer overflow-hidden rounded-xl"
         {...motionProps}
         transition={{ duration: 0.5 }}

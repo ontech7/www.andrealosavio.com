@@ -38,6 +38,7 @@ export function FloatingInput({
 
       {/* Floating Line */}
       <div
+        aria-hidden="true"
         className={cn(
           "bg-muted pointer-events-none absolute z-1 h-1 text-sm text-transparent transition-all duration-200",
           isFloating
@@ -56,7 +57,7 @@ export function FloatingInput({
       >
         <div className="bg-muted flex rounded-lg">
           {icon && (
-            <span className="text-muted-foreground shrink-0 py-3 pr-1 pl-3">
+            <span className="text-muted-foreground shrink-0 py-3 pr-1 pl-3" aria-hidden="true">
               {icon}
             </span>
           )}

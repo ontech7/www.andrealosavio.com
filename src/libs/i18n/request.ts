@@ -9,7 +9,8 @@ const namespaces = [
   "projects",
   "about",
   "privacy",
-] as const;
+  "bestPractices",
+] as const;;
 
 async function loadMessages(locale: Locale) {
   const messages: Record<string, Record<string, string>> = {};

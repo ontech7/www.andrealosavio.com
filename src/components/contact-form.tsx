@@ -15,8 +15,8 @@ import {
 import { motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import { useId, useState } from "react";
-import { FloatingInput } from "./floating-input";
-import { FloatingTextarea } from "./floating-textarea";
+import { FloatingInput } from "./ui/floating-input";
+import { FloatingTextarea } from "./ui/floating-textarea";
 
 interface ContactFormProps {
   id?: string;
@@ -84,11 +84,17 @@ export function ContactForm({
       >
         <Card className="bg-background p-4 md:p-8">
           <div className="flex flex-col items-center justify-center py-8 text-center">
-            <CheckCircleIcon className="mb-4 size-16 text-green-500" />
+            <CheckCircleIcon
+              className="mb-4 size-16 text-green-500"
+              aria-hidden="true"
+            />
             <h3 className="mb-3 bg-(image:--text-gradient) bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-4xl">
               {t("successTitle")}
             </h3>
-            <p className="text-muted-foreground max-w-md text-sm md:text-base">
+            <p
+              className="text-muted-foreground max-w-md text-sm md:text-base"
+              role="status"
+            >
               {t("successMessage")}
             </p>
           </div>
@@ -120,12 +126,19 @@ export function ContactForm({
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="mx-auto max-w-xl space-y-6">
+        <form
+          onSubmit={handleSubmit}
+          className="mx-auto max-w-xl space-y-6"
+          aria-busy={status === "loading"}
+          noValidate
+        >
           <FloatingInput
             label={t("fullname")}
             icon={<UserIcon className="size-4" />}
             name="fullname"
             required
+            aria-required="true"
+            autoComplete="name"
             disabled={status === "loading"}
           />
 
@@ -135,6 +148,8 @@ export function ContactForm({
             icon={<MailIcon className="size-4" />}
             name="email"
             required
+            aria-required="true"
+            autoComplete="email"
             disabled={status === "loading"}
           />
 
@@ -143,6 +158,7 @@ export function ContactForm({
             name="challenge"
             rows={3}
             required
+            aria-required="true"
             disabled={status === "loading"}
           />
 
@@ -164,7 +180,13 @@ export function ContactForm({
 
           {/* Error Message */}
           {status === "error" && errorMessage && (
-            <p className="text-center text-sm text-red-500">{errorMessage}</p>
+            <p
+              className="text-center text-sm text-red-500"
+              role="alert"
+              aria-live="assertive"
+            >
+              {errorMessage}
+            </p>
           )}
 
           {/* Submit Button */}
@@ -177,12 +199,15 @@ export function ContactForm({
               {status === "loading" ? (
                 <>
                   {t("sending")}
-                  <LoaderIcon className="size-4 animate-spin" />
+                  <LoaderIcon
+                    className="size-4 animate-spin"
+                    aria-hidden="true"
+                  />
                 </>
               ) : (
                 <>
                   {t("submit")}
-                  <SendIcon className="size-4" />
+                  <SendIcon className="size-4" aria-hidden="true" />
                 </>
               )}
             </Button>

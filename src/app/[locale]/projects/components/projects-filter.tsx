@@ -5,7 +5,7 @@ import { cn } from "@/utils/cn";
 import { ChevronDownIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 
 export type SortOrder = "none" | "asc" | "desc";
 
@@ -25,11 +25,21 @@ export function ProjectsFilter({
   onSortChange,
 }: ProjectsFilterProps) {
   const t = useTranslations("projects.filter");
+  const tCommon = useTranslations("common");
+
   const [isOpen, setIsOpen] = useState(false);
+
   const selectRef = useRef<HTMLDivElement>(null);
+  const listboxId = useId();
 
   const handleBlur = (e: React.FocusEvent) => {
     if (!selectRef.current?.contains(e.relatedTarget)) {
+      setIsOpen(false);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape" && isOpen) {
       setIsOpen(false);
     }
   };
@@ -48,8 +58,15 @@ export function ProjectsFilter({
         transition={{ duration: 0.5 }}
         className="order-1 flex flex-col gap-2"
       >
-        <span className="text-muted-foreground text-sm">{t("sortLabel")}</span>
-        <div ref={selectRef} className="relative" onBlur={handleBlur}>
+        <span id="sort-label" className="text-muted-foreground text-sm">
+          {t("sortLabel")}
+        </span>
+        <div
+          ref={selectRef}
+          className="relative"
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+        >
           <span
             className="relative inline-flex rounded-lg p-px"
             style={{ background: "var(--border-gradient)" }}
@@ -57,6 +74,10 @@ export function ProjectsFilter({
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
+              aria-expanded={isOpen}
+              aria-haspopup="listbox"
+              aria-controls={listboxId}
+              aria-labelledby="sort-label"
               className="bg-muted text-foreground flex items-center gap-2 rounded-lg px-4 py-2 text-sm"
             >
               <span>
@@ -71,15 +92,23 @@ export function ProjectsFilter({
                   "size-4 transition-transform",
                   isOpen && "rotate-180"
                 )}
+                aria-hidden="true"
               />
             </button>
           </span>
 
           {/* Dropdown */}
           {isOpen && (
-            <div className="border-border bg-card absolute left-0 z-10 mt-2 min-w-25 rounded-lg border p-1 shadow-lg">
+            <div
+              id={listboxId}
+              role="listbox"
+              aria-labelledby="sort-label"
+              className="border-border bg-card absolute left-0 z-10 mt-2 min-w-25 rounded-lg border p-1 shadow-lg"
+            >
               <button
                 type="button"
+                role="option"
+                aria-selected={sortOrder === "none"}
                 onClick={() => {
                   onSortChange("none");
                   setIsOpen(false);
@@ -95,6 +124,8 @@ export function ProjectsFilter({
               </button>
               <button
                 type="button"
+                role="option"
+                aria-selected={sortOrder === "asc"}
                 onClick={() => {
                   onSortChange("asc");
                   setIsOpen(false);
@@ -110,6 +141,8 @@ export function ProjectsFilter({
               </button>
               <button
                 type="button"
+                role="option"
+                aria-selected={sortOrder === "desc"}
                 onClick={() => {
                   onSortChange("desc");
                   setIsOpen(false);
@@ -135,7 +168,11 @@ export function ProjectsFilter({
         className="order-2 flex flex-col gap-2"
       >
         <span className="text-muted-foreground text-sm">{t("tagsLabel")}</span>
-        <div className="flex flex-wrap gap-1.5">
+        <div
+          className="flex flex-wrap gap-1.5"
+          role="group"
+          aria-label={t("tagsLabel")}
+        >
           {tags.map((tag) => {
             const isSelected = selectedTags.includes(tag);
             return (
@@ -143,6 +180,8 @@ export function ProjectsFilter({
                 key={tag}
                 type="button"
                 onClick={() => onTagToggle(tag)}
+                aria-pressed={isSelected}
+                aria-label={tCommon("accessibility.filterByTag", { tag })}
                 className={cn(
                   "cursor-pointer rounded-md px-2 py-1 text-xs font-medium transition-colors lg:text-[10px]",
                   isSelected

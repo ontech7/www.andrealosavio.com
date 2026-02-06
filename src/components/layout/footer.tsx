@@ -25,17 +25,18 @@ export async function Footer() {
                 </p>
 
                 {/* Social Links */}
-                <div className="mt-4 flex items-center gap-4">
+                <div className="mt-4 flex items-center gap-4" role="list" aria-label={t("accessibility.socialLinks")}>
                   {SOCIAL_LINKS.map((social) => (
                     <a
                       key={social.labelKey}
                       href={social.href.replace("{lang}", locale)}
                       target="_blank"
                       rel="noopener noreferrer"
+                      role="listitem"
                       aria-label={t(social.labelKey)}
                       className="text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      <social.Icon className="stroke-1" />
+                      <social.Icon className="stroke-1" aria-hidden="true" />
                     </a>
                   ))}
                 </div>
@@ -43,7 +44,7 @@ export async function Footer() {
             </div>
 
             {/* Navigation Columns */}
-            <div className="lg:col-span-6">
+            <nav aria-label={t("accessibility.footerNavigation")} className="lg:col-span-6">
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
                 {/* General */}
                 <div>
@@ -102,7 +103,7 @@ export async function Footer() {
                   </ul>
                 </div>
               </div>
-            </div>
+            </nav>
 
             {/* CTA Section */}
             <div className="lg:col-span-3">
@@ -122,6 +123,8 @@ export async function Footer() {
                   <Link
                     href="https://fastmemo.vercel.app?utm_source=andrealosavio.com&utm_medium=referral"
                     target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t("accessibility.featuredProject")}
                   >
                     <FastMemoFeaturedProject />
                   </Link>
@@ -136,7 +139,7 @@ export async function Footer() {
       <div className="border-border border-t py-8">
         <p className="text-muted-foreground mx-auto flex max-w-67.5 flex-col gap-3 text-center text-sm font-normal md:max-w-max md:flex-row">
           {t("footer.copyright", { year: currentYear })}
-          <span className="text-muted-foreground">―</span>
+          <span aria-hidden="true" className="text-muted-foreground">―</span>
           {t("footer.vat", { vatNumber: "12705460967" })}
         </p>
       </div>
@@ -152,6 +155,7 @@ function FastMemoFeaturedProject() {
       viewBox="0 0 135 40"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
     >
       <rect
         x="0.5"

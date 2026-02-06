@@ -39,9 +39,9 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         <motion.div variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
           <Button variant="gradient-primary" size="lg" asChild>
             <Link href="/services" className="flex items-center gap-2">
-              <div className="bg-secondary size-2.5 shrink-0 animate-pulse rounded-full shadow-(--shadow-secondary)" />
+              <div className="bg-secondary size-2.5 shrink-0 animate-pulse rounded-full shadow-(--shadow-secondary)" aria-hidden="true" />
               {t("homepage.hero.ctaDiscussVision")}
-              <ArrowRightIcon className="size-4" />
+              <ArrowRightIcon className="size-4" aria-hidden="true" />
             </Link>
           </Button>
         </motion.div>
@@ -54,14 +54,14 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         >
           {t("homepage.hero.title")}
         </motion.h1>
-        <motion.h4
+        <motion.h2
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
           className="text-md mb-5 flex items-center gap-1.5 bg-(image:--text-gradient) bg-clip-text pb-1.5 leading-0 text-transparent md:text-xl"
         >
-          <CodeIcon className="size-5 text-white md:-mb-0.5 md:size-5.5" />
+          <CodeIcon className="size-5 text-white md:-mb-0.5 md:size-5.5" aria-hidden="true" />
           {t("homepage.hero.subtitle")}
-        </motion.h4>
+        </motion.h2>
 
         <motion.p
           variants={fadeInUpAnim}
@@ -91,7 +91,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
                 ease: "easeInOut",
               }}
             >
-              <ArrowDownIcon className="size-4" />
+              <ArrowDownIcon className="size-4" aria-hidden="true" />
             </motion.span>
           </Button>
           <Button asChild variant="primary">
