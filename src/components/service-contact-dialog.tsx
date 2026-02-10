@@ -19,7 +19,7 @@ import {
   UserIcon,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { FloatingInput } from "./ui/floating-input";
 import { FloatingTextarea } from "./ui/floating-textarea";
 
@@ -41,9 +41,31 @@ export function ServiceContactDialog({
   const tCommon = useTranslations("common");
   const locale = useLocale() as "it" | "en";
   const checkboxId = useId();
+  const csrfTokenRef = useRef("");
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    fetch("/api/csrf")
+      .then((r) => r.json())
+      .then((data) => {
+        csrfTokenRef.current = data.token;
+      })
+      .catch(() => {});
+  }, []);
+
+  // Refresh token when dialog opens (handles long-idle sessions)
+  useEffect(() => {
+    if (open) {
+      fetch("/api/csrf")
+        .then((r) => r.json())
+        .then((data) => {
+          csrfTokenRef.current = data.token;
+        })
+        .catch(() => {});
+    }
+  }, [open]);
 
   const serviceTitle = t(`availableServices.${serviceId}.title`);
 
@@ -60,6 +82,7 @@ export function ServiceContactDialog({
       website: formData.get("website") as string,
       service: serviceTitle,
       locale,
+      csrfToken: csrfTokenRef.current,
     };
 
     try {
@@ -77,6 +100,14 @@ export function ServiceContactDialog({
     } catch {
       setStatus("error");
       setErrorMessage(t("contactForm.errorMessage"));
+
+      // Refresh CSRF token for retry
+      fetch("/api/csrf")
+        .then((r) => r.json())
+        .then((data) => {
+          csrfTokenRef.current = data.token;
+        })
+        .catch(() => {});
     }
   }
 

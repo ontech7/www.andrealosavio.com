@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { FloatingInput } from "./ui/floating-input";
 import { FloatingTextarea } from "./ui/floating-textarea";
 
@@ -36,9 +36,19 @@ export function ContactForm({
   const t = useTranslations("services.contactForm");
   const locale = useLocale() as "it" | "en";
   const checkboxId = useId();
+  const csrfTokenRef = useRef("");
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    fetch("/api/csrf")
+      .then((r) => r.json())
+      .then((data) => {
+        csrfTokenRef.current = data.token;
+      })
+      .catch(() => {});
+  }, []);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -52,6 +62,7 @@ export function ContactForm({
       challenge: formData.get("challenge") as string,
       website: formData.get("website") as string,
       locale,
+      csrfToken: csrfTokenRef.current,
     };
 
     try {
@@ -69,6 +80,14 @@ export function ContactForm({
     } catch {
       setStatus("error");
       setErrorMessage(t("errorMessage"));
+
+      // Refresh CSRF token for retry
+      fetch("/api/csrf")
+        .then((r) => r.json())
+        .then((data) => {
+          csrfTokenRef.current = data.token;
+        })
+        .catch(() => {});
     }
   }
 

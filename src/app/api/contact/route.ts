@@ -1,6 +1,8 @@
 import { getResendClient } from "@/libs/email/resend";
 import { ClientConfirmationEmail } from "@/libs/email/template/client-confirmation";
 import { OwnerNotificationEmail } from "@/libs/email/template/owner-notification";
+import { validateCsrfToken } from "@/libs/security/csrf";
+import { contactRateLimiter } from "@/libs/security/rate-limiter";
 import { NextRequest, NextResponse } from "next/server";
 
 interface ContactFormData {
@@ -10,6 +12,15 @@ interface ContactFormData {
   service?: string;
   website?: string;
   locale: "it" | "en";
+  csrfToken: string;
+}
+
+function getClientIp(request: NextRequest): string {
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+    request.headers.get("x-real-ip") ||
+    "unknown"
+  );
 }
 
 export async function POST(request: NextRequest) {
@@ -23,11 +34,38 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
+    // Rate limiting (before body parsing to save resources)
+    const ip = getClientIp(request);
+    const rateLimitResult = contactRateLimiter.check(ip);
+
+    if (!rateLimitResult.allowed) {
+      return NextResponse.json(
+        { error: "Too many requests" },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": Math.ceil(
+              rateLimitResult.retryAfterMs / 1000
+            ).toString(),
+          },
+        }
+      );
+    }
+
     const body: ContactFormData = await request.json();
-    const { fullname, email, challenge, service, locale, website } = body;
+    const { fullname, email, challenge, service, locale, website, csrfToken } =
+      body;
 
     if (website) {
       return NextResponse.json({ success: true }, { status: 200 });
+    }
+
+    // CSRF validation
+    if (!csrfToken || !validateCsrfToken(csrfToken)) {
+      return NextResponse.json(
+        { error: "Invalid or expired token" },
+        { status: 403 }
+      );
     }
 
     // Validate required fields
