@@ -50,6 +50,7 @@ export function ContactForm({
       fullname: formData.get("fullname") as string,
       email: formData.get("email") as string,
       challenge: formData.get("challenge") as string,
+      website: formData.get("website") as string,
       locale,
     };
 
@@ -132,6 +133,16 @@ export function ContactForm({
           aria-busy={status === "loading"}
           noValidate
         >
+          {/* Honeypot field - hidden from real users */}
+          <input
+            type="text"
+            name="website"
+            autoComplete="off"
+            tabIndex={-1}
+            aria-hidden="true"
+            className="absolute -left-[9999px] h-0 w-0 opacity-0"
+          />
+
           <FloatingInput
             label={t("fullname")}
             icon={<UserIcon className="size-4" />}

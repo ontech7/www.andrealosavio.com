@@ -8,13 +8,27 @@ interface ContactFormData {
   email: string;
   challenge: string;
   service?: string;
+  website?: string;
   locale: "it" | "en";
 }
 
 export async function POST(request: NextRequest) {
   try {
+    // Block requests from external origins
+    const origin = request.headers.get("origin");
+    const allowedOriginPattern =
+      /^https?:\/\/([a-z0-9-]+\.)*andrealosavio\.com$/;
+
+    if (!origin || !allowedOriginPattern.test(origin)) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
     const body: ContactFormData = await request.json();
-    const { fullname, email, challenge, service, locale } = body;
+    const { fullname, email, challenge, service, locale, website } = body;
+
+    if (website) {
+      return NextResponse.json({ success: true }, { status: 200 });
+    }
 
     // Validate required fields
     if (!fullname || !email || !challenge) {

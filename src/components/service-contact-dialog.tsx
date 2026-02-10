@@ -57,6 +57,7 @@ export function ServiceContactDialog({
       fullname: formData.get("fullname") as string,
       email: formData.get("email") as string,
       challenge: formData.get("challenge") as string,
+      website: formData.get("website") as string,
       service: serviceTitle,
       locale,
     };
@@ -127,6 +128,16 @@ export function ServiceContactDialog({
               aria-busy={status === "loading"}
               noValidate
             >
+              {/* Honeypot field - hidden from real users */}
+              <input
+                type="text"
+                name="website"
+                autoComplete="off"
+                tabIndex={-1}
+                aria-hidden="true"
+                className="absolute -left-[9999px] h-0 w-0 opacity-0"
+              />
+
               {/* Service Badge */}
               <div className="flex items-center gap-2">
                 <span className="text-muted-foreground text-sm">
