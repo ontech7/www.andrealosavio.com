@@ -1,38 +1,76 @@
-# Project Overview
+# Project Overview: www.andrealosavio.com
 
 ## Purpose
-Personal portfolio website for Andrea Losavio - designed to generate leads and attract potential clients.
+Personal portfolio website for Andrea Losavio, designed to generate leads and attract potential clients.
+Dark mode only (no light/dark toggle). Must follow Figma design system 1:1.
 
 ## Tech Stack
-- Next.js 16.1.6 (App Router)
-- TypeScript
-- Tailwind CSS v4
-- shadcn/ui (Radix primitives)
-- next-intl for i18n (IT/EN)
-- Resend API for contact form emails
-- Motion for animations
-- nuqs for query params state management
-- react-hook-form for forms
+- **Framework**: Next.js 16.1.6 (App Router, server-first architecture)
+- **Language**: TypeScript (strict mode)
+- **Styling**: Tailwind CSS v4 + tw-animate-css
+- **UI Library**: shadcn/ui (new-york style, Lucide icons)
+- **i18n**: next-intl v4.7 — locales: `it` (Italian), `en` (English, default)
+- **Animations**: Motion (framer-motion successor)
+- **Forms**: react-hook-form + Resend API for emails
+- **Query State**: nuqs v2
+- **Formatting/Linting**: Prettier + ESLint (next config)
 
-## Commands
-- `npm run dev` - Development server
-- `npm run build` - Production build
-- `npm run lint` - ESLint
-- `npm run lint:fix` - ESLint with auto-fix
-- `npm run format` - Prettier formatting
+## Architecture
 
-## Code Style
-- Named function exports (not default)
-- kebab-case file names
-- Server Components by default
-- Client Components only when strictly required
-- No `any` or `unknown` types
-- All strings in /src/translations (next-intl)
+### Routing
+- App Router with `[locale]` dynamic segment
+- Proxy/middleware in `src/proxy.ts` handles i18n locale detection via `next-intl/middleware`
+- Pages: Homepage `(homepage)`, Services, Projects, About, Best Practices, Privacy
+- API routes: `/api/contact` (email), `/api/csrf` (CSRF token)
 
-## Structure
-- `src/app/[locale]/` - Pages (homepage, about, projects, services, privacy)
-- `src/components/` - Shared components (ui, layout, contact-form)
-- `src/translations/` - i18n dictionaries (it/, en/)
-- `src/constants/` - Shared constants
-- `src/libs/` - External libs (i18n, email)
-- `src/utils/` - Utilities (cn.ts)
+### Source Structure (under `src/`)
+```
+app/
+  [locale]/
+    (homepage)/       # Homepage (route group)
+      sections/       # Page sections (hero, feedback, etc.)
+      components/     # Page-scoped components
+      constants/      # Page-scoped constants
+    services/         # Services page
+    projects/         # Projects page
+    about/            # About page
+    best-practices/   # Best Practices page
+    privacy/          # Privacy page
+    layout.tsx        # Root layout (fonts, metadata)
+  api/
+    contact/route.ts  # Contact form API
+    csrf/route.ts     # CSRF token API
+components/
+  ui/                 # shadcn primitives (button, card, dialog, etc.)
+  layout/             # Layout components (header, footer, etc.)
+  contact-form.tsx    # Shared contact form
+  grid-layers.tsx     # Grid overlay
+  logo.tsx            # Logo component
+constants/            # Shared constants (navigation, projects, services, motion)
+utils/                # Utilities (cn.ts for classnames)
+libs/
+  i18n/               # next-intl config (routing, request, utils)
+  email/              # Resend email templates
+  security/           # CSRF + rate limiting
+translations/
+  it/                 # Italian translations (JSON per namespace)
+  en/                 # English translations (JSON per namespace)
+```
+
+### Path Alias
+- `@/*` → `./src/*`
+
+### Design System (globals.css)
+- Dark theme only (`color-scheme: dark`)
+- Custom CSS variables for colors, gradients, radii
+- Fonts: DM Sans (sans), DM Mono (mono)
+- Custom breakpoints: sm(480), md(768), lg(900), xl(1024), 2xl(1200), 3xl(1400)
+- Custom scrollbar styling
+- Reduced motion accessibility support
+
+### Key Patterns
+- Pages are composed of **sections** (server components by default)
+- Each page folder has: `sections/`, `components/`, `constants/`, `page.tsx`
+- Motion animations use shared variants from `constants/motion.ts` (fadeInUpAnim, staggerContainerAnim)
+- `generateMetadata` used for per-page SEO with translations
+- `generateStaticParams` for static locale generation

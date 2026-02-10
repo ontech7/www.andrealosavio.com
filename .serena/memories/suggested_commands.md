@@ -1,19 +1,32 @@
 # Suggested Commands
 
 ## Development
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
+```bash
+npm run dev          # Start dev server (Next.js)
+npm run build        # Production build
+npm run start        # Start production server
+```
 
 ## Code Quality
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Run ESLint with auto-fix
-- `npm run format` - Format with Prettier
+```bash
+npm run lint         # Run ESLint (JS/JSX/TS/TSX)
+npm run lint:fix     # Run ESLint with auto-fix
+npm run format       # Run Prettier on all files
+```
 
 ## shadcn/ui
-- `npx shadcn@latest add [component]` - Add shadcn component
+```bash
+npx shadcn@latest add [component]   # Add a shadcn component
+```
 
-## Task Completion
-After completing a task, run:
-1. `npm run lint:fix` - Fix linting issues
-2. `npm run build` - Ensure build passes
+## System Utilities (macOS/Darwin)
+```bash
+git status           # Check git status
+git log --oneline    # View commit history
+git diff             # View changes
+```
+
+## Notes
+- No test framework is currently configured (no test script in package.json)
+- The project uses ESLint flat config (`eslint.config.mjs`) with next core-web-vitals + TypeScript rules
+- Prettier config: double quotes, semicolons, trailing commas (es5), 80 char print width, Tailwind CSS plugin
