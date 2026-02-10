@@ -36,14 +36,16 @@ export function ContactForm({
   const t = useTranslations("services.contactForm");
   const locale = useLocale() as "it" | "en";
   const checkboxId = useId();
-  const csrfTokenRef = useRef("");
+
   const [consent, setConsent] = useState(false);
+  const csrfTokenRef = useRef("");
+
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     fetch("/api/csrf")
-      .then((r) => r.json())
+      .then((res) => res.json())
       .then((data) => {
         csrfTokenRef.current = data.token;
       })
@@ -56,6 +58,7 @@ export function ContactForm({
     setErrorMessage("");
 
     const formData = new FormData(event.currentTarget);
+
     const data = {
       fullname: formData.get("fullname") as string,
       email: formData.get("email") as string,

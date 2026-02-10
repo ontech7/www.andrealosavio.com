@@ -53,6 +53,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body: ContactFormData = await request.json();
+
     const { fullname, email, challenge, service, locale, website, csrfToken } =
       body;
 
@@ -62,10 +63,7 @@ export async function POST(request: NextRequest) {
 
     // CSRF validation
     if (!csrfToken || !validateCsrfToken(csrfToken)) {
-      return NextResponse.json(
-        { error: "Invalid or expired token" },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     // Validate required fields
