@@ -35,11 +35,20 @@ export async function generateMetadata({
       type: "website",
       locale: locale === "it" ? "it_IT" : "en_US",
       siteName: "Andrea Losavio",
+      images: [
+        {
+          url: `${siteUrl}/images/og.jpg`,
+          width: 1200,
+          height: 630,
+          alt: "Andrea Losavio - Software Engineer & Tech Partner",
+        },
+      ],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: t("title"),
       description: t("description"),
+      images: [`${siteUrl}/images/og.jpg`],
     },
   };
 }
