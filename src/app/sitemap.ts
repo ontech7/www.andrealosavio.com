@@ -1,15 +1,10 @@
 import { routing } from "@/libs/i18n/routing";
 import type { MetadataRoute } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "";
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const isProduction =
-    !SITE_URL.includes("test") &&
-    !SITE_URL.includes("dev") &&
-    !SITE_URL.includes("localhost");
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-  if (!isProduction) {
+  if (!siteUrl) {
     return [];
   }
 
@@ -26,18 +21,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/privacy", priority: 0.3, changeFrequency: "yearly" as const },
   ];
 
-  return routes.flatMap((route) => ({
-    url: `https://${SITE_URL}${route.path}`,
-    lastModified: new Date(),
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
-    alternates: {
-      languages: Object.fromEntries(
-        routing.locales.map((altLocale) => [
-          altLocale,
-          `https://${SITE_URL}/${altLocale}${route.path}`,
-        ])
-      ),
-    },
-  }));
+  return routes.flatMap((route) =>
+    routing.locales.map((locale) => ({
+      url: `https://${siteUrl}/${locale}${route.path}`,
+      lastModified: new Date(),
+      changeFrequency: route.changeFrequency,
+      priority: route.priority,
+      alternates: {
+        languages: Object.fromEntries(
+          routing.locales.map((altLocale) => [
+            altLocale,
+            `https://${siteUrl}/${altLocale}${route.path}`,
+          ])
+        ),
+      },
+    }))
+  );
 }

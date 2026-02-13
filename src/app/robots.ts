@@ -1,14 +1,9 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "";
-
 export default function robots(): MetadataRoute.Robots {
-  const isProduction =
-    !SITE_URL.includes("test") &&
-    !SITE_URL.includes("dev") &&
-    !SITE_URL.includes("localhost");
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-  if (!isProduction) {
+  if (!siteUrl) {
     return {
       rules: {
         userAgent: "*",
@@ -22,6 +17,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `https://${SITE_URL}/sitemap.xml`,
+    sitemap: `https://${siteUrl}/sitemap.xml`,
   };
 }

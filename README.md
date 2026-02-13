@@ -27,6 +27,34 @@ clients.
 npm install
 ```
 
+### Environment Variables
+
+Copy `.env.sample` to `.env` and configure the variables:
+
+```bash
+cp .env.sample .env
+```
+
+**Required variables:**
+
+- `NEXT_PUBLIC_SITE_URL` - Your domain (without https://)
+  - Local: `"localhost:3000"`
+  - **Production: `"www.andrealosavio.com"`** ⚠️ Critical for SEO!
+- `RESEND_API_KEY` - API key from [Resend](https://resend.com)
+- `OWNER_EMAIL` - Email to receive contact form submissions
+- `FROM_EMAIL` - Sender email for notifications
+- `CSRF_SECRET` - Secret for CSRF protection (generate with `openssl rand -hex 32`)
+- `CAT_API_KEY` - (Optional) API key from [The Cat API](https://thecatapi.com)
+
+**Deployment (Vercel):**
+
+Set these environment variables in your Vercel project settings:
+
+1. Go to your project → Settings → Environment Variables
+2. Add all variables from `.env.sample`
+3. **Make sure to set `NEXT_PUBLIC_SITE_URL` to `www.andrealosavio.com`** (without https://)
+4. Deploy!
+
 ### Development
 
 ```bash
