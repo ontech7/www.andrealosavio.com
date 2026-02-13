@@ -1,3 +1,4 @@
+import { generateBreadcrumbSchema, schemaToJsonLd } from "@/utils/seo-schema";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { BestPracticesSection } from "./sections/best-practices-section";
@@ -55,9 +56,25 @@ export async function generateMetadata({
   };
 }
 
-export default function BestPracticesPage() {
+export default async function BestPracticesPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "bestPractices" });
+  const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: `${siteUrl}/${locale}` },
+    {
+      name: t("metadata.title"),
+      url: `${siteUrl}/${locale}/best-practices`,
+    },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: schemaToJsonLd(breadcrumbSchema) }}
+      />
       <HeroSection id="hero" />
       <ScoresSection id="scores" />
       <BestPracticesSection id="practices" />

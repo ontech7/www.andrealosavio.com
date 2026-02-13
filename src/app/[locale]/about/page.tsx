@@ -1,11 +1,12 @@
+import { generateBreadcrumbSchema, schemaToJsonLd } from "@/utils/seo-schema";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { EXPERIENCE_ITEMS } from "./constants/experience-items";
+import { HOBBY_ITEMS } from "./constants/hobby-items";
+import { SKILL_ITEMS } from "./constants/skill-items";
 import { BeyondCodeSection } from "./sections/beyond-code-section";
 import { ExperiencesSection } from "./sections/experiences-section";
 import { HeroSection } from "./sections/hero-section";
-import { HOBBY_ITEMS } from "./constants/hobby-items";
-import { EXPERIENCE_ITEMS } from "./constants/experience-items";
-import { SKILL_ITEMS } from "./constants/skill-items";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -53,9 +54,22 @@ export async function generateMetadata({
   };
 }
 
-export default async function AboutPage() {
+export default async function AboutPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "about" });
+  const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: `${siteUrl}/${locale}` },
+    { name: t("metadata.title"), url: `${siteUrl}/${locale}/about` },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: schemaToJsonLd(breadcrumbSchema) }}
+      />
       {/* Preload images for faster rendering */}
       {HOBBY_ITEMS.map((hobby) => (
         <link

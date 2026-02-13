@@ -1,3 +1,4 @@
+import { generateBreadcrumbSchema, schemaToJsonLd } from "@/utils/seo-schema";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
@@ -50,9 +51,22 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProjectsPage() {
+export default async function ProjectsPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "projects" });
+  const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: `${siteUrl}/${locale}` },
+    { name: t("metadata.title"), url: `${siteUrl}/${locale}/projects` },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: schemaToJsonLd(breadcrumbSchema) }}
+      />
       <HeroSection id="hero" />
       <Suspense>
         <ProjectsSection id="projects" />
