@@ -64,6 +64,12 @@
     "requiredField": "obbligatorio",
     "formSubmitting": "Invio del modulo in corso"
   },
+  "notFound": {
+    "code": "404",
+    "title": "Pagina non trovata",
+    "description": "La pagina che stai cercando non esiste o è stata spostata.",
+    "backToHome": "Torna alla Home"
+  },
   "catVote": {
     "title": "Dai un voto a questo gatto!",
     "description": "Tutti i gatti sono belli, quindi puoi dare solo voti positivi!",

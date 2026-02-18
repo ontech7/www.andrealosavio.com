@@ -64,6 +64,12 @@
     "requiredField": "required",
     "formSubmitting": "Submitting form"
   },
+  "notFound": {
+    "code": "404",
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "backToHome": "Back to Home"
+  },
   "catVote": {
     "title": "Rate this cat!",
     "description": "All cats are beautiful, so you can only give positive votes!",
