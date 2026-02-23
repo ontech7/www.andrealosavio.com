@@ -1,76 +1,157 @@
-# Project Overview: www.andrealosavio.com
+# Project Overview - www.andrealosavio.com
 
 ## Purpose
-Personal portfolio website for Andrea Losavio, designed to generate leads and attract potential clients.
-Dark mode only (no light/dark toggle). Must follow Figma design system 1:1.
+Personal portfolio website designed to generate leads and attract potential clients for Andrea Losavio, a Software Engineer & Tech Partner.
 
 ## Tech Stack
-- **Framework**: Next.js 16.1.6 (App Router, server-first architecture)
-- **Language**: TypeScript (strict mode)
-- **Styling**: Tailwind CSS v4 + tw-animate-css
-- **UI Library**: shadcn/ui (new-york style, Lucide icons)
-- **i18n**: next-intl v4.7 — locales: `it` (Italian), `en` (English, default)
-- **Animations**: Motion (framer-motion successor)
-- **Forms**: react-hook-form + Resend API for emails
-- **Query State**: nuqs v2
-- **Formatting/Linting**: Prettier + ESLint (next config)
 
-## Architecture
+### Core Framework
+- **Next.js 16.1.6** with App Router
+- **React 19.2.3**
+- **TypeScript 5**
+- **Node.js 20+**
 
-### Routing
-- App Router with `[locale]` dynamic segment
-- Proxy/middleware in `src/proxy.ts` handles i18n locale detection via `next-intl/middleware`
-- Pages: Homepage `(homepage)`, Services, Projects, About, Best Practices, Privacy
-- API routes: `/api/contact` (email), `/api/csrf` (CSRF token)
+### Styling & UI
+- **Tailwind CSS 4** with PostCSS
+- **shadcn/ui** components (Radix UI based)
+- **Motion (v12.26.1)** for animations
+- **lucide-react** for icons
+- **class-variance-authority** and **clsx** for conditional styling
 
-### Source Structure (under `src/`)
+### Internationalization
+- **next-intl (v4.7.0)** for i18n
+- Supported locales: **IT (Italian)** and **EN (English)**
+- Default locale: EN
+
+### Additional Libraries
+- **nuqs** for query params state management
+- **react-hook-form** for form handling
+- **Resend API** for contact form email delivery
+- **canvas-confetti** for interactive effects
+- **schema-dts** for TypeScript Schema.org types
+
+### Development Tools
+- **ESLint 9** with Next.js config
+- **Prettier 3.7.4** with Tailwind plugin
+- **prettier-plugin-tailwindcss** for class sorting
+
+## Project Structure
+
 ```
-app/
-  [locale]/
-    (homepage)/       # Homepage (route group)
-      sections/       # Page sections (hero, feedback, etc.)
-      components/     # Page-scoped components
-      constants/      # Page-scoped constants
-    services/         # Services page
-    projects/         # Projects page
-    about/            # About page
-    best-practices/   # Best Practices page
-    privacy/          # Privacy page
-    layout.tsx        # Root layout (fonts, metadata)
-  api/
-    contact/route.ts  # Contact form API
-    csrf/route.ts     # CSRF token API
-components/
-  ui/                 # shadcn primitives (button, card, dialog, etc.)
-  layout/             # Layout components (header, footer, etc.)
-  contact-form.tsx    # Shared contact form
-  grid-layers.tsx     # Grid overlay
-  logo.tsx            # Logo component
-constants/            # Shared constants (navigation, projects, services, motion)
-utils/                # Utilities (cn.ts for classnames)
-libs/
-  i18n/               # next-intl config (routing, request, utils)
-  email/              # Resend email templates
-  security/           # CSRF + rate limiting
-translations/
-  it/                 # Italian translations (JSON per namespace)
-  en/                 # English translations (JSON per namespace)
+/
+├── src/
+│   ├── app/                      # Next.js App Router
+│   │   ├── [locale]/             # Internationalized routes
+│   │   │   ├── (homepage)/       # Homepage route group
+│   │   │   │   ├── sections/     # Homepage sections
+│   │   │   │   └── components/   # Homepage-specific components
+│   │   │   ├── services/         # Services page
+│   │   │   ├── projects/         # Projects page
+│   │   │   ├── about/            # About page
+│   │   │   ├── best-practices/   # Best practices page
+│   │   │   ├── privacy/          # Privacy policy page
+│   │   │   ├── components/       # Locale-scoped shared components
+│   │   │   ├── layout.tsx        # Root layout
+│   │   │   └── not-found.tsx     # 404 page
+│   │   ├── nuqs-provider.tsx     # Query params provider
+│   │   ├── sitemap.ts            # Dynamic sitemap generation
+│   │   └── robots.ts             # Dynamic robots.txt
+│   ├── components/               # Global reusable components
+│   │   ├── ui/                   # Primitive components (shadcn)
+│   │   ├── layout/               # Layout components (header, footer)
+│   │   ├── logo.tsx
+│   │   ├── contact-form.tsx
+│   │   ├── grid-layers.tsx
+│   │   └── service-contact-dialog.tsx
+│   ├── constants/                # Application constants
+│   │   ├── motion.ts             # Animation constants
+│   │   ├── navigation.ts         # Navigation menu items
+│   │   ├── projects.ts           # Projects data
+│   │   └── services.ts           # Services data
+│   ├── utils/                    # Utility functions
+│   │   ├── cn.ts                 # Tailwind class merger
+│   │   └── seo-schema.ts         # SEO schema generators
+│   ├── libs/                     # External libraries configuration
+│   │   └── i18n/                 # Internationalization setup
+│   ├── translations/             # Translation files
+│   │   ├── en/                   # English translations
+│   │   └── it/                   # Italian translations
+│   └── proxy.ts                  # Proxy utilities
+├── public/                       # Static assets
+│   └── images/                   # Images (including og.jpg)
+├── .agents/                      # Agent skills
+├── .serena/                      # Serena MCP memories
+├── components.json               # shadcn/ui configuration
+├── next.config.ts                # Next.js configuration
+├── tsconfig.json                 # TypeScript configuration
+├── eslint.config.mjs             # ESLint configuration
+├── postcss.config.mjs            # PostCSS configuration
+├── .prettierrc.json              # Prettier configuration
+├── package.json                  # Dependencies and scripts
+├── README.md                     # Project documentation
+└── SEO.md                        # Comprehensive SEO guide
+
 ```
 
-### Path Alias
-- `@/*` → `./src/*`
+## Pages
+1. **Homepage** (`/[locale]`) - Hero, Impact, Feedback, Quote sections
+2. **Services** (`/[locale]/services`) - Available services showcase
+3. **Projects** (`/[locale]/projects`) - Portfolio with filtering
+4. **About** (`/[locale]/about`) - Experience, hobbies, beyond code
+5. **Best Practices** (`/[locale]/best-practices`) - Technical best practices showcase
+6. **Privacy** (`/[locale]/privacy`) - Privacy policy
 
-### Design System (globals.css)
-- Dark theme only (`color-scheme: dark`)
-- Custom CSS variables for colors, gradients, radii
-- Fonts: DM Sans (sans), DM Mono (mono)
-- Custom breakpoints: sm(480), md(768), lg(900), xl(1024), 2xl(1200), 3xl(1400)
-- Custom scrollbar styling
-- Reduced motion accessibility support
+## Key Features
 
-### Key Patterns
-- Pages are composed of **sections** (server components by default)
-- Each page folder has: `sections/`, `components/`, `constants/`, `page.tsx`
-- Motion animations use shared variants from `constants/motion.ts` (fadeInUpAnim, staggerContainerAnim)
-- `generateMetadata` used for per-page SEO with translations
-- `generateStaticParams` for static locale generation
+### SEO Optimization
+- Multi-language sitemap (12 URLs: 6 pages × 2 languages)
+- Dynamic robots.txt (blocks in dev, allows in production)
+- Complete meta tags (title, description, canonical, hreflang)
+- Open Graph images for social sharing (1200×630px)
+- Schema.org JSON-LD markup:
+  - Person schema (homepage)
+  - Organization schema (homepage)
+  - BreadcrumbList schema (other pages)
+- Internationalization with hreflang tags
+- Performance optimized (Core Web Vitals)
+
+### Internationalization
+- URL structure: `/it/page` and `/en/page`
+- Separate translation files per locale
+- Metadata localized per page
+
+### Contact Form
+- CSRF protection
+- Email delivery via Resend API
+- Form validation with react-hook-form
+
+### Design System
+- Figma design reference available
+- Consistent component architecture
+- Animation system with Motion
+- Responsive grid layouts
+
+## Environment Variables
+
+### Required (Production)
+- `NEXT_PUBLIC_SITE_URL` - Domain without https:// (**Critical for SEO!**)
+  - Production: `www.andrealosavio.com`
+  - Local: `localhost:3000`
+- `RESEND_API_KEY` - API key from Resend
+- `OWNER_EMAIL` - Email to receive contact form submissions
+- `FROM_EMAIL` - Sender email for notifications
+- `CSRF_SECRET` - Secret for CSRF protection (generate with `openssl rand -hex 32`)
+
+### Optional
+- `CAT_API_KEY` - API key from The Cat API
+
+## Deployment
+- **Platform**: Vercel
+- **Domain**: www.andrealosavio.com
+- **Critical**: Set `NEXT_PUBLIC_SITE_URL=www.andrealosavio.com` in Vercel environment variables
+
+## System Information
+- **Platform**: Darwin (macOS)
+- **Node**: 20+
+- **Package Manager**: npm
+- **Git**: Yes (repository tracked)
