@@ -16,7 +16,7 @@ export function AboutHeroDecoration() {
       {/* Image container with rounded corners and clipping */}
       <div className="absolute top-[5.2%] left-[5.2%] h-[89.6%] w-[89.6%] overflow-hidden rounded-[11px]">
         <Image
-          src="/images/about/me.png"
+          src="/images/about/me.webp"
           alt="Andrea Losavio"
           width={740}
           height={740}
