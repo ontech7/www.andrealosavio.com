@@ -21,6 +21,7 @@ export async function generateMetadata({
       languages: {
         en: `${siteUrl}/en/privacy`,
         it: `${siteUrl}/it/privacy`,
+        "x-default": `${siteUrl}/it/privacy`,
       },
     },
     openGraph: {
@@ -29,6 +30,7 @@ export async function generateMetadata({
       url: `${siteUrl}/${locale}/privacy`,
       type: "website",
       locale: locale === "it" ? "it_IT" : "en_US",
+      alternateLocale: locale === "it" ? "en_US" : "it_IT",
       siteName: "Andrea Losavio",
       images: [
         {

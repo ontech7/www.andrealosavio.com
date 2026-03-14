@@ -1,3 +1,3 @@
 export type AppLocale = (typeof locales)[number];
 export const locales = ["it", "en"] as const;
-export const defaultLocale = "en";
+export const defaultLocale = "it";
