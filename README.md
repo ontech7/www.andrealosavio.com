@@ -111,4 +111,4 @@ The design system is defined in Figma:
 
 ## License
 
-All rights reserved. Empty commit.
+All rights reserved.
