@@ -43,7 +43,8 @@ cp .env.sample .env
 - `RESEND_API_KEY` - API key from [Resend](https://resend.com)
 - `OWNER_EMAIL` - Email to receive contact form submissions
 - `FROM_EMAIL` - Sender email for notifications
-- `CSRF_SECRET` - Secret for CSRF protection (generate with `openssl rand -hex 32`)
+- `CSRF_SECRET` - Secret for CSRF protection (generate with
+  `openssl rand -hex 32`)
 - `CAT_API_KEY` - (Optional) API key from [The Cat API](https://thecatapi.com)
 
 **Deployment (Vercel):**
@@ -52,7 +53,8 @@ Set these environment variables in your Vercel project settings:
 
 1. Go to your project → Settings → Environment Variables
 2. Add all variables from `.env.sample`
-3. **Make sure to set `NEXT_PUBLIC_SITE_URL` to `www.andrealosavio.com`** (without https://)
+3. **Make sure to set `NEXT_PUBLIC_SITE_URL` to `www.andrealosavio.com`**
+   (without https://)
 4. Deploy!
 
 ### Development
@@ -109,4 +111,4 @@ The design system is defined in Figma:
 
 ## License
 
-All rights reserved.
+All rights reserved. Empty commit.
