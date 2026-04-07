@@ -10,6 +10,13 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    id: "othersideTechnology",
+    logo: "/images/clients/otherside-technology.svg",
+    image: "/images/projects/otherside-technology.webp",
+    tags: ["customer", "nextjs", "react"],
+    websiteUrl: "https://www.othersidetechnology.com",
+  },
+  {
     id: "coolifyManager",
     logo: "/images/clients/coolify-manager.svg",
     image: "/images/projects/coolify-manager.webp",

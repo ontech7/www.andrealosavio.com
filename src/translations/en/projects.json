@@ -22,6 +22,10 @@
       "checkWebsite": "Visit the website",
       "checkGitHub": "Go to GitHub"
     },
+    "othersideTechnology": {
+      "name": "Otherside Technology S.r.l.",
+      "description": "Otherside Technology is a company that designs and develops custom software and artificial intelligence solutions for businesses: it helps organizations automate processes, analyze data, and improve decision-making through tailored digital tools and scalable AI systems."
+    },
     "coolifyManager": {
       "name": "Coolify Manager",
       "description": "Coolify Manager is a Chrome extension that lets you manage your self-hosted Coolify server directly from your browser toolbar."
