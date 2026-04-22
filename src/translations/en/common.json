@@ -3,7 +3,8 @@
     "home": "Home",
     "services": "Services",
     "projects": "Projects",
-    "about": "About"
+    "about": "About",
+    "llmsTxt": "llms.txt"
   },
   "footer": {
     "tagline": "Helping startups and companies build solid, scalable digital products focused on growth",
@@ -18,7 +19,7 @@
       "projects": "Projects",
       "about": "About me",
       "privacyPolicy": "Privacy Policy",
-      "bestPractices": "Best Practices",
+      "llmsTxt": "llms.txt",
       "collaboration": "Collaboration",
       "validationMvp": "Validation & MVP",
       "auditConsulting": "Audit & Consulting",

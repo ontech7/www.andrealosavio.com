@@ -1,10 +1,17 @@
 import { FileUserIcon, GithubIcon, LinkedinIcon } from "lucide-react";
 
-export const NAV_LINKS = [
+export type NavLink = {
+  readonly href: string;
+  readonly labelKey: string;
+  readonly external?: boolean;
+};
+
+export const NAV_LINKS: readonly NavLink[] = [
   { href: "/", labelKey: "navigation.home" },
   { href: "/services", labelKey: "navigation.services" },
   { href: "/projects", labelKey: "navigation.projects" },
   { href: "/about", labelKey: "navigation.about" },
+  { href: "/llms.txt", labelKey: "navigation.llmsTxt", external: true },
 ] as const;
 
 export const FOOTER_LINKS = {
@@ -15,9 +22,9 @@ export const FOOTER_LINKS = {
       { href: "/services", labelKey: "footer.links.services" },
       { href: "/projects", labelKey: "footer.links.projects" },
       { href: "/about", labelKey: "footer.links.about" },
-      { href: "/best-practices", labelKey: "footer.links.bestPractices" },
+      { href: "/llms.txt", labelKey: "footer.links.llmsTxt", external: true },
       { href: "/privacy", labelKey: "footer.links.privacyPolicy" },
-    ],
+    ] as readonly NavLink[],
   },
   services: {
     titleKey: "footer.sections.services",

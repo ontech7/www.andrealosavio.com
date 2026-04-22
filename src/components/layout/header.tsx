@@ -26,18 +26,37 @@ export function Header() {
 
           {/* Desktop Navigation + Language Switcher */}
           <div className="hidden items-center gap-2 md:flex">
-            <nav aria-label={t("accessibility.mainNavigation")} className="flex items-center gap-1">
+            <nav
+              aria-label={t("accessibility.mainNavigation")}
+              className="flex items-center gap-1"
+            >
               {NAV_LINKS.map((link) => {
                 const isActive = pathname === link.href;
+                const className = cn(
+                  "text-foreground rounded-lg px-4 py-1.5 text-base transition-colors",
+                  isActive ? "bg-muted" : "hover:bg-muted/60"
+                );
+
+                if (link.external) {
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={className}
+                    >
+                      {t(link.labelKey)}
+                    </a>
+                  );
+                }
+
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
                     aria-current={isActive ? "page" : undefined}
-                    className={cn(
-                      "text-foreground rounded-lg px-4 py-1.5 text-base transition-colors",
-                      isActive ? "bg-muted" : "hover:bg-muted/60"
-                    )}
+                    className={className}
                   >
                     {t(link.labelKey)}
                   </Link>
@@ -99,20 +118,40 @@ export function Header() {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div id="mobile-navigation">
-            <nav aria-label={t("accessibility.mobileNavigation")} className="border-border border-t py-4 md:hidden">
+            <nav
+              aria-label={t("accessibility.mobileNavigation")}
+              className="border-border border-t py-4 md:hidden"
+            >
               <div className="flex flex-col gap-1">
                 {NAV_LINKS.map((link) => {
                   const isActive = pathname === link.href;
+                  const className = cn(
+                    "text-foreground rounded-lg px-4 py-3 text-base transition-colors",
+                    isActive ? "bg-muted" : "hover:bg-muted/60"
+                  );
+
+                  if (link.external) {
+                    return (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={className}
+                      >
+                        {t(link.labelKey)}
+                      </a>
+                    );
+                  }
+
                   return (
                     <Link
                       key={link.href}
                       href={link.href}
                       onClick={() => setMobileMenuOpen(false)}
                       aria-current={isActive ? "page" : undefined}
-                      className={cn(
-                        "text-foreground rounded-lg px-4 py-3 text-base transition-colors",
-                        isActive ? "bg-muted" : "hover:bg-muted/60"
-                      )}
+                      className={className}
                     >
                       {t(link.labelKey)}
                     </Link>
@@ -122,7 +161,11 @@ export function Header() {
             </nav>
 
             {/* Social Links */}
-            <div className="flex items-center gap-4 px-4 pb-6" role="list" aria-label={t("accessibility.socialLinks")}>
+            <div
+              className="flex items-center gap-4 px-4 pb-6"
+              role="list"
+              aria-label={t("accessibility.socialLinks")}
+            >
               {SOCIAL_LINKS.map((social) => (
                 <a
                   key={social.labelKey}

@@ -41,8 +41,6 @@ https://www.andrealosavio.com/it/projects
 https://www.andrealosavio.com/en/projects
 https://www.andrealosavio.com/it/about
 https://www.andrealosavio.com/en/about
-https://www.andrealosavio.com/it/best-practices
-https://www.andrealosavio.com/en/best-practices
 https://www.andrealosavio.com/it/privacy
 https://www.andrealosavio.com/en/privacy
 ```

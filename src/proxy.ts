@@ -13,10 +13,10 @@ export const config: ProxyConfig = {
      * - _next (static files)
      * - favicon.ico, favicon.png, favicon.svg (browser icons)
      * - images/videos/documents/icons (assets in public folder)
-     * - sitemap.xml, robots.txt (SEO files)
+     * - sitemap.xml, robots.txt, llms.txt (SEO / LLM files)
      * - .well-known (devtools)
      * - manifest.json, robots.txt (metadata files)
      */
-    "/((?!api|trcp|_next/static|_next|icons|videos|images|documents|.well-known|favicon.ico|favicon.png|favicon.svg|robots.txt|sitemap.xml|manifest.json).*)",
+    "/((?!api|trcp|_next/static|_next|icons|videos|images|documents|.well-known|favicon.ico|favicon.png|favicon.svg|robots.txt|sitemap.xml|llms.txt|manifest.json).*)",
   ],
 };

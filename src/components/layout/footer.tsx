@@ -25,7 +25,11 @@ export async function Footer() {
                 </p>
 
                 {/* Social Links */}
-                <div className="mt-4 flex items-center gap-4" role="list" aria-label={t("accessibility.socialLinks")}>
+                <div
+                  className="mt-4 flex items-center gap-4"
+                  role="list"
+                  aria-label={t("accessibility.socialLinks")}
+                >
                   {SOCIAL_LINKS.map((social) => (
                     <a
                       key={social.labelKey}
@@ -44,7 +48,10 @@ export async function Footer() {
             </div>
 
             {/* Navigation Columns */}
-            <nav aria-label={t("accessibility.footerNavigation")} className="lg:col-span-6">
+            <nav
+              aria-label={t("accessibility.footerNavigation")}
+              className="lg:col-span-6"
+            >
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
                 {/* General */}
                 <div>
@@ -54,12 +61,23 @@ export async function Footer() {
                   <ul className="space-y-2 p-0">
                     {FOOTER_LINKS.general.links.map((link) => (
                       <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-                        >
-                          {t(link.labelKey)}
-                        </Link>
+                        {link.external ? (
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                          >
+                            {t(link.labelKey)}
+                          </a>
+                        ) : (
+                          <Link
+                            href={link.href}
+                            className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                          >
+                            {t(link.labelKey)}
+                          </Link>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -139,7 +157,9 @@ export async function Footer() {
       <div className="border-border border-t py-8">
         <p className="text-muted-foreground mx-auto flex max-w-67.5 flex-col gap-3 text-center text-sm font-normal md:max-w-max md:flex-row">
           {t("footer.copyright", { year: currentYear })}
-          <span aria-hidden="true" className="text-muted-foreground">―</span>
+          <span aria-hidden="true" className="text-muted-foreground">
+            ―
+          </span>
           {t("footer.vat", { vatNumber: "12705460967" })}
         </p>
       </div>

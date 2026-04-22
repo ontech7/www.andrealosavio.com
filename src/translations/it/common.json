@@ -3,7 +3,8 @@
     "home": "Home",
     "services": "Servizi",
     "projects": "Progetti",
-    "about": "Chi sono"
+    "about": "Chi sono",
+    "llmsTxt": "llms.txt"
   },
   "footer": {
     "tagline": "Aiuto startup e aziende a costruire prodotti digitali solidi e scalabili, focalizzati sulla crescita",
@@ -26,7 +27,7 @@
       "productDevelopment": "Sviluppo Prodotto",
       "personalIdeas": "Personali & Idee",
       "forClients": "Per clienti",
-      "bestPractices": "Best Practices"
+      "llmsTxt": "llms.txt"
     },
     "cta": {
       "title": "Hai già deciso?",
