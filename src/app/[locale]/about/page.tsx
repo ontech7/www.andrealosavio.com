@@ -1,4 +1,9 @@
-import { generateBreadcrumbSchema, schemaToJsonLd } from "@/utils/seo-schema";
+import {
+  generateBreadcrumbSchema,
+  generatePersonSchema,
+  generateProfilePageSchema,
+  schemaToJsonLd,
+} from "@/utils/seo-schema";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { EXPERIENCE_ITEMS } from "./constants/experience-items";
@@ -60,17 +65,52 @@ export default async function AboutPage({ params }: PageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "about" });
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
+  const pageUrl = `${siteUrl}/${locale}/about`;
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: `${siteUrl}/${locale}` },
-    { name: t("metadata.title"), url: `${siteUrl}/${locale}/about` },
+    { name: t("metadata.title"), url: pageUrl },
   ]);
+
+  const personSchema = generatePersonSchema({
+    name: "Andrea Losavio",
+    jobTitle: "Software Engineer & Tech Partner",
+    url: siteUrl,
+    description: t("metadata.description"),
+    image: `${siteUrl}/images/og.jpg`,
+    email: "business@andrealosavio.com",
+    nationality: "Italian",
+    alumniOf: [
+      { name: "Politecnico di Milano", url: "https://www.polimi.it/" },
+    ],
+    knowsAbout: SKILL_ITEMS.map((s) => s.name),
+    knowsLanguage: ["Italian", "English"],
+    address: { addressCountry: "IT" },
+    sameAs: [
+      "https://github.com/ontech7",
+      "https://www.linkedin.com/in/andrea-losavio/",
+    ],
+    worksFor: { name: "Andrea Losavio", url: siteUrl },
+  });
+
+  const profilePageSchema = generateProfilePageSchema({
+    url: pageUrl,
+    name: t("metadata.title"),
+    description: t("metadata.description"),
+    mainEntityPersonId: `${siteUrl}#person`,
+  });
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: schemaToJsonLd(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: schemaToJsonLd([
+            breadcrumbSchema,
+            personSchema,
+            profilePageSchema,
+          ]),
+        }}
       />
       {/* Preload images for faster rendering */}
       {HOBBY_ITEMS.map((hobby) => (

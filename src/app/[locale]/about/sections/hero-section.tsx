@@ -20,7 +20,7 @@ interface HeroSectionProps {
 }
 
 const ENGINEER_REGISTER_URL =
-  "https://areariservata.tuttoingegnere.it/PortaleCNI/it/albo_unico.wp;jsessionid=729985FD4418ACF62E0735FD65425DB0?internalServletActionPath=/ExtStr2/do/ricercaRegistro/dettaglio.action&internalServletFrameDest=1&log=false&idDettaglio=ANDREA.LOSAVIO.MI34249";
+  "https://www.cni.it/proxy.php?w=dett_albo&u=albounico.wp?internalServletActionPath=/ExtStr2/do/ricercaRegistro/dettaglio.action&internalServletFrameDest=0&log=false&idDettaglio=LSVNDR96C27L049B";
 
 const FAST_MEMO_URL = "https://fastmemo.vercel.app/";
 

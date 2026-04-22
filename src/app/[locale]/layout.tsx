@@ -21,7 +21,26 @@ const dmMono = DM_Mono({
   weight: ["300", "400", "500"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ? `https://${process.env.NEXT_PUBLIC_SITE_URL}`
+  : "https://www.andrealosavio.com";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  authors: [{ name: "Andrea Losavio", url: siteUrl }],
+  creator: "Andrea Losavio",
+  publisher: "Andrea Losavio",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },

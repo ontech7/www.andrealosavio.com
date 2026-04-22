@@ -1,4 +1,9 @@
-import { generateBreadcrumbSchema, schemaToJsonLd } from "@/utils/seo-schema";
+import { PROJECTS } from "@/constants/projects";
+import {
+  generateBreadcrumbSchema,
+  generateItemListSchema,
+  schemaToJsonLd,
+} from "@/utils/seo-schema";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
@@ -56,18 +61,34 @@ export async function generateMetadata({
 export default async function ProjectsPage({ params }: PageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "projects" });
+  const tItems = await getTranslations({ locale, namespace: "projects.items" });
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
+  const pageUrl = `${siteUrl}/${locale}/projects`;
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: `${siteUrl}/${locale}` },
-    { name: t("metadata.title"), url: `${siteUrl}/${locale}/projects` },
+    { name: t("metadata.title"), url: pageUrl },
   ]);
+
+  const itemListSchema = generateItemListSchema({
+    name: t("metadata.title"),
+    description: t("metadata.description"),
+    items: PROJECTS.map((project) => ({
+      name: tItems(`${project.id}.name` as never),
+      description: tItems(`${project.id}.description` as never),
+      url:
+        project.websiteUrl ?? project.githubUrl ?? project.designUrl ?? pageUrl,
+      image: `${siteUrl}${project.image}`,
+    })),
+  });
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: schemaToJsonLd(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: schemaToJsonLd([breadcrumbSchema, itemListSchema]),
+        }}
       />
       <HeroSection id="hero" />
       <Suspense>
