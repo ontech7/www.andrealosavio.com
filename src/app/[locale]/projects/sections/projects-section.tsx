@@ -20,7 +20,6 @@ interface ProjectsSectionProps {
   className?: string;
 }
 
-// Extract all unique tags from projects
 const ALL_TAGS = [...new Set(PROJECTS.flatMap((p) => p.tags))].sort();
 
 const sortOrderParser = parseAsStringLiteral([
@@ -31,7 +30,7 @@ const sortOrderParser = parseAsStringLiteral([
 const tagsParser = parseAsArrayOf(parseAsString, ",").withDefault([]);
 
 export function ProjectsSection({ id, className }: ProjectsSectionProps) {
-  const t = useTranslations("projects.items");
+  const t = useTranslations();
 
   const [selectedTags, setSelectedTags] = useQueryState("tags", tagsParser);
   const [sortOrder, setSortOrder] = useQueryState("sort", sortOrderParser);
@@ -45,12 +44,10 @@ export function ProjectsSection({ id, className }: ProjectsSectionProps) {
   const filteredAndSortedProjects = useMemo(() => {
     let filtered = PROJECTS;
 
-    // Filter out empty strings and non-existent tags from malformed URLs
     const validTags = selectedTags.filter(
       (tag) => tag.trim() !== "" && ALL_TAGS.includes(tag)
     );
 
-    // Filter by selected tags (show projects that have ALL selected tags)
     if (validTags.length > 0) {
       filtered = filtered.filter((project) =>
         validTags.every((tag) => project.tags.includes(tag))
@@ -61,10 +58,9 @@ export function ProjectsSection({ id, className }: ProjectsSectionProps) {
       return filtered;
     }
 
-    // Sort alphabetically by name
     return [...filtered].sort((a, b) => {
-      const nameA = t(`${a.id}.name`).toLowerCase();
-      const nameB = t(`${b.id}.name`).toLowerCase();
+      const nameA = t(`projects.items.${a.id}.name`).toLowerCase();
+      const nameB = t(`projects.items.${b.id}.name`).toLowerCase();
       return sortOrder === "asc"
         ? nameA.localeCompare(nameB)
         : nameB.localeCompare(nameA);
@@ -99,18 +95,16 @@ export function ProjectsSection({ id, className }: ProjectsSectionProps) {
       >
         {filteredAndSortedProjects.length === 0 ? (
           <p className="text-muted-foreground col-span-2 py-12 text-center">
-            {t("common.noResults")}
+            {t("projects.items.common.noResults")}
           </p>
         ) : (
           <>
-            {/* Mobile: single column */}
             <div className="flex flex-col gap-6 md:hidden">
               {filteredAndSortedProjects.map((project) => (
                 <ProjectCard key={project.id} project={project} />
               ))}
             </div>
 
-            {/* Desktop: masonry layout */}
             <div className="hidden flex-col gap-6 md:flex">
               {leftColumn.map((project) => (
                 <ProjectCard key={project.id} project={project} />

@@ -20,7 +20,7 @@ export function YouCouldBeNextSection({
   id,
   className,
 }: YouCouldBeNextSectionProps) {
-  const t = useTranslations("homepage");
+  const t = useTranslations();
 
   return (
     <section
@@ -30,13 +30,11 @@ export function YouCouldBeNextSection({
         className
       )}
     >
-      {/* Background Grid */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <GridLayers />
       </div>
 
       <div className="relative z-10">
-        {/* Title */}
         <motion.div
           className="mb-12 text-center"
           variants={staggerContainerAnim}
@@ -49,18 +47,17 @@ export function YouCouldBeNextSection({
             variants={fadeInUpAnim}
             transition={{ duration: 0.5 }}
           >
-            {t("youCouldBeNext.title")}
+            {t("homepage.youCouldBeNext.title")}
           </motion.h2>
           <motion.p
             className="text-muted-foreground mx-auto mt-4 max-w-lg text-lg"
             variants={fadeInUpAnim}
             transition={{ duration: 0.5 }}
           >
-            {t("youCouldBeNext.subtitle")}
+            {t("homepage.youCouldBeNext.subtitle")}
           </motion.p>
         </motion.div>
 
-        {/* Content Grid */}
         <motion.div
           className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-12"
           variants={staggerContainerAnim}
@@ -68,7 +65,6 @@ export function YouCouldBeNextSection({
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {/* Left Text */}
           <motion.div
             className="order-2 flex flex-col justify-between lg:order-1 lg:h-full"
             variants={fadeInUpAnim}
@@ -76,24 +72,23 @@ export function YouCouldBeNextSection({
           >
             <div>
               <p className="text-muted-foreground mb-6 text-lg">
-                {t("youCouldBeNext.leftText.line1")}{" "}
+                {t("homepage.youCouldBeNext.leftText.line1")}{" "}
                 <span className="font-semibold text-white">
-                  {t("youCouldBeNext.leftText.line1Highlight")}
+                  {t("homepage.youCouldBeNext.leftText.line1Highlight")}
                 </span>
                 .
               </p>
               <p className="text-muted-foreground text-lg">
-                {t("youCouldBeNext.leftText.line2")}
+                {t("homepage.youCouldBeNext.leftText.line2")}
               </p>
             </div>
 
-            {/* Not ready yet */}
             <div className="mt-12 lg:mt-auto lg:pt-12">
               <p className="text-muted-foreground text-sm">
-                {t("youCouldBeNext.notReadyYet")}
+                {t("homepage.youCouldBeNext.notReadyYet")}
               </p>
               <p className="text-muted-foreground mt-1 text-sm">
-                {t("youCouldBeNext.keepScrolling")}{" "}
+                {t("homepage.youCouldBeNext.keepScrolling")}{" "}
                 <motion.span
                   className="inline-block align-middle"
                   animate={{ y: [-2, 2, -2] }}
@@ -109,7 +104,6 @@ export function YouCouldBeNextSection({
             </div>
           </motion.div>
 
-          {/* Right Card */}
           <motion.div
             className="order-1 lg:order-2"
             variants={fadeInUpAnim}
@@ -117,42 +111,38 @@ export function YouCouldBeNextSection({
           >
             <Card className="bg-background px-6 py-6">
               <CardContent className="flex flex-col gap-4 p-0">
-                {/* Card Header */}
                 <div className="text-center">
                   <h3 className="text-lg font-semibold">
-                    {t("youCouldBeNext.challengeBox.title")}
+                    {t("homepage.youCouldBeNext.challengeBox.title")}
                   </h3>
                   <p className="text-muted-foreground mt-1 text-sm">
-                    {t("youCouldBeNext.challengeBox.subtitle")}
+                    {t("homepage.youCouldBeNext.challengeBox.subtitle")}
                   </p>
                 </div>
 
-                {/* Services Grid */}
                 <div className="mt-2 grid grid-cols-2 gap-3">
                   {SERVICES.map((service) => (
                     <Button key={service.id} variant="primary" asChild>
                       <Link href={`/services#${service.id}`}>
                         {t(
-                          `youCouldBeNext.challengeBox.services.${service.id}`
+                          `homepage.youCouldBeNext.challengeBox.services.${service.id}`
                         )}
                       </Link>
                     </Button>
                   ))}
                 </div>
 
-                {/* Divider with "or" */}
                 <div className="flex items-center gap-4">
                   <div className="border-border h-px flex-1 border-t" />
                   <span className="text-muted-foreground text-sm">
-                    {t("youCouldBeNext.challengeBox.or")}
+                    {t("homepage.youCouldBeNext.challengeBox.or")}
                   </span>
                   <div className="border-border h-px flex-1 border-t" />
                 </div>
 
-                {/* Contact Button */}
                 <Button variant="gradient-outline" asChild>
                   <Link href={`/services#contactForm`}>
-                    {t("youCouldBeNext.challengeBox.contactMe")}
+                    {t("homepage.youCouldBeNext.challengeBox.contactMe")}
                     <Send className="size-4" />
                   </Link>
                 </Button>

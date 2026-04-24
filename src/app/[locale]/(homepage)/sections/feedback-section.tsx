@@ -15,11 +15,10 @@ interface FeedbackSectionProps {
 }
 
 export function FeedbackSection({ id, className }: FeedbackSectionProps) {
-  const t = useTranslations("homepage");
+  const t = useTranslations();
 
   return (
     <section id={id} className={cn("mx-auto max-w-5xl px-6", className)}>
-      {/* Feedback Cards - Masonry Layout */}
       <motion.div
         className="columns-1 gap-4 md:columns-2 lg:columns-3"
         variants={staggerContainerAnim}
@@ -36,13 +35,12 @@ export function FeedbackSection({ id, className }: FeedbackSectionProps) {
           >
             <Card className="px-5 py-4">
               <CardContent className="flex flex-col gap-3 p-0">
-                {/* Header with icon and name */}
                 <div className="flex items-start gap-3">
                   <div className="shrink-0">
                     {item.icon ? (
                       <Image
                         src={item.icon}
-                        alt={t(`feedback.clients.${item.id}.name`)}
+                        alt={t(`homepage.feedback.clients.${item.id}.name`)}
                         width={32}
                         height={32}
                         className="size-8"
@@ -53,17 +51,16 @@ export function FeedbackSection({ id, className }: FeedbackSectionProps) {
                   </div>
                   <div className="flex flex-col">
                     <span className="text-sm font-medium">
-                      {t(`feedback.clients.${item.id}.name`)}
+                      {t(`homepage.feedback.clients.${item.id}.name`)}
                     </span>
                     <span className="text-muted-foreground text-xs">
-                      {t(`feedback.clients.${item.id}.description`)}
+                      {t(`homepage.feedback.clients.${item.id}.description`)}
                     </span>
                   </div>
                 </div>
 
-                {/* Quote */}
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  {t(`feedback.clients.${item.id}.quote`)}
+                  {t(`homepage.feedback.clients.${item.id}.quote`)}
                 </p>
               </CardContent>
             </Card>

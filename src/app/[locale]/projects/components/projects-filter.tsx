@@ -24,8 +24,8 @@ export function ProjectsFilter({
   sortOrder,
   onSortChange,
 }: ProjectsFilterProps) {
-  const t = useTranslations("projects.filter");
-  const tCommon = useTranslations("common");
+  const t = useTranslations();
+  const tCommon = useTranslations();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -52,14 +52,13 @@ export function ProjectsFilter({
       viewport={{ once: true }}
       className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2"
     >
-      {/* Sort Select - First on mobile, left on desktop */}
       <motion.div
         variants={fadeInUpAnim}
         transition={{ duration: 0.5 }}
         className="order-1 flex flex-col gap-2"
       >
         <span id="sort-label" className="text-muted-foreground text-sm">
-          {t("sortLabel")}
+          {t("projects.filter.sortLabel")}
         </span>
         <div
           ref={selectRef}
@@ -82,10 +81,10 @@ export function ProjectsFilter({
             >
               <span>
                 {sortOrder === "none"
-                  ? t("sortOrderNone")
+                  ? t("projects.filter.sortOrderNone")
                   : sortOrder === "asc"
-                    ? t("sortOrderAsc")
-                    : t("sortOrderDesc")}
+                    ? t("projects.filter.sortOrderAsc")
+                    : t("projects.filter.sortOrderDesc")}
               </span>
               <ChevronDownIcon
                 className={cn(
@@ -97,7 +96,6 @@ export function ProjectsFilter({
             </button>
           </span>
 
-          {/* Dropdown */}
           {isOpen && (
             <div
               id={listboxId}
@@ -120,7 +118,7 @@ export function ProjectsFilter({
                     : "text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer"
                 )}
               >
-                {t("sortOrderNone")}
+                {t("projects.filter.sortOrderNone")}
               </button>
               <button
                 type="button"
@@ -137,7 +135,7 @@ export function ProjectsFilter({
                     : "text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer"
                 )}
               >
-                {t("sortOrderAsc")}
+                {t("projects.filter.sortOrderAsc")}
               </button>
               <button
                 type="button"
@@ -154,24 +152,25 @@ export function ProjectsFilter({
                     : "text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer"
                 )}
               >
-                {t("sortOrderDesc")}
+                {t("projects.filter.sortOrderDesc")}
               </button>
             </div>
           )}
         </div>
       </motion.div>
 
-      {/* Tags - Second on mobile, right on desktop */}
       <motion.div
         variants={fadeInUpAnim}
         transition={{ duration: 0.5 }}
         className="order-2 flex flex-col gap-2"
       >
-        <span className="text-muted-foreground text-sm">{t("tagsLabel")}</span>
+        <span className="text-muted-foreground text-sm">
+          {t("projects.filter.tagsLabel")}
+        </span>
         <div
           className="flex flex-wrap gap-1.5"
           role="group"
-          aria-label={t("tagsLabel")}
+          aria-label={t("projects.filter.tagsLabel")}
         >
           {tags.map((tag) => {
             const isSelected = selectedTags.includes(tag);
@@ -181,7 +180,9 @@ export function ProjectsFilter({
                 type="button"
                 onClick={() => onTagToggle(tag)}
                 aria-pressed={isSelected}
-                aria-label={tCommon("accessibility.filterByTag", { tag })}
+                aria-label={tCommon("common.accessibility.filterByTag", {
+                  tag,
+                })}
                 className={cn(
                   "cursor-pointer rounded-md px-2 py-1 text-xs font-medium transition-colors lg:text-[10px]",
                   isSelected

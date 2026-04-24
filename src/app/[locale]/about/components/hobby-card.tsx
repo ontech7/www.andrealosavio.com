@@ -10,7 +10,7 @@ interface HobbyCardProps {
 }
 
 export function HobbyCard({ hobby, animateDirectly }: HobbyCardProps) {
-  const t = useTranslations("about");
+  const t = useTranslations();
 
   const hasLink = "href" in hobby && hobby.href;
 
@@ -18,17 +18,15 @@ export function HobbyCard({ hobby, animateDirectly }: HobbyCardProps) {
     <>
       <Image
         src={hobby.image}
-        alt={t(`beyondCode.hobbies.${hobby.id}`)}
+        alt={t(`about.beyondCode.hobbies.${hobby.id}`)}
         fill
         className="object-cover transition-transform duration-500 group-hover:scale-105"
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
       />
-      {/* Gradient Overlay */}
       <div
         className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"
         aria-hidden="true"
       />
-      {/* External Link Icon */}
       {hasLink && (
         <div
           className="absolute top-4 right-4 flex items-center gap-2 rounded-full bg-black/50 p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -36,16 +34,15 @@ export function HobbyCard({ hobby, animateDirectly }: HobbyCardProps) {
         >
           {hobby.hrefDescription && (
             <span className="text-xs">
-              {t(`beyondCode.hobbies.${hobby.hrefDescription}`)}
+              {t(`about.beyondCode.hobbies.${hobby.hrefDescription}`)}
             </span>
           )}
           <ExternalLink className="size-4 text-white" />
         </div>
       )}
-      {/* Label */}
       <div className="absolute inset-x-0 bottom-0 p-4">
         <p className="bg-(image:--text-gradient) bg-clip-text text-center text-xl font-semibold text-transparent">
-          {t(`beyondCode.hobbies.${hobby.id}`)}
+          {t(`about.beyondCode.hobbies.${hobby.id}`)}
         </p>
       </div>
     </>
@@ -69,7 +66,7 @@ export function HobbyCard({ hobby, animateDirectly }: HobbyCardProps) {
         href={hobby.href}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`${t(`beyondCode.hobbies.${hobby.id}`)} — ${t("beyondCode.externalLink")}`}
+        aria-label={`${t(`about.beyondCode.hobbies.${hobby.id}`)} — ${t("about.beyondCode.externalLink")}`}
         className="group relative block h-63.75 cursor-pointer overflow-hidden rounded-xl"
         {...motionProps}
         transition={{ duration: 0.5 }}

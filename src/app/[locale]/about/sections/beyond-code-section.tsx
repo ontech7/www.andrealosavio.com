@@ -17,7 +17,8 @@ interface BeyondCodeSectionProps {
 }
 
 export function BeyondCodeSection({ id, className }: BeyondCodeSectionProps) {
-  const t = useTranslations("about");
+  const t = useTranslations();
+
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -28,12 +29,10 @@ export function BeyondCodeSection({ id, className }: BeyondCodeSectionProps) {
         className
       )}
     >
-      {/* Background Grid */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-90">
         <GridLayers />
       </div>
 
-      {/* Title */}
       <motion.div
         className="mb-16 w-full text-center"
         variants={staggerContainerAnim}
@@ -46,7 +45,7 @@ export function BeyondCodeSection({ id, className }: BeyondCodeSectionProps) {
           transition={{ duration: 0.5 }}
           className="mb-4 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
         >
-          {t.rich("beyondCode.title", {
+          {t.rich("about.beyondCode.title", {
             highlight: (children) => (
               <span className="bg-(image:--outline-gradient-light) bg-clip-text text-transparent">
                 {children}
@@ -59,11 +58,10 @@ export function BeyondCodeSection({ id, className }: BeyondCodeSectionProps) {
           transition={{ duration: 0.5 }}
           className="text-muted-foreground"
         >
-          {t("beyondCode.subtitle")}
+          {t("about.beyondCode.subtitle")}
         </motion.p>
       </motion.div>
 
-      {/* Desktop Grid - 2 rows with different column proportions */}
       <motion.div
         className="hidden w-full flex-col gap-6 lg:flex"
         initial="hidden"
@@ -80,14 +78,12 @@ export function BeyondCodeSection({ id, className }: BeyondCodeSectionProps) {
           },
         }}
       >
-        {/* Row 1: narrower - wider - narrower */}
         <div className="grid grid-cols-[1fr_1.5fr_1fr] gap-6">
           {HOBBY_ITEMS.slice(0, 3).map((hobby) => (
             <HobbyCard key={hobby.id} hobby={hobby} />
           ))}
         </div>
 
-        {/* Row 2: wider - medium - wider */}
         <div className="grid grid-cols-[1.3fr_1fr_1.3fr] gap-6">
           {HOBBY_ITEMS.slice(3, 6).map((hobby) => (
             <HobbyCard key={hobby.id} hobby={hobby} />
@@ -95,7 +91,6 @@ export function BeyondCodeSection({ id, className }: BeyondCodeSectionProps) {
         </div>
       </motion.div>
 
-      {/* Tablet/Mobile Grid - equal columns with expand/collapse */}
       <motion.div
         className="flex w-full flex-col gap-4 lg:hidden"
         initial="hidden"
@@ -112,14 +107,12 @@ export function BeyondCodeSection({ id, className }: BeyondCodeSectionProps) {
           },
         }}
       >
-        {/* Always visible: first 2 cards */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {HOBBY_ITEMS.slice(0, 2).map((hobby) => (
             <HobbyCard key={hobby.id} hobby={hobby} />
           ))}
         </div>
 
-        {/* Expandable: remaining cards */}
         <AnimatePresence initial={false}>
           {isExpanded && (
             <motion.div
@@ -138,7 +131,6 @@ export function BeyondCodeSection({ id, className }: BeyondCodeSectionProps) {
           )}
         </AnimatePresence>
 
-        {/* Show more/less button */}
         <motion.div
           className="mt-4 flex justify-center"
           initial={{ opacity: 0 }}
@@ -146,7 +138,9 @@ export function BeyondCodeSection({ id, className }: BeyondCodeSectionProps) {
           transition={{ delay: 0.4 }}
         >
           <Button variant="primary" onClick={() => setIsExpanded(!isExpanded)}>
-            {isExpanded ? t("beyondCode.showLess") : t("beyondCode.showMore")}
+            {isExpanded
+              ? t("about.beyondCode.showLess")
+              : t("about.beyondCode.showMore")}
             {isExpanded ? (
               <CopyMinus className="size-4" />
             ) : (

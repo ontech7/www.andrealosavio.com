@@ -16,7 +16,7 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const t = useTranslations("projects.items");
+  const t = useTranslations();
 
   return (
     <motion.div
@@ -31,7 +31,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {project.logo ? (
             <Image
               src={project.logo}
-              alt={t(`${project.id}.name`)}
+              alt={t(`projects.items.${project.id}.name`)}
               width={40}
               height={40}
               className="size-10 shrink-0"
@@ -41,7 +41,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           )}
           <div className="flex flex-col gap-1.5">
             <h3 className="text-base leading-none font-semibold">
-              {t(`${project.id}.name`)}
+              {t(`projects.items.${project.id}.name`)}
             </h3>
             <div className="flex flex-wrap gap-1">
               {project.tags.map((tag) => (
@@ -59,13 +59,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
         <CardContent className="flex flex-col gap-4 px-0">
           <p className="text-muted-foreground text-sm">
-            {t(`${project.id}.description`)}
+            {t(`projects.items.${project.id}.description`)}
           </p>
 
           <div className="overflow-hidden rounded-lg">
             <Image
               src={project.image}
-              alt={t(`${project.id}.name`)}
+              alt={t(`projects.items.${project.id}.name`)}
               width={600}
               height={400}
               className="h-auto w-full"
@@ -86,10 +86,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
               >
                 <LinkIcon className="size-4" />
                 {project.designUrl
-                  ? t("common.checkDesign")
+                  ? t("projects.items.common.checkDesign")
                   : project.githubUrl
-                    ? t("common.checkGitHub")
-                    : t("common.checkWebsite")}
+                    ? t("projects.items.common.checkGitHub")
+                    : t("projects.items.common.checkWebsite")}
               </Link>
             </Button>
           )}

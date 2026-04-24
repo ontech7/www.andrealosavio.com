@@ -5,30 +5,27 @@ import { FooterCatCta } from "./footer-cat-cta";
 
 export async function Footer() {
   const locale = await getLocale();
-  const t = await getTranslations("common");
+  const t = await getTranslations();
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="border-border bg-background border-t">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        {/* Main Footer Content */}
         <div className="py-12 lg:py-16">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
-            {/* Brand Section */}
             <div className="lg:col-span-3">
               <div className="flex flex-col gap-4">
                 <h3 className="bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-2xl font-bold text-transparent">
                   Andrea Losavio
                 </h3>
                 <p className="text-muted-foreground text-xs leading-tight">
-                  {t("footer.tagline")}
+                  {t("common.footer.tagline")}
                 </p>
 
-                {/* Social Links */}
                 <div
                   className="mt-4 flex items-center gap-4"
                   role="list"
-                  aria-label={t("accessibility.socialLinks")}
+                  aria-label={t("common.accessibility.socialLinks")}
                 >
                   {SOCIAL_LINKS.map((social) => (
                     <a
@@ -37,7 +34,7 @@ export async function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       role="listitem"
-                      aria-label={t(social.labelKey)}
+                      aria-label={t(`common.${social.labelKey}`)}
                       className="text-muted-foreground hover:text-foreground transition-colors"
                     >
                       <social.Icon className="stroke-1" aria-hidden="true" />
@@ -47,16 +44,14 @@ export async function Footer() {
               </div>
             </div>
 
-            {/* Navigation Columns */}
             <nav
-              aria-label={t("accessibility.footerNavigation")}
+              aria-label={t("common.accessibility.footerNavigation")}
               className="lg:col-span-6"
             >
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-                {/* General */}
                 <div>
                   <h4 className="text-foreground mb-3 text-sm font-semibold">
-                    {t(FOOTER_LINKS.general.titleKey)}
+                    {t(`common.${FOOTER_LINKS.general.titleKey}`)}
                   </h4>
                   <ul className="space-y-2 p-0">
                     {FOOTER_LINKS.general.links.map((link) => (
@@ -68,14 +63,14 @@ export async function Footer() {
                             rel="noopener noreferrer"
                             className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                           >
-                            {t(link.labelKey)}
+                            {t(`common.${link.labelKey}`)}
                           </a>
                         ) : (
                           <Link
                             href={link.href}
                             className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                           >
-                            {t(link.labelKey)}
+                            {t(`common.${link.labelKey}`)}
                           </Link>
                         )}
                       </li>
@@ -83,10 +78,9 @@ export async function Footer() {
                   </ul>
                 </div>
 
-                {/* Services */}
                 <div>
                   <h4 className="text-foreground mb-3 text-sm font-semibold">
-                    {t(FOOTER_LINKS.services.titleKey)}
+                    {t(`common.${FOOTER_LINKS.services.titleKey}`)}
                   </h4>
                   <ul className="space-y-2 p-0">
                     {FOOTER_LINKS.services.links.map((link) => (
@@ -95,17 +89,16 @@ export async function Footer() {
                           href={link.href}
                           className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                         >
-                          {t(link.labelKey)}
+                          {t(`common.${link.labelKey}`)}
                         </Link>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Projects */}
                 <div>
                   <h4 className="text-foreground mb-3 text-sm font-semibold">
-                    {t(FOOTER_LINKS.projects.titleKey)}
+                    {t(`common.${FOOTER_LINKS.projects.titleKey}`)}
                   </h4>
                   <ul className="space-y-2 p-0">
                     {FOOTER_LINKS.projects.links.map((link) => (
@@ -114,7 +107,7 @@ export async function Footer() {
                           href={link.href}
                           className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                         >
-                          {t(link.labelKey)}
+                          {t(`common.${link.labelKey}`)}
                         </Link>
                       </li>
                     ))}
@@ -123,26 +116,24 @@ export async function Footer() {
               </div>
             </nav>
 
-            {/* CTA Section */}
             <div className="lg:col-span-3">
               <div className="flex flex-col gap-6">
                 <div>
                   <h4 className="text-foreground mb-3 text-xl font-bold">
-                    {t("footer.cta.title")}
+                    {t("common.footer.cta.title")}
                   </h4>
                   <FooterCatCta />
                 </div>
 
-                {/* Featured Projects */}
                 <div>
                   <h5 className="text-foreground mb-3 text-xl font-bold">
-                    {t("footer.featuredProjects")}
+                    {t("common.footer.featuredProjects")}
                   </h5>
                   <Link
                     href="https://fastmemo.vercel.app?utm_source=andrealosavio.com&utm_medium=referral"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={t("accessibility.featuredProject")}
+                    aria-label={t("common.accessibility.featuredProject")}
                   >
                     <FastMemoFeaturedProject />
                   </Link>
@@ -153,14 +144,13 @@ export async function Footer() {
         </div>
       </div>
 
-      {/* Copyright Bar */}
       <div className="border-border border-t py-8">
         <p className="text-muted-foreground mx-auto flex max-w-67.5 flex-col gap-3 text-center text-sm font-normal md:max-w-max md:flex-row">
-          {t("footer.copyright", { year: currentYear })}
+          {t("common.footer.copyright", { year: currentYear })}
           <span aria-hidden="true" className="text-muted-foreground">
             ―
           </span>
-          {t("footer.vat", { vatNumber: "12705460967" })}
+          {t("common.footer.vat", { vatNumber: "12705460967" })}
         </p>
       </div>
     </footer>

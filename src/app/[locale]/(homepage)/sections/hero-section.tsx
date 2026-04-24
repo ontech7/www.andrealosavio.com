@@ -28,25 +28,25 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         className
       )}
     >
-      {/* Main */}
       <motion.div
         className="relative z-10"
         variants={staggerContainerAnim}
         initial="hidden"
         animate="visible"
       >
-        {/* CTAs (1) */}
         <motion.div variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
           <Button variant="gradient-primary" size="lg" asChild>
             <Link href="/services" className="flex items-center gap-2">
-              <div className="bg-secondary size-2.5 shrink-0 animate-pulse rounded-full shadow-(--shadow-secondary)" aria-hidden="true" />
+              <div
+                className="bg-secondary size-2.5 shrink-0 animate-pulse rounded-full shadow-(--shadow-secondary)"
+                aria-hidden="true"
+              />
               {t("homepage.hero.ctaDiscussVision")}
               <ArrowRightIcon className="size-4" aria-hidden="true" />
             </Link>
           </Button>
         </motion.div>
 
-        {/* Title */}
         <motion.h1
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
@@ -59,7 +59,10 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           transition={{ duration: 0.5 }}
           className="text-md mb-5 flex items-center gap-1.5 bg-(image:--text-gradient) bg-clip-text pb-1.5 leading-0 text-transparent md:text-xl"
         >
-          <CodeIcon className="size-5 text-white md:-mb-0.5 md:size-5.5" aria-hidden="true" />
+          <CodeIcon
+            className="size-5 text-white md:-mb-0.5 md:size-5.5"
+            aria-hidden="true"
+          />
           {t("homepage.hero.subtitle")}
         </motion.h2>
 
@@ -71,7 +74,6 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           {t("homepage.hero.description")}
         </motion.p>
 
-        {/* CTAs (2) */}
         <motion.div variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
           <Button
             variant="gradient-outline"
@@ -99,7 +101,6 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           </Button>
         </motion.div>
 
-        {/* Social Links */}
         <motion.div
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
@@ -120,7 +121,6 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         </motion.div>
       </motion.div>
 
-      {/* Decoration */}
       <div
         className={cn(
           "pointer-events-none absolute",

@@ -16,32 +16,32 @@ export interface ImpactItem {
 export const IMPACT_ITEMS: ImpactItem[] = [
   {
     icon: SparklesIcon,
-    textKey: "makingAnImpact.items.brandIdentity",
-    highlightKey: "makingAnImpact.items.brandIdentityHighlight",
+    textKey: "homepage.makingAnImpact.items.brandIdentity",
+    highlightKey: "homepage.makingAnImpact.items.brandIdentityHighlight",
     position: "left",
   },
   {
     icon: LayersIcon,
-    textKey: "makingAnImpact.items.infrastructure",
-    highlightKey: "makingAnImpact.items.infrastructureHighlight",
+    textKey: "homepage.makingAnImpact.items.infrastructure",
+    highlightKey: "homepage.makingAnImpact.items.infrastructureHighlight",
     position: "right",
   },
   {
     icon: GlobeIcon,
-    textKey: "makingAnImpact.items.platforms",
-    highlightKey: "makingAnImpact.items.platformsHighlight",
+    textKey: "homepage.makingAnImpact.items.platforms",
+    highlightKey: "homepage.makingAnImpact.items.platformsHighlight",
     position: "left",
   },
   {
     icon: RefreshCwIcon,
-    textKey: "makingAnImpact.items.transition",
-    highlightKey: "makingAnImpact.items.transitionHighlight",
+    textKey: "homepage.makingAnImpact.items.transition",
+    highlightKey: "homepage.makingAnImpact.items.transitionHighlight",
     position: "right",
   },
   {
     icon: GemIcon,
-    textKey: "makingAnImpact.items.investment",
-    highlightKey: "makingAnImpact.items.investmentHighlight",
+    textKey: "homepage.makingAnImpact.items.investment",
+    highlightKey: "homepage.makingAnImpact.items.investmentHighlight",
     position: "left",
   },
 ];

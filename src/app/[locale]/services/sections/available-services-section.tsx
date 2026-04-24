@@ -17,7 +17,7 @@ export function AvailableServicesSection({
   id,
   className,
 }: AvailableServicesSectionProps) {
-  const t = useTranslations("services");
+  const t = useTranslations();
 
   return (
     <section
@@ -39,7 +39,6 @@ export function AvailableServicesSection({
           />
         ))}
 
-        {/* Divider */}
         <motion.div
           variants={fadeInUpAnim}
           initial="hidden"
@@ -50,15 +49,15 @@ export function AvailableServicesSection({
         >
           <div className="bg-border h-px flex-1" />
           <span className="text-muted-foreground text-sm">
-            {t("contactForm.divider")}
+            {t("services.contactForm.divider")}
           </span>
           <div className="bg-border h-px flex-1" />
         </motion.div>
 
         <ContactForm
           id="contactForm"
-          title={t("contactForm.title")}
-          description={t("contactForm.description")}
+          title={t("services.contactForm.title")}
+          description={t("services.contactForm.description")}
           className="scroll-mt-24"
         />
       </motion.div>

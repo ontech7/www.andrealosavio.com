@@ -38,7 +38,6 @@ const content = {
   },
 };
 
-// Brand colors
 const colors = {
   background: "#111111",
   cardBackground: "#1f1f1f",
@@ -72,7 +71,6 @@ export function ClientConfirmationEmail({
           overflow: "hidden",
         }}
       >
-        {/* Header with Logo */}
         <div
           style={{
             background: `linear-gradient(135deg, ${colors.background} 0%, #1a1a2e 100%)`,
@@ -111,7 +109,6 @@ export function ClientConfirmationEmail({
           </p>
         </div>
 
-        {/* Main Content */}
         <div style={{ padding: "32px" }}>
           <p
             style={{
@@ -147,7 +144,6 @@ export function ClientConfirmationEmail({
             {t.response}
           </p>
 
-          {/* Links Section */}
           <div
             style={{
               backgroundColor: colors.background,
@@ -227,7 +223,6 @@ export function ClientConfirmationEmail({
             </table>
           </div>
 
-          {/* Signature */}
           <p
             style={{
               color: colors.textMuted,
@@ -249,7 +244,6 @@ export function ClientConfirmationEmail({
           </p>
         </div>
 
-        {/* Footer */}
         <div
           style={{
             borderTop: `1px solid ${colors.border}`,
@@ -257,7 +251,6 @@ export function ClientConfirmationEmail({
             textAlign: "center" as const,
           }}
         >
-          {/* Social Links */}
           <table
             cellPadding="0"
             cellSpacing="0"

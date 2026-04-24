@@ -20,12 +20,12 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "homepage.metadata" });
+  const t = await getTranslations({ locale });
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
 
   return {
-    title: t("title"),
-    description: t("description"),
+    title: t("homepage.metadata.title"),
+    description: t("homepage.metadata.description"),
     alternates: {
       canonical: `${siteUrl}/${locale}`,
       languages: {
@@ -35,8 +35,8 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: t("title"),
-      description: t("description"),
+      title: t("homepage.metadata.title"),
+      description: t("homepage.metadata.description"),
       url: `${siteUrl}/${locale}`,
       type: "website",
       locale: locale === "it" ? "it_IT" : "en_US",
@@ -53,8 +53,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: t("title"),
-      description: t("description"),
+      title: t("homepage.metadata.title"),
+      description: t("homepage.metadata.description"),
       images: [`${siteUrl}/images/og.jpg`],
     },
   };
@@ -62,10 +62,10 @@ export async function generateMetadata({
 
 export default async function HomePage({ params }: PageProps) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "homepage.metadata" });
+  const t = await getTranslations({ locale });
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
 
-  const description = t("description");
+  const description = t("homepage.metadata.description");
   const sameAs = [
     "https://github.com/ontech7",
     "https://www.linkedin.com/in/andrea-losavio/",

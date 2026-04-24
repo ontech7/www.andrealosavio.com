@@ -16,12 +16,12 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "services.metadata" });
+  const t = await getTranslations({ locale });
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
 
   return {
-    title: t("title"),
-    description: t("description"),
+    title: t("services.metadata.title"),
+    description: t("services.metadata.description"),
     alternates: {
       canonical: `${siteUrl}/${locale}/services`,
       languages: {
@@ -31,8 +31,8 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: t("title"),
-      description: t("description"),
+      title: t("services.metadata.title"),
+      description: t("services.metadata.description"),
       url: `${siteUrl}/${locale}/services`,
       type: "website",
       locale: locale === "it" ? "it_IT" : "en_US",
@@ -49,8 +49,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: t("title"),
-      description: t("description"),
+      title: t("services.metadata.title"),
+      description: t("services.metadata.description"),
       images: [`${siteUrl}/images/og.jpg`],
     },
   };
@@ -58,56 +58,62 @@ export async function generateMetadata({
 
 export default async function ServicesPage({ params }: PageProps) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "services" });
+  const t = await getTranslations({ locale });
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
   const pageUrl = `${siteUrl}/${locale}/services`;
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: `${siteUrl}/${locale}` },
-    { name: t("metadata.title"), url: pageUrl },
+    { name: t("services.metadata.title"), url: pageUrl },
   ]);
 
   const serviceCatalogSchema = generateServiceCatalogSchema({
     providerName: "Andrea Losavio",
     providerUrl: siteUrl,
-    catalogName: t("metadata.title"),
+    catalogName: t("services.metadata.title"),
     services: [
       {
-        name: t("availableServices.collaboration.title"),
-        description: t("availableServices.collaboration.description"),
+        name: t("services.availableServices.collaboration.title"),
+        description: t("services.availableServices.collaboration.description"),
         url: `${pageUrl}#collaboration`,
       },
       {
-        name: t("availableServices.validationMvp.title"),
-        description: t("availableServices.validationMvp.description"),
+        name: t("services.availableServices.validationMvp.title"),
+        description: t("services.availableServices.validationMvp.description"),
         url: `${pageUrl}#validationMvp`,
         price: "2500",
         priceCurrency: "EUR",
       },
       {
-        name: t("availableServices.auditConsulting.title"),
-        description: t("availableServices.auditConsulting.description"),
+        name: t("services.availableServices.auditConsulting.title"),
+        description: t(
+          "services.availableServices.auditConsulting.description"
+        ),
         url: `${pageUrl}#auditConsulting`,
         price: "60",
         priceCurrency: "EUR",
       },
       {
-        name: t("availableServices.fractionalCto.title"),
-        description: t("availableServices.fractionalCto.description"),
+        name: t("services.availableServices.fractionalCto.title"),
+        description: t("services.availableServices.fractionalCto.description"),
         url: `${pageUrl}#fractionalCto`,
         price: "800",
         priceCurrency: "EUR",
       },
       {
-        name: t("availableServices.technicalMentorship.title"),
-        description: t("availableServices.technicalMentorship.description"),
+        name: t("services.availableServices.technicalMentorship.title"),
+        description: t(
+          "services.availableServices.technicalMentorship.description"
+        ),
         url: `${pageUrl}#technicalMentorship`,
         price: "55",
         priceCurrency: "EUR",
       },
       {
-        name: t("availableServices.productDevelopment.title"),
-        description: t("availableServices.productDevelopment.description"),
+        name: t("services.availableServices.productDevelopment.title"),
+        description: t(
+          "services.availableServices.productDevelopment.description"
+        ),
         url: `${pageUrl}#productDevelopment`,
         price: "7000",
         priceCurrency: "EUR",

@@ -14,9 +14,10 @@ interface ImpactCardProps {
 }
 
 export function ImpactCard({ item }: ImpactCardProps) {
-  const t = useTranslations("homepage");
+  const t = useTranslations();
 
   const ref = useRef<HTMLDivElement>(null);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 0.85", "start 0.6"],

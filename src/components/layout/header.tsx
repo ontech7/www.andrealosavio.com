@@ -9,7 +9,7 @@ import { Logo } from "../logo";
 import { LanguageSwitcher } from "./language-switcher";
 
 export function Header() {
-  const t = useTranslations("common");
+  const t = useTranslations();
   const pathname = usePathname();
   const locale = useLocale();
 
@@ -19,15 +19,13 @@ export function Header() {
     <header className="bg-background/80 fixed top-0 right-0 left-0 z-50 backdrop-blur-xl">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" aria-label={t("accessibility.homeLink")}>
+          <Link href="/" aria-label={t("common.accessibility.homeLink")}>
             <Logo />
           </Link>
 
-          {/* Desktop Navigation + Language Switcher */}
           <div className="hidden items-center gap-2 md:flex">
             <nav
-              aria-label={t("accessibility.mainNavigation")}
+              aria-label={t("common.accessibility.mainNavigation")}
               className="flex items-center gap-1"
             >
               {NAV_LINKS.map((link) => {
@@ -46,7 +44,7 @@ export function Header() {
                       rel="noopener noreferrer"
                       className={className}
                     >
-                      {t(link.labelKey)}
+                      {t(`common.${link.labelKey}`)}
                     </a>
                   );
                 }
@@ -58,17 +56,15 @@ export function Header() {
                     aria-current={isActive ? "page" : undefined}
                     className={className}
                   >
-                    {t(link.labelKey)}
+                    {t(`common.${link.labelKey}`)}
                   </Link>
                 );
               })}
             </nav>
 
-            {/* Language Switcher */}
             <LanguageSwitcher className="ml-4" />
           </div>
 
-          {/* Mobile Menu Button */}
           <LanguageSwitcher className="mr-6 ml-auto md:hidden" />
 
           <button
@@ -79,8 +75,8 @@ export function Header() {
             aria-controls="mobile-navigation"
             aria-label={
               mobileMenuOpen
-                ? t("accessibility.closeMenu")
-                : t("accessibility.openMenu")
+                ? t("common.accessibility.closeMenu")
+                : t("common.accessibility.openMenu")
             }
           >
             {mobileMenuOpen ? (
@@ -115,11 +111,10 @@ export function Header() {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div id="mobile-navigation">
             <nav
-              aria-label={t("accessibility.mobileNavigation")}
+              aria-label={t("common.accessibility.mobileNavigation")}
               className="border-border border-t py-4 md:hidden"
             >
               <div className="flex flex-col gap-1">
@@ -140,7 +135,7 @@ export function Header() {
                         onClick={() => setMobileMenuOpen(false)}
                         className={className}
                       >
-                        {t(link.labelKey)}
+                        {t(`common.${link.labelKey}`)}
                       </a>
                     );
                   }
@@ -153,18 +148,17 @@ export function Header() {
                       aria-current={isActive ? "page" : undefined}
                       className={className}
                     >
-                      {t(link.labelKey)}
+                      {t(`common.${link.labelKey}`)}
                     </Link>
                   );
                 })}
               </div>
             </nav>
 
-            {/* Social Links */}
             <div
               className="flex items-center gap-4 px-4 pb-6"
               role="list"
-              aria-label={t("accessibility.socialLinks")}
+              aria-label={t("common.accessibility.socialLinks")}
             >
               {SOCIAL_LINKS.map((social) => (
                 <a
@@ -173,7 +167,7 @@ export function Header() {
                   target="_blank"
                   rel="noopener noreferrer"
                   role="listitem"
-                  aria-label={t(social.labelKey)}
+                  aria-label={t(`common.${social.labelKey}`)}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <social.Icon className="stroke-1" aria-hidden="true" />

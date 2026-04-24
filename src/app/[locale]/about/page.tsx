@@ -21,12 +21,12 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "about.metadata" });
+  const t = await getTranslations({ locale });
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
 
   return {
-    title: t("title"),
-    description: t("description"),
+    title: t("about.metadata.title"),
+    description: t("about.metadata.description"),
     alternates: {
       canonical: `${siteUrl}/${locale}/about`,
       languages: {
@@ -36,8 +36,8 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: t("title"),
-      description: t("description"),
+      title: t("about.metadata.title"),
+      description: t("about.metadata.description"),
       url: `${siteUrl}/${locale}/about`,
       type: "website",
       locale: locale === "it" ? "it_IT" : "en_US",
@@ -54,8 +54,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: t("title"),
-      description: t("description"),
+      title: t("about.metadata.title"),
+      description: t("about.metadata.description"),
       images: [`${siteUrl}/images/og.jpg`],
     },
   };
@@ -63,20 +63,20 @@ export async function generateMetadata({
 
 export default async function AboutPage({ params }: PageProps) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "about" });
+  const t = await getTranslations({ locale });
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
   const pageUrl = `${siteUrl}/${locale}/about`;
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: `${siteUrl}/${locale}` },
-    { name: t("metadata.title"), url: pageUrl },
+    { name: t("about.metadata.title"), url: pageUrl },
   ]);
 
   const personSchema = generatePersonSchema({
     name: "Andrea Losavio",
     jobTitle: "Software Engineer & Tech Partner",
     url: siteUrl,
-    description: t("metadata.description"),
+    description: t("about.metadata.description"),
     image: `${siteUrl}/images/og.jpg`,
     email: "business@andrealosavio.com",
     nationality: "Italian",
@@ -95,8 +95,8 @@ export default async function AboutPage({ params }: PageProps) {
 
   const profilePageSchema = generateProfilePageSchema({
     url: pageUrl,
-    name: t("metadata.title"),
-    description: t("metadata.description"),
+    name: t("about.metadata.title"),
+    description: t("about.metadata.description"),
     mainEntityPersonId: `${siteUrl}#person`,
   });
 
@@ -112,7 +112,6 @@ export default async function AboutPage({ params }: PageProps) {
           ]),
         }}
       />
-      {/* Preload images for faster rendering */}
       {HOBBY_ITEMS.map((hobby) => (
         <link
           key={hobby.id}

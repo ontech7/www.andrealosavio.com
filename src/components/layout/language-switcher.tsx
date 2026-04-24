@@ -11,11 +11,12 @@ interface LanguageSwitcherProps {
 }
 
 export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
+  const t = useTranslations();
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+
   const [isPending, startTransition] = useTransition();
-  const t = useTranslations("common");
 
   const isEnglish = locale === "en";
 
@@ -28,7 +29,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   return (
     <div
       role="group"
-      aria-label={t("accessibility.languageSwitcher")}
+      aria-label={t("common.accessibility.languageSwitcher")}
       className={cn(
         "relative rounded-full p-px",
         isPending && "pointer-events-none opacity-60",
@@ -39,33 +40,31 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
       }}
     >
       <div className="bg-muted relative flex items-center rounded-full p-1">
-        {/* EN Button */}
         <button
           type="button"
           onClick={() => handleLocaleChange("en")}
           aria-pressed={isEnglish}
-          aria-label={t("accessibility.switchToEnglish")}
+          aria-label={t("common.accessibility.switchToEnglish")}
           className={cn(
             "relative z-10 rounded-full px-3 py-1 text-sm font-medium",
             isEnglish
               ? "bg-foreground text-background"
-              : "bg-transparent text-foreground"
+              : "text-foreground bg-transparent"
           )}
         >
           EN
         </button>
 
-        {/* IT Button */}
         <button
           type="button"
           onClick={() => handleLocaleChange("it")}
           aria-pressed={!isEnglish}
-          aria-label={t("accessibility.switchToItalian")}
+          aria-label={t("common.accessibility.switchToItalian")}
           className={cn(
             "relative z-10 rounded-full px-3 py-1 text-sm font-medium",
             !isEnglish
               ? "bg-foreground text-background"
-              : "bg-transparent text-foreground"
+              : "text-foreground bg-transparent"
           )}
         >
           IT

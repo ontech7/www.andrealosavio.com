@@ -18,14 +18,13 @@ export function MakingAnImpactSection({
   id,
   className,
 }: MakingAnImpactSectionProps) {
-  const t = useTranslations("homepage");
+  const t = useTranslations();
 
   return (
     <section
       id={id}
       className={cn("mx-auto max-w-5xl scroll-mt-20 px-6", className)}
     >
-      {/* Title */}
       <motion.div
         className="mb-4 text-center"
         variants={staggerContainerAnim}
@@ -38,18 +37,17 @@ export function MakingAnImpactSection({
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
         >
-          {t("makingAnImpact.title")}
+          {t("homepage.makingAnImpact.title")}
         </motion.h2>
         <motion.p
           className="mx-auto mt-4 max-w-md bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-lg text-transparent"
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
         >
-          {t("makingAnImpact.subtitle")}
+          {t("homepage.makingAnImpact.subtitle")}
         </motion.p>
       </motion.div>
 
-      {/* Impact Timeline */}
       <div className="relative flex flex-col items-center">
         <SLine inverted className="md:mr-72.5 md:w-72.5" />
         {IMPACT_ITEMS.map((item, index) => (

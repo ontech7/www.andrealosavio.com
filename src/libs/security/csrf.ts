@@ -1,7 +1,7 @@
 import { createHmac, randomBytes, timingSafeEqual } from "crypto";
 
 const CSRF_SECRET = process.env.CSRF_SECRET || crypto.randomUUID();
-const TOKEN_EXPIRY_MS = 30 * 60 * 1000; // 30 minutes
+const TOKEN_EXPIRY_MS = 30 * 60 * 1000;
 
 function sign(timestamp: string, nonce: string): string {
   return createHmac("sha256", CSRF_SECRET)

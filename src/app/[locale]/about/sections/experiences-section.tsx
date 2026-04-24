@@ -13,7 +13,7 @@ interface ExperiencesSectionProps {
 }
 
 export function ExperiencesSection({ id, className }: ExperiencesSectionProps) {
-  const t = useTranslations("about");
+  const t = useTranslations();
 
   return (
     <section
@@ -23,7 +23,6 @@ export function ExperiencesSection({ id, className }: ExperiencesSectionProps) {
         className
       )}
     >
-      {/* Title */}
       <motion.div
         className="mb-16 w-full text-center"
         variants={staggerContainerAnim}
@@ -36,7 +35,7 @@ export function ExperiencesSection({ id, className }: ExperiencesSectionProps) {
           transition={{ duration: 0.5 }}
           className="mb-4 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
         >
-          {t.rich("experiences.title", {
+          {t.rich("about.experiences.title", {
             highlight: (children) => (
               <span className="bg-(image:--outline-gradient-light) bg-clip-text text-transparent">
                 {children}
@@ -49,11 +48,10 @@ export function ExperiencesSection({ id, className }: ExperiencesSectionProps) {
           transition={{ duration: 0.5 }}
           className="text-muted-foreground"
         >
-          {t("experiences.subtitle")}
+          {t("about.experiences.subtitle")}
         </motion.p>
       </motion.div>
 
-      {/* Experience Timeline */}
       <motion.div
         className="w-full space-y-12"
         initial="hidden"

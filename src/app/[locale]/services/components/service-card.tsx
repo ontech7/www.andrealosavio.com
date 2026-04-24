@@ -1,6 +1,6 @@
 "use client";
 
-import { ServiceContactDialog } from "@/components/service-contact-dialog";
+import { ContactFormDialog } from "@/components/contact-form";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";
@@ -18,7 +18,8 @@ interface ServiceCardProps {
 }
 
 export function ServiceCard({ service, reversed = false }: ServiceCardProps) {
-  const t = useTranslations("services.availableServices");
+  const t = useTranslations();
+
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
@@ -39,48 +40,60 @@ export function ServiceCard({ service, reversed = false }: ServiceCardProps) {
               reversed && "md:[&>*:first-child]:order-2"
             )}
           >
-            {/* Image Column */}
             <div className="relative h-50 shrink-0 overflow-hidden rounded-lg md:h-63.75">
               <Image
                 src={service.imageSrc}
-                alt={t(`${service.id}.title`)}
+                alt={t(`services.availableServices.${service.id}.title`)}
                 width={340 * 3}
                 height={255 * 3}
                 className="h-auto w-full md:h-full md:w-auto"
               />
             </div>
 
-            {/* Text Column */}
             <div className="flex flex-col justify-between">
               <div>
                 <h3 className="mb-3 text-2xl font-semibold">
-                  {t(`${service.id}.title`)}
+                  {t(`services.availableServices.${service.id}.title`)}
                 </h3>
                 <p className="text-muted-foreground">
-                  {t.has(`${service.id}.highlight`) ? (
+                  {t.has(
+                    `services.availableServices.${service.id}.highlight`
+                  ) ? (
                     <>
                       {
-                        t(`${service.id}.description`).split(
-                          t(`${service.id}.highlight`)
+                        t(
+                          `services.availableServices.${service.id}.description`
+                        ).split(
+                          t(
+                            `services.availableServices.${service.id}.highlight`
+                          )
                         )[0]
                       }
                       <span className="text-secondary font-medium">
-                        {t(`${service.id}.highlight`)}
+                        {t(
+                          `services.availableServices.${service.id}.highlight`
+                        )}
                       </span>
                       {
-                        t(`${service.id}.description`).split(
-                          t(`${service.id}.highlight`)
+                        t(
+                          `services.availableServices.${service.id}.description`
+                        ).split(
+                          t(
+                            `services.availableServices.${service.id}.highlight`
+                          )
                         )[1]
                       }
                     </>
                   ) : (
-                    t(`${service.id}.description`)
+                    t(`services.availableServices.${service.id}.description`)
                   )}
                 </p>
 
                 <div className="mt-4">
                   <p className="text-muted-foreground mb-2 text-sm font-medium">
-                    {t(`${service.id}.useCasesLabel`)}
+                    {t(
+                      `services.availableServices.${service.id}.useCasesLabel`
+                    )}
                   </p>
                   <motion.ul
                     variants={staggerContainerAnim}
@@ -92,7 +105,9 @@ export function ServiceCard({ service, reversed = false }: ServiceCardProps) {
                     {(
                       ["useCase1", "useCase2", "useCase3", "useCase4"] as const
                     ).map((key) =>
-                      t.has(`${service.id}.${key}`) ? (
+                      t.has(
+                        `services.availableServices.${service.id}.${key}`
+                      ) ? (
                         <motion.li
                           key={key}
                           variants={fadeInUpAnim}
@@ -100,7 +115,7 @@ export function ServiceCard({ service, reversed = false }: ServiceCardProps) {
                           className="text-muted-foreground flex items-center gap-2 text-sm"
                         >
                           <CheckIcon className="text-secondary size-3.5 shrink-0" />
-                          {t(`${service.id}.${key}`)}
+                          {t(`services.availableServices.${service.id}.${key}`)}
                         </motion.li>
                       ) : null
                     )}
@@ -116,16 +131,16 @@ export function ServiceCard({ service, reversed = false }: ServiceCardProps) {
                 >
                   <div className="bg-secondary size-2.5 shrink-0 animate-pulse rounded-full shadow-(--shadow-secondary)" />
 
-                  {t.rich(`${service.id}.cta`, {
+                  {t.rich(`services.availableServices.${service.id}.cta`, {
                     price: (children) => (
                       <span className="-ml-1.5 font-medium">{children}</span>
                     ),
                   })}
                   <ArrowRightIcon className="size-4" />
                 </Button>
-                {t.has(`${service.id}.ctaNote`) && (
+                {t.has(`services.availableServices.${service.id}.ctaNote`) && (
                   <p className="text-muted-foreground mt-1 ml-5.5 text-xs">
-                    {t(`${service.id}.ctaNote`)}
+                    {t(`services.availableServices.${service.id}.ctaNote`)}
                   </p>
                 )}
               </div>
@@ -134,7 +149,7 @@ export function ServiceCard({ service, reversed = false }: ServiceCardProps) {
         </Card>
       </motion.div>
 
-      <ServiceContactDialog
+      <ContactFormDialog
         serviceId={service.id}
         open={dialogOpen}
         onOpenChange={setDialogOpen}

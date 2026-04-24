@@ -4,7 +4,7 @@ import { cn } from "@/utils/cn";
 import { useTranslations } from "next-intl";
 
 export function SkipLink() {
-  const t = useTranslations("common");
+  const t = useTranslations();
 
   return (
     <a
@@ -17,7 +17,7 @@ export function SkipLink() {
         "text-sm font-medium"
       )}
     >
-      {t("accessibility.skipToContent")}
+      {t("common.accessibility.skipToContent")}
     </a>
   );
 }

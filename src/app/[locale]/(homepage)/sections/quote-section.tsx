@@ -12,7 +12,7 @@ interface QuoteSectionProps {
 }
 
 export function QuoteSection({ id, className }: QuoteSectionProps) {
-  const t = useTranslations("homepage");
+  const t = useTranslations();
 
   return (
     <section
@@ -29,20 +29,17 @@ export function QuoteSection({ id, className }: QuoteSectionProps) {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        {/* Separator */}
         <motion.div
           className="border-border mb-12 w-50 border-t"
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
         />
 
-        {/* Quote container */}
         <motion.div
           className="relative mx-6 text-center"
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
         >
-          {/* Opening quote mark */}
           <Image
             src="/images/open-quote.svg"
             alt=""
@@ -52,12 +49,10 @@ export function QuoteSection({ id, className }: QuoteSectionProps) {
             aria-hidden="true"
           />
 
-          {/* Quote text */}
           <p className="mx-auto max-w-200 px-8 text-lg leading-relaxed md:px-14 md:text-xl">
-            {t("quote.text")}
+            {t("homepage.quote.text")}
           </p>
 
-          {/* Closing quote mark */}
           <Image
             src="/images/close-quote.svg"
             alt=""
@@ -68,14 +63,13 @@ export function QuoteSection({ id, className }: QuoteSectionProps) {
           />
         </motion.div>
 
-        {/* Author */}
         <motion.p
           className="text-muted-foreground mt-10 max-w-100 text-center text-xs md:max-w-200 md:text-sm"
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
         >
-          — {t("quote.author")},{" "}
-          <span className="underline">{t("quote.book")}</span>
+          — {t("homepage.quote.author")},{" "}
+          <span className="underline">{t("homepage.quote.book")}</span>
         </motion.p>
       </motion.div>
     </section>

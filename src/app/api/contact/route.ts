@@ -25,7 +25,6 @@ function getClientIp(request: NextRequest): string {
 
 export async function POST(request: NextRequest) {
   try {
-    // Block requests from external origins
     const origin = request.headers.get("origin");
     const allowedOriginPattern =
       /^https?:\/\/([a-z0-9-]+\.)*andrealosavio\.com$/;
@@ -34,7 +33,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    // Rate limiting (before body parsing to save resources)
     const ip = getClientIp(request);
     const rateLimitResult = contactRateLimiter.check(ip);
 
@@ -61,12 +59,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: true }, { status: 200 });
     }
 
-    // CSRF validation
     if (!csrfToken || !validateCsrfToken(csrfToken)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    // Validate required fields
     if (!fullname || !email || !challenge) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -74,7 +70,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
@@ -96,7 +91,6 @@ export async function POST(request: NextRequest) {
 
     const resend = getResendClient();
 
-    // Send confirmation email to client
     const clientEmailSubject =
       locale === "it"
         ? "Grazie per avermi contattato!"
@@ -117,7 +111,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Send notification email to owner
     const ownerSubject = service
       ? `New Contact: ${fullname} - ${service}`
       : `New Contact: ${fullname}`;
@@ -132,7 +125,6 @@ export async function POST(request: NextRequest) {
 
     if (ownerError) {
       console.error("Error sending owner notification email:", ownerError);
-      // Don't return error to client since their confirmation was sent
     }
 
     return NextResponse.json({ success: true }, { status: 200 });

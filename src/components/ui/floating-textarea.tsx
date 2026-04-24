@@ -19,7 +19,6 @@ export function FloatingTextarea({
 
   return (
     <div className="relative">
-      {/* Floating Label */}
       <label
         htmlFor={textareaId}
         className={cn(
@@ -32,7 +31,6 @@ export function FloatingTextarea({
         {label}
       </label>
 
-      {/* Floating Line */}
       <div
         aria-hidden="true"
         className={cn(

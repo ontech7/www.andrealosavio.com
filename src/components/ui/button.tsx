@@ -22,13 +22,10 @@ const buttonVariants = cva(
         "gradient-primary":
           "bg-linear-to-r from-secondary-foreground to-secondary-foreground/0 rounded-l-full text-foreground hover:[&>svg]:animate-pulse",
         "gradient-outline": [
-          // Base settings
           "relative isolate overflow-hidden bg-transparent text-foreground border border-transparent",
 
-          // Layer 1: Background Base
           "before:absolute before:inset-0 before:-z-20 before:[background:var(--outline-gradient)]",
 
-          // Layer 2: Background Hover
           "after:absolute after:inset-0 after:-z-10",
           "after:[background:var(--outline-gradient-hover)]",
           "after:opacity-0 after:transition-opacity after:duration-300",

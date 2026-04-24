@@ -18,12 +18,12 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "projects.metadata" });
+  const t = await getTranslations({ locale });
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
 
   return {
-    title: t("title"),
-    description: t("description"),
+    title: t("projects.metadata.title"),
+    description: t("projects.metadata.description"),
     alternates: {
       canonical: `${siteUrl}/${locale}/projects`,
       languages: {
@@ -33,8 +33,8 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: t("title"),
-      description: t("description"),
+      title: t("projects.metadata.title"),
+      description: t("projects.metadata.description"),
       url: `${siteUrl}/${locale}/projects`,
       type: "website",
       locale: locale === "it" ? "it_IT" : "en_US",
@@ -51,8 +51,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: t("title"),
-      description: t("description"),
+      title: t("projects.metadata.title"),
+      description: t("projects.metadata.description"),
       images: [`${siteUrl}/images/og.jpg`],
     },
   };
@@ -60,22 +60,22 @@ export async function generateMetadata({
 
 export default async function ProjectsPage({ params }: PageProps) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "projects" });
-  const tItems = await getTranslations({ locale, namespace: "projects.items" });
+  const t = await getTranslations({ locale });
+  const tItems = await getTranslations({ locale });
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
   const pageUrl = `${siteUrl}/${locale}/projects`;
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: `${siteUrl}/${locale}` },
-    { name: t("metadata.title"), url: pageUrl },
+    { name: t("projects.metadata.title"), url: pageUrl },
   ]);
 
   const itemListSchema = generateItemListSchema({
-    name: t("metadata.title"),
-    description: t("metadata.description"),
+    name: t("projects.metadata.title"),
+    description: t("projects.metadata.description"),
     items: PROJECTS.map((project) => ({
-      name: tItems(`${project.id}.name` as never),
-      description: tItems(`${project.id}.description` as never),
+      name: tItems(`projects.items.${project.id}.name` as never),
+      description: tItems(`projects.items.${project.id}.description` as never),
       url:
         project.websiteUrl ?? project.githubUrl ?? project.designUrl ?? pageUrl,
       image: `${siteUrl}${project.image}`,

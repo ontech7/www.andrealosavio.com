@@ -8,7 +8,7 @@ interface ExperienceCardProps {
 }
 
 export function ExperienceCard({ experience }: ExperienceCardProps) {
-  const t = useTranslations("about");
+  const t = useTranslations();
 
   const formatDateRange = (startDate: string, endDate: string | null) => {
     const formatDate = (dateStr: string) => {
@@ -20,25 +20,25 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
     };
 
     const start = formatDate(startDate);
-    const end = endDate ? formatDate(endDate) : t("experiences.present");
+    const end = endDate ? formatDate(endDate) : t("about.experiences.present");
 
     return `${start} — ${end}`;
   };
 
   const getContractType = () => {
     const types = {
-      freelance: t("experiences.contractTypes.freelance"),
-      permanent: t("experiences.contractTypes.permanent"),
-      apprenticeship: t("experiences.contractTypes.apprenticeship"),
+      freelance: t("about.experiences.contractTypes.freelance"),
+      permanent: t("about.experiences.contractTypes.permanent"),
+      apprenticeship: t("about.experiences.contractTypes.apprenticeship"),
     };
     return types[experience.type];
   };
 
   const getWorkMode = () => {
     const modes = {
-      remote: t("experiences.workModes.remote"),
-      hybrid: t("experiences.workModes.hybrid"),
-      onsite: t("experiences.workModes.onsite"),
+      remote: t("about.experiences.workModes.remote"),
+      hybrid: t("about.experiences.workModes.hybrid"),
+      onsite: t("about.experiences.workModes.onsite"),
     };
     return modes[experience.workMode];
   };
@@ -52,21 +52,17 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
       }}
       transition={{ duration: 0.5 }}
     >
-      {/* Date Column */}
       <div className="shrink-0 md:w-48">
         <p className="text-muted-foreground text-sm font-medium tracking-wider">
           {formatDateRange(experience.startDate, experience.endDate)}
         </p>
       </div>
 
-      {/* Content Column */}
       <div className="flex-1">
-        {/* Role Title */}
         <h3 className="-mt-1 mb-0.5 text-lg font-semibold text-white">
-          {t(`experiences.roles.${experience.roleKey}`)}
+          {t(`about.experiences.roles.${experience.roleKey}`)}
         </h3>
 
-        {/* Company Info */}
         <div className="mb-4 flex items-center gap-2">
           <Image
             src={experience.logo}
@@ -81,15 +77,15 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
           </span>
         </div>
 
-        {/* Role Description */}
         <p className="text-muted-foreground text-sm leading-relaxed">
-          {t(`experiences.items.${experience.id}.description`)}
+          {t(`about.experiences.items.${experience.id}.description`)}
         </p>
 
-        {/* Achievements */}
         <ul className="space-y-2">
           {(
-            t.raw(`experiences.items.${experience.id}.achievements`) as string[]
+            t.raw(
+              `about.experiences.items.${experience.id}.achievements`
+            ) as string[]
           ).map((achievement, index) => (
             <li
               key={index}
@@ -101,10 +97,9 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
           ))}
         </ul>
 
-        {/* Extra Note (optional) */}
-        {t.raw(`experiences.items.${experience.id}.note`) && (
+        {t.raw(`about.experiences.items.${experience.id}.note`) && (
           <p className="text-muted-foreground text-sm italic">
-            {t.rich(`experiences.items.${experience.id}.note`, {
+            {t.rich(`about.experiences.items.${experience.id}.note`, {
               highlight: (children) => (
                 <span className="bg-(image:--outline-gradient-light) bg-clip-text text-transparent">
                   {children}

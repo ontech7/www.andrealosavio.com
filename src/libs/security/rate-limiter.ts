@@ -50,5 +50,5 @@ function createRateLimiter({ maxRequests, windowMs }: RateLimiterConfig) {
 
 export const contactRateLimiter = createRateLimiter({
   maxRequests: 3,
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000,
 });

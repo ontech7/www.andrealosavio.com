@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/images/cover.jpg" alt="Coolify Manager Screenshot">
+</p>
+
 # Andrea Losavio - Portfolio Website
 
 Personal portfolio website designed to generate leads and attract potential
@@ -38,8 +42,6 @@ cp .env.sample .env
 **Required variables:**
 
 - `NEXT_PUBLIC_SITE_URL` - Your domain (without https://)
-  - Local: `"localhost:3000"`
-  - **Production: `"www.andrealosavio.com"`** ⚠️ Critical for SEO!
 - `RESEND_API_KEY` - API key from [Resend](https://resend.com)
 - `OWNER_EMAIL` - Email to receive contact form submissions
 - `FROM_EMAIL` - Sender email for notifications
@@ -92,17 +94,6 @@ src/
 │   └── it/                 # Italian translations
 └── utils/                  # Utility functions
 ```
-
-## Available Scripts
-
-| Script     | Description               |
-| ---------- | ------------------------- |
-| `dev`      | Start development server  |
-| `build`    | Build for production      |
-| `start`    | Start production server   |
-| `lint`     | Run ESLint                |
-| `lint:fix` | Run ESLint with auto-fix  |
-| `format`   | Format code with Prettier |
 
 ## Design
 

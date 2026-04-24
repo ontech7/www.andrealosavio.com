@@ -21,7 +21,6 @@ export function FloatingInput({
 
   return (
     <div className="relative">
-      {/* Floating Label */}
       <label
         htmlFor={inputId}
         className={cn(
@@ -36,7 +35,6 @@ export function FloatingInput({
         {label}
       </label>
 
-      {/* Floating Line */}
       <div
         aria-hidden="true"
         className={cn(
@@ -57,7 +55,10 @@ export function FloatingInput({
       >
         <div className="bg-muted flex rounded-lg">
           {icon && (
-            <span className="text-muted-foreground shrink-0 py-3 pr-1 pl-3" aria-hidden="true">
+            <span
+              className="text-muted-foreground shrink-0 py-3 pr-1 pl-3"
+              aria-hidden="true"
+            >
               {icon}
             </span>
           )}

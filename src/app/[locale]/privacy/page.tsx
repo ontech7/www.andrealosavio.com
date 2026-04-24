@@ -10,12 +10,12 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "privacy.metadata" });
+  const t = await getTranslations({ locale });
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
 
   return {
-    title: t("title"),
-    description: t("description"),
+    title: t("privacy.metadata.title"),
+    description: t("privacy.metadata.description"),
     alternates: {
       canonical: `${siteUrl}/${locale}/privacy`,
       languages: {
@@ -25,8 +25,8 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: t("title"),
-      description: t("description"),
+      title: t("privacy.metadata.title"),
+      description: t("privacy.metadata.description"),
       url: `${siteUrl}/${locale}/privacy`,
       type: "website",
       locale: locale === "it" ? "it_IT" : "en_US",
@@ -43,8 +43,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: t("title"),
-      description: t("description"),
+      title: t("privacy.metadata.title"),
+      description: t("privacy.metadata.description"),
       images: [`${siteUrl}/images/og.jpg`],
     },
   };
@@ -88,12 +88,12 @@ const listItemKeys: Record<string, { key: string; items: readonly string[] }> =
 
 export default async function PrivacyPage({ params }: PageProps) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "privacy" });
+  const t = await getTranslations({ locale });
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: `${siteUrl}/${locale}` },
-    { name: t("metadata.title"), url: `${siteUrl}/${locale}/privacy` },
+    { name: t("privacy.metadata.title"), url: `${siteUrl}/${locale}/privacy` },
   ]);
 
   return (
@@ -104,20 +104,20 @@ export default async function PrivacyPage({ params }: PageProps) {
       />
       <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <h1 className="mb-2 bg-(image:--text-gradient) bg-clip-text text-3xl font-bold tracking-tight text-transparent md:text-4xl">
-          {t("title")}
+          {t("privacy.title")}
         </h1>
         <p className="text-muted-foreground mb-12 text-sm">
-          {t("lastUpdated")}
+          {t("privacy.lastUpdated")}
         </p>
 
         <div className="space-y-8">
           {sectionKeys.map((sectionKey) => (
             <div key={sectionKey}>
               <h2 className="text-foreground mb-3 text-xl font-semibold">
-                {t(`sections.${sectionKey}.title`)}
+                {t(`privacy.sections.${sectionKey}.title`)}
               </h2>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                {t(`sections.${sectionKey}.content`)}
+                {t(`privacy.sections.${sectionKey}.content`)}
               </p>
 
               {listItemKeys[sectionKey] && (
@@ -125,7 +125,7 @@ export default async function PrivacyPage({ params }: PageProps) {
                   {listItemKeys[sectionKey].items.map((itemKey) => (
                     <li key={itemKey}>
                       {t(
-                        `sections.${sectionKey}.${listItemKeys[sectionKey].key}.${itemKey}`
+                        `privacy.sections.${sectionKey}.${listItemKeys[sectionKey].key}.${itemKey}`
                       )}
                     </li>
                   ))}
@@ -134,13 +134,13 @@ export default async function PrivacyPage({ params }: PageProps) {
 
               {sectionKey === "dataCollected" && (
                 <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
-                  {t("sections.dataCollected.note")}
+                  {t("privacy.sections.dataCollected.note")}
                 </p>
               )}
 
               {sectionKey === "rights" && (
                 <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
-                  {t("sections.rights.contact")}
+                  {t("privacy.sections.rights.contact")}
                 </p>
               )}
             </div>

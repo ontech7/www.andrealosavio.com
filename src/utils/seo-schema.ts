@@ -9,10 +9,6 @@ import type {
   WebSite,
 } from "schema-dts";
 
-/* -------------------------------------------------------------------------- */
-/*  Person                                                                    */
-/* -------------------------------------------------------------------------- */
-
 interface GeneratePersonSchemaProps {
   name: string;
   jobTitle: string;
@@ -87,10 +83,6 @@ export function generatePersonSchema({
   };
 }
 
-/* -------------------------------------------------------------------------- */
-/*  Organization                                                              */
-/* -------------------------------------------------------------------------- */
-
 interface GenerateOrganizationSchemaProps {
   name: string;
   url: string;
@@ -132,10 +124,6 @@ export function generateOrganizationSchema({
   };
 }
 
-/* -------------------------------------------------------------------------- */
-/*  WebSite (enables brand association + potential search box in sitelinks)   */
-/* -------------------------------------------------------------------------- */
-
 interface GenerateWebSiteSchemaProps {
   name: string;
   url: string;
@@ -168,10 +156,6 @@ export function generateWebSiteSchema({
   };
 }
 
-/* -------------------------------------------------------------------------- */
-/*  Breadcrumb                                                                */
-/* -------------------------------------------------------------------------- */
-
 interface BreadcrumbItem {
   name: string;
   url: string;
@@ -190,10 +174,6 @@ export function generateBreadcrumbSchema(
     })),
   };
 }
-
-/* -------------------------------------------------------------------------- */
-/*  Service / OfferCatalog (for /services page)                               */
-/* -------------------------------------------------------------------------- */
 
 interface ServiceOffer {
   name: string;
@@ -275,10 +255,6 @@ export function generateServiceSchema({
   };
 }
 
-/* -------------------------------------------------------------------------- */
-/*  ItemList (for /projects page)                                             */
-/* -------------------------------------------------------------------------- */
-
 interface ItemListEntry {
   name: string;
   description?: string;
@@ -314,10 +290,6 @@ export function generateItemListSchema({
   };
 }
 
-/* -------------------------------------------------------------------------- */
-/*  ProfilePage (for /about page)                                             */
-/* -------------------------------------------------------------------------- */
-
 export function generateProfilePageSchema({
   url,
   name,
@@ -337,10 +309,6 @@ export function generateProfilePageSchema({
     mainEntity: { "@id": mainEntityPersonId },
   };
 }
-
-/* -------------------------------------------------------------------------- */
-/*  JSON-LD rendering                                                         */
-/* -------------------------------------------------------------------------- */
 
 /**
  * Convert a schema object (or array of schemas) to a JSON-LD string.

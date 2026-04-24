@@ -25,7 +25,7 @@ const ENGINEER_REGISTER_URL =
 const FAST_MEMO_URL = "https://fastmemo.vercel.app/";
 
 export function HeroSection({ id, className }: HeroSectionProps) {
-  const t = useTranslations("about");
+  const t = useTranslations();
 
   return (
     <section
@@ -35,12 +35,10 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         className
       )}
     >
-      {/* Background Grid */}
       <div className="pointer-events-none absolute inset-0 -top-60 flex items-center justify-center opacity-90">
         <GridLayers />
       </div>
 
-      {/* Title  */}
       <motion.div
         className="mb-20 w-full text-center"
         variants={staggerContainerAnim}
@@ -52,7 +50,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           transition={{ duration: 0.5 }}
           className="mb-4 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
         >
-          {t.rich("hero.title", {
+          {t.rich("about.hero.title", {
             highlight: (children) => (
               <span className="bg-(image:--outline-gradient-light) bg-clip-text text-transparent">
                 {children}
@@ -65,12 +63,11 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           transition={{ duration: 0.5 }}
           className="text-muted-foreground"
         >
-          {t("hero.subtitle")}
+          {t("about.hero.subtitle")}
         </motion.p>
       </motion.div>
 
       <div className="flex-start flex flex-col lg:flex-row lg:gap-8">
-        {/* Image */}
         <motion.div
           className="relative mb-10 w-full max-w-103.25 shrink-0 self-center lg:-mt-2.5 lg:mb-0 lg:w-auto lg:max-w-none lg:self-auto"
           initial={{ opacity: 0, y: 20 }}
@@ -80,28 +77,25 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           <AboutHeroDecoration />
         </motion.div>
 
-        {/* Content */}
         <motion.div
           className="flex flex-1 flex-col"
           variants={staggerContainerAnim}
           initial="hidden"
           animate="visible"
         >
-          {/* Name and Role */}
           <motion.div
             variants={fadeInUpAnim}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
             <h2 className="text-2xl font-bold text-white md:text-3xl">
-              {t("hero.name")}
+              {t("about.hero.name")}
             </h2>
-            <p className="text-muted-foreground mb-6">{t("hero.role")}</p>
+            <p className="text-muted-foreground mb-6">{t("about.hero.role")}</p>
           </motion.div>
 
-          {/* Bio */}
           <div className="text-muted-foreground mb-8 space-y-4 text-sm leading-relaxed md:text-base">
             <motion.p variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
-              {t.rich("hero.bio1", {
+              {t.rich("about.hero.bio1", {
                 bold: (children) => (
                   <span className="font-semibold text-white">{children}</span>
                 ),
@@ -118,14 +112,14 @@ export function HeroSection({ id, className }: HeroSectionProps) {
               })}
             </motion.p>
             <motion.p variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
-              {t.rich("hero.bio2", {
+              {t.rich("about.hero.bio2", {
                 bold: (children) => (
                   <span className="font-semibold text-white">{children}</span>
                 ),
               })}
             </motion.p>
             <motion.p variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
-              {t.rich("hero.bio3", {
+              {t.rich("about.hero.bio3", {
                 link: (children) => (
                   <a
                     href={FAST_MEMO_URL}
@@ -140,7 +134,6 @@ export function HeroSection({ id, className }: HeroSectionProps) {
             </motion.p>
           </div>
 
-          {/* Tech Stack */}
           <motion.div
             className="flex flex-wrap gap-4"
             initial="hidden"

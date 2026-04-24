@@ -14,7 +14,7 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ id, className }: HeroSectionProps) {
-  const t = useTranslations("projects");
+  const t = useTranslations();
 
   return (
     <section
@@ -25,20 +25,18 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         className
       )}
     >
-      {/* Main */}
       <motion.div
         className="relative z-10 max-w-lg"
         variants={staggerContainerAnim}
         initial="hidden"
         animate="visible"
       >
-        {/* Title */}
         <motion.h1
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
           className="mb-7.5 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
         >
-          {t.rich("hero.title", {
+          {t.rich("projects.hero.title", {
             highlight: (children) => (
               <span className="bg-(image:--outline-gradient-light) bg-clip-text text-transparent">
                 {children}
@@ -52,10 +50,9 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           transition={{ duration: 0.5 }}
           className="text-muted-foreground mb-10 max-w-md"
         >
-          {t("hero.description")}
+          {t("projects.hero.description")}
         </motion.p>
 
-        {/* CTA */}
         <motion.div variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
           <Button
             variant="primary"
@@ -65,7 +62,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
                 ?.scrollIntoView({ behavior: "smooth", block: "start" });
             }}
           >
-            {t("hero.ctaCheckOut")}
+            {t("projects.hero.ctaCheckOut")}
             <motion.span
               animate={{ y: [-2, 2, -2] }}
               transition={{
@@ -80,7 +77,6 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         </motion.div>
       </motion.div>
 
-      {/* Decoration */}
       <div
         className={cn(
           "pointer-events-none absolute",
