@@ -39,8 +39,8 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "fastmemo",
-    logo: "/images/clients/fastmemo.svg",
-    image: "/images/projects/fastmemo_v2.webp",
+    logo: "/images/clients/fastmemo_v3.svg",
+    image: "/images/projects/fastmemo_v3.webp",
     tags: ["mobile", "personal", "design", "react-native", "expo-sdk", "tauri"],
     websiteUrl: "https://fastmemo.vercel.app",
   },
