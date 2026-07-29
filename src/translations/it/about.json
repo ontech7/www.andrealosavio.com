@@ -7,10 +7,10 @@
     "title": "Chi <highlight>sono</highlight>",
     "subtitle": "Chi sono, il mio percorso, le competenze e la visione creativa",
     "name": "Andrea Losavio",
-    "role": "Software Engineer & Tech Partner (Freelance)",
+    "role": "Senior Software Engineer & FDE (Freelance)",
     "bio1": "Sono un <bold>Ingegnere Informatico</bold> laureato al <bold>Politecnico di Milano</bold> nel 2019, iscritto all'albo professionale con il numero <link>34249</link>, sezione B. Sono appassionato di programmazione dal 2009, affascinato fin da giovane dalla logica e dalla struttura del software — esplorando i fondamenti della programmazione, dell'architettura dei computer e degli algoritmi.",
-    "bio2": "Ho iniziato il mio percorso professionale nel settore della consulenza IT nel 2018 e ho iniziato a lavorare come <bold>freelancer</bold> all'inizio del 2023. Oggi collaboro con aziende e startup come <bold>Software Engineer & Tech Partner</bold>, aiutandole a sviluppare prodotti digitali di alta qualità e a crescere attraverso soluzioni tecnologiche su misura.",
-    "bio3": "Nel 2023 ho progettato e sviluppato l'app e il sito web <link>Fast Memo</link>, attualmente disponibile su Android e iOS store."
+    "bio2": "Ho iniziato il mio percorso nel settore della consulenza IT nel 2018 e lavoro come <bold>freelancer</bold> dal 2023. Oggi collaboro con aziende e startup come <bold>Senior Software Engineer & FDE (Forward Deployed Engineer)</bold>, integrandomi nei loro contesti per tradurre requisiti di business in soluzioni tech & AI e architetture software scalabili e ad alte prestazioni.",
+    "bio3": "Ho anche realizzato prodotti personali: <link>Fast Memo</link> (2023, app e sito per Android e iOS) e <linkPlayStore>Coolify Manager</linkPlayStore> (2026, estensione Chrome e app Android per server Coolify self-hosted)."
   },
   "beyondCode": {
     "title": "<highlight>Beyond</highlight> code",
@@ -44,7 +44,7 @@
       "onsite": "In sede"
     },
     "roles": {
-      "softwareEngineerTechPartner": "Software Engineer & Tech Partner",
+      "softwareEngineerTechPartner": "Senior Software Engineer & FDE",
       "fullStackAemDeveloper": "Full-stack AEM Developer",
       "backEndAemDeveloper": "Back-end AEM Developer",
       "juniorAemDeveloper": "Junior AEM Developer",
@@ -52,8 +52,10 @@
     },
     "items": {
       "andrealosavio": {
-        "description": "Come Software Engineer & Tech Partner freelance, lavoro su web e mobile. Sviluppo applicazioni frontend moderne con React/Next.js, backend robusti con Node.js ed Express, e app mobile con React Native ed Expo SDK. Progetto anche architetture di alto livello e aiuto i team a prendere decisioni tecniche solide.",
+        "description": "Come Senior Software Engineer & FDE (Forward Deployed Engineer) freelance, mi integro nei contesti dei clienti per tradurre requisiti di business complessi in soluzioni tech & AI personalizzate e architetture software scalabili e ad alte prestazioni.",
         "achievements": [
+          "Sviluppo prodotti digitali end-to-end su web e mobile: frontend con React, Next.js e TypeScript, backend con Node.js, Express e Prisma ORM (PostgreSQL, MongoDB, Redis, Firebase, Supabase), app mobile con React Native ed Expo SDK, e product design UI/UX completo con Figma, dal prototipo al codice di produzione.",
+          "Progetto sistemi agentic e soluzioni di AI Engineering usando LLM come Anthropic Claude, OpenAI ChatGPT, Google Gemini e Ollama per modelli locali: orchestrazione multi-agent, delegazione a subagent, decomposizione dei task, custom tool/function calling, skill modulari, prompt engineering, output JSON strutturati, gestione del contesto e integrazione di API esterne.",
           "Sviluppato Fast Memo, un'applicazione cross-platform per memo costruita con React Native ed Expo, con note rich-text, checklist, organizzazione per categorie, sincronizzazione cloud Firebase e molte altre funzionalità. Open-source, disponibile in 7 lingue e scaricata da oltre 1.000 utenti.",
           "Costruito e mantenuto diverse librerie open-source—come react-native-dialog e figma-node-query—fornendo strumenti affidabili e developer-friendly adottati dalla community.",
           "Aiutato un cliente a sviluppare una forte brand identity che gli ha permesso di raggiungere un pubblico più ampio e attrarre più clienti.",
@@ -62,7 +64,7 @@
           "Assistito una startup durante una fase critica di transizione del prodotto, garantendo un'evoluzione fluida.",
           "Aiutato una startup a ottenere un round di investimento di quasi €2M attraverso lo sviluppo del prodotto e la strategia tecnica."
         ],
-        "note": "(Aiutato oltre 10 clienti a raggiungere il livello successivo <highlight>⚡</highlight>)"
+        "note": ""
       },
       "minsait": {
         "description": "Durante il mio periodo come Adobe Experience Manager Developer, ho contribuito end-to-end a progetti digitali su larga scala per importanti clienti multinazionali. Il mio lavoro ha coinvolto lo sviluppo full-stack su AEM, combinando ingegneria front-end moderna (HTML, CSS, JavaScript, jQuery) con sviluppo back-end robusto utilizzando Java Sling e le tecnologie core di AEM.",

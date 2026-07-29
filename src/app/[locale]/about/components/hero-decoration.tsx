@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function AboutHeroDecoration() {
   return (
-    <div className="relative aspect-square w-full transition-transform duration-300 hover:rotate-2 lg:w-103.25">
+    <div className="relative aspect-square w-full transition-transform duration-300 hover:rotate-2 lg:aspect-[5/6] lg:w-84">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-0 left-[2.82%] h-full w-[0.9px] bg-[#BFBFBF]/30" />
         <div className="absolute top-0 right-[2.82%] h-full w-[0.9px] bg-[#BFBFBF]/30" />

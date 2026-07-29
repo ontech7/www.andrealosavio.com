@@ -45,7 +45,7 @@ export async function generateMetadata({
           url: `${siteUrl}/images/og.jpg`,
           width: 1200,
           height: 630,
-          alt: "Andrea Losavio - Software Engineer & Tech Partner",
+          alt: "Andrea Losavio - Senior Software Engineer & FDE",
         },
       ],
     },

@@ -24,6 +24,9 @@ const ENGINEER_REGISTER_URL =
 
 const FAST_MEMO_URL = "https://fastmemo.vercel.app/";
 
+const COOLIFY_PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.ontech7.coolifyManager&hl=it";
+
 export function HeroSection({ id, className }: HeroSectionProps) {
   const t = useTranslations();
 
@@ -69,7 +72,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
 
       <div className="flex-start flex flex-col lg:flex-row lg:gap-8">
         <motion.div
-          className="relative mb-10 w-full max-w-103.25 shrink-0 self-center lg:-mt-2.5 lg:mb-0 lg:w-auto lg:max-w-none lg:self-auto"
+          className="relative mb-10 w-full max-w-84 shrink-0 self-center lg:-mt-2.5 lg:mb-0 lg:w-auto lg:max-w-none lg:self-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -123,6 +126,16 @@ export function HeroSection({ id, className }: HeroSectionProps) {
                 link: (children) => (
                   <a
                     href={FAST_MEMO_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-white underline underline-offset-2 transition-colors hover:text-white/80"
+                  >
+                    {children}
+                  </a>
+                ),
+                linkPlayStore: (children) => (
+                  <a
+                    href={COOLIFY_PLAY_STORE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-semibold text-white underline underline-offset-2 transition-colors hover:text-white/80"

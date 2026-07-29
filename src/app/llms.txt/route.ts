@@ -6,12 +6,12 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL
 
 const LLMS_TXT = `# Andrea Losavio - AI/LLM Briefing Document
 
-> Andrea Losavio is a freelance Software Engineer & Tech Partner based in Italy. He helps startups and companies build solid, scalable digital products focused on growth — from idea validation and MVP to full product development, technical consulting, and fractional CTO engagements.
+> Andrea Losavio is a freelance Senior Software Engineer & FDE (Forward Deployed Engineer) based in Italy. As an FDE, he embeds directly with startups, software houses, and enterprise clients to translate business requirements into tailored tech & AI solutions and scalable, high-performance software architectures. He helps companies build solid, scalable digital products focused on growth — from idea validation and MVP to full product development, technical consulting, and fractional CTO engagements.
 
 ## Overview
 
 - **Name**: Andrea Losavio
-- **Role**: Software Engineer & Tech Partner (Freelance)
+- **Role**: Senior Software Engineer & FDE (Forward Deployed Engineer) — Freelance
 - **Location**: Italy (remote worldwide)
 - **Education**: M.Sc. in Computer Engineering — Politecnico di Milano (2019)
 - **Professional Registration**: Registered with the Italian professional board of engineers, n. 34249 (section B)
@@ -26,20 +26,39 @@ Andrea offers a curated set of services for startups and companies:
 
 - **Collaboration** — Integrates into existing teams with a product-oriented mindset, contributing code, architecture, and strategic decisions. Pricing: on request.
 - **Validation & MVP** — Transforms an idea into a functional Minimum Viable Product to test the market, gather feedback, and prepare for funding rounds. Pricing: from €2,500/project.
-- **Audit & Consulting** — In-depth analysis of architecture, codebase, and workflows; detailed report on technical debt, bottlenecks, risks, with a prioritized action plan. Pricing: €60/hour.
+- **FDE Discovery & Audit** — Forward-deployed engineering: bridges complex software and AI technologies with real-world business needs, working directly alongside the team to design, build, and deploy custom full-stack solutions and AI integrations for rapid value delivery and seamless adoption. Pricing: on request.
 - **Fractional CTO** — Executive-level technical leadership without a full-time executive: strategic guidance, resource management, technical hiring, IT roadmap alignment with business goals. Pricing: from €800/month.
-- **Technical Mentorship** — Personalized guidance and hands-on support to help teams strengthen skills, adopt best practices, and make informed engineering decisions. Pricing: €55/hour.
+- **Technical Mentorship** — Personalized guidance and hands-on support to help teams strengthen skills, adopt best practices, and make informed engineering decisions. Pricing: 50/hour.
 - **Product Development** — Full-stack service covering the entire lifecycle: UX/UI design, frontend, backend, cloud deployment of robust web and mobile applications. Pricing: from €7,000.
 
 See all services: ${SITE_URL}/en/services
+
+## Expertise & Specializations
+
+**Forward Deployed Engineering & Technical Consultancy**
+- Client Engagement: Leads the integration of custom tech & AI solutions directly with startups, software houses, and enterprise clients.
+- Bridge Between Business & Code: Translates complex business requirements into scalable, high-performance software architectures.
+
+**Full-Stack, Mobile & UI/UX Development**
+- Frontend: HTML, CSS, JavaScript, TypeScript, React, Next.js
+- Backend & Databases: Node.js, Express, Prisma ORM | PostgreSQL, MongoDB, Redis | Firebase, Supabase
+- Mobile: React Native, Expo SDK
+- Product Design: End-to-end UI/UX design using Figma, bridging the gap from prototype to production code.
+
+**AI Engineering & Agentic Systems**
+- LLMs & Local Models: Anthropic Claude, OpenAI ChatGPT, Google Gemini, Ollama (local model orchestration).
+- Agentic Workflows & Architectures: Multi-agent orchestration, subagent delegation, task decomposition, and custom tool calling / function calling.
+- Agent Skills & Capabilities: Modular skill development, prompt engineering, structured JSON outputs, context management, and external API integration.
 
 ## Technical Stack
 
 - **Frontend**: React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind CSS
 - **Mobile**: React Native, Expo SDK
-- **Backend**: Node.js, Express, Java (Sling / AEM), C, C++, C#
+- **Backend**: Node.js, Express, Prisma ORM, Java (Sling / AEM), C, C++, C#
+- **Databases**: PostgreSQL, MongoDB, Redis, Oracle DB, Firebase, Supabase, SOQL
+- **AI / LLMs**: Anthropic Claude, OpenAI ChatGPT, Google Gemini, Ollama (local model orchestration); multi-agent orchestration, subagent delegation, tool/function calling, prompt engineering, structured JSON outputs
+- **Product Design**: Figma (end-to-end UI/UX, from prototype to production code)
 - **CMS / Enterprise**: Adobe Experience Manager (AEM 6.4+), CIF, HTL, Handlebars
-- **Databases**: Oracle DB, Firebase, SOQL
 - **DevOps**: GitLab CI, Jenkins, AEM Dispatcher, Cloud deployment
 - **Other**: Cordova, FrameMaker, CRM integrations
 
@@ -50,7 +69,6 @@ See all services: ${SITE_URL}/en/services
 - Assisted a startup during a **critical product transition** phase, ensuring a smooth evolution.
 - Supported a company in building a **robust infrastructure** as a foundation for future projects.
 - Helped a client develop a **strong brand identity** to reach a wider audience and attract more customers.
-- Helped **10+ clients** reach the next level in their digital journey.
 
 ## Selected Projects & Clients
 
@@ -59,7 +77,7 @@ See all services: ${SITE_URL}/en/services
 - **Quido S.r.l.** — AI platform for private equity and M&A in Italy. Designed the interface bridging finance and AI.
 - **Ravenn S.r.l.** — Event logistics and hospitality management platform. End-to-end development.
 - **Studio Bargiggia** — Condominium management firm. Complete rebuild of their showcase website.
-- **Coolify Manager** — Chrome extension to manage self-hosted Coolify servers from the browser toolbar.
+- **Coolify Manager** — Chrome extension and Android app to manage self-hosted Coolify servers. Available on Google Play Store (https://play.google.com/store/apps/details?id=com.ontech7.coolifyManager&hl=it) and Chrome Web Store (https://chromewebstore.google.com/detail/coolify-manager/dmcclgoafojpjaflnggcnmhbenplnmpi).
 - **Forfettario Control** — Mobile app for Italian freelancers under the "regime forfettario" to manage invoices, fiscal documents, and deadlines.
 - **Otherside Technology S.r.l.** — Custom software and AI solutions for businesses.
 - **Brainplatform S.r.l.** — Short-term collaboration on digital product initiatives.
@@ -76,7 +94,7 @@ See full portfolio: ${SITE_URL}/en/projects
 
 ## Professional Experience
 
-- **2023 - Present**: Software Engineer & Tech Partner — Freelance (andrealosavio.com)
+- **2023 - Present**: Senior Software Engineer & FDE (Forward Deployed Engineer) — Freelance (andrealosavio.com)
 - **2018 - 2023**: Full-stack AEM Developer at Minisait, Back-end AEM Developer at Doing, Junior AEM Developer at Deloitte, IT Specialist at IBM.
 
 ## How to Contact
@@ -104,7 +122,7 @@ Andrea typically works best with:
 - Non-technical founders looking for a trustworthy technical partner.
 - Companies in a growth phase that need to scale their product, raise the technical bar, or tackle technical debt.
 - Teams looking for hands-on mentorship and best practices adoption.
-- Companies preparing for a funding round that need a technical audit.
+- Companies preparing for a funding round that need an FDE discovery & audit.
 
 ## Working Style
 

@@ -97,7 +97,7 @@ https://www.andrealosavio.com/en/privacy
 
 ```tsx
 return {
-  title: "Andrea Losavio - Software Engineer & Tech Partner",
+  title: "Andrea Losavio - Senior Software Engineer & FDE",
   description: "Full-stack developer specializing in...",
   alternates: {
     canonical: "https://www.andrealosavio.com/en",
@@ -137,7 +137,7 @@ openGraph: {
     url: "https://www.andrealosavio.com/images/og.jpg",
     width: 1200,
     height: 630,
-    alt: "Andrea Losavio - Software Engineer & Tech Partner",
+    alt: "Andrea Losavio - Senior Software Engineer & FDE",
   }],
 }
 ```
@@ -175,7 +175,7 @@ Knowledge Graph.
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Andrea Losavio",
-  "jobTitle": "Software Engineer & Tech Partner",
+  "jobTitle": "Senior Software Engineer & FDE",
   "url": "https://www.andrealosavio.com",
   "image": "https://www.andrealosavio.com/images/og.jpg",
   "sameAs": [

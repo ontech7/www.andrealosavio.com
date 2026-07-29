@@ -31,16 +31,16 @@
       "useCase4": "Progetti con budget e tempi limitati",
       "cta": "Prezzo: <price>2.500€+/progetto</price>"
     },
-    "auditConsulting": {
-      "title": "Audit & Consulenza",
-      "description": "Conduco analisi approfondite della tua architettura, codice e workflow del team. Fornisco un report dettagliato su Technical Debt, colli di bottiglia e rischi, insieme a un piano d'azione prioritizzato per aumentare stabilità, velocità di sviluppo ed efficienza operativa.",
-      "highlight": "Technical Debt",
+    "fdeDiscoveryAudit": {
+      "title": "FDE Discovery & Audit",
+      "description": "Colmo il divario tra tecnologie software e AI complesse e le reali esigenze del tuo business. Lavorando a diretto contatto con il tuo team, progetto, costruisco e deployo soluzioni full-stack personalizzate e integrazioni AI in tempo reale, garantendo una rapida delivery di valore e un'adozione senza attriti.",
+      "highlight": "rapida delivery di valore e un'adozione senza attriti",
       "useCasesLabel": "Quando serve?",
-      "useCase1": "Codebase legacy difficile da mantenere",
-      "useCase2": "Problemi di performance o scalabilità",
-      "useCase3": "Team in crescita che vuole standardizzare",
-      "useCase4": "Prima di un round di investimento",
-      "cta": "Prezzo: <price>60€/ora</price>"
+      "useCase1": "Esigenze software o AI complesse oltre le competenze del team",
+      "useCase2": "Integrare l'AI nei prodotti esistenti senza attriti",
+      "useCase3": "Team che devono spedire feature full-stack velocemente",
+      "useCase4": "Requisiti di business che superano la capacità tecnica di esecuzione",
+      "cta": "Prezzo: <price>Discutiamone</price>"
     },
     "fractionalCto": {
       "title": "Fractional CTO",

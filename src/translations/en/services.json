@@ -31,16 +31,16 @@
       "useCase4": "Projects with limited budget and timeline",
       "cta": "Pricing: <price>2.500€+/project</price>"
     },
-    "auditConsulting": {
-      "title": "Audit & Consulting",
-      "description": "I conduct in-depth analysis of your architecture, code, and team workflows. I provide a detailed report on Technical Debt, bottlenecks, and risks, along with a prioritized action plan to increase stability, development speed, and operational cost efficiency.",
-      "highlight": "Technical Debt",
+    "fdeDiscoveryAudit": {
+      "title": "FDE Discovery & Audit",
+      "description": "I bridge the gap between complex software and AI technologies and your real-world business needs. Working directly alongside your team, I design, build, and deploy custom full-stack solutions and AI integrations in real time, ensuring rapid value delivery and seamless adoption.",
+      "highlight": "rapid value delivery and seamless adoption",
       "useCasesLabel": "When is it needed?",
-      "useCase1": "Legacy codebase hard to maintain",
-      "useCase2": "Performance or scalability issues",
-      "useCase3": "Growing teams wanting to standardize",
-      "useCase4": "Before a funding round",
-      "cta": "Pricing: <price>60€/hour</price>"
+      "useCase1": "Complex software or AI needs beyond your team's expertise",
+      "useCase2": "Bringing AI into existing products without friction",
+      "useCase3": "Teams that need to ship full-stack features fast",
+      "useCase4": "Business requirements outpacing your technical execution",
+      "cta": "Pricing: <price>Let's discuss</price>"
     },
     "fractionalCto": {
       "title": "Fractional CTO",
@@ -61,7 +61,7 @@
       "useCase1": "Junior developers to level up",
       "useCase2": "Teams wanting to adopt best practices",
       "useCase3": "Transitioning to new technologies",
-      "cta": "Pricing: <price>55€/hour</price>"
+      "cta": "Pricing: <price>50€/hour</price>"
     },
     "productDevelopment": {
       "title": "Product Development",

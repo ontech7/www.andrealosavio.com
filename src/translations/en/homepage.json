@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "title": "Andrea Losavio | Software Engineer & Tech Partner",
+    "title": "Andrea Losavio | Senior Software Engineer & FDE",
     "description": "Helping startups and companies build solid, scalable digital products focused on growth"
   },
   "hero": {
     "title": "Andrea Losavio",
-    "subtitle": "Software Engineer & Tech Partner",
+    "subtitle": "Senior Software Engineer & FDE",
     "description": "Helping startups and companies build solid, scalable digital products focused on growth",
     "ctaDiscussVision": "Let's discuss your vision",
     "ctaMoreAboutMe": "More about me",
@@ -78,7 +78,7 @@
         "fractionalCto": "Fractional CTO",
         "validationMvp": "Validation & MVP",
         "technicalMentorship": "Technical Mentorship",
-        "auditConsulting": "Audit & Consulting",
+        "fdeDiscoveryAudit": "FDE Discovery & Audit",
         "productDevelopment": "Product Development",
         "collaboration": "Collaboration"
       },

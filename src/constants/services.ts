@@ -8,7 +8,7 @@ export const SERVICES = [
     imageSrc: "/images/services/validation-mvp.webp",
   },
   {
-    id: "auditConsulting",
+    id: "fdeDiscoveryAudit",
     imageSrc: "/images/services/audit-consulting.webp",
   },
   {

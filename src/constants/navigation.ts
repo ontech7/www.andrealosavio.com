@@ -38,8 +38,8 @@ export const FOOTER_LINKS = {
         labelKey: "footer.links.validationMvp",
       },
       {
-        href: "/services#auditConsulting",
-        labelKey: "footer.links.auditConsulting",
+        href: "/services#fdeDiscoveryAudit",
+        labelKey: "footer.links.fdeDiscoveryAudit",
       },
       {
         href: "/services#fractionalCto",

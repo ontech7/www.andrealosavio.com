@@ -150,6 +150,16 @@
   }
 }
 
+/* External-link indicator: only for text links opening in a new tab.
+   Links wrapping images/SVG (e.g. footer social icons) are skipped. */
+:where(a[target="_blank" i]:not(:has(img, svg)))::after {
+  content: " \2197";
+  font-size: 0.7em;
+  position: relative;
+  vertical-align: baseline;
+  top: -3px;
+}
+
 /* Reduced Motion - Accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,

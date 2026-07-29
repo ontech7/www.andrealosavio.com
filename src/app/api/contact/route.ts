@@ -28,8 +28,15 @@ export async function POST(request: NextRequest) {
     const origin = request.headers.get("origin");
     const allowedOriginPattern =
       /^https?:\/\/([a-z0-9-]+\.)*andrealosavio\.com$/;
+    const localhostPattern =
+      /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
+    const isDev = process.env.NODE_ENV === "development";
 
-    if (!origin || !allowedOriginPattern.test(origin)) {
+    if (
+      !origin ||
+      (!allowedOriginPattern.test(origin) &&
+        !(isDev && localhostPattern.test(origin)))
+    ) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 

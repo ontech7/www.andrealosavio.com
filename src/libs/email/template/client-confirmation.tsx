@@ -19,7 +19,7 @@ const content = {
     about: "Learn more about me",
     closing: "Talk soon,",
     signature: "Andrea Losavio",
-    role: "Software Engineer & Tech Consultant",
+    role: "Senior Software Engineer & FDE",
   },
   it: {
     subject: "Grazie per avermi contattato!",
@@ -34,7 +34,7 @@ const content = {
     about: "Scopri di più su di me",
     closing: "A presto,",
     signature: "Andrea Losavio",
-    role: "Software Engineer & Tech Consultant",
+    role: "Senior Software Engineer & FDE",
   },
 };
 

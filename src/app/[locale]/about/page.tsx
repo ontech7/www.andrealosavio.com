@@ -48,7 +48,7 @@ export async function generateMetadata({
           url: `${siteUrl}/images/og.jpg`,
           width: 1200,
           height: 630,
-          alt: "Andrea Losavio - Software Engineer & Tech Partner",
+          alt: "Andrea Losavio - Senior Software Engineer & FDE",
         },
       ],
     },
@@ -74,7 +74,7 @@ export default async function AboutPage({ params }: PageProps) {
 
   const personSchema = generatePersonSchema({
     name: "Andrea Losavio",
-    jobTitle: "Software Engineer & Tech Partner",
+    jobTitle: "Senior Software Engineer & FDE",
     url: siteUrl,
     description: t("about.metadata.description"),
     image: `${siteUrl}/images/og.jpg`,

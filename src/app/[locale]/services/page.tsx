@@ -43,7 +43,7 @@ export async function generateMetadata({
           url: `${siteUrl}/images/og.jpg`,
           width: 1200,
           height: 630,
-          alt: "Andrea Losavio - Software Engineer & Tech Partner",
+          alt: "Andrea Losavio - Senior Software Engineer & FDE",
         },
       ],
     },
@@ -85,13 +85,11 @@ export default async function ServicesPage({ params }: PageProps) {
         priceCurrency: "EUR",
       },
       {
-        name: t("services.availableServices.auditConsulting.title"),
+        name: t("services.availableServices.fdeDiscoveryAudit.title"),
         description: t(
-          "services.availableServices.auditConsulting.description"
+          "services.availableServices.fdeDiscoveryAudit.description"
         ),
-        url: `${pageUrl}#auditConsulting`,
-        price: "60",
-        priceCurrency: "EUR",
+        url: `${pageUrl}#fdeDiscoveryAudit`,
       },
       {
         name: t("services.availableServices.fractionalCto.title"),
@@ -106,7 +104,7 @@ export default async function ServicesPage({ params }: PageProps) {
           "services.availableServices.technicalMentorship.description"
         ),
         url: `${pageUrl}#technicalMentorship`,
-        price: "55",
+        price: "50",
         priceCurrency: "EUR",
       },
       {

@@ -12,5 +12,10 @@ export const SKILL_ITEMS = [
   { name: "Firebase", icon: "/icons/skills/firebase.svg" },
   { name: "Supabase", icon: "/icons/skills/supabase.svg" },
   { name: "PostgreSQL", icon: "/icons/skills/postgres.svg" },
+  { name: "Redis", icon: "/icons/skills/redis.svg" },
   { name: "Figma", icon: "/icons/skills/figma.svg" },
+  { name: "Claude", icon: "/icons/skills/claude.svg" },
+  { name: "ChatGPT", icon: "/icons/skills/chatgpt.svg" },
+  { name: "Gemini", icon: "/icons/skills/gemini.svg" },
+  { name: "Ollama", icon: "/icons/skills/ollama.svg" },
 ] as const;
