@@ -10,6 +10,13 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    id: "coffeeNotesLab",
+    logo: "/images/clients/coffee-notes-lab.svg",
+    image: "/images/projects/coffee-notes-lab.webp",
+    tags: ["personal", "nextjs", "react", "design"],
+    websiteUrl: "https://coffeenoteslab.online",
+  },
+  {
     id: "othersideTechnology",
     logo: "/images/clients/otherside-technology.svg",
     image: "/images/projects/otherside-technology.webp",

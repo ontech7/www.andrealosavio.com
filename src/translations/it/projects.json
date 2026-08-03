@@ -65,6 +65,10 @@
     "studioBargiggia": {
       "name": "Studio Bargiggia",
       "description": "Studio Bargiggia è uno studio di amministrazione condominiale che combina competenza, disponibilità e passione per garantire la migliore amministrazione possibile del tuo edificio."
+    },
+    "coffeeNotesLab": {
+      "name": "Coffee Notes Lab",
+      "description": "Coffee Notes Lab è un progetto personale che documenta un viaggio nel mondo dell'espresso: degustazioni in giro per il mondo ed esperimenti fatti in casa, raccontati attraverso foto e video in un'interfaccia minimale e curata nel design."
     }
   }
 }
