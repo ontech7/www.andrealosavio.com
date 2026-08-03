@@ -108,5 +108,5 @@ coherent and easy to navigate.
   meaningful `aria-label` when its visual text is absent.
 - Respect `prefers-reduced-motion` for long animations.
 - Decorative images carry `aria-hidden="true"` and empty `alt`.
-- See `.agents/skills/accessibility-compliance/SKILL.md` for the full WCAG 2.2
+- See `.claude/skills/accessibility-compliance/SKILL.md` for the full WCAG 2.2
   checklist we target.
