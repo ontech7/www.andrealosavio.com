@@ -28,7 +28,7 @@ export const PROJECTS: Project[] = [
     logo: "/images/clients/coolify-manager.svg",
     image: "/images/projects/coolify-manager.webp",
     tags: ["personal", "design", "javascript", "extension"],
-    githubUrl: "https://github.com/ontech7/coolify-manager-extension",
+    githubUrl: "https://github.com/ontech7/coolify-manager-app",
   },
   {
     id: "quido",
