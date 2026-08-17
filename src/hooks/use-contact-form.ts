@@ -1,5 +1,7 @@
 "use client";
 
+import { CONTACT_EMAIL } from "@/constants/contact";
+import { track } from "@vercel/analytics";
 import { useLocale, useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -13,6 +15,7 @@ export function useContactForm() {
 
   const [status, setStatus] = useState<ContactFormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [consentError, setConsentError] = useState(false);
 
   const [consent, setConsent] = useState(false);
 
@@ -32,7 +35,16 @@ export function useContactForm() {
   const onSubmitForm = useCallback(
     async (event: React.FormEvent<HTMLFormElement>, service?: string) => {
       event.preventDefault();
+
+      if (!consent) {
+        setStatus("error");
+        setConsentError(true);
+        setErrorMessage(t("services.contactForm.consentRequired"));
+        return;
+      }
+
       setStatus("loading");
+      setConsentError(false);
       setErrorMessage("");
 
       const formData = new FormData(event.currentTarget);
@@ -52,28 +64,52 @@ export function useContactForm() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
-        if (!response.ok) throw new Error("Failed to send message");
+
+        if (!response.ok) {
+          setStatus("error");
+          setErrorMessage(
+            t(
+              response.status === 429
+                ? "services.contactForm.rateLimitMessage"
+                : "services.contactForm.errorMessage",
+              { email: CONTACT_EMAIL }
+            )
+          );
+          refreshCsrfToken();
+          return;
+        }
+
         setStatus("success");
+        track("contact_submit", { service: service ?? "generic", locale });
       } catch {
         setStatus("error");
-        setErrorMessage(t("services.contactForm.errorMessage"));
+        setErrorMessage(
+          t("services.contactForm.errorMessage", { email: CONTACT_EMAIL })
+        );
         refreshCsrfToken();
       }
     },
-    [locale, refreshCsrfToken, t]
+    [consent, locale, refreshCsrfToken, t]
   );
 
   const reset = useCallback(() => {
     setStatus("idle");
     setConsent(false);
+    setConsentError(false);
     setErrorMessage("");
+  }, []);
+
+  const updateConsent = useCallback((value: boolean) => {
+    setConsent(value);
+    if (value) setConsentError(false);
   }, []);
 
   return {
     status,
     errorMessage,
+    consentError,
     consent,
-    setConsent,
+    setConsent: updateConsent,
     onSubmitForm,
     reset,
     refreshCsrfToken,

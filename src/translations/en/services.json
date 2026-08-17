@@ -1,14 +1,16 @@
 {
   "metadata": {
-    "title": "Services | Andrea Losavio",
-    "description": "Expertise, strategy, and practical solutions to help startups and companies grow confidently"
+    "title": "Services for startups: MVP, Fractional CTO, product development",
+    "description": "Validation and MVP from €2,500, Fractional CTO from €800/month, full-stack development and AI integrations. Write to me: I reply within 24-48 hours."
   },
   "hero": {
     "title": "Services for <highlight>startups</highlight> and <highlight>companies</highlight>",
     "description": "Offering expertise, strategy, and practical solutions to help startups and companies grow confidently",
-    "ctaCheckOut": "Check out"
+    "ctaCheckOut": "Check out",
+    "ctaWriteMe": "Write to me"
   },
   "availableServices": {
+    "sectionTitle": "The services",
     "collaboration": {
       "title": "Collaboration",
       "description": "I integrate into your team with a product-oriented mindset. I don't just write code: I bring experience, propose solutions, and actively contribute to building a solid product that drives your company's growth.",
@@ -17,8 +19,7 @@
       "useCase1": "Companies wanting to build solid and scalable foundations",
       "useCase2": "Growing teams needing to raise the technical bar",
       "useCase3": "Products requiring strategic technology choices",
-      "useCase4": "Teams looking for an active contributor",
-      "cta": "Pricing: <price>Let's discuss</price>"
+      "useCase4": "Teams looking for an active contributor"
     },
     "validationMvp": {
       "title": "Validation & MVP",
@@ -28,8 +29,7 @@
       "useCase1": "Ideas to validate on the market",
       "useCase2": "Pre-seed or seed stage startups",
       "useCase3": "Founders seeking product-market fit",
-      "useCase4": "Projects with limited budget and timeline",
-      "cta": "Pricing: <price>2.500€+/project</price>"
+      "useCase4": "Projects with limited budget and timeline"
     },
     "fdeDiscoveryAudit": {
       "title": "FDE Discovery & Audit",
@@ -39,8 +39,7 @@
       "useCase1": "Complex software or AI needs beyond your team's expertise",
       "useCase2": "Bringing AI into existing products without friction",
       "useCase3": "Teams that need to ship full-stack features fast",
-      "useCase4": "Business requirements outpacing your technical execution",
-      "cta": "Pricing: <price>Let's discuss</price>"
+      "useCase4": "Business requirements outpacing your technical execution"
     },
     "fractionalCto": {
       "title": "Fractional CTO",
@@ -50,8 +49,7 @@
       "useCase1": "Startups without an in-house CTO",
       "useCase2": "Non-technical founders",
       "useCase3": "Companies in growth phase",
-      "useCase4": "Tech teams needing leadership",
-      "cta": "Pricing: <price>800€+/month</price>"
+      "useCase4": "Tech teams needing leadership"
     },
     "technicalMentorship": {
       "title": "Technical Mentorship",
@@ -60,8 +58,7 @@
       "useCasesLabel": "When is it needed?",
       "useCase1": "Junior developers to level up",
       "useCase2": "Teams wanting to adopt best practices",
-      "useCase3": "Transitioning to new technologies",
-      "cta": "Pricing: <price>50€/hour</price>"
+      "useCase3": "Transitioning to new technologies"
     },
     "productDevelopment": {
       "title": "Product Development",
@@ -70,27 +67,43 @@
       "useCasesLabel": "When is it needed?",
       "useCase1": "Digital products to build from scratch",
       "useCase2": "Complete redesign of existing apps",
-      "useCase3": "Companies wanting to go digital",
-      "cta": "Pricing: <price>Let's discuss*</price>",
-      "ctaNote": "*minimum 7.000€"
+      "useCase3": "Companies wanting to go digital"
     }
+  },
+  "pricing": {
+    "label": "Pricing",
+    "onRequest": "On request",
+    "from": "From {price}{unit}",
+    "flat": "{price}{unit}",
+    "units": {
+      "project": " per project",
+      "month": " per month",
+      "hour": " per hour"
+    }
+  },
+  "cta": {
+    "talk": "Let's talk",
+    "responseTime": "I reply within 24-48 hours"
   },
   "contactForm": {
     "divider": "or",
     "title": "Looking for something else?",
     "description": "Let me know what you're looking for. I'm happy to help or discuss custom solutions",
     "fullname": "Fullname",
-    "fullnamePlaceholder": "Andrea Losavio",
     "email": "E-mail",
-    "emailPlaceholder": "placeholder@email.com",
     "challenge": "What's your challenge?",
-    "challengePlaceholder": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-    "consent": "I consent to the processing of my personal data for the purpose of receiving a response to my message",
+    "consent": "I consent to the processing of my personal data in order to receive a reply to my message. Read the <privacy>Privacy Policy</privacy>.",
+    "consentRequired": "Please tick the consent box: without it, I can't reply by email.",
     "submit": "Send me an email",
     "sending": "Sending...",
     "successTitle": "Message sent!",
     "successMessage": "Thank you for reaching out! I'll get back to you within 24-48 hours.",
-    "errorMessage": "Something went wrong. Please try again or contact me directly."
+    "successExplore": "In the meantime, have a look at the <projects>projects</projects> or at my <linkedin>LinkedIn profile</linkedin>.",
+    "errorMessage": "I couldn't send your message. Please try again, or write to me directly at {email}.",
+    "rateLimitMessage": "You've already sent a few messages recently. Try again in a few minutes or write to me directly at {email}.",
+    "directTitle": "Prefer to skip the form?",
+    "directEmail": "Send me an email",
+    "directLinkedin": "Reach me on LinkedIn"
   },
   "serviceDialog": {
     "title": "Interested in {service}?",

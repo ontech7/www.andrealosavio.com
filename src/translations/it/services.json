@@ -1,14 +1,16 @@
 {
   "metadata": {
-    "title": "Servizi | Andrea Losavio",
-    "description": "Competenze, strategie e soluzioni pratiche per aiutare startup e aziende a crescere con fiducia"
+    "title": "Servizi per startup: MVP, Fractional CTO, sviluppo prodotto",
+    "description": "Validazione e MVP da 2.500 €, Fractional CTO da 800 €/mese, sviluppo full-stack e integrazioni AI. Scrivimi: rispondo entro 24-48 ore."
   },
   "hero": {
     "title": "Servizi per <highlight>startup</highlight> e <highlight>aziende</highlight>",
     "description": "Offro competenze, strategie e soluzioni pratiche per aiutare startup e aziende a crescere con fiducia",
-    "ctaCheckOut": "Dai un'occhiata"
+    "ctaCheckOut": "Dai un'occhiata",
+    "ctaWriteMe": "Scrivimi"
   },
   "availableServices": {
+    "sectionTitle": "I servizi",
     "collaboration": {
       "title": "Collaborazione",
       "description": "Mi integro nel tuo team con un approccio orientato al prodotto. Non mi limito a scrivere codice: porto esperienza, propongo soluzioni e contribuisco attivamente a costruire un prodotto solido che faccia crescere la tua azienda.",
@@ -17,8 +19,7 @@
       "useCase1": "Aziende che vogliono costruire fondamenta solide e scalabili",
       "useCase2": "Team in crescita che devono alzare il livello tecnico",
       "useCase3": "Prodotti che necessitano di scelte tecnologiche strategiche",
-      "useCase4": "Team che cercano un contributor attivo",
-      "cta": "Prezzo: <price>Discutiamone</price>"
+      "useCase4": "Team che cercano un contributor attivo"
     },
     "validationMvp": {
       "title": "Validazione & MVP",
@@ -28,8 +29,7 @@
       "useCase1": "Idee da validare sul mercato",
       "useCase2": "Startup in fase pre-seed o seed",
       "useCase3": "Founder che cercano il product-market fit",
-      "useCase4": "Progetti con budget e tempi limitati",
-      "cta": "Prezzo: <price>2.500€+/progetto</price>"
+      "useCase4": "Progetti con budget e tempi limitati"
     },
     "fdeDiscoveryAudit": {
       "title": "FDE Discovery & Audit",
@@ -39,8 +39,7 @@
       "useCase1": "Esigenze software o AI complesse oltre le competenze del team",
       "useCase2": "Integrare l'AI nei prodotti esistenti senza attriti",
       "useCase3": "Team che devono spedire feature full-stack velocemente",
-      "useCase4": "Requisiti di business che superano la capacità tecnica di esecuzione",
-      "cta": "Prezzo: <price>Discutiamone</price>"
+      "useCase4": "Requisiti di business che superano la capacità tecnica di esecuzione"
     },
     "fractionalCto": {
       "title": "Fractional CTO",
@@ -50,8 +49,7 @@
       "useCase1": "Startup senza CTO interno",
       "useCase2": "Founder non tecnici",
       "useCase3": "Aziende in fase di crescita",
-      "useCase4": "Team tech che hanno bisogno di guida",
-      "cta": "Prezzo: <price>800€+/mese</price>"
+      "useCase4": "Team tech che hanno bisogno di guida"
     },
     "technicalMentorship": {
       "title": "Mentorship Tecnica",
@@ -60,8 +58,7 @@
       "useCasesLabel": "Quando serve?",
       "useCase1": "Developer junior da far crescere",
       "useCase2": "Team che vogliono adottare best practices",
-      "useCase3": "Transizione verso nuove tecnologie",
-      "cta": "Prezzo: <price>55€/ora</price>"
+      "useCase3": "Transizione verso nuove tecnologie"
     },
     "productDevelopment": {
       "title": "Sviluppo Prodotto",
@@ -70,10 +67,23 @@
       "useCasesLabel": "Quando serve?",
       "useCase1": "Prodotti digitali da costruire da zero",
       "useCase2": "Redesign completo di app esistenti",
-      "useCase3": "Aziende che vogliono digitalizzarsi",
-      "cta": "Prezzo: <price>Discutiamone*</price>",
-      "ctaNote": "*minimo 7.000€"
+      "useCase3": "Aziende che vogliono digitalizzarsi"
     }
+  },
+  "pricing": {
+    "label": "Prezzo",
+    "onRequest": "Su richiesta",
+    "from": "Da {price}{unit}",
+    "flat": "{price}{unit}",
+    "units": {
+      "project": " a progetto",
+      "month": " al mese",
+      "hour": " all'ora"
+    }
+  },
+  "cta": {
+    "talk": "Parliamone",
+    "responseTime": "Rispondo entro 24-48 ore"
   },
   "contactForm": {
     "divider": "oppure",
@@ -82,12 +92,18 @@
     "fullname": "Nome completo",
     "email": "E-mail",
     "challenge": "Qual è la tua sfida?",
-    "consent": "Acconsento al trattamento dei miei dati personali al fine di ricevere una risposta al mio messaggio",
+    "consent": "Acconsento al trattamento dei miei dati personali per ricevere una risposta al mio messaggio. Leggi la <privacy>Privacy Policy</privacy>.",
+    "consentRequired": "Spunta il consenso: senza, non posso risponderti via email.",
     "submit": "Inviami un'email",
     "sending": "Invio in corso...",
     "successTitle": "Messaggio inviato!",
     "successMessage": "Grazie per avermi contattato! Ti risponderò entro 24-48 ore.",
-    "errorMessage": "Qualcosa è andato storto. Riprova o contattami direttamente."
+    "successExplore": "Nel frattempo, dai un'occhiata ai <projects>progetti</projects> o al mio <linkedin>profilo LinkedIn</linkedin>.",
+    "errorMessage": "Non sono riuscito a inviare il messaggio. Riprova, oppure scrivimi direttamente a {email}.",
+    "rateLimitMessage": "Hai già inviato qualche messaggio poco fa. Riprova tra qualche minuto o scrivimi direttamente a {email}.",
+    "directTitle": "Preferisci saltare il form?",
+    "directEmail": "Scrivimi un'email",
+    "directLinkedin": "Contattami su LinkedIn"
   },
   "serviceDialog": {
     "title": "Interessato a {service}?",
