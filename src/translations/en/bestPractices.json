@@ -1,0 +1,140 @@
+{
+  "metadata": {
+    "title": "How I build: software engineering standards",
+    "description": "Architecture, backend, data, AI, mobile and security: the standards I apply to every project, with this site's measurements as a sample you can verify yourself."
+  },
+  "hero": {
+    "title": "Standards you can <highlight>verify</highlight>",
+    "description": "Claiming to care about quality is easy. This page lists the standards I apply as a software engineer — from the architecture of a backend to an agentic system — and uses this site as the part you can check yourself, right now, without taking my word for it.",
+    "cta": "See the measurements"
+  },
+  "scores": {
+    "title": "The verifiable sample",
+    "subtitle": "Taken with {tool} on {url}, {device} profile, on {date}.",
+    "intro": "A website is the only part of my work you can audit without my permission: it's public, and standard tools exist to measure it. That's why I use it as a sample. It is not the scope of what I do — it's the part that can be checked.",
+    "categories": {
+      "accessibility": "Accessibility",
+      "bestPractices": "Best Practices",
+      "seo": "SEO"
+    },
+    "vitalsTitle": "Core Web Vitals",
+    "vitals": {
+      "lcp": "LCP",
+      "cls": "CLS",
+      "ttfb": "TTFB"
+    },
+    "vitalsHint": "Largest Contentful Paint, Cumulative Layout Shift, Time To First Byte. The thresholds considered good are 2.5 s, 0.1 and 800 ms respectively.",
+    "reproduceTitle": "Measure it yourself",
+    "reproduce": "Open DevTools on any page of this site, Lighthouse tab, mobile profile, and hit Analyze. Nothing in this section asks you to take my word for it.",
+    "buildStat": "{pages} pages prerendered at build time, generated in {time} ms.",
+    "honesty": "Lighthouse's Performance category is missing here because its score depends on the network and CPU throttling of the machine running the test: publishing a number without stating those conditions would be misleading. You get the raw metrics instead, which are comparable."
+  },
+  "practices": {
+    "title": "The standards, area by area",
+    "subtitle": "Every line is a design decision, not an intention.",
+    "groups": {
+      "verifiable": {
+        "title": "What you can verify here",
+        "subtitle": "Measurable with public tools, on this domain, in a minute."
+      },
+      "underTheHood": {
+        "title": "What a website cannot show",
+        "subtitle": "The part of the work that lives behind an API, inside an app or in an agentic system — where Lighthouse doesn't reach and design is what counts."
+      }
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "items": {
+        "1": "Skip link to the main content as the first focusable element",
+        "2": "Every control without visible text exposes a translated aria-label",
+        "3": "Accessible name always contains the visible label (WCAG 2.5.3)",
+        "4": "Visible focus on every interactive element, never removed",
+        "5": "prefers-reduced-motion honoured globally",
+        "6": "ARIA roles only where needed: never override native semantics"
+      }
+    },
+    "performance": {
+      "title": "Performance",
+      "items": {
+        "1": "Pages statically prerendered and served from the CDN cache",
+        "2": "Cumulative Layout Shift at zero: no content jumps while loading",
+        "3": "Images in WebP, no asset above 72 KB",
+        "4": "Self-hosted, preloaded fonts, with no third-party requests",
+        "5": "Translations loaded per route: a page never ships catalogs it cannot use",
+        "6": "Server rendering wherever interactivity isn't needed, to avoid paying for hydration"
+      }
+    },
+    "discoverability": {
+      "title": "SEO and machine readability",
+      "items": {
+        "1": "Canonical URL and hreflang from a single source, with no conflicting signals",
+        "2": "JSON-LD structured data linked into one entity graph with stable @id values",
+        "3": "Multilingual sitemap with alternates declared for every URL",
+        "4": "Public, maintained llms.txt, compliant with the recommendations",
+        "5": "Content present in the served HTML, not produced after hydration",
+        "6": "Permanent 301 redirects from every legacy address, so history isn't lost"
+      }
+    },
+    "architecture": {
+      "title": "Architecture & APIs",
+      "items": {
+        "1": "Explicit module boundaries: every unit has a purpose statable in one sentence",
+        "2": "Input validated at the system edge, before any business logic runs",
+        "3": "Typed errors separated by audience: what the user sees versus what the maintainer sees",
+        "4": "Domain state kept separate from transport state, so either can change alone",
+        "5": "Architectural decisions driven by real constraints, not by technology fashion",
+        "6": "Reversible choices when the cost of being wrong is high and the context uncertain"
+      }
+    },
+    "data": {
+      "title": "Data & persistence",
+      "items": {
+        "1": "Schema as the source of truth, with versioned and reversible migrations",
+        "2": "Integrity constraints in the database, not only in application code",
+        "3": "Indexes designed around real queries, not bolted on afterwards to treat symptoms",
+        "4": "N+1 queries treated as design defects, not as load problems",
+        "5": "Caching with explicit invalidation: never a cache whose expiry nobody knows",
+        "6": "PostgreSQL, MongoDB or Redis chosen for the access pattern, not out of habit"
+      }
+    },
+    "aiEngineering": {
+      "title": "AI engineering & agentic systems",
+      "items": {
+        "1": "Structured, validated output: no model response enters the system without a schema",
+        "2": "Tool and function calling with explicit contracts and handled failures",
+        "3": "Multi-agent orchestration with declared delegation and responsibilities",
+        "4": "Context treated as a finite resource: what goes in, what gets summarized, what is dropped",
+        "5": "Models interchangeable behind a boundary, local ones via Ollama included",
+        "6": "Cost and latency treated as project requirements, not as end-of-month surprises"
+      }
+    },
+    "mobile": {
+      "title": "Mobile & cross-platform",
+      "items": {
+        "1": "A single React Native and Expo codebase, with no drift between platforms",
+        "2": "Native conventions respected where users expect them",
+        "3": "Offline state designed in, not added once the reports come in",
+        "4": "Automated updates and releases, with traceable versions",
+        "5": "Real products in the stores, not just prototypes: Fast Memo, 1,000+ downloads in 7 languages",
+        "6": "Open-source components extracted and maintained when they outlive the project"
+      }
+    },
+    "delivery": {
+      "title": "Security, delivery & maintainability",
+      "items": {
+        "1": "Secrets server-side only: no key ever reachable from the client",
+        "2": "Layered defence on public endpoints: origin, rate limit, CSRF, validation, in that order",
+        "3": "No user input echoed back in error responses",
+        "4": "TypeScript in strict mode, with no exceptions and no weakening of the config",
+        "5": "A CI pipeline that blocks on types, lint and build before every release",
+        "6": "Code that explains itself: explicit names instead of comments, shared constants against divergence"
+      }
+    }
+  },
+  "cta": {
+    "title": "Want this level of care on your product?",
+    "description": "I apply the same standards to client work, from the backend to the mobile app to AI systems. If you need someone who treats quality as a requirement rather than an extra, let's talk.",
+    "button": "See the services",
+    "secondary": "Write to me"
+  }
+}

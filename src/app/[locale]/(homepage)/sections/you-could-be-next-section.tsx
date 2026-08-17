@@ -7,7 +7,7 @@ import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";
 import { SERVICES } from "@/constants/services";
 import { Link } from "@/libs/i18n/navigation";
 import { cn } from "@/utils/cn";
-import { ChevronDown, Send } from "lucide-react";
+import { ArrowRightIcon, ChevronDown, Send } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 
@@ -81,6 +81,19 @@ export function YouCouldBeNextSection({
               <p className="text-muted-foreground text-lg">
                 {t("homepage.youCouldBeNext.leftText.line2")}
               </p>
+
+              <div className="border-secondary/40 mt-8 border-l-2 pl-5">
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {t("homepage.youCouldBeNext.proof.intro")}
+                </p>
+                <Link
+                  href="/best-practices"
+                  className="text-foreground hover:text-secondary mt-2 inline-flex items-center gap-2 text-sm font-medium underline decoration-dotted underline-offset-4 transition-colors"
+                >
+                  {t("homepage.youCouldBeNext.proof.link")}
+                  <ArrowRightIcon className="size-3.5" aria-hidden="true" />
+                </Link>
+              </div>
             </div>
 
             <div className="mt-12 lg:mt-auto lg:pt-12">

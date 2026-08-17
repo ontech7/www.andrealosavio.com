@@ -69,6 +69,10 @@
       "line1Highlight": "what we can build together",
       "line2": "Whether you need to validate an idea, scale a product, or tackle a complex technical challenge, I have the experience to guide you there."
     },
+    "proof": {
+      "intro": "The quickest way to assess me is this site: what you see here is measured, not claimed. But it's only the visible part — the same standards go into the architecture of a backend, a mobile app or an agentic system, where nobody can hand you a score.",
+      "link": "See how I build"
+    },
     "notReadyYet": "Not ready yet?",
     "keepScrolling": "Keep scrolling to read what clients say about working with me.",
     "challengeBox": {

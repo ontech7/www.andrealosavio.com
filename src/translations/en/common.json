@@ -27,7 +27,8 @@
       "technicalMentorship": "Technical Mentorship",
       "productDevelopment": "Product Development",
       "personalIdeas": "Personal & Ideas",
-      "forClients": "For clients"
+      "forClients": "For clients",
+      "bestPractices": "How I build"
     },
     "cta": {
       "title": "Did you decide yet?",
@@ -53,8 +54,8 @@
     "mainNavigation": "Main navigation",
     "mobileNavigation": "Mobile navigation",
     "languageSwitcher": "Language switcher",
-    "switchToEnglish": "Switch to English",
-    "switchToItalian": "Switch to Italian",
+    "switchToEnglish": "EN, switch to English",
+    "switchToItalian": "IT, switch to Italian",
     "footerNavigation": "Footer navigation",
     "socialLinks": "Social links",
     "closeDialog": "Close dialog",
