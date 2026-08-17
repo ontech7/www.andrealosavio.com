@@ -4,6 +4,7 @@ import type {
   OfferCatalog,
   Organization,
   Person,
+  ProfessionalService,
   ProfilePage,
   Service,
   WebSite,
@@ -184,20 +185,21 @@ interface ServiceOffer {
 }
 
 interface GenerateServiceCatalogSchemaProps {
-  providerName: string;
-  providerUrl: string;
+  providerId: string;
   catalogName: string;
+  catalogId: string;
   services: ServiceOffer[];
 }
 
 export function generateServiceCatalogSchema({
-  providerName,
-  providerUrl,
+  providerId,
   catalogName,
+  catalogId,
   services,
 }: GenerateServiceCatalogSchemaProps): OfferCatalog {
   return {
     "@type": "OfferCatalog",
+    "@id": catalogId,
     name: catalogName,
     itemListElement: services.map((s) => ({
       "@type": "Offer" as const,
@@ -210,13 +212,51 @@ export function generateServiceCatalogSchema({
         name: s.name,
         description: s.description,
         ...(s.url && { url: s.url }),
-        provider: {
-          "@type": "Person" as const,
-          name: providerName,
-          url: providerUrl,
-        },
+        provider: { "@id": providerId },
       },
     })),
+  };
+}
+
+interface GenerateProfessionalServiceSchemaProps {
+  name: string;
+  url: string;
+  description: string;
+  founderId: string;
+  catalogId: string;
+  areaServed?: string[];
+  priceRange?: string;
+  email?: string;
+  sameAs?: string[];
+}
+
+/**
+ * The business entity behind the services page. Ties the offer catalog and the
+ * `Person` entity declared on the homepage into one connected graph.
+ */
+export function generateProfessionalServiceSchema({
+  name,
+  url,
+  description,
+  founderId,
+  catalogId,
+  areaServed,
+  priceRange,
+  email,
+  sameAs = [],
+}: GenerateProfessionalServiceSchemaProps): ProfessionalService {
+  return {
+    "@type": "ProfessionalService",
+    "@id": `${url}#professionalservice`,
+    name,
+    url,
+    description,
+    founder: { "@id": founderId },
+    hasOfferCatalog: { "@id": catalogId },
+    ...(areaServed && areaServed.length > 0 && { areaServed }),
+    ...(priceRange && { priceRange }),
+    ...(email && { email }),
+    ...(sameAs.length > 0 && { sameAs }),
   };
 }
 

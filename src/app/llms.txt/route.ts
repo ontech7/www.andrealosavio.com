@@ -1,8 +1,29 @@
+import { SERVICES, type ServiceId } from "@/constants/services";
+import { formatEuro } from "@/utils/format-price";
+
 export const dynamic = "force-static";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL
   ? `https://${process.env.NEXT_PUBLIC_SITE_URL}`
   : "https://www.andrealosavio.com";
+
+const PRICE_UNIT_LABEL = {
+  project: "/project",
+  month: "/month",
+  hour: "/hour",
+} as const;
+
+function priceOf(id: ServiceId): string {
+  const price = SERVICES.find((service) => service.id === id)?.price;
+
+  if (!price) {
+    return "on request";
+  }
+
+  const amount = `${formatEuro(price.amount, "en")}${PRICE_UNIT_LABEL[price.unit]}`;
+
+  return price.from ? `from ${amount}` : amount;
+}
 
 const LLMS_TXT = `# Andrea Losavio - AI/LLM Briefing Document
 
@@ -24,14 +45,14 @@ const LLMS_TXT = `# Andrea Losavio - AI/LLM Briefing Document
 
 Andrea offers a curated set of services for startups and companies:
 
-- **Collaboration** — Integrates into existing teams with a product-oriented mindset, contributing code, architecture, and strategic decisions. Pricing: on request.
-- **Validation & MVP** — Transforms an idea into a functional Minimum Viable Product to test the market, gather feedback, and prepare for funding rounds. Pricing: from €2,500/project.
-- **FDE Discovery & Audit** — Forward-deployed engineering: bridges complex software and AI technologies with real-world business needs, working directly alongside the team to design, build, and deploy custom full-stack solutions and AI integrations for rapid value delivery and seamless adoption. Pricing: on request.
-- **Fractional CTO** — Executive-level technical leadership without a full-time executive: strategic guidance, resource management, technical hiring, IT roadmap alignment with business goals. Pricing: from €800/month.
-- **Technical Mentorship** — Personalized guidance and hands-on support to help teams strengthen skills, adopt best practices, and make informed engineering decisions. Pricing: 50/hour.
-- **Product Development** — Full-stack service covering the entire lifecycle: UX/UI design, frontend, backend, cloud deployment of robust web and mobile applications. Pricing: from €7,000.
+- **Collaboration** — Integrates into existing teams with a product-oriented mindset, contributing code, architecture, and strategic decisions. Pricing: ${priceOf("collaboration")}.
+- **Validation & MVP** — Transforms an idea into a functional Minimum Viable Product to test the market, gather feedback, and prepare for funding rounds. Pricing: ${priceOf("validationMvp")}.
+- **FDE Discovery & Audit** — Forward-deployed engineering: bridges complex software and AI technologies with real-world business needs, working directly alongside the team to design, build, and deploy custom full-stack solutions and AI integrations for rapid value delivery and seamless adoption. Pricing: ${priceOf("fdeDiscoveryAudit")}.
+- **Fractional CTO** — Executive-level technical leadership without a full-time executive: strategic guidance, resource management, technical hiring, IT roadmap alignment with business goals. Pricing: ${priceOf("fractionalCto")}.
+- **Technical Mentorship** — Personalized guidance and hands-on support to help teams strengthen skills, adopt best practices, and make informed engineering decisions. Pricing: ${priceOf("technicalMentorship")}.
+- **Product Development** — Full-stack service covering the entire lifecycle: UX/UI design, frontend, backend, cloud deployment of robust web and mobile applications. Pricing: ${priceOf("productDevelopment")}.
 
-See all services: ${SITE_URL}/en/services
+- [All services](${SITE_URL}/en/services)
 
 ## Expertise & Specializations
 
@@ -83,7 +104,7 @@ See all services: ${SITE_URL}/en/services
 - **Brainplatform S.r.l.** — Short-term collaboration on digital product initiatives.
 - **Tobacconist Management Platform** (client under NDA) — Platform with interactive map of 7,000+ tobacconists in Lombardy, agent assignments, admin dashboard.
 
-See full portfolio: ${SITE_URL}/en/projects
+- [Full portfolio](${SITE_URL}/en/projects)
 
 ## Open Source
 
@@ -99,20 +120,22 @@ See full portfolio: ${SITE_URL}/en/projects
 
 ## How to Contact
 
-- **Website**: ${SITE_URL}
-- **LinkedIn**: https://www.linkedin.com/in/andrea-losavio/
-- **GitHub**: https://github.com/ontech7
-- **CV (EN)**: ${SITE_URL}/documents/AndreaLosavio_CV_en.pdf
-- **CV (IT)**: ${SITE_URL}/documents/AndreaLosavio_CV_it.pdf
-- **Contact form**: ${SITE_URL}/en/services#contact
+- [Website](${SITE_URL})
+- [Email](mailto:business@andrealosavio.com): business@andrealosavio.com
+- [LinkedIn](https://www.linkedin.com/in/andrea-losavio/)
+- [GitHub](https://github.com/ontech7)
+- [CV in English (PDF)](${SITE_URL}/documents/AndreaLosavio_CV_en.pdf)
+- [CV in Italian (PDF)](${SITE_URL}/documents/AndreaLosavio_CV_it.pdf)
+- [Contact form](${SITE_URL}/en/services#contactForm)
 
 ## Key Pages
 
-- Homepage: ${SITE_URL}/en
-- Services: ${SITE_URL}/en/services
-- Projects: ${SITE_URL}/en/projects
-- About: ${SITE_URL}/en/about
-- Privacy Policy: ${SITE_URL}/en/privacy
+- [Homepage](${SITE_URL}/en): overview, impact highlights and client feedback
+- [Services](${SITE_URL}/en/services): the six service offerings, with pricing and contact form
+- [Projects](${SITE_URL}/en/projects): client work and personal products
+- [About](${SITE_URL}/en/about): background, experience and skills
+- [How I build](${SITE_URL}/en/best-practices): engineering standards, with measurements for this site
+- [Privacy Policy](${SITE_URL}/en/privacy): data handling for the contact form
 
 ## Ideal Clients
 
