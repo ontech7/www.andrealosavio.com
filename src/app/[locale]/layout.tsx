@@ -1,7 +1,10 @@
 import "../globals.css";
 
 import { Layout } from "@/components/layout/layout";
+import { pickMessages } from "@/libs/i18n/messages";
 import { routing } from "@/libs/i18n/routing";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
@@ -47,7 +50,7 @@ export const metadata: Metadata = {
       { url: "/icons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/icons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
   },
 };
 
@@ -77,10 +80,12 @@ export default async function RootLayout({
     <html lang={locale} style={{ colorScheme: "dark" }}>
       <body className={`${dmSans.variable} ${dmMono.variable} antialiased`}>
         <NuqsAdapter>
-          <NextIntlClientProvider messages={messages}>
+          <NextIntlClientProvider messages={pickMessages(messages, ["common"])}>
             <Layout>{children}</Layout>
           </NextIntlClientProvider>
         </NuqsAdapter>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

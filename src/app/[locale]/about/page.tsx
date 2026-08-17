@@ -4,6 +4,7 @@ import {
   generateProfilePageSchema,
   schemaToJsonLd,
 } from "@/utils/seo-schema";
+import { PageMessages } from "@/libs/i18n/messages";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { EXPERIENCE_ITEMS } from "./constants/experience-items";
@@ -68,7 +69,7 @@ export default async function AboutPage({ params }: PageProps) {
   const pageUrl = `${siteUrl}/${locale}/about`;
 
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: `${siteUrl}/${locale}` },
+    { name: t("common.navigation.home"), url: `${siteUrl}/${locale}` },
     { name: t("about.metadata.title"), url: pageUrl },
   ]);
 
@@ -139,9 +140,11 @@ export default async function AboutPage({ params }: PageProps) {
           type="image/svg+xml"
         />
       ))}
-      <HeroSection id="hero" />
-      <BeyondCodeSection id="beyond-code" />
-      <ExperiencesSection id="experiences" />
+      <PageMessages namespaces={["about"]}>
+        <HeroSection id="hero" />
+        <BeyondCodeSection id="beyond-code" />
+        <ExperiencesSection id="experiences" />
+      </PageMessages>
     </>
   );
 }
