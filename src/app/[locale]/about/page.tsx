@@ -7,8 +7,6 @@ import {
 import { PageMessages } from "@/libs/i18n/messages";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { EXPERIENCE_ITEMS } from "./constants/experience-items";
-import { HOBBY_ITEMS } from "./constants/hobby-items";
 import { SKILL_ITEMS } from "./constants/skill-items";
 import { BeyondCodeSection } from "./sections/beyond-code-section";
 import { ExperiencesSection } from "./sections/experiences-section";
@@ -113,33 +111,6 @@ export default async function AboutPage({ params }: PageProps) {
           ]),
         }}
       />
-      {HOBBY_ITEMS.map((hobby) => (
-        <link
-          key={hobby.id}
-          rel="preload"
-          href={hobby.image}
-          as="image"
-          type="image/png"
-        />
-      ))}
-      {EXPERIENCE_ITEMS.map((experience) => (
-        <link
-          key={experience.id}
-          rel="preload"
-          href={experience.logo}
-          as="image"
-          type="image/svg+xml"
-        />
-      ))}
-      {SKILL_ITEMS.map((skill) => (
-        <link
-          key={skill.name}
-          rel="preload"
-          href={skill.icon}
-          as="image"
-          type="image/svg+xml"
-        />
-      ))}
       <PageMessages namespaces={["about"]}>
         <HeroSection id="hero" />
         <BeyondCodeSection id="beyond-code" />
