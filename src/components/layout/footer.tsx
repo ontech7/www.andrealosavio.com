@@ -22,25 +22,24 @@ export async function Footer() {
                   {t("common.footer.tagline")}
                 </p>
 
-                <div
-                  className="mt-4 flex items-center gap-4"
-                  role="list"
+                <ul
+                  className="mt-4 flex items-center gap-4 p-0"
                   aria-label={t("common.accessibility.socialLinks")}
                 >
                   {SOCIAL_LINKS.map((social) => (
-                    <a
-                      key={social.labelKey}
-                      href={social.href.replace("{lang}", locale)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      role="listitem"
-                      aria-label={t(`common.${social.labelKey}`)}
-                      className="text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      <social.Icon className="stroke-1" aria-hidden="true" />
-                    </a>
+                    <li key={social.labelKey}>
+                      <a
+                        href={social.href.replace("{lang}", locale)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={t(`common.${social.labelKey}`)}
+                        className="text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        <social.Icon className="stroke-1" aria-hidden="true" />
+                      </a>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </div>
 

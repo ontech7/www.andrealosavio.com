@@ -4,6 +4,7 @@ import {
   generateWebSiteSchema,
   schemaToJsonLd,
 } from "@/utils/seo-schema";
+import { PageMessages } from "@/libs/i18n/messages";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { FeedbackSection } from "./sections/feedback-section";
@@ -141,11 +142,13 @@ export default async function HomePage({ params }: PageProps) {
           ]),
         }}
       />
-      <HeroSection id="hero" />
-      <MakingAnImpactSection id="making-an-impact" />
-      <YouCouldBeNextSection id="you-could-be-next" />
-      <FeedbackSection id="feedback" />
-      <QuoteSection id="quote" />
+      <PageMessages namespaces={["homepage"]}>
+        <HeroSection id="hero" />
+        <MakingAnImpactSection id="making-an-impact" />
+        <YouCouldBeNextSection id="you-could-be-next" />
+        <FeedbackSection id="feedback" />
+        <QuoteSection id="quote" />
+      </PageMessages>
     </>
   );
 }

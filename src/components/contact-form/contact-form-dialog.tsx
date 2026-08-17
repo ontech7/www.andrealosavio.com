@@ -7,14 +7,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { SERVICES } from "@/constants/services";
+import type { ServiceId } from "@/constants/services";
 import { CheckCircleIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { useContactForm } from "../../hooks/use-contact-form";
 import { ContactFormFields } from "./contact-form-fields";
-
-type ServiceId = (typeof SERVICES)[number]["id"];
+import { DirectContactLinks } from "./direct-contact-links";
 
 interface ContactFormDialogProps {
   serviceId: ServiceId;
@@ -32,6 +31,7 @@ export function ContactFormDialog({
   const {
     status,
     errorMessage,
+    consentError,
     consent,
     setConsent,
     onSubmitForm,
@@ -83,6 +83,7 @@ export function ContactFormDialog({
             <ContactFormFields
               status={status}
               errorMessage={errorMessage}
+              consentError={consentError}
               consent={consent}
               setConsent={setConsent}
               onSubmit={(e) => onSubmitForm(e, serviceTitle)}
@@ -102,6 +103,8 @@ export function ContactFormDialog({
                 </div>
               }
             />
+
+            <DirectContactLinks className="mt-5" />
           </>
         )}
       </DialogContent>

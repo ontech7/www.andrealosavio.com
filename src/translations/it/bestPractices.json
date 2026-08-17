@@ -1,0 +1,140 @@
+{
+  "metadata": {
+    "title": "Come lavoro: standard di ingegneria del software",
+    "description": "Architettura, backend, dati, AI, mobile e sicurezza: gli standard che applico a ogni progetto, con le misure di questo sito come campione che puoi verificare da solo."
+  },
+  "hero": {
+    "title": "Standard che si possono <highlight>verificare</highlight>",
+    "description": "Dire di tenere alla qualità è facile. Questa pagina elenca gli standard che applico come software engineer — dall'architettura di un backend a un sistema agentico — e usa questo sito come il pezzo che puoi controllare tu, subito, senza fidarti di me.",
+    "cta": "Guarda le misure"
+  },
+  "scores": {
+    "title": "Il campione verificabile",
+    "subtitle": "Rilevate con {tool} su {url}, profilo {device}, il {date}.",
+    "intro": "Un sito è l'unica parte del mio lavoro che puoi auditare senza il mio permesso: è pubblica, ed esistono strumenti standard per misurarla. Per questo la uso come campione. Non è il perimetro di quello che faccio — è la parte che si può controllare.",
+    "categories": {
+      "accessibility": "Accessibilità",
+      "bestPractices": "Best Practices",
+      "seo": "SEO"
+    },
+    "vitalsTitle": "Core Web Vitals",
+    "vitals": {
+      "lcp": "LCP",
+      "cls": "CLS",
+      "ttfb": "TTFB"
+    },
+    "vitalsHint": "Largest Contentful Paint, Cumulative Layout Shift, Time To First Byte. Le soglie considerate buone sono rispettivamente 2,5 s, 0,1 e 800 ms.",
+    "reproduceTitle": "Rimisuralo tu",
+    "reproduce": "Apri DevTools su una qualsiasi pagina di questo sito, scheda Lighthouse, profilo mobile, e premi Analizza. Nessuna delle affermazioni di questa sezione richiede di fidarsi di me.",
+    "buildStat": "{pages} pagine prerenderizzate al build, generate in {time} ms.",
+    "honesty": "La categoria Performance di Lighthouse non compare qui perché il suo punteggio dipende dal throttling di rete e CPU della macchina che esegue il test: pubblicare un numero senza le stesse condizioni sarebbe fuorviante. Trovi al suo posto le metriche grezze, che sono confrontabili."
+  },
+  "practices": {
+    "title": "Gli standard, area per area",
+    "subtitle": "Ogni voce è una scelta di progettazione, non un'intenzione.",
+    "groups": {
+      "verifiable": {
+        "title": "Quello che puoi verificare qui",
+        "subtitle": "Misurabile con strumenti pubblici, su questo dominio, in un minuto."
+      },
+      "underTheHood": {
+        "title": "Quello che un sito non può mostrare",
+        "subtitle": "La parte del lavoro che vive dietro un'API, dentro un'app o in un sistema agentico — dove Lighthouse non arriva e conta come è progettata."
+      }
+    },
+    "accessibility": {
+      "title": "Accessibilità",
+      "items": {
+        "1": "Skip link verso il contenuto principale come primo elemento focalizzabile",
+        "2": "Ogni controllo senza testo visibile espone un aria-label tradotto",
+        "3": "Nome accessibile che contiene sempre l'etichetta visibile (WCAG 2.5.3)",
+        "4": "Focus visibile su ogni elemento interattivo, mai rimosso",
+        "5": "prefers-reduced-motion rispettato a livello globale",
+        "6": "Ruoli ARIA solo dove servono: mai sovrascrivere la semantica nativa"
+      }
+    },
+    "performance": {
+      "title": "Performance",
+      "items": {
+        "1": "Pagine prerenderizzate staticamente e servite dalla cache CDN",
+        "2": "Cumulative Layout Shift a zero: nessun salto di contenuto in caricamento",
+        "3": "Immagini in WebP, nessun asset oltre i 72 KB",
+        "4": "Font self-hosted e precaricati, senza richieste a domini terzi",
+        "5": "Traduzioni caricate per rotta: una pagina non spedisce cataloghi che non usa",
+        "6": "Rendering lato server dove l'interattività non serve, per non pagare l'idratazione"
+      }
+    },
+    "discoverability": {
+      "title": "SEO e leggibilità per le macchine",
+      "items": {
+        "1": "URL canonico e hreflang da un'unica sorgente, senza segnali in conflitto",
+        "2": "Dati strutturati JSON-LD collegati in un unico grafo di entità con @id stabili",
+        "3": "Sitemap multilingua con alternates dichiarati per ogni URL",
+        "4": "llms.txt pubblico e mantenuto, conforme alle raccomandazioni",
+        "5": "Contenuto presente nell'HTML servito, non generato dopo l'idratazione",
+        "6": "Redirect 301 permanenti da ogni vecchio indirizzo, per non perdere storia"
+      }
+    },
+    "architecture": {
+      "title": "Architettura & API",
+      "items": {
+        "1": "Confini espliciti tra moduli: ogni unità ha uno scopo dichiarabile in una frase",
+        "2": "Validazione degli input al bordo del sistema, prima di ogni logica di business",
+        "3": "Errori tipizzati e distinti per destinatario: cosa vede l'utente, cosa vede chi mantiene",
+        "4": "Stato di dominio separato dallo stato di trasporto, per poter cambiare l'uno senza l'altro",
+        "5": "Decisioni architetturali prese per vincoli reali, non per moda tecnologica",
+        "6": "Scelte reversibili quando il costo dell'errore è alto e il contesto è incerto"
+      }
+    },
+    "data": {
+      "title": "Dati & persistenza",
+      "items": {
+        "1": "Schema come fonte di verità, con migrazioni versionate e reversibili",
+        "2": "Vincoli di integrità nel database, non solo nel codice applicativo",
+        "3": "Indici progettati sulle query reali, non aggiunti a posteriori sui sintomi",
+        "4": "Query N+1 trattate come difetti di progettazione, non come problemi di carico",
+        "5": "Caching con invalidazione esplicita: mai una cache di cui non si sa quando scade",
+        "6": "PostgreSQL, MongoDB o Redis scelti per il modello di accesso, non per abitudine"
+      }
+    },
+    "aiEngineering": {
+      "title": "AI engineering & sistemi agentici",
+      "items": {
+        "1": "Output strutturati e validati: nessuna risposta di un modello entra nel sistema senza schema",
+        "2": "Tool e function calling con contratti espliciti e fallimenti gestiti",
+        "3": "Orchestrazione multi-agent con deleghe e responsabilità dichiarate",
+        "4": "Gestione del contesto come risorsa finita: cosa entra, cosa si riassume, cosa si scarta",
+        "5": "Modelli intercambiabili dietro un confine, inclusi quelli locali via Ollama",
+        "6": "Costi e latenza trattati come requisiti di progetto, non come sorprese a fine mese"
+      }
+    },
+    "mobile": {
+      "title": "Mobile & cross-platform",
+      "items": {
+        "1": "Un'unica base di codice React Native ed Expo, senza divergenze fra le piattaforme",
+        "2": "Convenzioni native rispettate dove l'utente se le aspetta",
+        "3": "Stato offline previsto in progettazione, non aggiunto quando arrivano le segnalazioni",
+        "4": "Aggiornamenti e rilasci automatizzati, con versioni tracciabili",
+        "5": "Prodotti reali in store, non solo prototipi: Fast Memo, oltre 1.000 download in 7 lingue",
+        "6": "Componenti open-source estratti e mantenuti quando hanno valore oltre il progetto"
+      }
+    },
+    "delivery": {
+      "title": "Sicurezza, delivery & manutenibilità",
+      "items": {
+        "1": "Segreti solo lato server: nessuna chiave raggiungibile dal client, mai",
+        "2": "Difesa a strati sugli endpoint pubblici: origine, rate limit, CSRF, validazione, in quest'ordine",
+        "3": "Nessun input utente riecheggiato nelle risposte di errore",
+        "4": "TypeScript in modalità strict, senza eccezioni e senza indebolire la configurazione",
+        "5": "Pipeline CI che blocca su tipi, lint e build prima di ogni rilascio",
+        "6": "Codice che si spiega da sé: nomi espliciti al posto dei commenti, costanti condivise contro la divergenza"
+      }
+    }
+  },
+  "cta": {
+    "title": "Vuoi questo livello di cura sul tuo prodotto?",
+    "description": "Applico gli stessi standard ai progetti dei clienti, dal backend all'app mobile ai sistemi AI. Se ti serve qualcuno che tratti la qualità come un requisito e non come un extra, parliamone.",
+    "button": "Guarda i servizi",
+    "secondary": "Scrivimi"
+  }
+}

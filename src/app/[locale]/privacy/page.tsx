@@ -92,7 +92,7 @@ export default async function PrivacyPage({ params }: PageProps) {
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
 
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: `${siteUrl}/${locale}` },
+    { name: t("common.navigation.home"), url: `${siteUrl}/${locale}` },
     { name: t("privacy.metadata.title"), url: `${siteUrl}/${locale}/privacy` },
   ]);
 

@@ -10,19 +10,21 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: "/documents/:path*.pdf",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "noindex, follow",
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
-      // Removed links
-      {
-        source: "/best-practices",
-        destination: "/services",
-        permanent: true,
-      },
-      {
-        source: "/:locale(it|en)/best-practices",
-        destination: "/:locale/services",
-        permanent: true,
-      },
       // Legacy links
       {
         source: "/contattami",

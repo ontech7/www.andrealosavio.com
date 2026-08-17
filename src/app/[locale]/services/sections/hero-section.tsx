@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";
 import { cn } from "@/utils/cn";
-import { ArrowDownIcon } from "lucide-react";
+import { ArrowDownIcon, SendIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { ServicesHeroDecoration } from "../components/hero-decoration";
@@ -53,7 +53,23 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           {t("services.hero.description")}
         </motion.p>
 
-        <motion.div variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
+        <motion.div
+          variants={fadeInUpAnim}
+          transition={{ duration: 0.5 }}
+          className="flex flex-wrap items-center gap-3"
+        >
+          <Button
+            variant="gradient-outline"
+            onClick={() => {
+              document
+                .getElementById("contactForm")
+                ?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+          >
+            {t("services.hero.ctaWriteMe")}
+            <SendIcon className="size-4" aria-hidden="true" />
+          </Button>
+
           <Button
             variant="primary"
             onClick={() => {
@@ -71,7 +87,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
                 ease: "easeInOut",
               }}
             >
-              <ArrowDownIcon className="size-4" />
+              <ArrowDownIcon className="size-4" aria-hidden="true" />
             </motion.span>
           </Button>
         </motion.div>

@@ -11,6 +11,7 @@ import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState } from "react";
+import { ServicePrice } from "./service-price";
 
 interface ServiceCardProps {
   service: (typeof SERVICES)[number];
@@ -123,26 +124,23 @@ export function ServiceCard({ service, reversed = false }: ServiceCardProps) {
                 </div>
               </div>
 
-              <div className="mt-4">
-                <Button
-                  variant="gradient-primary"
-                  size="default"
-                  onClick={() => setDialogOpen(true)}
-                >
-                  <div className="bg-secondary size-2.5 shrink-0 animate-pulse rounded-full shadow-(--shadow-secondary)" />
+              <div className="mt-4 flex flex-col gap-2">
+                <ServicePrice price={service.price} />
 
-                  {t.rich(`services.availableServices.${service.id}.cta`, {
-                    price: (children) => (
-                      <span className="-ml-1.5 font-medium">{children}</span>
-                    ),
-                  })}
-                  <ArrowRightIcon className="size-4" />
-                </Button>
-                {t.has(`services.availableServices.${service.id}.ctaNote`) && (
-                  <p className="text-muted-foreground mt-1 ml-5.5 text-xs">
-                    {t(`services.availableServices.${service.id}.ctaNote`)}
-                  </p>
-                )}
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <Button
+                    variant="gradient-primary"
+                    size="default"
+                    onClick={() => setDialogOpen(true)}
+                  >
+                    <div className="bg-secondary size-2.5 shrink-0 animate-pulse rounded-full shadow-(--shadow-secondary)" />
+                    {t("services.cta.talk")}
+                    <ArrowRightIcon className="size-4" aria-hidden="true" />
+                  </Button>
+                  <span className="text-muted-foreground text-xs">
+                    {t("services.cta.responseTime")}
+                  </span>
+                </div>
               </div>
             </div>
           </CardContent>

@@ -28,8 +28,7 @@ export async function POST(request: NextRequest) {
     const origin = request.headers.get("origin");
     const allowedOriginPattern =
       /^https?:\/\/([a-z0-9-]+\.)*andrealosavio\.com$/;
-    const localhostPattern =
-      /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
+    const localhostPattern = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
     const isDev = process.env.NODE_ENV === "development";
 
     if (
@@ -98,26 +97,6 @@ export async function POST(request: NextRequest) {
 
     const resend = getResendClient();
 
-    const clientEmailSubject =
-      locale === "it"
-        ? "Grazie per avermi contattato!"
-        : "Thank you for reaching out!";
-
-    const { error: clientError } = await resend.emails.send({
-      from: `Andrea Losavio <${fromEmail}>`,
-      to: email,
-      subject: clientEmailSubject,
-      react: ClientConfirmationEmail({ fullname, locale }),
-    });
-
-    if (clientError) {
-      console.error("Error sending client confirmation email:", clientError);
-      return NextResponse.json(
-        { error: "Failed to send confirmation email" },
-        { status: 500 }
-      );
-    }
-
     const ownerSubject = service
       ? `New Contact: ${fullname} - ${service}`
       : `New Contact: ${fullname}`;
@@ -132,6 +111,26 @@ export async function POST(request: NextRequest) {
 
     if (ownerError) {
       console.error("Error sending owner notification email:", ownerError);
+      return NextResponse.json(
+        { error: "Failed to deliver message" },
+        { status: 500 }
+      );
+    }
+
+    const clientEmailSubject =
+      locale === "it"
+        ? "Grazie per avermi contattato!"
+        : "Thank you for reaching out!";
+
+    const { error: clientError } = await resend.emails.send({
+      from: `Andrea Losavio <${fromEmail}>`,
+      to: email,
+      subject: clientEmailSubject,
+      react: ClientConfirmationEmail({ fullname, locale }),
+    });
+
+    if (clientError) {
+      console.error("Error sending client confirmation email:", clientError);
     }
 
     return NextResponse.json({ success: true }, { status: 200 });

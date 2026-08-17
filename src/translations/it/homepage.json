@@ -69,6 +69,10 @@
       "line1Highlight": "cosa possiamo costruire insieme",
       "line2": "Che tu debba validare un'idea, scalare un prodotto o affrontare una sfida tecnica complessa, ho l'esperienza per guidarti."
     },
+    "proof": {
+      "intro": "Il modo più rapido per valutarmi è questo sito: quello che vedi qui è misurato, non dichiarato. Ma è solo la parte visibile — gli stessi standard finiscono nell'architettura di un backend, in un'app mobile o in un sistema agentico, dove nessuno può passarti un punteggio.",
+      "link": "Guarda come lavoro"
+    },
     "notReadyYet": "Non sei ancora pronto?",
     "keepScrolling": "Continua a scorrere per leggere cosa dicono i clienti che hanno lavorato con me.",
     "challengeBox": {

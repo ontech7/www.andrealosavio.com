@@ -1,8 +1,12 @@
+import { CONTACT_EMAIL, LINKEDIN_URL } from "@/constants/contact";
+import { SERVICES } from "@/constants/services";
 import {
   generateBreadcrumbSchema,
+  generateProfessionalServiceSchema,
   generateServiceCatalogSchema,
   schemaToJsonLd,
 } from "@/utils/seo-schema";
+import { PageMessages } from "@/libs/i18n/messages";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { AvailableServicesSection } from "./sections/available-services-section";
@@ -62,61 +66,39 @@ export default async function ServicesPage({ params }: PageProps) {
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
   const pageUrl = `${siteUrl}/${locale}/services`;
 
+  const catalogId = `${pageUrl}#catalog`;
+  const personId = `${siteUrl}#person`;
+
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: `${siteUrl}/${locale}` },
-    { name: t("services.metadata.title"), url: pageUrl },
+    { name: t("common.navigation.home"), url: `${siteUrl}/${locale}` },
+    { name: t("services.availableServices.sectionTitle"), url: pageUrl },
   ]);
 
   const serviceCatalogSchema = generateServiceCatalogSchema({
-    providerName: "Andrea Losavio",
-    providerUrl: siteUrl,
-    catalogName: t("services.metadata.title"),
-    services: [
-      {
-        name: t("services.availableServices.collaboration.title"),
-        description: t("services.availableServices.collaboration.description"),
-        url: `${pageUrl}#collaboration`,
-      },
-      {
-        name: t("services.availableServices.validationMvp.title"),
-        description: t("services.availableServices.validationMvp.description"),
-        url: `${pageUrl}#validationMvp`,
-        price: "2500",
+    providerId: personId,
+    catalogId,
+    catalogName: t("services.availableServices.sectionTitle"),
+    services: SERVICES.map((service) => ({
+      name: t(`services.availableServices.${service.id}.title`),
+      description: t(`services.availableServices.${service.id}.description`),
+      url: `${pageUrl}#${service.id}`,
+      ...(service.price && {
+        price: String(service.price.amount),
         priceCurrency: "EUR",
-      },
-      {
-        name: t("services.availableServices.fdeDiscoveryAudit.title"),
-        description: t(
-          "services.availableServices.fdeDiscoveryAudit.description"
-        ),
-        url: `${pageUrl}#fdeDiscoveryAudit`,
-      },
-      {
-        name: t("services.availableServices.fractionalCto.title"),
-        description: t("services.availableServices.fractionalCto.description"),
-        url: `${pageUrl}#fractionalCto`,
-        price: "800",
-        priceCurrency: "EUR",
-      },
-      {
-        name: t("services.availableServices.technicalMentorship.title"),
-        description: t(
-          "services.availableServices.technicalMentorship.description"
-        ),
-        url: `${pageUrl}#technicalMentorship`,
-        price: "50",
-        priceCurrency: "EUR",
-      },
-      {
-        name: t("services.availableServices.productDevelopment.title"),
-        description: t(
-          "services.availableServices.productDevelopment.description"
-        ),
-        url: `${pageUrl}#productDevelopment`,
-        price: "7000",
-        priceCurrency: "EUR",
-      },
-    ],
+      }),
+    })),
+  });
+
+  const professionalServiceSchema = generateProfessionalServiceSchema({
+    name: "Andrea Losavio",
+    url: pageUrl,
+    description: t("services.metadata.description"),
+    founderId: personId,
+    catalogId,
+    areaServed: ["IT", "EU", "Worldwide"],
+    priceRange: "€€",
+    email: CONTACT_EMAIL,
+    sameAs: ["https://github.com/ontech7", LINKEDIN_URL],
   });
 
   return (
@@ -124,11 +106,17 @@ export default async function ServicesPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: schemaToJsonLd([breadcrumbSchema, serviceCatalogSchema]),
+          __html: schemaToJsonLd([
+            breadcrumbSchema,
+            professionalServiceSchema,
+            serviceCatalogSchema,
+          ]),
         }}
       />
-      <HeroSection id="hero" />
-      <AvailableServicesSection id="service-list" />
+      <PageMessages namespaces={["services"]}>
+        <HeroSection id="hero" />
+        <AvailableServicesSection id="service-list" />
+      </PageMessages>
     </>
   );
 }

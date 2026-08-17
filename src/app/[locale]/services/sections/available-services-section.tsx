@@ -31,6 +31,14 @@ export function AvailableServicesSection({
         whileInView="visible"
         viewport={{ once: true }}
       >
+        <motion.h2
+          variants={fadeInUpAnim}
+          transition={{ duration: 0.5 }}
+          className="bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-3xl font-bold text-transparent md:text-4xl"
+        >
+          {t("services.availableServices.sectionTitle")}
+        </motion.h2>
+
         {SERVICES.map((service, index) => (
           <ServiceCard
             key={service.id}

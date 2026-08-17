@@ -27,7 +27,8 @@
       "productDevelopment": "Sviluppo Prodotto",
       "personalIdeas": "Personali & Idee",
       "forClients": "Per clienti",
-      "llmsTxt": "llms.txt"
+      "llmsTxt": "llms.txt",
+      "bestPractices": "Come lavoro"
     },
     "cta": {
       "title": "Hai già deciso?",
@@ -53,8 +54,8 @@
     "mainNavigation": "Navigazione principale",
     "mobileNavigation": "Navigazione mobile",
     "languageSwitcher": "Selettore lingua",
-    "switchToEnglish": "Cambia in inglese",
-    "switchToItalian": "Cambia in italiano",
+    "switchToEnglish": "EN, passa all'inglese",
+    "switchToItalian": "IT, passa all'italiano",
     "footerNavigation": "Navigazione a piè di pagina",
     "socialLinks": "Link social",
     "closeDialog": "Chiudi finestra",

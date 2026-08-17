@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Link } from "@/libs/i18n/navigation";
 import { cn } from "@/utils/cn";
 import { LoaderIcon, MailIcon, SendIcon, UserIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -13,6 +14,7 @@ import { FloatingTextarea } from "../ui/floating-textarea";
 interface ContactFormFieldsProps {
   status: ContactFormStatus;
   errorMessage: string;
+  consentError: boolean;
   consent: boolean;
   setConsent: (value: boolean) => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -27,6 +29,7 @@ interface ContactFormFieldsProps {
 export function ContactFormFields({
   status,
   errorMessage,
+  consentError,
   consent,
   setConsent,
   onSubmit,
@@ -39,6 +42,7 @@ export function ContactFormFields({
 }: ContactFormFieldsProps) {
   const t = useTranslations();
   const checkboxId = useId();
+  const errorId = useId();
 
   return (
     <form
@@ -94,17 +98,31 @@ export function ContactFormFields({
           checked={consent}
           onCheckedChange={(checked) => setConsent(checked === true)}
           disabled={status === "loading"}
+          aria-invalid={consentError || undefined}
+          aria-describedby={consentError ? errorId : undefined}
+          className={cn(consentError && "border-red-500")}
         />
         <label
           htmlFor={checkboxId}
           className="text-muted-foreground cursor-pointer text-sm leading-relaxed"
         >
-          {t("services.contactForm.consent")}
+          {t.rich("services.contactForm.consent", {
+            privacy: (children) => (
+              <Link
+                href="/privacy"
+                target="_blank"
+                className="text-foreground underline underline-offset-2"
+              >
+                {children}
+              </Link>
+            ),
+          })}
         </label>
       </div>
 
       {status === "error" && errorMessage && (
         <p
+          id={errorId}
           className="text-center text-sm text-red-500"
           role="alert"
           aria-live="assertive"
@@ -124,7 +142,7 @@ export function ContactFormFields({
         <Button
           variant="gradient-outline"
           type="submit"
-          disabled={!consent || status === "loading"}
+          disabled={status === "loading"}
         >
           {status === "loading" ? (
             <>

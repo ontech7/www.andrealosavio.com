@@ -4,6 +4,7 @@ import {
   generateItemListSchema,
   schemaToJsonLd,
 } from "@/utils/seo-schema";
+import { PageMessages } from "@/libs/i18n/messages";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
@@ -66,7 +67,7 @@ export default async function ProjectsPage({ params }: PageProps) {
   const pageUrl = `${siteUrl}/${locale}/projects`;
 
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: `${siteUrl}/${locale}` },
+    { name: t("common.navigation.home"), url: `${siteUrl}/${locale}` },
     { name: t("projects.metadata.title"), url: pageUrl },
   ]);
 
@@ -90,10 +91,12 @@ export default async function ProjectsPage({ params }: PageProps) {
           __html: schemaToJsonLd([breadcrumbSchema, itemListSchema]),
         }}
       />
-      <HeroSection id="hero" />
-      <Suspense>
-        <ProjectsSection id="projects" />
-      </Suspense>
+      <PageMessages namespaces={["projects"]}>
+        <HeroSection id="hero" />
+        <Suspense>
+          <ProjectsSection id="projects" />
+        </Suspense>
+      </PageMessages>
     </>
   );
 }
