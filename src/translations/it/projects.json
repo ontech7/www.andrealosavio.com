@@ -15,6 +15,9 @@
     "sortOrderDesc": "Ordina da Z a A",
     "tagsLabel": "Scegli i tag"
   },
+  "list": {
+    "title": "Elenco dei progetti"
+  },
   "items": {
     "common": {
       "noResults": "Nessun progetto trovato con i filtri selezionati",
