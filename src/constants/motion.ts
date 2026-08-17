@@ -1,3 +1,6 @@
+export const fadeInUpEnter =
+  "animate-in fade-in slide-in-from-bottom-5 duration-500 fill-mode-backwards";
+
 export const fadeInUpAnim = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },

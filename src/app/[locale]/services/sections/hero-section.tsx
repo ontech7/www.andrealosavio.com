@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";
+import { fadeInUpEnter } from "@/constants/motion";
 import { cn } from "@/utils/cn";
 import { ArrowDownIcon, SendIcon } from "lucide-react";
 import { motion } from "motion/react";
@@ -25,16 +25,13 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         className
       )}
     >
-      <motion.div
-        className="relative z-10 max-w-lg"
-        variants={staggerContainerAnim}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.h1
-          variants={fadeInUpAnim}
-          transition={{ duration: 0.5 }}
-          className="mb-7.5 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
+      <div className="relative z-10 max-w-lg">
+        <h1
+          className={cn(
+            fadeInUpEnter,
+            "delay-100",
+            "mb-7.5 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
+          )}
         >
           {t.rich("services.hero.title", {
             highlight: (children) => (
@@ -43,20 +40,24 @@ export function HeroSection({ id, className }: HeroSectionProps) {
               </span>
             ),
           })}
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          variants={fadeInUpAnim}
-          transition={{ duration: 0.5 }}
-          className="text-muted-foreground mb-10 max-w-md"
+        <p
+          className={cn(
+            fadeInUpEnter,
+            "delay-200",
+            "text-muted-foreground mb-10 max-w-md"
+          )}
         >
           {t("services.hero.description")}
-        </motion.p>
+        </p>
 
-        <motion.div
-          variants={fadeInUpAnim}
-          transition={{ duration: 0.5 }}
-          className="flex flex-wrap items-center gap-3"
+        <div
+          className={cn(
+            fadeInUpEnter,
+            "delay-300",
+            "flex flex-wrap items-center gap-3"
+          )}
         >
           <Button
             variant="gradient-outline"
@@ -90,8 +91,8 @@ export function HeroSection({ id, className }: HeroSectionProps) {
               <ArrowDownIcon className="size-4" aria-hidden="true" />
             </motion.span>
           </Button>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
       <div
         className={cn(

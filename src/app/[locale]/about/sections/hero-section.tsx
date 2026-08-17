@@ -6,9 +6,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";
+import { fadeInUpEnter } from "@/constants/motion";
 import { cn } from "@/utils/cn";
-import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { AboutHeroDecoration } from "../components/hero-decoration";
@@ -42,16 +41,13 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         <GridLayers />
       </div>
 
-      <motion.div
-        className="mb-20 w-full text-center"
-        variants={staggerContainerAnim}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.h1
-          variants={fadeInUpAnim}
-          transition={{ duration: 0.5 }}
-          className="mb-4 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
+      <div className="mb-20 w-full text-center">
+        <h1
+          className={cn(
+            fadeInUpEnter,
+            "delay-100",
+            "mb-4 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
+          )}
         >
           {t.rich("about.hero.title", {
             highlight: (children) => (
@@ -60,44 +56,33 @@ export function HeroSection({ id, className }: HeroSectionProps) {
               </span>
             ),
           })}
-        </motion.h1>
-        <motion.p
-          variants={fadeInUpAnim}
-          transition={{ duration: 0.5 }}
-          className="text-muted-foreground"
-        >
+        </h1>
+        <p className={cn(fadeInUpEnter, "delay-200", "text-muted-foreground")}>
           {t("about.hero.subtitle")}
-        </motion.p>
-      </motion.div>
+        </p>
+      </div>
 
       <div className="flex-start flex flex-col lg:flex-row lg:gap-8">
-        <motion.div
-          className="relative mb-10 w-full max-w-84 shrink-0 self-center lg:-mt-2.5 lg:mb-0 lg:w-auto lg:max-w-none lg:self-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+        <div
+          className={cn(
+            fadeInUpEnter,
+            "delay-200",
+            "relative mb-10 w-full max-w-84 shrink-0 self-center lg:-mt-2.5 lg:mb-0 lg:w-auto lg:max-w-none lg:self-auto"
+          )}
         >
           <AboutHeroDecoration />
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="flex flex-1 flex-col"
-          variants={staggerContainerAnim}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div
-            variants={fadeInUpAnim}
-            transition={{ duration: 0.5, delay: 0.15 }}
-          >
+        <div className="flex flex-1 flex-col">
+          <div className={cn(fadeInUpEnter, "delay-150")}>
             <h2 className="text-2xl font-bold text-white md:text-3xl">
               {t("about.hero.name")}
             </h2>
             <p className="text-muted-foreground mb-6">{t("about.hero.role")}</p>
-          </motion.div>
+          </div>
 
           <div className="text-muted-foreground mb-8 space-y-4 text-sm leading-relaxed md:text-base">
-            <motion.p variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
+            <p className={cn(fadeInUpEnter, "delay-200")}>
               {t.rich("about.hero.bio1", {
                 bold: (children) => (
                   <span className="font-semibold text-white">{children}</span>
@@ -113,15 +98,15 @@ export function HeroSection({ id, className }: HeroSectionProps) {
                   </a>
                 ),
               })}
-            </motion.p>
-            <motion.p variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
+            </p>
+            <p className={cn(fadeInUpEnter, "delay-300")}>
               {t.rich("about.hero.bio2", {
                 bold: (children) => (
                   <span className="font-semibold text-white">{children}</span>
                 ),
               })}
-            </motion.p>
-            <motion.p variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
+            </p>
+            <p className={cn(fadeInUpEnter, "delay-400")}>
               {t.rich("about.hero.bio3", {
                 link: (children) => (
                   <a
@@ -144,32 +129,15 @@ export function HeroSection({ id, className }: HeroSectionProps) {
                   </a>
                 ),
               })}
-            </motion.p>
+            </p>
           </div>
 
-          <motion.div
-            className="flex flex-wrap gap-4"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: {
-                  staggerChildren: 0.05,
-                  delayChildren: 0.5,
-                },
-              },
-            }}
-          >
-            {SKILL_ITEMS.map((skill) => (
-              <motion.div
+          <div className="flex flex-wrap gap-4">
+            {SKILL_ITEMS.map((skill, index) => (
+              <div
                 key={skill.name}
-                variants={{
-                  hidden: { opacity: 0, scale: 0.8 },
-                  visible: { opacity: 1, scale: 1 },
-                }}
-                transition={{ duration: 0.3 }}
+                className="animate-in fade-in zoom-in-80 fill-mode-backwards duration-300"
+                style={{ animationDelay: `${500 + index * 50}ms` }}
               >
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -185,10 +153,10 @@ export function HeroSection({ id, className }: HeroSectionProps) {
                   </TooltipTrigger>
                   <TooltipContent>{skill.name}</TooltipContent>
                 </Tooltip>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

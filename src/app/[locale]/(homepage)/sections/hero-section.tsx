@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";
+import { fadeInUpEnter } from "@/constants/motion";
 import { SOCIAL_LINKS } from "@/constants/navigation";
 import { Link } from "@/libs/i18n/navigation";
 import { cn } from "@/utils/cn";
@@ -28,13 +28,8 @@ export function HeroSection({ id, className }: HeroSectionProps) {
         className
       )}
     >
-      <motion.div
-        className="relative z-10"
-        variants={staggerContainerAnim}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.div variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
+      <div className="relative z-10">
+        <div className={cn(fadeInUpEnter, "delay-100")}>
           <Button variant="gradient-primary" size="lg" asChild>
             <Link href="/services" className="flex items-center gap-2">
               <div
@@ -45,36 +40,42 @@ export function HeroSection({ id, className }: HeroSectionProps) {
               <ArrowRightIcon className="size-4" aria-hidden="true" />
             </Link>
           </Button>
-        </motion.div>
+        </div>
 
-        <motion.h1
-          variants={fadeInUpAnim}
-          transition={{ duration: 0.5 }}
-          className="mt-6 -mb-0.5 bg-(image:--text-gradient) bg-clip-text text-4xl font-bold text-transparent md:mb-0 md:text-7xl"
+        <h1
+          className={cn(
+            fadeInUpEnter,
+            "delay-200",
+            "mt-6 -mb-0.5 bg-(image:--text-gradient) bg-clip-text text-4xl font-bold text-transparent md:mb-0 md:text-7xl"
+          )}
         >
           {t("homepage.hero.title")}
-        </motion.h1>
-        <motion.h2
-          variants={fadeInUpAnim}
-          transition={{ duration: 0.5 }}
-          className="text-md mb-5 flex items-center gap-1.5 bg-(image:--text-gradient) bg-clip-text pb-1.5 leading-0 text-transparent md:text-xl"
+        </h1>
+        <h2
+          className={cn(
+            fadeInUpEnter,
+            "delay-300",
+            "text-md mb-5 flex items-center gap-1.5 bg-(image:--text-gradient) bg-clip-text pb-1.5 leading-0 text-transparent md:text-xl"
+          )}
         >
           <CodeIcon
             className="size-5 text-white md:-mb-0.5 md:size-5.5"
             aria-hidden="true"
           />
           {t("homepage.hero.subtitle")}
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          variants={fadeInUpAnim}
-          transition={{ duration: 0.5 }}
-          className="text-muted-foreground mb-10 max-w-md"
+        <p
+          className={cn(
+            fadeInUpEnter,
+            "delay-400",
+            "text-muted-foreground mb-10 max-w-md"
+          )}
         >
           {t("homepage.hero.description")}
-        </motion.p>
+        </p>
 
-        <motion.div variants={fadeInUpAnim} transition={{ duration: 0.5 }}>
+        <div className={cn(fadeInUpEnter, "delay-500")}>
           <Button
             variant="gradient-outline"
             className="mr-3"
@@ -99,12 +100,14 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           <Button asChild variant="primary">
             <Link href="/about">{t("homepage.hero.ctaMoreAboutMe")}</Link>
           </Button>
-        </motion.div>
+        </div>
 
-        <motion.div
-          variants={fadeInUpAnim}
-          transition={{ duration: 0.5 }}
-          className="mt-12 flex items-center gap-4"
+        <div
+          className={cn(
+            fadeInUpEnter,
+            "delay-600",
+            "mt-12 flex items-center gap-4"
+          )}
         >
           {SOCIAL_LINKS.map((social) => (
             <a
@@ -118,8 +121,8 @@ export function HeroSection({ id, className }: HeroSectionProps) {
               <social.Icon className="stroke-1" />
             </a>
           ))}
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
       <div
         className={cn(
