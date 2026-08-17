@@ -15,6 +15,9 @@
     "sortOrderDesc": "Sort Z to A",
     "tagsLabel": "Choose tags"
   },
+  "list": {
+    "title": "Project list"
+  },
   "items": {
     "common": {
       "noResults": "No projects found with selected filters",

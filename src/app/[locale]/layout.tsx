@@ -10,7 +10,6 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { DM_Mono, DM_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -79,11 +78,9 @@ export default async function RootLayout({
   return (
     <html lang={locale} style={{ colorScheme: "dark" }}>
       <body className={`${dmSans.variable} ${dmMono.variable} antialiased`}>
-        <NuqsAdapter>
-          <NextIntlClientProvider messages={pickMessages(messages, ["common"])}>
-            <Layout>{children}</Layout>
-          </NextIntlClientProvider>
-        </NuqsAdapter>
+        <NextIntlClientProvider messages={pickMessages(messages, ["common"])}>
+          <Layout>{children}</Layout>
+        </NextIntlClientProvider>
         <Analytics />
         <SpeedInsights />
       </body>

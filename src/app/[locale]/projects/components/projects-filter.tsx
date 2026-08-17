@@ -1,36 +1,35 @@
 "use client";
 
-import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";
 import { cn } from "@/utils/cn";
 import { ChevronDownIcon } from "lucide-react";
-import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useId, useRef, useState } from "react";
+import { SortOrder, useProjectsFilter } from "./projects-filter-provider";
 
-export type SortOrder = "none" | "asc" | "desc";
+const SORT_OPTIONS = [
+  { value: "none", labelKey: "projects.filter.sortOrderNone" },
+  { value: "asc", labelKey: "projects.filter.sortOrderAsc" },
+  { value: "desc", labelKey: "projects.filter.sortOrderDesc" },
+] as const satisfies readonly { value: SortOrder; labelKey: string }[];
 
 interface ProjectsFilterProps {
-  tags: string[];
-  selectedTags: string[];
-  onTagToggle: (tag: string) => void;
-  sortOrder: SortOrder;
-  onSortChange: (order: SortOrder) => void;
+  tags: readonly string[];
 }
 
-export function ProjectsFilter({
-  tags,
-  selectedTags,
-  onTagToggle,
-  sortOrder,
-  onSortChange,
-}: ProjectsFilterProps) {
+export function ProjectsFilter({ tags }: ProjectsFilterProps) {
   const t = useTranslations();
-  const tCommon = useTranslations();
+  const { selectedTags, sortOrder, toggleTag, changeSortOrder } =
+    useProjectsFilter();
 
   const [isOpen, setIsOpen] = useState(false);
 
   const selectRef = useRef<HTMLDivElement>(null);
   const listboxId = useId();
+  const triggerId = useId();
+
+  const activeSortOption =
+    SORT_OPTIONS.find((option) => option.value === sortOrder) ??
+    SORT_OPTIONS[0];
 
   const handleBlur = (e: React.FocusEvent) => {
     if (!selectRef.current?.contains(e.relatedTarget)) {
@@ -45,18 +44,8 @@ export function ProjectsFilter({
   };
 
   return (
-    <motion.div
-      variants={staggerContainerAnim}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2"
-    >
-      <motion.div
-        variants={fadeInUpAnim}
-        transition={{ duration: 0.5 }}
-        className="order-1 flex flex-col gap-2"
-      >
+    <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="order-1 flex flex-col gap-2">
         <span id="sort-label" className="text-muted-foreground text-sm">
           {t("projects.filter.sortLabel")}
         </span>
@@ -71,21 +60,16 @@ export function ProjectsFilter({
             style={{ background: "var(--border-gradient)" }}
           >
             <button
+              id={triggerId}
               type="button"
               onClick={() => setIsOpen(!isOpen)}
               aria-expanded={isOpen}
               aria-haspopup="listbox"
               aria-controls={listboxId}
-              aria-labelledby="sort-label"
+              aria-labelledby={`sort-label ${triggerId}`}
               className="bg-muted text-foreground flex items-center gap-2 rounded-lg px-4 py-2 text-sm"
             >
-              <span>
-                {sortOrder === "none"
-                  ? t("projects.filter.sortOrderNone")
-                  : sortOrder === "asc"
-                    ? t("projects.filter.sortOrderAsc")
-                    : t("projects.filter.sortOrderDesc")}
-              </span>
+              <span>{t(activeSortOption.labelKey)}</span>
               <ChevronDownIcon
                 className={cn(
                   "size-4 transition-transform",
@@ -103,67 +87,32 @@ export function ProjectsFilter({
               aria-labelledby="sort-label"
               className="border-border bg-card absolute left-0 z-10 mt-2 min-w-25 rounded-lg border p-1 shadow-lg"
             >
-              <button
-                type="button"
-                role="option"
-                aria-selected={sortOrder === "none"}
-                onClick={() => {
-                  onSortChange("none");
-                  setIsOpen(false);
-                }}
-                className={cn(
-                  "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
-                  sortOrder === "none"
-                    ? "bg-muted text-foreground"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer"
-                )}
-              >
-                {t("projects.filter.sortOrderNone")}
-              </button>
-              <button
-                type="button"
-                role="option"
-                aria-selected={sortOrder === "asc"}
-                onClick={() => {
-                  onSortChange("asc");
-                  setIsOpen(false);
-                }}
-                className={cn(
-                  "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
-                  sortOrder === "asc"
-                    ? "bg-muted text-foreground"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer"
-                )}
-              >
-                {t("projects.filter.sortOrderAsc")}
-              </button>
-              <button
-                type="button"
-                role="option"
-                aria-selected={sortOrder === "desc"}
-                onClick={() => {
-                  onSortChange("desc");
-                  setIsOpen(false);
-                }}
-                className={cn(
-                  "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
-                  sortOrder === "desc"
-                    ? "bg-muted text-foreground"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer"
-                )}
-              >
-                {t("projects.filter.sortOrderDesc")}
-              </button>
+              {SORT_OPTIONS.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  role="option"
+                  aria-selected={sortOrder === option.value}
+                  onClick={() => {
+                    changeSortOrder(option.value);
+                    setIsOpen(false);
+                  }}
+                  className={cn(
+                    "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors",
+                    sortOrder === option.value
+                      ? "bg-muted text-foreground"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer"
+                  )}
+                >
+                  {t(option.labelKey)}
+                </button>
+              ))}
             </div>
           )}
         </div>
-      </motion.div>
+      </div>
 
-      <motion.div
-        variants={fadeInUpAnim}
-        transition={{ duration: 0.5 }}
-        className="order-2 flex flex-col gap-2"
-      >
+      <div className="order-2 flex flex-col gap-2">
         <span className="text-muted-foreground text-sm">
           {t("projects.filter.tagsLabel")}
         </span>
@@ -178,11 +127,9 @@ export function ProjectsFilter({
               <button
                 key={tag}
                 type="button"
-                onClick={() => onTagToggle(tag)}
+                onClick={() => toggleTag(tag)}
                 aria-pressed={isSelected}
-                aria-label={tCommon("common.accessibility.filterByTag", {
-                  tag,
-                })}
+                aria-label={t("common.accessibility.filterByTag", { tag })}
                 className={cn(
                   "cursor-pointer rounded-md px-2 py-1 text-xs font-medium transition-colors lg:text-[10px]",
                   isSelected
@@ -195,7 +142,7 @@ export function ProjectsFilter({
             );
           })}
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }

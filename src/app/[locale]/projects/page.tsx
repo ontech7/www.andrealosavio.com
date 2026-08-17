@@ -7,7 +7,6 @@ import {
 import { PageMessages } from "@/libs/i18n/messages";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Suspense } from "react";
 import { HeroSection } from "./sections/hero-section";
 import { ProjectsSection } from "./sections/projects-section";
 
@@ -93,9 +92,7 @@ export default async function ProjectsPage({ params }: PageProps) {
       />
       <PageMessages namespaces={["projects"]}>
         <HeroSection id="hero" />
-        <Suspense>
-          <ProjectsSection id="projects" />
-        </Suspense>
+        <ProjectsSection id="projects" />
       </PageMessages>
     </>
   );
