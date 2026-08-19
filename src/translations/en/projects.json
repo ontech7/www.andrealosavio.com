@@ -31,7 +31,7 @@
     },
     "coolifyManager": {
       "name": "Coolify Manager",
-      "description": "Coolify Manager is a Chrome extension that lets you manage your self-hosted Coolify server directly from your browser toolbar."
+      "description": "Coolify Manager is a mobile app that lets you manage your self-hosted Coolify servers wherever you are, plus a Chrome extension to do the same directly from your browser toolbar."
     },
     "quido": {
       "name": "Quido S.r.l.",

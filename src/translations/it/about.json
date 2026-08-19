@@ -10,7 +10,7 @@
     "role": "Senior Software Engineer & FDE (Freelance)",
     "bio1": "Sono un <bold>Ingegnere Informatico</bold> laureato al <bold>Politecnico di Milano</bold> nel 2019, iscritto all'albo professionale con il numero <link>34249</link>, sezione B. Sono appassionato di programmazione dal 2009, affascinato fin da giovane dalla logica e dalla struttura del software — esplorando i fondamenti della programmazione, dell'architettura dei computer e degli algoritmi.",
     "bio2": "Ho iniziato il mio percorso nel settore della consulenza IT nel 2018 e lavoro come <bold>freelancer</bold> dal 2023. Oggi collaboro con aziende e startup come <bold>Senior Software Engineer & FDE (Forward Deployed Engineer)</bold>, integrandomi nei loro contesti per tradurre requisiti di business in soluzioni tech & AI e architetture software scalabili e ad alte prestazioni.",
-    "bio3": "Ho anche realizzato prodotti personali: <link>Fast Memo</link> (2023, app e sito per Android e iOS) e <linkPlayStore>Coolify Manager</linkPlayStore> (2026, estensione Chrome e app Android per server Coolify self-hosted)."
+    "bio3": "Ho anche realizzato prodotti personali: <link>Fast Memo</link> (2023, app e sito per Android e iOS) e <linkCoolifyManager>Coolify Manager</linkCoolifyManager> (2026, app mobile con estensione Chrome per server Coolify self-hosted)."
   },
   "beyondCode": {
     "title": "<highlight>Beyond</highlight> code",

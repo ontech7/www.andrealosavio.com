@@ -98,7 +98,7 @@ Andrea offers a curated set of services for startups and companies:
 - **Quido S.r.l.** — AI platform for private equity and M&A in Italy. Designed the interface bridging finance and AI.
 - **Ravenn S.r.l.** — Event logistics and hospitality management platform. End-to-end development.
 - **Studio Bargiggia** — Condominium management firm. Complete rebuild of their showcase website.
-- **Coolify Manager** — Chrome extension and Android app to manage self-hosted Coolify servers. Available on Google Play Store (https://play.google.com/store/apps/details?id=com.ontech7.coolifyManager&hl=it) and Chrome Web Store (https://chromewebstore.google.com/detail/coolify-manager/dmcclgoafojpjaflnggcnmhbenplnmpi).
+- **Coolify Manager** — Mobile app to manage self-hosted Coolify servers, with a companion Chrome extension. Available on Google Play Store (https://play.google.com/store/apps/details?id=com.ontech7.coolifyManager&hl=it) and Chrome Web Store (https://chromewebstore.google.com/detail/coolify-manager/dmcclgoafojpjaflnggcnmhbenplnmpi).
 - **Forfettario Control** — Mobile app for Italian freelancers under the "regime forfettario" to manage invoices, fiscal documents, and deadlines.
 - **Otherside Technology S.r.l.** — Custom software and AI solutions for businesses.
 - **Brainplatform S.r.l.** — Short-term collaboration on digital product initiatives.

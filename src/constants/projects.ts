@@ -36,7 +36,7 @@ export const PROJECTS: Project[] = [
       "react-native",
       "javascript",
     ],
-    githubUrl: "https://github.com/ontech7/coolify-manager-app",
+    websiteUrl: "https://coolify-manager.vercel.app",
   },
   {
     id: "quido",

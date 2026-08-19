@@ -23,8 +23,7 @@ const ENGINEER_REGISTER_URL =
 
 const FAST_MEMO_URL = "https://fastmemo.vercel.app/";
 
-const COOLIFY_PLAY_STORE_URL =
-  "https://play.google.com/store/apps/details?id=com.ontech7.coolifyManager&hl=it";
+const COOLIFY_MANAGER_URL = "https://coolify-manager.vercel.app";
 
 export function HeroSection({ id, className }: HeroSectionProps) {
   const t = useTranslations();
@@ -118,9 +117,9 @@ export function HeroSection({ id, className }: HeroSectionProps) {
                     {children}
                   </a>
                 ),
-                linkPlayStore: (children) => (
+                linkCoolifyManager: (children) => (
                   <a
-                    href={COOLIFY_PLAY_STORE_URL}
+                    href={COOLIFY_MANAGER_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-semibold text-white underline underline-offset-2 transition-colors hover:text-white/80"
