@@ -1,13 +1,11 @@
 "use client";
 
+import { Card, CardContent } from "@/components/ui/card";
 import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";
 import { cn } from "@/utils/cn";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { Fragment } from "react";
-import { ImpactCard } from "../components/impact-card";
-import { SLine } from "../components/s-line";
-import { IMPACT_ITEMS } from "../constants/impact-items";
+import { IMPACT_TILES } from "../constants/impact-items";
 
 interface MakingAnImpactSectionProps {
   id: string;
@@ -23,10 +21,13 @@ export function MakingAnImpactSection({
   return (
     <section
       id={id}
-      className={cn("mx-auto max-w-5xl scroll-mt-20 px-6", className)}
+      className={cn(
+        "mx-auto max-w-5xl scroll-mt-20 px-6 py-10 md:py-14",
+        className
+      )}
     >
       <motion.div
-        className="mb-4 text-center"
+        className="mb-10 text-center"
         variants={staggerContainerAnim}
         initial="hidden"
         whileInView="visible"
@@ -40,7 +41,7 @@ export function MakingAnImpactSection({
           {t("homepage.makingAnImpact.title")}
         </motion.h2>
         <motion.p
-          className="mx-auto mt-4 max-w-md bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-lg text-transparent"
+          className="text-muted-foreground mx-auto mt-4 max-w-md text-lg"
           variants={fadeInUpAnim}
           transition={{ duration: 0.5 }}
         >
@@ -48,18 +49,74 @@ export function MakingAnImpactSection({
         </motion.p>
       </motion.div>
 
-      <div className="relative flex flex-col items-center">
-        <SLine inverted className="md:mr-72.5 md:w-72.5" />
-        {IMPACT_ITEMS.map((item, index) => (
-          <Fragment key={item.textKey}>
-            <ImpactCard item={item} />
-            {index !== IMPACT_ITEMS.length - 1 && (
-              <SLine inverted={index % 2 === 1} className="w-40 md:w-145" />
+      <motion.div
+        className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4"
+        variants={staggerContainerAnim}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        {IMPACT_TILES.map((tile) => (
+          <motion.div
+            key={tile.id}
+            className={cn("h-full", tile.className)}
+            variants={fadeInUpAnim}
+            transition={{ duration: 0.5 }}
+          >
+            {tile.kind === "kpi" ? (
+              <Card
+                className={cn(
+                  "h-full px-5 py-5",
+                  tile.featured
+                    ? "from-secondary-foreground/40 border-secondary/30 bg-linear-to-br to-transparent"
+                    : "bg-card"
+                )}
+              >
+                <CardContent
+                  className={cn(
+                    "flex h-full flex-col p-0",
+                    tile.featured ? "justify-between gap-6" : "gap-2"
+                  )}
+                >
+                  <span
+                    className={cn(
+                      "from-secondary via-secondary/85 to-secondary/60 bg-linear-to-t bg-clip-text font-bold text-transparent",
+                      tile.featured
+                        ? "text-5xl leading-none md:text-6xl"
+                        : "text-3xl leading-none md:text-4xl"
+                    )}
+                  >
+                    {t(`homepage.makingAnImpact.kpis.${tile.id}.value`)}
+                  </span>
+                  <span
+                    className={cn(
+                      "text-muted-foreground leading-snug",
+                      tile.featured ? "max-w-64 text-base" : "text-sm"
+                    )}
+                  >
+                    {t(`homepage.makingAnImpact.kpis.${tile.id}.label`)}
+                  </span>
+                </CardContent>
+              </Card>
+            ) : (
+              <Card className="bg-card h-full px-5 py-5">
+                <CardContent className="flex h-full flex-col gap-2 p-0">
+                  <tile.icon
+                    className="text-secondary size-5 shrink-0 stroke-[1.5]"
+                    aria-hidden="true"
+                  />
+                  <h3 className="mt-1 font-semibold">
+                    {t(`homepage.makingAnImpact.outcomes.${tile.id}.title`)}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {t(`homepage.makingAnImpact.outcomes.${tile.id}.text`)}
+                  </p>
+                </CardContent>
+              </Card>
             )}
-          </Fragment>
+          </motion.div>
         ))}
-        <SLine className="md:mr-72.5 md:w-72.5" />
-      </div>
+      </motion.div>
     </section>
   );
 }

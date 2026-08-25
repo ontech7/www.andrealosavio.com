@@ -1,26 +1,95 @@
 {
   "metadata": {
     "title": "Andrea Losavio | Senior Software Engineer & FDE",
-    "description": "Aiuto startup e aziende a costruire prodotti digitali solidi e scalabili, focalizzati sulla crescita"
+    "description": "Ingegnere informatico freelance. Costruisco software per aziende e startup: architettura, web, mobile, backend e AI. Dall'idea al prodotto sul mercato."
   },
   "hero": {
+    "availability": "Disponibile per nuovi progetti",
     "title": "Andrea Losavio",
     "subtitle": "Senior Software Engineer & FDE",
-    "description": "Aiuto startup e aziende a costruire prodotti digitali solidi e scalabili, focalizzati sulla crescita",
-    "ctaDiscussVision": "Discutiamo la tua visione",
-    "ctaMoreAboutMe": "Di più su di me",
-    "ctaZeroToOne": "Da Zero a Uno"
+    "description": "Costruisco software per aziende e startup dal 2018. Mi occupo di tutto quello che serve per portare un prodotto dall'idea al mercato: architettura, sviluppo, scelte tecniche e supporto al team.",
+    "ctaHowIWork": "Conoscimi",
+    "ctaContact": "Contattami"
+  },
+  "howIWork": {
+    "eyebrow": "Prima di parlare di lavoro",
+    "title": "Facciamo che ci conosciamo",
+    "subtitle": "Tre cose su di me che un curriculum non riesce a dire.",
+    "steps": {
+      "listen": {
+        "tag": "Come inizio",
+        "title": "Parto dalle domande, non dal codice",
+        "text": "Prima di scrivere una riga voglio capire il problema. Parlo con chi conosce il business, porto tutto su carta e trasformo le esigenze in scelte tecniche chiare. Così il progetto parte con le idee a posto e senza sorprese a metà strada.",
+        "alt": "Andrea Losavio progetta una soluzione alla lavagna insieme a un collega del team Quido"
+      },
+      "team": {
+        "tag": "Come lavoro",
+        "title": "Divento parte del team",
+        "text": "Non sono un fornitore che consegna e sparisce. Sto dentro al gruppo, ascolto i feedback e li rimetto nel prodotto. Quando il lavoro finisce, il team sa portare avanti da solo quello che abbiamo costruito insieme.",
+        "alt": "Andrea Losavio insieme al team di Quido negli uffici dell'azienda"
+      },
+      "beyond": {
+        "tag": "Cosa aspettarti",
+        "title": "Non consegno cose che non userei",
+        "text": "Se una scelta tecnica è sbagliata te lo dico, anche quando è scomodo. Se una cosa si può fare meglio la rifaccio. Quello che ti consegno è roba che metterei online a nome mio, e infatti lo faccio.",
+        "alt": "Andrea Losavio intervistato nello studio televisivo di Story Time su Canale Italia"
+      }
+    },
+    "cta": "Conoscimi meglio"
   },
   "makingAnImpact": {
-    "title": "Un impatto concreto",
-    "subtitle": "Come ho supportato team e clienti a crescere, costruire e andare avanti",
-    "items": {
-      "brandIdentity": "Ho aiutato un cliente a sviluppare una <highlight>forte identità di brand</highlight> che gli ha permesso di raggiungere un pubblico più ampio e attrarre più clienti",
-      "infrastructure": "Ho supportato un'azienda nella costruzione di un' <highlight>infrastruttura robusta</highlight>, gettando solide basi per progetti futuri",
-      "platforms": "Ho collaborato a lungo termine con un'azienda per sviluppare alcune delle <highlight>piattaforme più utilizzate</highlight> oggi",
-      "transition": "Ho assistito una startup durante una fase di <highlight>transizione critica del prodotto</highlight>, garantendo un'evoluzione fluida",
-      "investment": "Ho aiutato una startup a ottenere un round di <highlight>investimento di quasi €2M</highlight> attraverso lo sviluppo del prodotto e la strategia tecnica"
+    "title": "Impatto concreto",
+    "subtitle": "Quello che ho fatto finora, detto senza giri di parole.",
+    "kpis": {
+      "clients": {
+        "value": "10+",
+        "label": "aziende e startup con cui ho lavorato"
+      },
+      "since": {
+        "value": "Dal 2018",
+        "label": "che lavoro nell'IT, tutti i giorni"
+      },
+      "investment": {
+        "value": "~€2M",
+        "label": "raccolti da una startup che ho seguito"
+      }
+    },
+    "outcomes": {
+      "architecture": {
+        "title": "Architettura e backend",
+        "text": "API, database e infrastrutture pensate per reggere la crescita. Per un'azienda ho costruito le fondamenta su cui sono nati tutti i progetti successivi."
+      },
+      "web": {
+        "title": "Piattaforme web",
+        "text": "Prodotti che migliaia di persone usano ogni giorno, veloci da usare e stabili nel tempo."
+      },
+      "mobile": {
+        "title": "App mobile",
+        "text": "App per iOS e Android, dalla prima schermata alla pubblicazione sugli store."
+      },
+      "ai": {
+        "title": "AI e automazioni",
+        "text": "Sistemi che usano i modelli AI per togliere il lavoro ripetitivo alle persone: agenti, integrazioni e strumenti su misura."
+      },
+      "product": {
+        "title": "Scelte di prodotto",
+        "text": "Sto a fianco di chi guida l'azienda per decidere cosa costruire prima, con quali tecnologie e con quale team."
+      },
+      "enterprise": {
+        "title": "Progetti enterprise",
+        "text": "Dal 2018 al 2022 su piattaforme di grandi clienti internazionali, in IBM, Deloitte Digital, DOING e Minsait."
+      }
     }
+  },
+  "products": {
+    "title": "Non costruisco solo per gli altri",
+    "subtitle": "Due app mie, pubblicate e usate da persone vere.",
+    "cta": "Guarda tutti i progetti"
+  },
+  "youCouldBeNext": {
+    "title": "Potresti essere il prossimo",
+    "subtitle": "Ogni progetto qui sopra è partito da una chiacchierata.",
+    "text": "Hai visto cosa ho fatto per gli altri. Ora sono curioso di scoprire <highlight>cosa possiamo costruire insieme</highlight>."
   },
   "feedback": {
     "clients": {
@@ -56,38 +125,8 @@
       }
     }
   },
-  "quote": {
-    "text": "Nel mondo del business ogni evento accade una volta sola. Il prossimo Bill Gates non costruirà un sistema operativo. Il prossimo Larry Page o Sergey Brin non realizzerà un motore di ricerca. E il prossimo Mark Zuckerberg non creerà un social network. Se state copiando le loro imprese, non state imparando molto da loro.",
-    "author": "Peter Thiel",
-    "book": "Da zero a uno: I segreti delle startup, ovvero come si costruisce il futuro"
-  },
-  "youCouldBeNext": {
-    "title": "Potresti essere il prossimo.",
-    "subtitle": "Ogni grande prodotto digitale in quella timeline è iniziato con una singola conversazione",
-    "leftText": {
-      "line1": "Hai visto cosa ho aiutato gli altri a raggiungere — ora sono pronto a scoprire",
-      "line1Highlight": "cosa possiamo costruire insieme",
-      "line2": "Che tu debba validare un'idea, scalare un prodotto o affrontare una sfida tecnica complessa, ho l'esperienza per guidarti."
-    },
-    "proof": {
-      "intro": "Il modo più rapido per valutarmi è questo sito: quello che vedi qui è misurato, non dichiarato. Ma è solo la parte visibile — gli stessi standard finiscono nell'architettura di un backend, in un'app mobile o in un sistema agentico, dove nessuno può passarti un punteggio.",
-      "link": "Guarda come lavoro"
-    },
-    "notReadyYet": "Non sei ancora pronto?",
-    "keepScrolling": "Continua a scorrere per leggere cosa dicono i clienti che hanno lavorato con me.",
-    "challengeBox": {
-      "title": "Qual è la tua sfida principale?",
-      "subtitle": "Scegli un servizio pensato per risolverla.",
-      "services": {
-        "fractionalCto": "Fractional CTO",
-        "validationMvp": "Validazione & MVP",
-        "technicalMentorship": "Mentorship Tecnica",
-        "fdeDiscoveryAudit": "FDE Discovery & Audit",
-        "productDevelopment": "Sviluppo Prodotto",
-        "collaboration": "Collaborazione"
-      },
-      "or": "oppure",
-      "contactMe": "Contattami"
-    }
+  "contact": {
+    "title": "Parliamo del tuo progetto",
+    "description": "Scrivimi cosa ti serve. Ti rispondo entro 24 o 48 ore, senza impegno."
   }
 }

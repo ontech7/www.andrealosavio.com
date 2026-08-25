@@ -8,6 +8,10 @@
     "description": "Developing custom solutions for clients and personal projects to deliver value and explore new ideas",
     "ctaCheckOut": "Check out"
   },
+  "featured": {
+    "title": "My own products",
+    "subtitle": "Two apps I designed, built and shipped on my own."
+  },
   "filter": {
     "sortLabel": "Sorting",
     "sortOrderNone": "No sorting",

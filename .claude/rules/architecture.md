@@ -24,9 +24,9 @@ src/
 │   │   ├── (homepage)/           homepage route group (keeps URL clean)
 │   │   │   ├── components/       page-local components (hero decoration, …)
 │   │   │   ├── constants/        page-local data (impact/feedback items, …)
-│   │   │   ├── sections/         page-local sections (hero, quote, …)
+│   │   │   ├── sections/         page-local sections (hero, how-i-work, …)
 │   │   │   └── page.tsx
-│   │   ├── about/  projects/  services/  privacy/    same convention
+│   │   ├── about/  projects/  privacy/         same convention
 │   │   ├── [...rest]/page.tsx    localized catch-all → 404
 │   │   ├── layout.tsx            providers + html shell
 │   │   └── not-found.tsx
@@ -69,7 +69,7 @@ src/
 - Config: `src/libs/i18n/{routing.ts,request.ts,navigation.ts,utils.ts}`. The
   plugin entry is wired in `next.config.ts` via
   `createNextIntlPlugin("./src/libs/i18n/request.ts")`.
-- Messages are split per namespace (`common`, `homepage`, `services`, …) and
+- Messages are split per namespace (`common`, `homepage`, `projects`, …) and
   loaded dynamically in `request.ts`.
 - **Convention**: call hooks without a namespace. Pass the full key from the
   root (e.g. `t("about.experiences.title")`). Reasons:
@@ -110,8 +110,11 @@ wrapper component.
    - Validates CSRF, required fields, and email format.
    - Sends a confirmation email to the sender (`ClientConfirmationEmail`).
    - Sends a notification email to the owner (`OwnerNotificationEmail`).
-3. Forms refresh the CSRF token when retrying after an error and when the
-   service dialog re-opens (to survive long-idle sessions).
+3. Forms refresh the CSRF token when retrying after an error (to survive
+   long-idle sessions).
+
+The form lives on the homepage (`#contact`). There is no dedicated services
+route: `/services` 301-redirects to `/<locale>#contact`.
 
 ## Environment Variables
 

@@ -1,34 +1,25 @@
 {
   "navigation": {
     "home": "Home",
-    "services": "Servizi",
     "projects": "Progetti",
     "about": "Chi sono",
-    "llmsTxt": "llms.txt"
+    "llmsTxt": "llms.txt",
+    "contact": "Contattami"
   },
   "footer": {
-    "tagline": "Aiuto startup e aziende a costruire prodotti digitali solidi e scalabili, focalizzati sulla crescita",
+    "tagline": "Costruisco software per aziende e startup, dall'idea al prodotto sul mercato.",
     "sections": {
       "general": "Generale",
-      "services": "Servizi",
       "projects": "Progetti"
     },
     "links": {
       "homepage": "Homepage",
-      "services": "Servizi",
       "projects": "Progetti",
       "about": "Chi sono",
-      "privacyPolicy": "Privacy Policy",
-      "collaboration": "Collaborazione",
-      "validationMvp": "Validazione & MVP",
-      "fdeDiscoveryAudit": "FDE Discovery & Audit",
-      "fractionalCto": "Fractional CTO",
-      "technicalMentorship": "Mentorship Tecnica",
-      "productDevelopment": "Sviluppo Prodotto",
-      "personalIdeas": "Personali & Idee",
-      "forClients": "Per clienti",
       "llmsTxt": "llms.txt",
-      "bestPractices": "Come lavoro"
+      "privacyPolicy": "Privacy Policy",
+      "personalIdeas": "Personali & Idee",
+      "forClients": "Per clienti"
     },
     "cta": {
       "title": "Hai già deciso?",
@@ -36,7 +27,6 @@
       "descriptionLink": "questo gatto",
       "descriptionPart2": ""
     },
-    "featuredProjects": "Progetti in evidenza",
     "copyright": "Copyright © 2018 - {year} Andrea Losavio. Tutti i diritti riservati.",
     "vat": "P.IVA: {vatNumber}",
     "privacyPolicy": "Privacy Policy"
@@ -61,11 +51,10 @@
     "closeDialog": "Chiudi finestra",
     "sortDropdown": "Ordine di ordinamento",
     "filterByTag": "Filtra per {tag}",
-    "featuredProject": "FastMemo - Progetto in evidenza (si apre in una nuova scheda)",
-    "featuredProjectCoolifyManager": "Coolify Manager - Progetto in evidenza (si apre in una nuova scheda)",
     "externalLink": "Si apre in una nuova scheda",
     "requiredField": "obbligatorio",
-    "formSubmitting": "Invio del modulo in corso"
+    "formSubmitting": "Invio del modulo in corso",
+    "contactCta": "Contattami - vai al modulo di contatto"
   },
   "notFound": {
     "code": "404",
@@ -85,9 +74,52 @@
     },
     "anotherCat": "Mostrami un altro gatto",
     "explore": {
-      "services": "Servizi",
+      "contact": "Contattami",
       "projects": "Progetti",
       "about": "Chi sono"
+    }
+  },
+  "services": {
+    "title": "Servizi",
+    "items": {
+      "collaboration": "Collaborazione",
+      "fde": "Forward Deployed Engineer",
+      "customSolutions": "Custom solutions",
+      "aiNativeEngineer": "AI-native Engineer",
+      "fractionalCto": "Fractional CTO",
+      "audit": "Audit",
+      "mentorship": "Mentorship"
+    }
+  },
+  "contactForm": {
+    "fullname": "Nome completo",
+    "email": "E-mail",
+    "challenge": "Qual è la tua sfida?",
+    "consent": "Acconsento al trattamento dei miei dati personali per ricevere una risposta al mio messaggio. Leggi la <privacy>Privacy Policy</privacy>.",
+    "consentRequired": "Spunta il consenso: senza, non posso risponderti via email.",
+    "submit": "Inviami un'email",
+    "sending": "Invio in corso...",
+    "successTitle": "Messaggio inviato!",
+    "successMessage": "Grazie per avermi contattato! Ti risponderò entro 24-48 ore.",
+    "successExplore": "Nel frattempo, dai un'occhiata ai <projects>progetti</projects> o al mio <linkedin>profilo LinkedIn</linkedin>.",
+    "errorMessage": "Non sono riuscito a inviare il messaggio. Riprova, oppure scrivimi direttamente a {email}.",
+    "rateLimitMessage": "Hai già inviato qualche messaggio poco fa. Riprova tra qualche minuto o scrivimi direttamente a {email}.",
+    "directTitle": "Preferisci saltare il form?",
+    "directEmail": "Scrivimi un'email",
+    "directLinkedin": "Contattami su LinkedIn"
+  },
+  "products": {
+    "downloads": "Oltre 1.000 download",
+    "visitSite": "Vai al sito",
+    "items": {
+      "fastmemo": {
+        "name": "Fast Memo",
+        "tagline": "Note e liste veloci su telefono e desktop. I dati restano tuoi, senza account e senza servizi di terzi."
+      },
+      "coolifyManager": {
+        "name": "Coolify Manager",
+        "tagline": "Gestisci i tuoi server Coolify dal telefono o dalla barra del browser, ovunque ti trovi."
+      }
     }
   }
 }

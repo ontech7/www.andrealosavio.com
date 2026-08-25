@@ -8,53 +8,23 @@ export type NavLink = {
 
 export const NAV_LINKS: readonly NavLink[] = [
   { href: "/", labelKey: "navigation.home" },
-  { href: "/services", labelKey: "navigation.services" },
   { href: "/projects", labelKey: "navigation.projects" },
   { href: "/about", labelKey: "navigation.about" },
   { href: "/llms.txt", labelKey: "navigation.llmsTxt", external: true },
 ] as const;
+
+export const CONTACT_HREF = "/#contact";
 
 export const FOOTER_LINKS = {
   general: {
     titleKey: "footer.sections.general",
     links: [
       { href: "/", labelKey: "footer.links.homepage" },
-      { href: "/services", labelKey: "footer.links.services" },
       { href: "/projects", labelKey: "footer.links.projects" },
       { href: "/about", labelKey: "footer.links.about" },
-      { href: "/best-practices", labelKey: "footer.links.bestPractices" },
       { href: "/llms.txt", labelKey: "footer.links.llmsTxt", external: true },
       { href: "/privacy", labelKey: "footer.links.privacyPolicy" },
     ] as readonly NavLink[],
-  },
-  services: {
-    titleKey: "footer.sections.services",
-    links: [
-      {
-        href: "/services#collaboration",
-        labelKey: "footer.links.collaboration",
-      },
-      {
-        href: "/services#validationMvp",
-        labelKey: "footer.links.validationMvp",
-      },
-      {
-        href: "/services#fdeDiscoveryAudit",
-        labelKey: "footer.links.fdeDiscoveryAudit",
-      },
-      {
-        href: "/services#fractionalCto",
-        labelKey: "footer.links.fractionalCto",
-      },
-      {
-        href: "/services#technicalMentorship",
-        labelKey: "footer.links.technicalMentorship",
-      },
-      {
-        href: "/services#productDevelopment",
-        labelKey: "footer.links.productDevelopment",
-      },
-    ],
   },
   projects: {
     titleKey: "footer.sections.projects",
@@ -64,7 +34,7 @@ export const FOOTER_LINKS = {
         labelKey: "footer.links.personalIdeas",
       },
       { href: "/projects?tags=customer", labelKey: "footer.links.forClients" },
-    ],
+    ] as readonly NavLink[],
   },
 } as const;
 

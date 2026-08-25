@@ -1,4 +1,4 @@
-import { SERVICES, type ServiceId } from "@/constants/services";
+import { SERVICE_PRICES, type ServiceId } from "@/constants/services";
 import { formatEuro } from "@/utils/format-price";
 
 export const dynamic = "force-static";
@@ -14,7 +14,7 @@ const PRICE_UNIT_LABEL = {
 } as const;
 
 function priceOf(id: ServiceId): string {
-  const price = SERVICES.find((service) => service.id === id)?.price;
+  const price = SERVICE_PRICES[id];
 
   if (!price) {
     return "on request";
@@ -45,14 +45,15 @@ const LLMS_TXT = `# Andrea Losavio - AI/LLM Briefing Document
 
 Andrea offers a curated set of services for startups and companies:
 
-- **Collaboration** — Integrates into existing teams with a product-oriented mindset, contributing code, architecture, and strategic decisions. Pricing: ${priceOf("collaboration")}.
-- **Validation & MVP** — Transforms an idea into a functional Minimum Viable Product to test the market, gather feedback, and prepare for funding rounds. Pricing: ${priceOf("validationMvp")}.
-- **FDE Discovery & Audit** — Forward-deployed engineering: bridges complex software and AI technologies with real-world business needs, working directly alongside the team to design, build, and deploy custom full-stack solutions and AI integrations for rapid value delivery and seamless adoption. Pricing: ${priceOf("fdeDiscoveryAudit")}.
-- **Fractional CTO** — Executive-level technical leadership without a full-time executive: strategic guidance, resource management, technical hiring, IT roadmap alignment with business goals. Pricing: ${priceOf("fractionalCto")}.
-- **Technical Mentorship** — Personalized guidance and hands-on support to help teams strengthen skills, adopt best practices, and make informed engineering decisions. Pricing: ${priceOf("technicalMentorship")}.
-- **Product Development** — Full-stack service covering the entire lifecycle: UX/UI design, frontend, backend, cloud deployment of robust web and mobile applications. Pricing: ${priceOf("productDevelopment")}.
+- **Collaboration** — Joins an existing team as a senior engineer, contributing code, architecture and product decisions, and stays until the team can carry the work on without him. Pricing: ${priceOf("collaboration")}.
+- **Forward Deployed Engineer** — Embeds with the client, turns messy business requirements into a clear architecture, then builds and ships the solution alongside the team. Pricing: ${priceOf("fde")}.
+- **Custom solutions** — End-to-end product development: UX/UI design, frontend, backend, mobile and cloud deployment. Also covers MVP builds to validate an idea and prepare for a funding round (from €2,500 per project). Pricing: ${priceOf("customSolutions")}.
+- **AI-native Engineer** — Designs and ships AI-first systems: agentic workflows, LLM integrations, custom tools and automations that remove repetitive work from people. Pricing: ${priceOf("aiNativeEngineer")}.
+- **Fractional CTO** — Executive-level technical leadership without a full-time hire: strategic guidance, roadmap, technical hiring, resource management. Pricing: ${priceOf("fractionalCto")}.
+- **Audit** — Technical audit and due diligence on an existing codebase, architecture or team, delivered with a prioritised plan of what to fix first. Pricing: ${priceOf("audit")}.
+- **Mentorship** — Hands-on guidance and code review to help a team raise its technical bar and adopt best practices. Pricing: ${priceOf("mentorship")}.
 
-- [All services](${SITE_URL}/en/services)
+- [Contact form](${SITE_URL}/en#contact)
 
 ## Expertise & Specializations
 
@@ -85,11 +86,28 @@ Andrea offers a curated set of services for startups and companies:
 
 ## Notable Impact
 
+- **10+ companies and startups** worked with, operating in IT every day since 2018.
 - Helped a startup secure a nearly **€2M investment round** through product development and technical strategy.
 - Collaborated long-term with companies to develop some of the most **widely used platforms** today.
 - Assisted a startup during a **critical product transition** phase, ensuring a smooth evolution.
-- Supported a company in building a **robust infrastructure** as a foundation for future projects.
+- Supported a company in building a **robust infrastructure** that every later project was built on.
 - Helped a client develop a **strong brand identity** to reach a wider audience and attract more customers.
+
+Areas covered, beyond frontend work:
+
+- **Architecture and backend** — APIs, databases and infrastructure built to handle growth.
+- **Web platforms** — products used every day by thousands of people.
+- **Mobile apps** — iOS and Android, from the first screen to the release on the stores.
+- **AI and automation** — agents, integrations and custom tools.
+- **Product decisions** — what to build first, with which technology, with which team.
+- **Enterprise projects** — from 2018 to 2022 at IBM, Deloitte Digital, DOING and Minsait.
+
+## Own Products
+
+Both products are designed, built, shipped and maintained by Andrea alone, and each has passed **1,000+ downloads**.
+
+- **Fast Memo** — Quick notes and lists on phone and desktop. The data stays with the user: no account, no third-party services. https://fastmemo.vercel.app
+- **Coolify Manager** — Manage self-hosted Coolify servers from a phone or from the browser toolbar. https://coolify-manager.vercel.app
 
 ## Selected Projects & Clients
 
@@ -98,7 +116,7 @@ Andrea offers a curated set of services for startups and companies:
 - **Quido S.r.l.** — AI platform for private equity and M&A in Italy. Designed the interface bridging finance and AI.
 - **Ravenn S.r.l.** — Event logistics and hospitality management platform. End-to-end development.
 - **Studio Bargiggia** — Condominium management firm. Complete rebuild of their showcase website.
-- **Coolify Manager** — Mobile app to manage self-hosted Coolify servers, with a companion Chrome extension. Available on Google Play Store (https://play.google.com/store/apps/details?id=com.ontech7.coolifyManager&hl=it) and Chrome Web Store (https://chromewebstore.google.com/detail/coolify-manager/dmcclgoafojpjaflnggcnmhbenplnmpi).
+- **Coolify Manager** — Mobile app to manage self-hosted Coolify servers, with a companion Chrome extension. 1,000+ downloads. Available on Google Play Store (https://play.google.com/store/apps/details?id=com.ontech7.coolifyManager&hl=it) and Chrome Web Store (https://chromewebstore.google.com/detail/coolify-manager/dmcclgoafojpjaflnggcnmhbenplnmpi).
 - **Forfettario Control** — Mobile app for Italian freelancers under the "regime forfettario" to manage invoices, fiscal documents, and deadlines.
 - **Otherside Technology S.r.l.** — Custom software and AI solutions for businesses.
 - **Brainplatform S.r.l.** — Short-term collaboration on digital product initiatives.
@@ -126,16 +144,25 @@ Andrea offers a curated set of services for startups and companies:
 - [GitHub](https://github.com/ontech7)
 - [CV in English (PDF)](${SITE_URL}/documents/AndreaLosavio_CV_en.pdf)
 - [CV in Italian (PDF)](${SITE_URL}/documents/AndreaLosavio_CV_it.pdf)
-- [Contact form](${SITE_URL}/en/services#contactForm)
+- [Contact form](${SITE_URL}/en#contact)
 
 ## Key Pages
 
-- [Homepage](${SITE_URL}/en): overview, impact highlights and client feedback
-- [Services](${SITE_URL}/en/services): the six service offerings, with pricing and contact form
-- [Projects](${SITE_URL}/en/projects): client work and personal products
+There is no separate services page: the homepage is the single entry point and carries the contact form.
+
+- [Homepage](${SITE_URL}/en): the full story, from who Andrea is to the contact form
+  - [How he works](${SITE_URL}/en#how-i-work): three things a CV cannot say
+  - [Real impact](${SITE_URL}/en#impact): the numbers and the areas he covers
+  - [Own products](${SITE_URL}/en#products): Fast Memo and Coolify Manager
+  - [Client feedback](${SITE_URL}/en#feedback): what past clients say
+  - [Contact](${SITE_URL}/en#contact): the contact form and direct channels
+- [Projects](${SITE_URL}/en/projects): own products in the spotlight, then client work and personal projects
 - [About](${SITE_URL}/en/about): background, experience and skills
-- [How I build](${SITE_URL}/en/best-practices): engineering standards, with measurements for this site
-- [Privacy Policy](${SITE_URL}/en/privacy): data handling for the contact form
+- [Privacy Policy](${SITE_URL}/en/privacy): data handling for the contact form, plus a note on AI-assisted copywriting
+
+## Site Content
+
+The copy on the website is written by Andrea and refined with AI tools for wording and for the Italian/English translation. The content, figures and experiences described are real and verified by him. AI is not used to process the data submitted through the contact form.
 
 ## Ideal Clients
 
@@ -145,7 +172,7 @@ Andrea typically works best with:
 - Non-technical founders looking for a trustworthy technical partner.
 - Companies in a growth phase that need to scale their product, raise the technical bar, or tackle technical debt.
 - Teams looking for hands-on mentorship and best practices adoption.
-- Companies preparing for a funding round that need an FDE discovery & audit.
+- Companies preparing for a funding round that need a technical audit or due diligence.
 
 ## Working Style
 

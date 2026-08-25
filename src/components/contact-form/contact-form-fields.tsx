@@ -63,7 +63,7 @@ export function ContactFormFields({
       {serviceBadge}
 
       <FloatingInput
-        label={t("services.contactForm.fullname")}
+        label={t("common.contactForm.fullname")}
         icon={<UserIcon className="size-4" />}
         name="fullname"
         required
@@ -73,7 +73,7 @@ export function ContactFormFields({
       />
 
       <FloatingInput
-        label={t("services.contactForm.email")}
+        label={t("common.contactForm.email")}
         type="email"
         icon={<MailIcon className="size-4" />}
         name="email"
@@ -106,7 +106,7 @@ export function ContactFormFields({
           htmlFor={checkboxId}
           className="text-muted-foreground cursor-pointer text-sm leading-relaxed"
         >
-          {t.rich("services.contactForm.consent", {
+          {t.rich("common.contactForm.consent", {
             privacy: (children) => (
               <Link
                 href="/privacy"
@@ -135,7 +135,7 @@ export function ContactFormFields({
         className={cn(
           "flex",
           submitAlignment === "center"
-            ? "justify-center pt-4"
+            ? "justify-center pt-2"
             : "justify-end pt-2"
         )}
       >
@@ -146,7 +146,7 @@ export function ContactFormFields({
         >
           {status === "loading" ? (
             <>
-              {t("services.contactForm.sending")}
+              {t("common.contactForm.sending")}
               <LoaderIcon className="size-4 animate-spin" aria-hidden="true" />
             </>
           ) : (

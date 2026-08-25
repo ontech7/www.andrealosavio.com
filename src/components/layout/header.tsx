@@ -6,6 +6,7 @@ import { cn } from "@/utils/cn";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { Logo } from "../logo";
+import { ContactCta } from "./contact-cta";
 import { LanguageSwitcher } from "./language-switcher";
 
 export function Header() {
@@ -61,6 +62,8 @@ export function Header() {
                 );
               })}
             </nav>
+
+            <ContactCta className="ml-2" />
 
             <LanguageSwitcher className="ml-4" />
           </div>
@@ -153,6 +156,11 @@ export function Header() {
                   );
                 })}
               </div>
+
+              <ContactCta
+                className="mt-3 ml-4"
+                onNavigate={() => setMobileMenuOpen(false)}
+              />
             </nav>
 
             <ul

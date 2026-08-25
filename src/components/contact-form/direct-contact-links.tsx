@@ -14,11 +14,11 @@ export function DirectContactLinks({ className }: DirectContactLinksProps) {
   const t = useTranslations();
 
   return (
-    <div className={cn("flex flex-col items-center gap-3", className)}>
+    <div className={cn("flex flex-col items-center gap-2", className)}>
       <div className="flex w-full items-center gap-4">
         <div className="bg-border h-px flex-1" />
         <span className="text-muted-foreground text-sm">
-          {t("services.contactForm.directTitle")}
+          {t("common.contactForm.directTitle")}
         </span>
         <div className="bg-border h-px flex-1" />
       </div>
@@ -30,7 +30,7 @@ export function DirectContactLinks({ className }: DirectContactLinksProps) {
           className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors"
         >
           <MailIcon className="size-4" aria-hidden="true" />
-          {t("services.contactForm.directEmail")}
+          {t("common.contactForm.directEmail")}
         </a>
 
         <a
@@ -41,7 +41,7 @@ export function DirectContactLinks({ className }: DirectContactLinksProps) {
           className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors"
         >
           <LinkedinIcon className="size-4" aria-hidden="true" />
-          {t("services.contactForm.directLinkedin")}
+          {t("common.contactForm.directLinkedin")}
         </a>
       </div>
 

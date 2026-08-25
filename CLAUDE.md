@@ -57,15 +57,15 @@ npx tsc --noEmit   # type check (run this after any TS edit)
 
 ## Quick orientation map
 
-| I want to…                  | Start here                                                                            |
-| --------------------------- | ------------------------------------------------------------------------------------- |
-| Add a new page              | `src/app/[locale]/<route>/page.tsx`, plus `sitemap.ts`                                |
-| Tweak the header / footer   | `src/components/layout/`                                                              |
-| Add / reshape a translation | `src/translations/<locale>/<ns>.json` + `src/libs/i18n/request.ts` if a new namespace |
-| Add JSON-LD to a page       | `src/utils/seo-schema.ts` helpers                                                     |
-| Change the contact flow     | `src/app/api/contact/route.ts`, `src/libs/email/`, `src/libs/security/`               |
-| Update OG metadata          | `generateMetadata` inside the relevant `page.tsx`                                     |
-| Touch URL-driven filters    | `nuqs` parsers near the consumer (e.g. `projects-section.tsx`)                        |
+| I want to…                  | Start here                                                                                                                          |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Add a new page              | `src/app/[locale]/<route>/page.tsx`, plus `sitemap.ts`                                                                              |
+| Tweak the header / footer   | `src/components/layout/`                                                                                                            |
+| Add / reshape a translation | `src/translations/<locale>/<ns>.json` + `src/libs/i18n/request.ts` if a new namespace                                               |
+| Add JSON-LD to a page       | `src/utils/seo-schema.ts` helpers                                                                                                   |
+| Change the contact flow     | `src/app/[locale]/(homepage)/sections/contact-section.tsx`, `src/app/api/contact/route.ts`, `src/libs/email/`, `src/libs/security/` |
+| Update OG metadata          | `generateMetadata` inside the relevant `page.tsx`                                                                                   |
+| Touch URL-driven filters    | `nuqs` parsers near the consumer (e.g. `projects-section.tsx`)                                                                      |
 
 ## Available agent skills (load with the `skill` tool)
 

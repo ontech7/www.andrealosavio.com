@@ -1,26 +1,95 @@
 {
   "metadata": {
     "title": "Andrea Losavio | Senior Software Engineer & FDE",
-    "description": "Helping startups and companies build solid, scalable digital products focused on growth"
+    "description": "Freelance software engineer. I build software for companies and startups: architecture, web, mobile, backend and AI. From the idea to the finished product."
   },
   "hero": {
+    "availability": "Available for new projects",
     "title": "Andrea Losavio",
     "subtitle": "Senior Software Engineer & FDE",
-    "description": "Helping startups and companies build solid, scalable digital products focused on growth",
-    "ctaDiscussVision": "Let's discuss your vision",
-    "ctaMoreAboutMe": "More about me",
-    "ctaZeroToOne": "Zero to One"
+    "description": "I have been building software for companies and startups since 2018. I take care of everything it takes to bring a product from the idea to the market: architecture, development, technical decisions and support for the team.",
+    "ctaHowIWork": "Get to know me",
+    "ctaContact": "Contact me"
+  },
+  "howIWork": {
+    "eyebrow": "Before we talk business",
+    "title": "Let's get to know each other",
+    "subtitle": "Three things about me that a CV cannot really say.",
+    "steps": {
+      "listen": {
+        "tag": "How I start",
+        "title": "I start with questions, not with code",
+        "text": "Before writing a single line I want to understand the problem. I talk to the people who know the business, put everything down on paper and turn their needs into clear technical decisions. That way the project starts with the right ideas and no surprises halfway through.",
+        "alt": "Andrea Losavio designing a solution at the whiteboard with a colleague from the Quido team"
+      },
+      "team": {
+        "tag": "How I work",
+        "title": "I become part of the team",
+        "text": "I am not a supplier who delivers and disappears. I stay inside the group, listen to feedback and put it back into the product. When the work is over, the team can carry on by itself what we built together.",
+        "alt": "Andrea Losavio with the Quido team at the company offices"
+      },
+      "beyond": {
+        "tag": "What to expect",
+        "title": "I don't ship things I wouldn't use",
+        "text": "If a technical choice is wrong I tell you, even when it is awkward. If something can be done better I do it again. What I hand over is stuff I would put online under my own name, and in fact I do.",
+        "alt": "Andrea Losavio being interviewed in the Story Time television studio on Canale Italia"
+      }
+    },
+    "cta": "Get to know me better"
   },
   "makingAnImpact": {
-    "title": "Making an impact",
-    "subtitle": "How I supported teams and clients grow, build, and move forward",
-    "items": {
-      "brandIdentity": "Helped a client develop a <highlight>strong brand identity</highlight> that allowed them to reach a wider audience and attract more customers",
-      "infrastructure": "Supported a company in building a <highlight>robust infrastructure</highlight>, laying solid foundations for future projects",
-      "platforms": "Collaborated long-term with a company to develop some of the most <highlight>widely used platforms</highlight> today",
-      "transition": "Assisted a startup during a <highlight>critical product transition</highlight> phase, ensuring a smooth evolution",
-      "investment": "Helped a startup secure almost <highlight>€2M investment</highlight> round through product development and technical strategy"
+    "title": "Real impact",
+    "subtitle": "What I have done so far, with no fluff.",
+    "kpis": {
+      "clients": {
+        "value": "10+",
+        "label": "companies and startups I worked with"
+      },
+      "since": {
+        "value": "Since 2018",
+        "label": "working in IT, every single day"
+      },
+      "investment": {
+        "value": "~€2M",
+        "label": "raised by a startup I worked with"
+      }
+    },
+    "outcomes": {
+      "architecture": {
+        "title": "Architecture and backend",
+        "text": "APIs, databases and infrastructure built to handle growth. For one company I built the foundations every later project was born on."
+      },
+      "web": {
+        "title": "Web platforms",
+        "text": "Products thousands of people use every day, quick to use and stable over time."
+      },
+      "mobile": {
+        "title": "Mobile apps",
+        "text": "Apps for iOS and Android, from the first screen to the release on the stores."
+      },
+      "ai": {
+        "title": "AI and automation",
+        "text": "Systems that use AI models to take repetitive work off people: agents, integrations and custom tools."
+      },
+      "product": {
+        "title": "Product decisions",
+        "text": "I sit next to the people who run the company to decide what to build first, with which technology and with which team."
+      },
+      "enterprise": {
+        "title": "Enterprise projects",
+        "text": "From 2018 to 2022 on platforms for large international clients, at IBM, Deloitte Digital, DOING and Minsait."
+      }
     }
+  },
+  "products": {
+    "title": "I do not build only for other people",
+    "subtitle": "Two apps of mine, published and used by real people.",
+    "cta": "See all the projects"
+  },
+  "youCouldBeNext": {
+    "title": "You could be next",
+    "subtitle": "Every project above started with a simple chat.",
+    "text": "You have seen what I did for other people. Now I am curious to find out <highlight>what we can build together</highlight>."
   },
   "feedback": {
     "clients": {
@@ -56,38 +125,8 @@
       }
     }
   },
-  "quote": {
-    "text": "Every moment in business happens only once. The next Bill Gates will not build an operating system. The next Larry Page or Sergey Brin won't make a search engine. And the next Mark Zuckerberg won't create a social network. If you are copying these guys, you aren't learning from them.",
-    "author": "Peter Thiel",
-    "book": "Zero to One: Notes on Startups, or How to Build the Future"
-  },
-  "youCouldBeNext": {
-    "title": "You could be next.",
-    "subtitle": "Every great digital product in that timeline started with a single conversation",
-    "leftText": {
-      "line1": "You've seen what I've helped others achieve — now I'm ready to discover",
-      "line1Highlight": "what we can build together",
-      "line2": "Whether you need to validate an idea, scale a product, or tackle a complex technical challenge, I have the experience to guide you there."
-    },
-    "proof": {
-      "intro": "The quickest way to assess me is this site: what you see here is measured, not claimed. But it's only the visible part — the same standards go into the architecture of a backend, a mobile app or an agentic system, where nobody can hand you a score.",
-      "link": "See how I build"
-    },
-    "notReadyYet": "Not ready yet?",
-    "keepScrolling": "Keep scrolling to read what clients say about working with me.",
-    "challengeBox": {
-      "title": "What's your main challenge?",
-      "subtitle": "Choose a service designed to solve it.",
-      "services": {
-        "fractionalCto": "Fractional CTO",
-        "validationMvp": "Validation & MVP",
-        "technicalMentorship": "Technical Mentorship",
-        "fdeDiscoveryAudit": "FDE Discovery & Audit",
-        "productDevelopment": "Product Development",
-        "collaboration": "Collaboration"
-      },
-      "or": "or",
-      "contactMe": "Contact me"
-    }
+  "contact": {
+    "title": "Let's talk about your project",
+    "description": "Tell me what you need. I reply within 24 to 48 hours, no strings attached."
   }
 }

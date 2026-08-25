@@ -4,7 +4,7 @@
     "description": "Privacy policy and personal data processing information for andrealosavio.com"
   },
   "title": "Privacy Policy",
-  "lastUpdated": "Last updated: 4th February 2025",
+  "lastUpdated": "Last updated: 25th August 2026",
   "sections": {
     "controller": {
       "title": "1. Data Controller",
@@ -58,8 +58,12 @@
       "title": "8. Cookies",
       "content": "This website does not use profiling cookies. Only technical cookies strictly necessary for the proper functioning of the website may be used."
     },
+    "aiAssistance": {
+      "title": "9. Site content and use of AI",
+      "content": "The texts on this site are written by me and refined with the help of artificial intelligence tools, which I use to polish the wording and to translate between Italian and English. The content, figures and experiences described are real and checked by me. AI is not used to process the data you send through the contact form: that data only goes through the services listed in section 5."
+    },
     "changes": {
-      "title": "9. Changes to This Policy",
+      "title": "10. Changes to This Policy",
       "content": "This privacy policy may be updated from time to time. Any changes will be published on this page with an updated revision date."
     }
   }

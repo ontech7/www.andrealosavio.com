@@ -178,7 +178,7 @@ export function generateBreadcrumbSchema(
 
 interface ServiceOffer {
   name: string;
-  description: string;
+  description?: string;
   url?: string;
   price?: string;
   priceCurrency?: string;
@@ -210,7 +210,7 @@ export function generateServiceCatalogSchema({
       itemOffered: {
         "@type": "Service" as const,
         name: s.name,
-        description: s.description,
+        ...(s.description && { description: s.description }),
         ...(s.url && { url: s.url }),
         provider: { "@id": providerId },
       },
@@ -231,7 +231,7 @@ interface GenerateProfessionalServiceSchemaProps {
 }
 
 /**
- * The business entity behind the services page. Ties the offer catalog and the
+ * The business entity behind the freelance work. Ties the offer catalog and the
  * `Person` entity declared on the homepage into one connected graph.
  */
 export function generateProfessionalServiceSchema({

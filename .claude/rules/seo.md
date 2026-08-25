@@ -26,7 +26,7 @@ in both languages (IT/EN).
 **Implementation**:
 
 - File: `src/app/sitemap.ts`
-- Generates 10 URLs (5 pages × 2 locales)
+- Generates 8 URLs (4 pages × 2 locales)
 - Includes: priority, changeFrequency, lastModified
 - Supports hreflang alternates
 
@@ -35,8 +35,6 @@ in both languages (IT/EN).
 ```
 https://www.andrealosavio.com/it
 https://www.andrealosavio.com/en
-https://www.andrealosavio.com/it/services
-https://www.andrealosavio.com/en/services
 https://www.andrealosavio.com/it/projects
 https://www.andrealosavio.com/en/projects
 https://www.andrealosavio.com/it/about
@@ -217,8 +215,8 @@ Knowledge Graph.
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Services",
-      "item": "https://www.andrealosavio.com/en/services"
+      "name": "Projects",
+      "item": "https://www.andrealosavio.com/en/projects"
     }
   ]
 }
@@ -260,12 +258,12 @@ Knowledge Graph.
 <link
   rel="alternate"
   hreflang="en"
-  href="https://www.andrealosavio.com/en/services"
+  href="https://www.andrealosavio.com/en/projects"
 />
 <link
   rel="alternate"
   hreflang="it"
-  href="https://www.andrealosavio.com/it/services"
+  href="https://www.andrealosavio.com/it/projects"
 />
 ```
 
@@ -401,8 +399,6 @@ To speed up indexing:
 2. Enter URLs one at a time:
    - `https://www.andrealosavio.com/it`
    - `https://www.andrealosavio.com/en`
-   - `https://www.andrealosavio.com/it/services`
-   - `https://www.andrealosavio.com/en/services`
    - `https://www.andrealosavio.com/it/projects`
    - `https://www.andrealosavio.com/en/projects`
 3. Click **"Request indexing"**

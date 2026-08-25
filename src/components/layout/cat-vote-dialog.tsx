@@ -10,6 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
+import { CONTACT_HREF } from "@/constants/navigation";
 import { Link } from "@/libs/i18n/navigation";
 import confetti from "canvas-confetti";
 import { Heart, Sparkles } from "lucide-react";
@@ -28,6 +29,19 @@ interface CatVoteDialogProps {
   children: React.ReactNode;
 }
 
+const CAT_IMAGE_HOSTS = new Set([
+  "cdn2.thecatapi.com",
+  "s3.us-west-2.amazonaws.com",
+]);
+
+function isRenderableCat(url: string) {
+  try {
+    return CAT_IMAGE_HOSTS.has(new URL(url).hostname);
+  } catch {
+    return false;
+  }
+}
+
 export function CatVoteDialog({ children }: CatVoteDialogProps) {
   const t = useTranslations();
 
@@ -41,12 +55,17 @@ export function CatVoteDialog({ children }: CatVoteDialogProps) {
     setHasVoted(false);
 
     try {
-      const response = await fetch(
-        "https://api.thecatapi.com/v1/images/search?size=med"
-      );
-      const data = await response.json();
-      if (data && data.length > 0) {
-        setCat(data[0]);
+      for (let attempt = 0; attempt < 3; attempt++) {
+        const response = await fetch(
+          "https://api.thecatapi.com/v1/images/search?size=med"
+        );
+        const data = await response.json();
+        const candidate: CatImage | undefined = data?.[0];
+
+        if (candidate && isRenderableCat(candidate.url)) {
+          setCat(candidate);
+          return;
+        }
       }
     } catch (error) {
       console.error("Failed to fetch cat:", error);
@@ -193,8 +212,8 @@ export function CatVoteDialog({ children }: CatVoteDialogProps) {
             <div className="mt-4 flex w-full flex-col gap-3">
               <div className="flex flex-col flex-wrap justify-center gap-2">
                 <Button variant="primary" asChild onClick={handleLinkClick}>
-                  <Link href="/services">
-                    {t("common.catVote.explore.services")}
+                  <Link href={CONTACT_HREF}>
+                    {t("common.catVote.explore.contact")}
                   </Link>
                 </Button>
                 <Button variant="primary" asChild onClick={handleLinkClick}>

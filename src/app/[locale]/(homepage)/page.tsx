@@ -1,17 +1,23 @@
+import { CONTACT_EMAIL, LINKEDIN_URL } from "@/constants/contact";
+import { SERVICE_IDS } from "@/constants/services";
 import {
   generateOrganizationSchema,
   generatePersonSchema,
+  generateProfessionalServiceSchema,
+  generateServiceCatalogSchema,
   generateWebSiteSchema,
   schemaToJsonLd,
 } from "@/utils/seo-schema";
 import { PageMessages } from "@/libs/i18n/messages";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { SectionConnector } from "./components/section-connector";
+import { ContactSection } from "./sections/contact-section";
 import { FeedbackSection } from "./sections/feedback-section";
 import { HeroSection } from "./sections/hero-section";
+import { HowIWorkSection } from "./sections/how-i-work-section";
 import { MakingAnImpactSection } from "./sections/making-an-impact-section";
-import { QuoteSection } from "./sections/quote-section";
-import { YouCouldBeNextSection } from "./sections/you-could-be-next-section";
+import { ProductsSection } from "./sections/products-section";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -67,10 +73,7 @@ export default async function HomePage({ params }: PageProps) {
   const siteUrl = `https://${process.env.NEXT_PUBLIC_SITE_URL || ""}`;
 
   const description = t("homepage.metadata.description");
-  const sameAs = [
-    "https://github.com/ontech7",
-    "https://www.linkedin.com/in/andrea-losavio/",
-  ];
+  const sameAs = ["https://github.com/ontech7", LINKEDIN_URL];
 
   const personSchema = generatePersonSchema({
     name: "Andrea Losavio",
@@ -78,7 +81,7 @@ export default async function HomePage({ params }: PageProps) {
     url: siteUrl,
     description,
     image: `${siteUrl}/images/og.jpg`,
-    email: "business@andrealosavio.com",
+    email: CONTACT_EMAIL,
     nationality: "Italian",
     alumniOf: [
       {
@@ -116,10 +119,33 @@ export default async function HomePage({ params }: PageProps) {
     url: siteUrl,
     logo: `${siteUrl}/images/og.jpg`,
     description,
-    email: "business@andrealosavio.com",
+    email: CONTACT_EMAIL,
     vatID: "IT12705460967",
     founder: { name: "Andrea Losavio", url: siteUrl },
     sameAs,
+  });
+
+  const catalogId = `${siteUrl}#catalog`;
+
+  const serviceCatalogSchema = generateServiceCatalogSchema({
+    providerId: `${siteUrl}#person`,
+    catalogId,
+    catalogName: t("common.services.title"),
+    services: SERVICE_IDS.map((serviceId) => ({
+      name: t(`common.services.items.${serviceId}`),
+      url: `${siteUrl}/${locale}#contact`,
+    })),
+  });
+
+  const professionalServiceSchema = generateProfessionalServiceSchema({
+    name: "Andrea Losavio",
+    url: `${siteUrl}/${locale}`,
+    description,
+    founderId: `${siteUrl}#person`,
+    catalogId,
+    areaServed: ["IT", "EU", "Worldwide"],
+    email: CONTACT_EMAIL,
+    sameAs: ["https://github.com/ontech7", LINKEDIN_URL],
   });
 
   const webSiteSchema = generateWebSiteSchema({
@@ -139,15 +165,22 @@ export default async function HomePage({ params }: PageProps) {
             personSchema,
             organizationSchema,
             webSiteSchema,
+            professionalServiceSchema,
+            serviceCatalogSchema,
           ]),
         }}
       />
       <PageMessages namespaces={["homepage"]}>
         <HeroSection id="hero" />
-        <MakingAnImpactSection id="making-an-impact" />
-        <YouCouldBeNextSection id="you-could-be-next" />
+        <HowIWorkSection id="how-i-work" />
+        <SectionConnector />
+        <MakingAnImpactSection id="impact" />
+        <SectionConnector />
+        <ProductsSection id="products" />
+        <SectionConnector />
         <FeedbackSection id="feedback" />
-        <QuoteSection id="quote" />
+        <SectionConnector />
+        <ContactSection id="contact" />
       </PageMessages>
     </>
   );

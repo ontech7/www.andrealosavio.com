@@ -1,47 +1,54 @@
 import {
-  GemIcon,
+  Building2Icon,
+  CompassIcon,
   GlobeIcon,
-  LayersIcon,
-  RefreshCwIcon,
+  ServerIcon,
+  SmartphoneIcon,
   SparklesIcon,
 } from "lucide-react";
 
-export interface ImpactItem {
-  icon: typeof SparklesIcon;
-  textKey: string;
-  highlightKey: string;
-  position: "left" | "right";
-}
+export type ImpactTile =
+  | {
+      kind: "kpi";
+      id: string;
+      featured?: boolean;
+      className?: string;
+    }
+  | {
+      kind: "outcome";
+      id: string;
+      icon: typeof SparklesIcon;
+      className?: string;
+    };
 
-export const IMPACT_ITEMS: ImpactItem[] = [
+export const IMPACT_TILES: ImpactTile[] = [
   {
-    icon: SparklesIcon,
-    textKey: "homepage.makingAnImpact.items.brandIdentity",
-    highlightKey: "homepage.makingAnImpact.items.brandIdentityHighlight",
-    position: "left",
+    kind: "kpi",
+    id: "investment",
+    featured: true,
+    className: "sm:col-span-2 lg:row-span-2",
+  },
+  { kind: "kpi", id: "clients" },
+  { kind: "kpi", id: "since" },
+  {
+    kind: "outcome",
+    id: "architecture",
+    icon: ServerIcon,
+    className: "sm:col-span-2",
+  },
+  { kind: "outcome", id: "web", icon: GlobeIcon, className: "sm:col-span-2" },
+  { kind: "outcome", id: "mobile", icon: SmartphoneIcon },
+  { kind: "outcome", id: "ai", icon: SparklesIcon },
+  {
+    kind: "outcome",
+    id: "product",
+    icon: CompassIcon,
+    className: "sm:col-span-2",
   },
   {
-    icon: LayersIcon,
-    textKey: "homepage.makingAnImpact.items.infrastructure",
-    highlightKey: "homepage.makingAnImpact.items.infrastructureHighlight",
-    position: "right",
-  },
-  {
-    icon: GlobeIcon,
-    textKey: "homepage.makingAnImpact.items.platforms",
-    highlightKey: "homepage.makingAnImpact.items.platformsHighlight",
-    position: "left",
-  },
-  {
-    icon: RefreshCwIcon,
-    textKey: "homepage.makingAnImpact.items.transition",
-    highlightKey: "homepage.makingAnImpact.items.transitionHighlight",
-    position: "right",
-  },
-  {
-    icon: GemIcon,
-    textKey: "homepage.makingAnImpact.items.investment",
-    highlightKey: "homepage.makingAnImpact.items.investmentHighlight",
-    position: "left",
+    kind: "outcome",
+    id: "enterprise",
+    icon: Building2Icon,
+    className: "sm:col-span-2",
   },
 ];

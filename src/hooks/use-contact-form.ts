@@ -39,7 +39,7 @@ export function useContactForm() {
       if (!consent) {
         setStatus("error");
         setConsentError(true);
-        setErrorMessage(t("services.contactForm.consentRequired"));
+        setErrorMessage(t("common.contactForm.consentRequired"));
         return;
       }
 
@@ -70,8 +70,8 @@ export function useContactForm() {
           setErrorMessage(
             t(
               response.status === 429
-                ? "services.contactForm.rateLimitMessage"
-                : "services.contactForm.errorMessage",
+                ? "common.contactForm.rateLimitMessage"
+                : "common.contactForm.errorMessage",
               { email: CONTACT_EMAIL }
             )
           );
@@ -84,7 +84,7 @@ export function useContactForm() {
       } catch {
         setStatus("error");
         setErrorMessage(
-          t("services.contactForm.errorMessage", { email: CONTACT_EMAIL })
+          t("common.contactForm.errorMessage", { email: CONTACT_EMAIL })
         );
         refreshCsrfToken();
       }

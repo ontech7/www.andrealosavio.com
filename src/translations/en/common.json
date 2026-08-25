@@ -1,34 +1,25 @@
 {
   "navigation": {
     "home": "Home",
-    "services": "Services",
     "projects": "Projects",
     "about": "About",
-    "llmsTxt": "llms.txt"
+    "llmsTxt": "llms.txt",
+    "contact": "Contact me"
   },
   "footer": {
-    "tagline": "Helping startups and companies build solid, scalable digital products focused on growth",
+    "tagline": "I build software for companies and startups, from the idea to the finished product.",
     "sections": {
       "general": "General",
-      "services": "Services",
       "projects": "Projects"
     },
     "links": {
       "homepage": "Homepage",
-      "services": "Services",
       "projects": "Projects",
       "about": "About me",
-      "privacyPolicy": "Privacy Policy",
       "llmsTxt": "llms.txt",
-      "collaboration": "Collaboration",
-      "validationMvp": "Validation & MVP",
-      "fdeDiscoveryAudit": "FDE Discovery & Audit",
-      "fractionalCto": "Fractional CTO",
-      "technicalMentorship": "Technical Mentorship",
-      "productDevelopment": "Product Development",
+      "privacyPolicy": "Privacy Policy",
       "personalIdeas": "Personal & Ideas",
-      "forClients": "For clients",
-      "bestPractices": "How I build"
+      "forClients": "For clients"
     },
     "cta": {
       "title": "Did you decide yet?",
@@ -36,7 +27,6 @@
       "descriptionLink": "this cat",
       "descriptionPart2": " a vote"
     },
-    "featuredProjects": "Featured projects",
     "copyright": "Copyright © 2018 - {year} Andrea Losavio. All rights reserved.",
     "vat": "VAT: {vatNumber}",
     "privacyPolicy": "Privacy Policy"
@@ -61,11 +51,10 @@
     "closeDialog": "Close dialog",
     "sortDropdown": "Sort order",
     "filterByTag": "Filter by {tag}",
-    "featuredProject": "FastMemo - Featured project (opens in new tab)",
-    "featuredProjectCoolifyManager": "Coolify Manager - Featured project (opens in new tab)",
     "externalLink": "Opens in new tab",
     "requiredField": "required",
-    "formSubmitting": "Submitting form"
+    "formSubmitting": "Submitting form",
+    "contactCta": "Contact me - go to the contact form"
   },
   "notFound": {
     "code": "404",
@@ -85,9 +74,52 @@
     },
     "anotherCat": "Show me another cat",
     "explore": {
-      "services": "Services",
+      "contact": "Contact me",
       "projects": "Projects",
       "about": "About me"
+    }
+  },
+  "services": {
+    "title": "Services",
+    "items": {
+      "collaboration": "Collaboration",
+      "fde": "Forward Deployed Engineer",
+      "customSolutions": "Custom solutions",
+      "aiNativeEngineer": "AI-native Engineer",
+      "fractionalCto": "Fractional CTO",
+      "audit": "Audit",
+      "mentorship": "Mentorship"
+    }
+  },
+  "contactForm": {
+    "fullname": "Fullname",
+    "email": "E-mail",
+    "challenge": "What's your challenge?",
+    "consent": "I consent to the processing of my personal data in order to receive a reply to my message. Read the <privacy>Privacy Policy</privacy>.",
+    "consentRequired": "Please tick the consent box: without it, I can't reply by email.",
+    "submit": "Send me an email",
+    "sending": "Sending...",
+    "successTitle": "Message sent!",
+    "successMessage": "Thank you for reaching out! I'll get back to you within 24-48 hours.",
+    "successExplore": "In the meantime, have a look at the <projects>projects</projects> or at my <linkedin>LinkedIn profile</linkedin>.",
+    "errorMessage": "I couldn't send your message. Please try again, or write to me directly at {email}.",
+    "rateLimitMessage": "You've already sent a few messages recently. Try again in a few minutes or write to me directly at {email}.",
+    "directTitle": "Prefer to skip the form?",
+    "directEmail": "Send me an email",
+    "directLinkedin": "Reach me on LinkedIn"
+  },
+  "products": {
+    "downloads": "Over 1,000 downloads",
+    "visitSite": "Visit the site",
+    "items": {
+      "fastmemo": {
+        "name": "Fast Memo",
+        "tagline": "Quick notes and lists on phone and desktop. Your data stays yours, with no account and no third party services."
+      },
+      "coolifyManager": {
+        "name": "Coolify Manager",
+        "tagline": "Manage your Coolify servers from your phone or from the browser toolbar, wherever you are."
+      }
     }
   }
 }

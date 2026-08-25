@@ -174,6 +174,7 @@
 
 /* Custom Scrollbar */
 html {
+  scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--muted-foreground) transparent;
 }
@@ -197,41 +198,36 @@ html {
   background-color: var(--muted);
 }
 
-/* Best Practices page - CSS-only reveal and score rings (no JS on this route) */
+/* Contact CTA - rotating shimmer running along the button outline */
 
-@property --bp-ring-angle {
+@property --contact-cta-angle {
   syntax: "<angle>";
   initial-value: 0deg;
   inherits: false;
 }
 
-.bp-ring {
+.contact-cta-outline {
   background:
     conic-gradient(
-      from 0deg,
-      var(--secondary) var(--bp-ring-angle),
-      transparent var(--bp-ring-angle)
+      from var(--contact-cta-angle),
+      transparent 0%,
+      transparent 62%,
+      color-mix(in srgb, var(--secondary) 55%, transparent) 78%,
+      #ffffff 88%,
+      color-mix(in srgb, var(--secondary) 55%, transparent) 96%,
+      transparent 100%
     ),
-    conic-gradient(from 0deg, var(--border) 0deg 360deg);
-  --bp-ring-angle: 360deg;
-}
-
-.bp-ring-inner {
-  background: var(--card);
+    var(--border-gradient);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .bp-ring {
-    animation: bp-ring-fill 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: var(--bp-ring-delay, 0ms);
+  .contact-cta-outline {
+    animation: contact-cta-spin 3.5s linear infinite;
   }
 }
 
-@keyframes bp-ring-fill {
-  from {
-    --bp-ring-angle: 0deg;
-  }
+@keyframes contact-cta-spin {
   to {
-    --bp-ring-angle: 360deg;
+    --contact-cta-angle: 360deg;
   }
 }

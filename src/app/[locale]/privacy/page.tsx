@@ -59,6 +59,7 @@ const sectionKeys = [
   "retention",
   "rights",
   "cookies",
+  "aiAssistance",
   "changes",
 ] as const;
 

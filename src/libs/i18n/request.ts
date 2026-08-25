@@ -5,11 +5,9 @@ import { routing } from "./routing";
 const namespaces = [
   "common",
   "homepage",
-  "services",
   "projects",
   "about",
   "privacy",
-  "bestPractices",
 ] as const;
 
 async function loadMessages(locale: Locale) {

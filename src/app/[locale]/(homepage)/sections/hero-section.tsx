@@ -2,10 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { fadeInUpEnter } from "@/constants/motion";
-import { SOCIAL_LINKS } from "@/constants/navigation";
+import { CONTACT_HREF, SOCIAL_LINKS } from "@/constants/navigation";
 import { Link } from "@/libs/i18n/navigation";
 import { cn } from "@/utils/cn";
-import { ArrowDownIcon, ArrowRightIcon, CodeIcon } from "lucide-react";
+import { ArrowDownIcon, CodeIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useLocale, useTranslations } from "next-intl";
 import { HomepageHeroDecoration } from "../components/hero-decoration";
@@ -29,18 +29,19 @@ export function HeroSection({ id, className }: HeroSectionProps) {
       )}
     >
       <div className="relative z-10">
-        <div className={cn(fadeInUpEnter, "delay-100")}>
-          <Button variant="gradient-primary" size="lg" asChild>
-            <Link href="/services" className="flex items-center gap-2">
-              <div
-                className="bg-secondary size-2.5 shrink-0 animate-pulse rounded-full shadow-(--shadow-secondary)"
-                aria-hidden="true"
-              />
-              {t("homepage.hero.ctaDiscussVision")}
-              <ArrowRightIcon className="size-4" aria-hidden="true" />
-            </Link>
-          </Button>
-        </div>
+        <p
+          className={cn(
+            fadeInUpEnter,
+            "delay-100",
+            "from-secondary-foreground to-secondary-foreground/0 text-foreground inline-flex items-center gap-2 rounded-l-full bg-linear-to-r py-3 pr-6 pl-3 text-sm"
+          )}
+        >
+          <span
+            className="bg-secondary size-2.5 shrink-0 animate-pulse rounded-full shadow-(--shadow-secondary)"
+            aria-hidden="true"
+          />
+          {t("homepage.hero.availability")}
+        </p>
 
         <h1
           className={cn(
@@ -69,23 +70,22 @@ export function HeroSection({ id, className }: HeroSectionProps) {
           className={cn(
             fadeInUpEnter,
             "delay-400",
-            "text-muted-foreground mb-10 max-w-md"
+            "text-muted-foreground mb-10 max-w-lg text-lg"
           )}
         >
           {t("homepage.hero.description")}
         </p>
 
-        <div className={cn(fadeInUpEnter, "delay-500")}>
+        <div className={cn(fadeInUpEnter, "delay-500", "flex flex-wrap gap-3")}>
           <Button
             variant="gradient-outline"
-            className="mr-3"
             onClick={() => {
               document
-                .getElementById("making-an-impact")
+                .getElementById("how-i-work")
                 ?.scrollIntoView({ behavior: "smooth", block: "start" });
             }}
           >
-            {t("homepage.hero.ctaZeroToOne")}
+            {t("homepage.hero.ctaHowIWork")}
             <motion.span
               animate={{ y: [-2, 2, -2] }}
               transition={{
@@ -98,7 +98,7 @@ export function HeroSection({ id, className }: HeroSectionProps) {
             </motion.span>
           </Button>
           <Button asChild variant="primary">
-            <Link href="/about">{t("homepage.hero.ctaMoreAboutMe")}</Link>
+            <Link href={CONTACT_HREF}>{t("homepage.hero.ctaContact")}</Link>
           </Button>
         </div>
 

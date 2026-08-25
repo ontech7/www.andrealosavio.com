@@ -4,7 +4,7 @@
     "description": "Informativa sulla privacy e sul trattamento dei dati personali per andrealosavio.com"
   },
   "title": "Privacy Policy",
-  "lastUpdated": "Ultimo aggiornamento: 4 Febbraio 2025",
+  "lastUpdated": "Ultimo aggiornamento: 25 Agosto 2026",
   "sections": {
     "controller": {
       "title": "1. Titolare del trattamento",
@@ -58,8 +58,12 @@
       "title": "8. Cookie",
       "content": "Questo sito non utilizza cookie di profilazione. Possono essere utilizzati esclusivamente cookie tecnici strettamente necessari per il corretto funzionamento del sito web."
     },
+    "aiAssistance": {
+      "title": "9. Contenuti del sito e uso dell'AI",
+      "content": "I testi di questo sito sono scritti da me e rifiniti con l'aiuto di strumenti di intelligenza artificiale, che uso per sistemare la forma e per la traduzione tra italiano e inglese. Contenuti, numeri ed esperienze descritte sono reali e verificati da me. L'AI non viene invece usata per trattare i dati che invii tramite il modulo di contatto: quelli passano solo dai servizi indicati nella sezione 5."
+    },
     "changes": {
-      "title": "9. Modifiche a questa informativa",
+      "title": "10. Modifiche a questa informativa",
       "content": "Questa informativa sulla privacy potrebbe essere aggiornata di tanto in tanto. Eventuali modifiche saranno pubblicate su questa pagina con una data di revisione aggiornata."
     }
   }

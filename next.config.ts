@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn2.thecatapi.com",
       },
+      {
+        protocol: "https",
+        hostname: "s3.us-west-2.amazonaws.com",
+        pathname: "/cdn2.thecatapi.com/**",
+      },
     ],
   },
   async headers() {
@@ -25,15 +30,36 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Retired pages - the homepage is now the single entry point
+      {
+        source: "/:locale(it|en)/best-practices",
+        destination: "/:locale#how-i-work",
+        permanent: true,
+      },
+      {
+        source: "/best-practices",
+        destination: "/it#how-i-work",
+        permanent: true,
+      },
+      {
+        source: "/:locale(it|en)/services",
+        destination: "/:locale#contact",
+        permanent: true,
+      },
+      {
+        source: "/services",
+        destination: "/it#contact",
+        permanent: true,
+      },
       // Legacy links
       {
         source: "/contattami",
-        destination: "/it/services",
+        destination: "/it#contact",
         permanent: true,
       },
       {
         source: "/servizi",
-        destination: "/it/services",
+        destination: "/it#contact",
         permanent: true,
       },
       {

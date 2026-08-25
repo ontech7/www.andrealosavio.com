@@ -5,7 +5,7 @@ import { cn } from "@/utils/cn";
 function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      className="relative rounded-lg p-px"
+      className="relative h-full rounded-lg p-px"
       style={{ background: "var(--border-gradient)" }}
     >
       <div

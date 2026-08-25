@@ -16,6 +16,7 @@ interface ContactFormProps {
   id?: string;
   title: string;
   description: string;
+  topics?: React.ReactNode;
   className?: string;
 }
 
@@ -23,6 +24,7 @@ export function ContactForm({
   id,
   title,
   description,
+  topics,
   className,
 }: ContactFormProps) {
   const t = useTranslations();
@@ -46,7 +48,7 @@ export function ContactForm({
       transition={{ duration: 0.5 }}
       className={cn(className)}
     >
-      <Card className="bg-background p-4 md:p-8">
+      <Card className="bg-background p-5 md:p-7">
         {status === "success" ? (
           <div className="flex flex-col items-center justify-center py-8 text-center">
             <CheckCircleIcon
@@ -54,16 +56,16 @@ export function ContactForm({
               aria-hidden="true"
             />
             <h2 className="mb-3 bg-(image:--text-gradient) bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-4xl">
-              {t("services.contactForm.successTitle")}
+              {t("common.contactForm.successTitle")}
             </h2>
             <p
               className="text-muted-foreground max-w-md text-sm md:text-base"
               role="status"
             >
-              {t("services.contactForm.successMessage")}
+              {t("common.contactForm.successMessage")}
             </p>
             <p className="text-muted-foreground mt-4 max-w-md text-sm">
-              {t.rich("services.contactForm.successExplore", {
+              {t.rich("common.contactForm.successExplore", {
                 projects: (children) => (
                   <Link
                     href="/projects"
@@ -87,13 +89,14 @@ export function ContactForm({
           </div>
         ) : (
           <>
-            <div className="mb-6 text-center">
-              <h2 className="mb-3 bg-(image:--text-gradient) bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-4xl">
+            <div className="mb-5 text-center">
+              <h2 className="mb-2 bg-(image:--text-gradient) bg-clip-text text-2xl font-bold tracking-tight text-transparent md:text-3xl">
                 {title}
               </h2>
               <p className="bg-(image:--text-gradient) bg-clip-text text-sm text-transparent md:text-base">
                 {description}
               </p>
+              {topics}
             </div>
 
             <ContactFormFields
@@ -103,14 +106,14 @@ export function ContactForm({
               consent={consent}
               setConsent={setConsent}
               onSubmit={onSubmitForm}
-              textareaLabelKey="services.contactForm.challenge"
-              submitLabelKey="services.contactForm.submit"
+              textareaLabelKey="common.contactForm.challenge"
+              submitLabelKey="common.contactForm.submit"
               textareaRows={3}
-              formClassName="mx-auto max-w-xl space-y-6"
+              formClassName="space-y-4"
               submitAlignment="center"
             />
 
-            <DirectContactLinks className="mx-auto mt-8 max-w-xl" />
+            <DirectContactLinks className="mt-4 mb-1" />
           </>
         )}
       </Card>
