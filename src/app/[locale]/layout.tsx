@@ -76,7 +76,11 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} style={{ colorScheme: "dark" }}>
+    <html
+      lang={locale}
+      data-scroll-behavior="smooth"
+      style={{ colorScheme: "dark" }}
+    >
       <body className={`${dmSans.variable} ${dmMono.variable} antialiased`}>
         <NextIntlClientProvider messages={pickMessages(messages, ["common"])}>
           <Layout>{children}</Layout>
