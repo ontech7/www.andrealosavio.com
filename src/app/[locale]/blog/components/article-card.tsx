@@ -17,7 +17,12 @@ export async function ArticleCard({ article, className }: ArticleCardProps) {
 
   return (
     <article className={cn("group flex flex-col gap-3", className)}>
-      <Link href={`/blog/${article.slug}`} className="block">
+      <Link
+        href={`/blog/${article.slug}`}
+        className="block"
+        aria-hidden="true"
+        tabIndex={-1}
+      >
         <ArticleCover
           slug={article.slug}
           kind={frontmatter.kind}

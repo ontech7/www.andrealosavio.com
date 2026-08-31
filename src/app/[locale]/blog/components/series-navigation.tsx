@@ -46,6 +46,9 @@ export async function SeriesNavigation({
             className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors"
           >
             <ArrowLeftIcon className="size-4" aria-hidden="true" />
+            <span className="sr-only">
+              {t("blog.article.series.previous")}:
+            </span>
             {previous.frontmatter.title}
           </Link>
         )}
@@ -55,6 +58,7 @@ export async function SeriesNavigation({
             href={`/blog/${next.slug}`}
             className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors sm:ml-auto"
           >
+            <span className="sr-only">{t("blog.article.series.next")}:</span>
             {next.frontmatter.title}
             <ArrowRightIcon className="size-4" aria-hidden="true" />
           </Link>
