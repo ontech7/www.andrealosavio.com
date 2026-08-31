@@ -36,8 +36,20 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
     return match ? (match[1] ?? "/") : null;
   }
 
+  function firstPathSegment(path: string): string {
+    return path.split("/")[1] ?? "";
+  }
+
+  function isSameSection(candidatePath: string, currentPath: string): boolean {
+    return firstPathSegment(candidatePath) === firstPathSegment(currentPath);
+  }
+
   function handleLocaleChange(newLocale: AppLocale) {
-    const target = localizedPathFor(newLocale) ?? pathname;
+    const alternatePath = localizedPathFor(newLocale);
+    const target =
+      alternatePath && isSameSection(alternatePath, pathname)
+        ? alternatePath
+        : pathname;
 
     startTransition(() => {
       router.replace(target, { locale: newLocale });

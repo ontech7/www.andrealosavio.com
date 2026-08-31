@@ -48,7 +48,7 @@ export async function Footer() {
               aria-label={t("common.accessibility.footerNavigation")}
               className="lg:col-span-6"
             >
-              <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
                 <div>
                   <h4 className="text-foreground mb-3 text-sm font-semibold">
                     {t(`common.${FOOTER_LINKS.general.titleKey}`)}
