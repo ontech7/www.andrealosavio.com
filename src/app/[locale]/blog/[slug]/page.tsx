@@ -8,6 +8,7 @@ import { ArticleMeta } from "@/app/[locale]/blog/components/article-meta";
 import { ArticleQuickActions } from "@/app/[locale]/blog/components/article-quick-actions";
 import { ArticleTakeaways } from "@/app/[locale]/blog/components/article-takeaways";
 import { ArticleToc } from "@/app/[locale]/blog/components/article-toc";
+import { ArticleTocMobile } from "@/app/[locale]/blog/components/article-toc-mobile";
 import { ReadingProgress } from "@/app/[locale]/blog/components/reading-progress";
 import { RelatedArticles } from "@/app/[locale]/blog/components/related-articles";
 import { SeriesNavigation } from "@/app/[locale]/blog/components/series-navigation";
@@ -199,12 +200,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
                   className="mt-8"
                 />
 
-                <details className="border-border bg-card mt-8 rounded-lg border px-4 py-3 xl:hidden">
-                  <summary className="text-foreground cursor-pointer text-sm font-semibold">
-                    {t("blog.article.toc")}
-                  </summary>
-                  <ArticleToc entries={article.toc} className="mt-3" />
-                </details>
+                <ArticleTocMobile entries={article.toc} className="mt-8" />
 
                 <ArticleTakeaways
                   items={frontmatter.takeaways}

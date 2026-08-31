@@ -25,7 +25,7 @@ export async function ArticleTakeaways({
       id="tldr"
       aria-label={t("blog.article.takeawaysLabel")}
       className={cn(
-        "tldr-outline my-10 scroll-mt-24 rounded-xl p-px",
+        "tldr-outline my-10 scroll-mt-36 rounded-xl p-px xl:scroll-mt-24",
         className
       )}
     >

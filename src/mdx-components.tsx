@@ -14,13 +14,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     h2: (props) => (
       <h2
-        className="text-foreground mt-14 mb-5 scroll-mt-24 text-2xl leading-snug font-bold tracking-tight md:text-[1.75rem]"
+        className="text-foreground mt-14 mb-5 scroll-mt-36 text-2xl leading-snug font-bold tracking-tight md:text-[1.75rem] xl:scroll-mt-24"
         {...props}
       />
     ),
     h3: (props) => (
       <h3
-        className="text-foreground mt-10 mb-3 scroll-mt-24 text-xl leading-snug font-semibold tracking-tight md:text-[1.375rem]"
+        className="text-foreground mt-10 mb-3 scroll-mt-36 text-xl leading-snug font-semibold tracking-tight md:text-[1.375rem] xl:scroll-mt-24"
         {...props}
       />
     ),

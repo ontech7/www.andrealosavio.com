@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useActiveHeading } from "@/app/[locale]/blog/components/use-active-heading";
 import type { TocEntry } from "@/libs/blog/toc";
 import { cn } from "@/utils/cn";
 
@@ -12,40 +12,7 @@ interface ArticleTocProps {
 
 export function ArticleToc({ entries, className }: ArticleTocProps) {
   const t = useTranslations();
-  const [activeId, setActiveId] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (entries.length < 2) {
-      return;
-    }
-
-    const headings = entries
-      .map((entry) => document.getElementById(entry.id))
-      .filter((element): element is HTMLElement => element !== null);
-
-    if (headings.length === 0) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (observed) => {
-        const visible = observed
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-
-        if (visible.length > 0) {
-          setActiveId(visible[0].target.id);
-        }
-      },
-      { rootMargin: "-80px 0px -60% 0px", threshold: 0 }
-    );
-
-    for (const heading of headings) {
-      observer.observe(heading);
-    }
-
-    return () => observer.disconnect();
-  }, [entries]);
+  const activeId = useActiveHeading(entries, 80);
 
   if (entries.length < 2) {
     return null;
