@@ -14,9 +14,10 @@ clients.
 - **Tailwind CSS**
 - **shadcn/ui** (only required components)
 - **next-intl** for internationalization (IT / EN)
+- **MDX** blog content, with `gray-matter` frontmatter validation
 - **Resend API** for contact form emails
 - **Motion** for animations
-- **nuqs** for query params state management
+- **Vitest** for unit tests
 
 ## Getting Started
 
@@ -74,26 +75,54 @@ npm run build
 npm start
 ```
 
+### Tests
+
+```bash
+npm test          # runs vitest once (alias for npx vitest run)
+```
+
 ## Project Structure
 
 ```
+content/
+└── blog/
+    ├── it/                  # Italian articles (.mdx)
+    └── en/                  # English articles (.mdx), paired by translationKey
+
 src/
 ├── app/                    # App Router pages and layouts
 │   └── [locale]/           # Internationalized routes
 │       ├── (homepage)/     # Homepage route group
 │       │   ├── components/ # Page-scoped components
 │       │   └── sections/   # Page sections
+│       ├── blog/            # Blog index + article page
 │       └── components/     # Locale-specific shared components
 ├── components/             # Shared reusable components
+│   ├── mdx/                # Components available inside article bodies
 │   └── ui/                 # Primitive components (shadcn)
 ├── constants/              # Shared constants
 ├── libs/                   # External libraries and vendor logic
+│   ├── blog/                # Frontmatter validation, article source
 │   └── i18n/               # Internationalization config
+├── mdx-components.tsx       # MDX component overrides
 ├── translations/           # i18n dictionaries
 │   ├── en/                 # English translations
 │   └── it/                 # Italian translations
 └── utils/                  # Utility functions
 ```
+
+## Publishing a Blog Article
+
+Every article exists as a pair of native MDX files —
+`content/blog/it/<slug>.mdx` and `content/blog/en/<slug>.mdx` — linked by a
+shared `translationKey` in their frontmatter.
+
+- **Preferred**: invoke the `blog-ghostwriter` skill and follow its interview.
+  It produces both files with validated frontmatter, in Andrea's voice.
+- **Manual**: hand-write both files. The build validates the frontmatter and
+  fails with a descriptive error on anything malformed (missing fields, wrong
+  types, an unregistered tag, a mismatched `translationKey` pair), so a broken
+  article never ships silently.
 
 ## Design
 

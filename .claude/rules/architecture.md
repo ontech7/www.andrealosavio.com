@@ -11,13 +11,23 @@ date when adding new routes, libraries, or cross-cutting concerns.
   `src/components/ui`
 - **Animation**: `motion` (Motion / Framer Motion successor)
 - **i18n**: `next-intl` v4 (IT default, EN)
-- **URL state**: `nuqs`
+- **URL state**: hand-rolled client context providers (no library — see [URL
+  State](#url-state))
+- **Content**: MDX (`@next/mdx`) with `gray-matter` frontmatter, for the blog
 - **Email**: Resend + `@react-email/components`
 - **SEO**: `schema-dts` JSON-LD helpers
+- **Testing**: Vitest, for the pure functions in `src/libs/blog/`
 
 ## Folder Layout
 
 ```
+content/
+└── blog/
+    ├── it/*.mdx                  Italian articles (frontmatter + MDX body)
+    └── en/*.mdx                  English articles, paired by translationKey
+                                   outside src/, reachable via the @content/*
+                                   alias (see tsconfig.json)
+
 src/
 ├── app/
 │   ├── [locale]/                 i18n routes (IT / EN)
@@ -27,26 +37,32 @@ src/
 │   │   │   ├── sections/         page-local sections (hero, how-i-work, …)
 │   │   │   └── page.tsx
 │   │   ├── about/  projects/  privacy/         same convention
+│   │   ├── blog/                 blog index + [slug] article page (see Blog)
 │   │   ├── [...rest]/page.tsx    localized catch-all → 404
 │   │   ├── layout.tsx            providers + html shell
 │   │   └── not-found.tsx
 │   ├── api/
+│   │   ├── blog/[locale]/[slug]/route.ts   plain-Markdown article, for LLM crawlers
 │   │   ├── contact/route.ts      contact form submission
 │   │   └── csrf/route.ts         CSRF token issuance
 │   ├── globals.css
 │   ├── robots.ts / sitemap.ts    SEO metadata routes
-│   └── llms.txt                  (served statically from public/llms.txt)
+│   └── llms.txt/route.ts         dynamic LLM briefing (lists published articles)
 ├── components/
 │   ├── layout/                   header, footer, skip-link, cat vote dialog, …
+│   ├── mdx/                      components usable inside article bodies (Callout, Figure, …)
 │   └── ui/                       shadcn primitives (button, card, dialog, …)
-├── constants/                    cross-page constants (navigation, services, …)
+├── constants/                    cross-page constants (navigation, services, blog tags/kinds, …)
 ├── libs/                         integrations / vendor logic
+│   ├── blog/                     frontmatter validation, article source, RSS/markdown helpers
 │   ├── email/                    Resend client + React Email templates
 │   ├── i18n/                     next-intl routing, request config, helpers
 │   └── security/                 CSRF + rate limiter
+├── mdx-components.tsx            MDX component overrides — must stay at this exact path
 ├── translations/
 │   ├── en/*.json
 │   └── it/*.json                 per-namespace message files
+├── types/                        ambient type declarations (css.d.ts, mdx.d.ts)
 ├── utils/                        pure utilities (cn, SEO JSON-LD helpers)
 └── proxy.ts                      Next.js 16 Proxy (replaces middleware.ts)
 ```
@@ -80,24 +96,83 @@ src/
 
 ## URL State
 
-`nuqs` is used for shareable UI state (e.g. filters on `/projects`). The
-`NuqsAdapter` is mounted directly in `src/app/[locale]/layout.tsx` — there is no
-wrapper component.
+There is no URL-state library (no `nuqs`, not in `package.json`). Shareable UI
+state (filter tags on `/projects` and `/blog`) is a hand-rolled client context
+provider:
+
+- On mount, it reads `window.location.search` and hydrates state from it.
+- It re-syncs on the `popstate` event (back/forward navigation).
+- Every state change writes the URL back with `window.history.replaceState`
+  (no server round-trip, no history entry per keystroke).
+
+See `src/app/[locale]/projects/components/projects-filter-provider.tsx` and
+`src/app/[locale]/blog/components/blog-filter-provider.tsx` as the canonical
+examples — copy one of them for a new filterable list rather than reaching for
+a library.
+
+## Blog
+
+Articles are MDX files with YAML frontmatter under `content/blog/{it,en}/`,
+outside `src/`, imported through the `@content/*` alias. Two reading paths
+exist on purpose:
+
+- **Frontmatter-only reads** (`src/libs/blog/source.ts`, via `gray-matter`)
+  power the index, sitemap, RSS feed, and footer — cheap, no MDX compilation.
+- **Full article reads** happen only on the article page
+  (`src/app/[locale]/blog/[slug]/page.tsx`), which dynamic-imports the MDX
+  file as a React component: `` await import(`@content/blog/${locale}/${slug}.mdx`) ``.
+
+Both paths run at build time. The article page sets `dynamicParams = false`,
+so only articles discovered at build time exist — there is no on-demand
+rendering of unknown slugs.
+
+Articles are localized in pairs, linked by a `translationKey` field in
+frontmatter (not by matching slugs — slugs are independently localized, e.g.
+`cache-nextjs-spiegata` / `nextjs-cache-explained`). `translationKey` drives
+hreflang alternates, the sitemap's per-locale paths, and the language switcher.
+
+Two build-time guards keep content honest:
+
+- `src/libs/blog/frontmatter.ts` (`parseFrontmatter`) throws a descriptive
+  error, prefixed with the source file, on any malformed field — this fails
+  the build instead of shipping bad metadata.
+- `src/libs/blog/source.ts` (`assertConsistency`) throws if a published
+  article's `translationKey` has no counterpart in the other locale, so a
+  half-translated pair fails the build rather than 404ing at runtime.
+
+MDX plugins are configured in `next.config.ts`'s `withMDX` call
+(`remarkPlugins`, `rehypePlugins`). Because Turbopack serializes this config
+and hands it to a Rust engine, plugins must be passed as **strings** (or
+`[string, jsonSerializableOptions]` tuples) — a function reference cannot
+cross that boundary. This is why `rehype-pretty-code` line-highlighting uses
+its data-attribute/CSS output instead of an `onVisitLine` callback.
+
+`src/mdx-components.tsx` supplies the component overrides used by every `.mdx`
+file (headings, code blocks, `<Callout>`, `<Figure>`, …). It **must** live at
+exactly that path — the project root or the `src` root — because that is the
+only place Next.js looks for it; nothing else wires it in.
+
+The `blog` translation namespace is registered in `src/libs/i18n/request.ts`
+alongside the others.
 
 ## SEO
 
 - `src/app/sitemap.ts` generates the multi-locale sitemap from the route table
-  and `routing.locales`.
+  and `routing.locales`, plus one entry pair per published article (real
+  `lastModified` dates from frontmatter, not a per-build `new Date()`; each
+  locale gets its own localized path instead of assuming identical slugs).
 - `src/app/robots.ts` switches between allow/disallow based on
   `NEXT_PUBLIC_SITE_URL`.
 - Per-page metadata (title, description, OpenGraph, Twitter, hreflang) lives in
   `generateMetadata` inside each `page.tsx`.
 - JSON-LD helpers in `src/utils/seo-schema.ts` produce typed `schema-dts`
   objects for `Person`, `Organization`, `WebSite`, `BreadcrumbList`,
-  `OfferCatalog`, `ItemList`, and `ProfilePage`. Combine them with
-  `schemaToJsonLd([...])` to emit a single `@graph`.
-- `public/llms.txt` is the static LLM briefing. Update it whenever public
-  information about Andrea changes.
+  `OfferCatalog`, `ItemList`, `ProfilePage`, `Blog`, `BlogPosting`, and
+  `FAQPage` (the last emitted only when an article's frontmatter has a `faq`
+  entry). Combine them with `schemaToJsonLd([...])` to emit a single `@graph`.
+- `src/app/llms.txt/route.ts` generates the LLM briefing dynamically, including
+  an "Articles" section built from published posts. There is no
+  `public/llms.txt` static file anymore.
 
 ## Contact Form Flow
 

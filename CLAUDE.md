@@ -21,6 +21,9 @@ npm run lint       # eslint
 npm run lint:fix
 npm run format     # prettier --write .
 npx tsc --noEmit   # type check (run this after any TS edit)
+npx vitest run      # unit tests, alias: npm test (src/libs/blog/* pure functions;
+                     # components are not unit-tested, covered by tsc + lint +
+                     # build + manual checks)
 ```
 
 ## Must-read docs (in this order)
@@ -46,8 +49,17 @@ npx tsc --noEmit   # type check (run this after any TS edit)
   there.
 - `src/proxy.ts` is the Next.js 16 equivalent of `middleware.ts`. Do not add a
   `middleware.ts` file.
-- `public/llms.txt` is a static file. Do not recreate it as a Next.js route.
-  URLs inside are hard-coded to `https://www.andrealosavio.com`.
+- `src/app/llms.txt/route.ts` generates the LLM briefing dynamically (it lists
+  published articles). There is no `public/llms.txt` anymore — do not add one
+  back as a static file.
+- `src/mdx-components.tsx` **must** stay at exactly that path (project root or
+  `src` root — Next only looks in those two places for MDX component overrides).
+  Moving it into `src/components/` silently breaks MDX rendering.
+- MDX plugins in `next.config.ts` (`remarkPlugins`, `rehypePlugins`) must be
+  passed as strings (or `[string, jsonSerializableOptions]` tuples), never
+  function references — Turbopack ships the config to a Rust engine that cannot
+  serialize functions. This is why `rehype-pretty-code` line styling is done in
+  CSS instead of its `onVisitLine` callback API.
 - Page-local components/sections/constants stay next to their `page.tsx`.
   Promote to `src/components/` only when ≥ 2 routes consume them.
 - Security layers in `/api/contact` run in a specific order (origin → rate-limit
@@ -65,7 +77,9 @@ npx tsc --noEmit   # type check (run this after any TS edit)
 | Add JSON-LD to a page       | `src/utils/seo-schema.ts` helpers                                                                                                   |
 | Change the contact flow     | `src/app/[locale]/(homepage)/sections/contact-section.tsx`, `src/app/api/contact/route.ts`, `src/libs/email/`, `src/libs/security/` |
 | Update OG metadata          | `generateMetadata` inside the relevant `page.tsx`                                                                                   |
-| Touch URL-driven filters    | `nuqs` parsers near the consumer (e.g. `projects-section.tsx`)                                                                      |
+| Touch URL-driven filters    | hand-rolled context provider near the consumer, e.g. `projects-filter-provider.tsx` or `blog-filter-provider.tsx` (see below)       |
+| Write a blog article        | `blog-ghostwriter` skill, or hand-write the `content/blog/{it,en}/` MDX pair                                                        |
+| Change how articles render  | `src/mdx-components.tsx`                                                                                                            |
 
 ## Available agent skills (load with the `skill` tool)
 
@@ -74,6 +88,8 @@ are absolute file URIs — open them to see the full instructions.
 
 - [accessibility-compliance](.claude/skills/accessibility-compliance/SKILL.md) —
   WCAG 2.2 audits, ARIA patterns, screen-reader support.
+- [blog-ghostwriter](.claude/skills/blog-ghostwriter/SKILL.md) — write, draft,
+  or translate a paired IT/EN blog article for `content/blog/`.
 - [fixing-motion-performance](.claude/skills/fixing-motion-performance/SKILL.md)
   — triage and fix animation performance regressions.
 - [seo-audit](.claude/skills/seo-audit/SKILL.md) — technical SEO audits,
