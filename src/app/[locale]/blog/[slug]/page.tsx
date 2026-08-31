@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { ArticleCover } from "@/app/[locale]/blog/components/article-cover";
+import { ArticleMeta } from "@/app/[locale]/blog/components/article-meta";
+import { ArticleTakeaways } from "@/app/[locale]/blog/components/article-takeaways";
+import { ArticleToc } from "@/app/[locale]/blog/components/article-toc";
+import { ReadingProgress } from "@/app/[locale]/blog/components/reading-progress";
 import { Link } from "@/libs/i18n/navigation";
 import { PageMessages } from "@/libs/i18n/messages";
 import { locales, type AppLocale } from "@/libs/i18n/utils";
@@ -149,24 +154,51 @@ export default async function BlogArticlePage({ params }: PageProps) {
       />
 
       <PageMessages namespaces={["blog"]}>
+        <ReadingProgress />
+
         <article className="mx-auto max-w-5xl px-4 pt-24 pb-16 sm:px-6 lg:px-8">
-          <div className="prose-article">
-            <Link
-              href="/blog"
-              className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-            >
-              {t("blog.article.backToBlog")}
-            </Link>
+          <div className="xl:grid xl:grid-cols-[16rem_minmax(0,1fr)] xl:gap-10">
+            <div className="hidden xl:block">
+              <ArticleToc entries={article.toc} className="sticky top-24" />
+            </div>
 
-            <h1 className="text-foreground mt-6 text-3xl leading-tight font-bold md:text-4xl">
-              {frontmatter.title}
-            </h1>
+            <div className="prose-article">
+              <Link
+                href="/blog"
+                className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+              >
+                {t("blog.article.backToBlog")}
+              </Link>
 
-            <p className="text-muted-foreground mt-3 text-lg">
-              {frontmatter.subtitle}
-            </p>
+              <h1 className="text-foreground mt-6 text-3xl leading-tight font-bold md:text-4xl">
+                {frontmatter.title}
+              </h1>
 
-            <div className="prose-article mt-10">
+              <p className="text-muted-foreground mt-3 text-lg">
+                {frontmatter.subtitle}
+              </p>
+
+              <ArticleMeta article={article} className="mt-6" />
+
+              <ArticleCover
+                slug={slug}
+                kind={frontmatter.kind}
+                title={frontmatter.title}
+                cover={frontmatter.cover}
+                coverAlt={frontmatter.coverAlt}
+                priority
+                className="mt-8"
+              />
+
+              <details className="border-border mt-8 rounded-lg border p-4 xl:hidden">
+                <summary className="text-foreground cursor-pointer text-sm font-semibold">
+                  {t("blog.article.toc")}
+                </summary>
+                <ArticleToc entries={article.toc} className="mt-3" />
+              </details>
+
+              <ArticleTakeaways items={frontmatter.takeaways} />
+
               <ArticleBody />
             </div>
           </div>
