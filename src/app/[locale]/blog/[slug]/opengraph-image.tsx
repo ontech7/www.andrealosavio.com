@@ -21,6 +21,25 @@ function loadFont(file: string): Buffer {
   return fs.readFileSync(path.join(process.cwd(), "public", "fonts", file));
 }
 
+const dmSansRegular = loadFont("dm-sans-400.woff");
+const dmSansBold = loadFont("dm-sans-700.woff");
+
+function titleFontSize(title: string): number {
+  if (title.length > 90) {
+    return 42;
+  }
+
+  if (title.length > 65) {
+    return 50;
+  }
+
+  if (title.length > 45) {
+    return 56;
+  }
+
+  return 62;
+}
+
 export default async function OpengraphImage({ params }: ImageProps) {
   const { locale, slug } = await params;
   const article = getArticle(locale, slug);
@@ -65,12 +84,14 @@ export default async function OpengraphImage({ params }: ImageProps) {
           flexDirection: "column",
           gap: "20px",
           maxWidth: "900px",
+          maxHeight: "380px",
+          overflow: "hidden",
         }}
       >
         <div
           style={{
             color: "#ffffff",
-            fontSize: 62,
+            fontSize: titleFontSize(frontmatter.title),
             fontWeight: 700,
             lineHeight: 1.15,
           }}
@@ -99,13 +120,13 @@ export default async function OpengraphImage({ params }: ImageProps) {
       fonts: [
         {
           name: "DM Sans",
-          data: loadFont("dm-sans-400.woff"),
+          data: dmSansRegular,
           weight: 400,
           style: "normal",
         },
         {
           name: "DM Sans",
-          data: loadFont("dm-sans-700.woff"),
+          data: dmSansBold,
           weight: 700,
           style: "normal",
         },
