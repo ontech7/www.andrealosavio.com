@@ -3,13 +3,14 @@
     "home": "Home",
     "projects": "Progetti",
     "about": "Chi sono",
-    "llmsTxt": "llms.txt",
+    "blog": "Blog",
     "contact": "Contattami"
   },
   "footer": {
     "tagline": "Costruisco software per aziende e startup, dall'idea al prodotto sul mercato.",
     "sections": {
       "general": "Generale",
+      "blog": "Blog",
       "projects": "Progetti"
     },
     "links": {
@@ -19,7 +20,8 @@
       "llmsTxt": "llms.txt",
       "privacyPolicy": "Privacy Policy",
       "personalIdeas": "Personali & Idee",
-      "forClients": "Per clienti"
+      "forClients": "Per clienti",
+      "allArticles": "Tutti gli articoli"
     },
     "cta": {
       "title": "Hai già deciso?",

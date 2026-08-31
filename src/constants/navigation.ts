@@ -10,7 +10,7 @@ export const NAV_LINKS: readonly NavLink[] = [
   { href: "/", labelKey: "navigation.home" },
   { href: "/projects", labelKey: "navigation.projects" },
   { href: "/about", labelKey: "navigation.about" },
-  { href: "/llms.txt", labelKey: "navigation.llmsTxt", external: true },
+  { href: "/blog", labelKey: "navigation.blog" },
 ] as const;
 
 export const CONTACT_HREF = "/#contact";
@@ -24,6 +24,12 @@ export const FOOTER_LINKS = {
       { href: "/about", labelKey: "footer.links.about" },
       { href: "/llms.txt", labelKey: "footer.links.llmsTxt", external: true },
       { href: "/privacy", labelKey: "footer.links.privacyPolicy" },
+    ] as readonly NavLink[],
+  },
+  blog: {
+    titleKey: "footer.sections.blog",
+    links: [
+      { href: "/blog", labelKey: "footer.links.allArticles" },
     ] as readonly NavLink[],
   },
   projects: {
