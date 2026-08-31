@@ -53,7 +53,7 @@ export function ArticleToc({ entries, className }: ArticleTocProps) {
 
   return (
     <nav aria-label={t("blog.article.toc")} className={className}>
-      <h2 className="text-muted-foreground mb-3 text-xs font-semibold tracking-wide uppercase">
+      <h2 className="text-secondary mb-3 text-xs font-semibold tracking-[0.2em] uppercase">
         {t("blog.article.toc")}
       </h2>
       <ul className="m-0 space-y-1 p-0">

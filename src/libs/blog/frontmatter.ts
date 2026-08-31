@@ -1,9 +1,4 @@
-import {
-  BLOG_KINDS,
-  BLOG_TAGS,
-  type BlogKind,
-  type BlogTag,
-} from "@/constants/blog";
+import { BLOG_TAGS, type BlogTag } from "@/constants/blog";
 
 export interface BlogSeries {
   id: string;
@@ -22,7 +17,6 @@ export interface BlogFrontmatter {
   publishedAt: string;
   updatedAt?: string;
   translationKey: string;
-  kind: BlogKind;
   tags: readonly BlogTag[];
   cover?: string;
   coverAlt?: string;
@@ -171,13 +165,6 @@ export function parseFrontmatter(
     source
   );
 
-  if (
-    typeof raw.kind !== "string" ||
-    !(BLOG_KINDS as readonly string[]).includes(raw.kind)
-  ) {
-    fail(source, `kind deve essere uno di: ${BLOG_KINDS.join(", ")}`);
-  }
-
   if (!Array.isArray(raw.tags) || raw.tags.length === 0) {
     fail(source, "tags deve essere un array non vuoto");
   }
@@ -230,7 +217,6 @@ export function parseFrontmatter(
     publishedAt,
     ...(updatedAt && { updatedAt }),
     translationKey,
-    kind: raw.kind as BlogKind,
     tags,
     ...(cover && { cover, coverAlt }),
     draft: raw.draft === true,

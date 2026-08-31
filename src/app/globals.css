@@ -232,6 +232,42 @@ html {
   }
 }
 
+/* TL;DR - due archi blu che ruotano lenti lungo il bordo del riassunto.
+   Stessa grammatica del CTA contatti, ma piu lento, senza il picco bianco
+   e in senso opposto, cosi i due anelli non si confondono. */
+
+@property --tldr-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.tldr-outline {
+  background:
+    conic-gradient(
+      from var(--tldr-angle),
+      transparent 0%,
+      color-mix(in srgb, var(--secondary) 70%, transparent) 10%,
+      transparent 25%,
+      transparent 50%,
+      color-mix(in srgb, var(--secondary) 70%, transparent) 60%,
+      transparent 75%
+    ),
+    var(--border-gradient);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tldr-outline {
+    animation: tldr-spin 7s linear infinite;
+  }
+}
+
+@keyframes tldr-spin {
+  to {
+    --tldr-angle: -360deg;
+  }
+}
+
 /* Code block MDX - selettori emessi da rehype-pretty-code */
 
 figure[data-rehype-pretty-code-figure] {
@@ -281,10 +317,4 @@ span[data-highlighted-chars] {
 
 .prose-article {
   @apply mx-auto max-w-[42.5rem];
-}
-
-.prose-article > figure[data-rehype-pretty-code-figure],
-.prose-article > .group,
-.prose-article > figure {
-  @apply lg:-mx-14 lg:max-w-[calc(100%+7rem)];
 }

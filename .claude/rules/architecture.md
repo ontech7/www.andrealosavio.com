@@ -52,7 +52,7 @@ src/
 │   ├── layout/                   header, footer, skip-link, cat vote dialog, …
 │   ├── mdx/                      components usable inside article bodies (Callout, Figure, …)
 │   └── ui/                       shadcn primitives (button, card, dialog, …)
-├── constants/                    cross-page constants (navigation, services, blog tags/kinds, …)
+├── constants/                    cross-page constants (navigation, services, blog tags/accents, …)
 ├── libs/                         integrations / vendor logic
 │   ├── blog/                     frontmatter validation, article source, RSS/markdown helpers
 │   ├── email/                    Resend client + React Email templates
@@ -151,6 +151,139 @@ its data-attribute/CSS output instead of an `onVisitLine` callback.
 file (headings, code blocks, `<Callout>`, `<Figure>`, …). It **must** live at
 exactly that path — the project root or the `src` root — because that is the
 only place Next.js looks for it; nothing else wires it in.
+
+Articles carry a single taxonomy axis: `tags`, drawn from the `BLOG_TAGS`
+vocabulary. There is no `kind`/category field — it duplicated the tags without
+adding meaning.
+
+Covers have two paths. Without `cover:` in frontmatter,
+`blog/components/article-cover.tsx` renders one of five scene archetypes built
+by `buildCoverScene` in `libs/blog/cover-layout.ts`:
+
+| Archetype | What it draws                                                          |
+| --------- | ---------------------------------------------------------------------- |
+| `isoChip` | raised isometric chip, circuit traces routed across a 2:1 iso grid      |
+| `orbit`   | luminous disc ringed by tilted elliptical orbits                        |
+| `horizon` | glowing horizon line, receding perspective grid, vertical light shafts  |
+| `stack`   | glass tiles receding into depth behind the front one                    |
+| `aurora`  | heavily blurred blue field behind a round glass tile                    |
+| `flow`    | glowing wires branching from the subject to dim node pills              |
+| `keys`    | a row of keycaps, only the one at the focus lit                         |
+| `spline`  | a smooth glowing curve through the focus, with drop lines and nodes     |
+| `beam`    | a cone of light thrown from the subject over a faint orthogonal grid    |
+
+They are deliberately different compositions but share one grammar, and that
+grammar is what makes them read as a set: a radial black-to-blue ground centred
+on the subject, exactly one luminous subject at the focus, bloom, and a radial
+depth mask that fades everything else away from it. Add an archetype by keeping
+that grammar; a scene that abandons it will look foreign next to the others.
+
+The article's `translationKey` seeds the archetype, one of three blue
+temperatures, the focus position and all the geometry, so two articles sharing a
+primary tag — and therefore the same glyph — differ in composition, not just in
+detail. Seeding on `translationKey` also means the IT and EN versions share one
+image, and the same build always produces the same scene.
+
+Two generators carry a constraint worth knowing before touching them. Traces
+(`isoChip`) are built in grid space and projected: each is locked to a single
+quadrant and only steps outward on the two axes, which is what guarantees it
+leaves the canvas instead of folding back on itself. The `spline` is two cubics
+whose join sits exactly on the focus, with the second control point mirrored
+through it — that reflection is what keeps the curve free of a kink where the
+subject sits.
+
+The glyph is always drawn upright and centred on the focus, never skewed onto a
+plane: the marks carry interior detail (the N inside a circle, TS inside a
+rounded square) and a projection matrix made them unreadable. The palette is
+always black-to-blue — a white-ish gradient reads as Vercel, which is the one
+thing these covers must not do. The cover never carries the article title, since
+it sits inches from the HTML title in both the index and the article page.
+`variant="thumb"` centres and enlarges the subject and thins the surroundings, so
+the scene still reads at ~208px.
+
+Every asset of an article lives in `public/images/blog/<translationKey>/`, one
+folder per article pair, so the two locales share one set of files and the
+directory does not turn into a flat pile as articles accumulate. Inside it the
+names are generic (`cover.svg`, `live-proof.mp4`), because the folder already
+carries the identity.
+
+With `cover:` pointing at an SVG under that folder, the file is
+inlined server-side instead — see the `blog-cover-designer` skill. SVG covers
+never reach `openGraph.images` or the `BlogPosting` schema (social platforms
+cannot render them): those keep pointing at the `opengraph-image` route, which
+rasterises the same SVG through satori.
+
+The index (`blog/page.tsx`) reuses the page grammar of `/projects`: a centred
+hero (eyebrow, gradient headline, `GridLayers` backdrop, RSS button), then two
+clearly separated blocks. First the newest article, under an `In evidenza` /
+`Featured` eyebrow, as a full-width featured `Card`. Then a hairline rule, an
+`All articles` heading, and a two-column grid of `ArticleCard`s. That grid is
+`auto-rows-fr`, not `items-start`, so every card is as tall as the tallest one on
+the page, across rows and not just within a row: `Card` is already `h-full` and
+`ArticleStamp` already `mt-auto`, so the date line settles on the bottom edge and
+a short subtitle just leaves more air above it. `related-articles.tsx` renders
+the same cards and carries the same rule. Both card shells are the shared `Card`,
+so the blog inherits the gradient hairline border used everywhere else; the filter is the same shape as `projects-filter`
+(labelled search inside a `--border-gradient` wrapper, `bg-muted` tag chips that
+flip to `bg-foreground` when selected). Filtering is client-side over
+pre-rendered cards: the search box is matched against title/subtitle/description
+and combined as OR across tags, AND with the query. The featured block, its rule
+and its heading are all suppressed while any filter is active, so a filtered
+page is just the result list.
+
+Article tags are `article-tag.tsx`, not a bare `Badge`: the same `p-px` wrapper
+over `--border-gradient` that `Card` uses, so a tag pill is a hairline-gradient
+ring rather than a grey outline. The cards, the featured block and the article
+page's `ArticleMeta` all go through it.
+
+The grid is paginated client-side at `BLOG_PAGE_SIZE` (6) articles per page, and
+the pagination always renders, down to `Page 1 of 1`, so the control does not
+appear and disappear as articles accumulate. The current page is marked with the
+same gradient ring over `bg-card`, never a white fill: the filled-chip treatment
+belongs to the tag filter, and reusing it here made the pagination read as a
+second filter. The pure helpers live in
+`src/libs/blog/pagination.ts` (`pageCount`, `clampPage`, `buildPageWindow`,
+`pageSlice`) and are unit-tested; `buildPageWindow` keeps the first, the last and
+the current page with its two neighbours, collapsing the rest into `"gap"`
+slots rendered as ellipses. The page number is the third piece of URL state in
+`blog-filter-provider.tsx`, written as `?page=N` and omitted on page 1. Changing
+a tag or the query resets it to 1, and a page number that outlives its result set
+(a stale `?page=7` in a shared link) is clamped during render and written back to
+the URL, rather than showing an empty grid. Because pagination is client-side,
+every article stays in the prerendered HTML: there is no per-page route to
+crawl, and the canonical URL remains `/{locale}/blog`.
+
+`article-quick-actions.tsx` is the floating control that appears bottom-right
+once the reader is past 60% of the viewport height. Collapsed it is a single
+`button`; hovering the group, focusing into it, or tapping it reveals three
+labelled actions (back to top, jump to the TL;DR, next article), and it collapses
+on mouse leave, on blur, on Escape and on a pointer press outside. The `next`
+target comes from `getNextArticle` in `source.ts`: the following part of the
+series when there is one still unread, otherwise the first related article, so it
+agrees with what the page recommends at the bottom. It is `inert` while hidden,
+which keeps it out of the tab order instead of leaving invisible buttons
+focusable, and the TL;DR jump relies on the `id="tldr"` and `scroll-mt-24` that
+`article-takeaways.tsx` carries for exactly this reason.
+
+The article page keeps the same vocabulary: `Card` for the series navigation
+and the closing CTA (the margin goes on a wrapper, never on the `Card`, whose
+gradient border is a separate outer element), `Button variant="gradient-outline"`
+for the CTA action, and `ArticleStamp` for the date/reading-time line shared by
+the cards. The TL;DR box (`article-takeaways.tsx`) is the one bespoke piece: it
+borrows the `contact-cta-outline` trick — a conic gradient rotated through a
+registered `@property` angle over a 1px padding ring — as `.tldr-outline` in
+`globals.css`, but slower, counter-clockwise and without the white spike, so it
+reads as a relative of the "Contattami" ring rather than a copy of it.
+
+The homepage does not give the blog a section of its own. A dedicated block
+between two `SectionConnector`s read as an orphan while scrolling, since every
+other homepage section is announced by its own heading. The entry point is
+instead a second link in the products section's existing CTA row,
+`Read the blog` next to `See all the projects`, so the homepage gains a route to
+`/blog` without gaining a block. `FooterBlogLinks` still lists recent articles in
+the footer, and the header carries the `Blog` nav item, so the homepage is the
+third of three doors rather than the only one. Nothing on the homepage reads the
+article index.
 
 The `blog` translation namespace is registered in `src/libs/i18n/request.ts`
 alongside the others.

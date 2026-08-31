@@ -1,0 +1,177 @@
+---
+title: "DeepSeek V4-Flash instead of Opus: where it holds"
+subtitle:
+  "Three weeks on the preview inside Claude Code, and this morning the 0731
+  weights under MIT"
+description:
+  "I wired it into Claude Code through Ollama Cloud and gave it real refactors:
+  where it matches Opus 4.7, where it drops the thread, what it costs."
+publishedAt: 2026-07-31
+translationKey: deepseek-v4-flash
+tags: [ai, devops]
+cover: /images/blog/deepseek-v4-flash/cover.svg
+coverAlt:
+  "The DeepSeek whale, white and front-facing, on the top face of a glowing
+  isometric chip, with the line $0.14 in, $0.28 out below it"
+takeaways:
+  - "$0.14 per million in, $0.28 out, against Opus 4.7 at $5 and $25: 35x
+    cheaper on input, 89x on output."
+  - "The $0.0028 cache hit is where it really shows, because an agent resends
+    the same context on every turn."
+  - "On ten-file refactors and on building a feature end to end it followed the
+    thread without inventing APIs. That is where the gap to Opus felt small."
+  - "It drifts on long tasks: around the twentieth tool call it forgets a
+    constraint you set at the start, and you only catch it in the diff."
+faq:
+  - q: "Do I need a GPU to use it?"
+    a:
+      "Not if you call it through the API or Ollama Cloud, where it runs on
+      their hardware. The weights are MIT and downloadable, but that is 167 GB
+      for 284 billion parameters, so running it yourself means serious hardware
+      or a quantized build."
+  - q: "Why do open weights matter if I call it as an API anyway?"
+    a:
+      "Because the API stops being the only door. If the price moves, or a
+      client tells you the data cannot leave their network, the same checkpoint
+      runs somewhere else and your prompts stay as they are."
+  - q: "Why is a cache hit fifty times cheaper than normal input?"
+    a:
+      "Context the model has already seen does not get recomputed. In an agent
+      resending the system prompt and the history on every tool call, that is
+      most of your input, but you only get the discount when calls come close
+      together and share a prefix."
+---
+
+## The invoice, not the benchmark
+
+One agent session, the kind where it reads half a repository and then rewrites
+twenty files, burns roughly two million input tokens and three hundred thousand
+output. On Claude Opus 4.7, at $5 per million in and $25 out, that is $17.50.
+For one session. Run three a day and the model costs more than the
+infrastructure serving what it wrote.
+
+When the agent is deciding something hard, I do not mind the number. I mind it
+when I am handing it mechanical work, **which is most of the time**.
+
+## What shipped on July 31
+
+This morning DeepSeek published the
+[V4-Flash-0731](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731)
+weights on Hugging Face, MIT licensed, 167 GB. I have been on the preview for
+three weeks. This checkpoint only reruns the post-training: same architecture,
+284 billion total parameters, 13 billion active per token, hybrid CSA plus HCA
+attention, a 1M-token input window and 384K out.
+
+The line that matters is the price list.
+
+| Per 1M tokens | Input | Output | Cached input |
+| ------------- | ----- | ------ | ------------ |
+| V4-Flash      | $0.14 | $0.28  | $0.0028      |
+| Opus 4.7      | $5.00 | $25.00 | n/a          |
+
+35x cheaper on input, 89x on output. And $0.0028 is not a discount, it is a
+different order of magnitude: **1785x under Opus**. For an agent that resends
+the system prompt and the conversation on every tool call, that column is most
+of the bill.
+
+On benchmarks DeepSeek reports 82.7 on Terminal Bench 2.1 and 54.4 on DeepSWE,
+above the V4-Pro preview on all nine agentic benchmarks it publishes. I am not
+putting that next to Opus 4.7's 69.4 on Terminal-Bench 2.0. Different version of
+the benchmark, so the comparison does not hold. What holds is what I watched it
+do.
+
+## Two environment variables, and Claude Code talks to Ollama Cloud
+
+What got me to try it properly is that I did not have to open a new account. I
+already pay for [Ollama Cloud](https://ollama.com/library/deepseek-v4-flash),
+and the model is sitting in there.
+
+```bash
+ollama signin
+ollama run deepseek-v4-flash:cloud
+```
+
+That works straight away, but a bare chat was not the point. I wanted the agent,
+with its tools and its permissions. Claude Code speaks the Anthropic Messages
+format. Ollama exposes an OpenAI-compatible endpoint. So something has to
+translate in between. I used
+[LiteLLM](https://docs.litellm.ai/docs/anthropic_unified/), which serves
+`/v1/messages` and forwards to whatever provider you point it at.
+
+```yaml title="config.yaml"
+model_list:
+  - model_name: flash
+    litellm_params:
+      model: openai/deepseek-v4-flash:cloud
+      api_base: https://ollama.com/v1
+      api_key: os.environ/OLLAMA_API_KEY
+```
+
+```bash
+litellm --config config.yaml --port 4000
+
+export ANTHROPIC_BASE_URL=http://localhost:4000
+export ANTHROPIC_AUTH_TOKEN=anything
+export ANTHROPIC_MODEL=flash
+claude
+```
+
+Four lines, and the CLI I open every day is talking to a different model with
+the same prompt and the same tools. It is the only honest way to compare them.
+Swap the harness too and you are no longer measuring the model.
+
+One note on billing: **Ollama Cloud charges GPU time, not tokens**, so inside
+the subscription you never see the numbers in that table. Three weeks of daily
+use and I did not hit the ceiling on the $20 plan.
+
+## Where it held: refactors and whole features
+
+I gave it the work I would have given the other model anyway. A refactor
+crossing twelve files, the kind where each edit is trivial and the difficulty is
+remembering at file nine what you decided at file two. Then a feature end to
+end: provider, component, translations in both locales, tests.
+
+What I did not expect is that it **followed the thread**. It opened files in a
+sensible order, did not invent functions that are not in the repository, and got
+to the end with something that compiled. On that kind of work, building rather
+than deciding, the gap to Opus 4.7 felt small. Small enough that I am not paying
+89x to close it.
+
+The habit before a big rework did not change either: I have it draw
+[the map of the system](/blog/archify-architecture-diagram) first, then let it
+work. It handled that the way I expected.
+
+## Where it sent me back
+
+Then there is the place it breaks, and it is always the same one: long tasks.
+
+I saw the pattern three times. I set a constraint up front, something like _do
+not touch the translation files until I say so_. It holds for ten, twelve tool
+calls. Around the twentieth it touches them. The code is not wrong. The
+instruction is gone. In an agent that is worse than a syntax error, because a
+syntax error shows up immediately and a dropped constraint shows up in the diff,
+if you look.
+
+<Callout type="warning">
+  Past twenty steps I stopped letting it run. If the job does not fit in about
+  ten tool calls, either I break it into shorter pieces or I send it to Opus and
+  stop thinking about it.
+</Callout>
+
+## How the work is split now
+
+I did not replace anything. I moved a line.
+
+- **On Flash**: reading repositories, first-pass refactors, tests over code that
+  already exists, translations, and anything with an output I can check in
+  thirty seconds.
+- **On Opus**: the long session, the architectural call, debugging something I
+  do not understand yet.
+
+The rule is not how hard the task is. It is how many steps it has, and how
+expensive it is to notice late that it went wrong.
+
+Next time you open a session for mechanical work, the kind where you already
+know what has to come out and you just need someone to type it, check what it
+cost you. If you already pay for Ollama Cloud, trying the alternative is two
+commands.

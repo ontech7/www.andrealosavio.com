@@ -10,7 +10,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/utils/cn";
 
 const calloutVariants = cva(
-  "my-6 flex gap-3 rounded-lg border-l-2 px-4 py-3 text-sm [&>p]:m-0",
+  "my-8 flex gap-3 rounded-lg border-l-2 px-4 py-4 text-base [&_p]:m-0 [&_p]:text-inherit [&_p]:leading-relaxed [&_p]:tracking-normal",
   {
     variants: {
       type: {
@@ -43,7 +43,7 @@ export function Callout({ type, className, children }: CalloutProps) {
 
   return (
     <aside className={cn(calloutVariants({ type }), className)}>
-      <Icon className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+      <Icon className="mt-1 size-4 shrink-0" aria-hidden="true" />
       <div>{children}</div>
     </aside>
   );

@@ -2,7 +2,12 @@ import { describe, expect, it } from "vitest";
 import type { BlogTag } from "@/constants/blog";
 import type { AppLocale } from "@/libs/i18n/utils";
 import type { BlogArticle } from "./source";
-import { assertConsistency, selectRelated, sortByVocabulary } from "./source";
+import {
+  assertConsistency,
+  selectNext,
+  selectRelated,
+  sortByVocabulary,
+} from "./source";
 
 function article(
   slug: string,
@@ -12,6 +17,7 @@ function article(
     publishedAt?: string;
     translationKey?: string;
     draft?: boolean;
+    series?: { id: string; part: number };
   } = {}
 ): BlogArticle {
   return {
@@ -27,10 +33,10 @@ function article(
       description: "d".repeat(140),
       publishedAt: overrides.publishedAt ?? "2026-01-01",
       translationKey: overrides.translationKey ?? slug,
-      kind: "tech",
       tags: overrides.tags ?? ["nextjs"],
       draft: overrides.draft ?? false,
       takeaways: ["uno", "due"],
+      ...(overrides.series ? { series: overrides.series } : {}),
     },
   };
 }
@@ -141,5 +147,45 @@ describe("sortByVocabulary", () => {
     sortByVocabulary(tags);
 
     expect(tags).toEqual(["performance", "nextjs"]);
+  });
+});
+
+describe("selectNext", () => {
+  const seriesId = "nextjs-deep-dive";
+
+  it("preferisce la parte successiva della serie", () => {
+    const current = article("parte-1", { series: { id: seriesId, part: 1 } });
+    const second = article("parte-2", { series: { id: seriesId, part: 2 } });
+
+    expect(
+      selectNext(current, [current, second], [article("correlato")])?.slug
+    ).toBe("parte-2");
+  });
+
+  it("ripiega sui correlati all'ultima parte della serie", () => {
+    const first = article("parte-1", { series: { id: seriesId, part: 1 } });
+    const current = article("parte-2", { series: { id: seriesId, part: 2 } });
+
+    expect(
+      selectNext(current, [first, current], [article("correlato")])?.slug
+    ).toBe("correlato");
+  });
+
+  it("usa il primo correlato quando l'articolo non e in una serie", () => {
+    const current = article("current");
+
+    expect(
+      selectNext(current, [], [article("primo"), article("secondo")])?.slug
+    ).toBe("primo");
+  });
+
+  it("non propone mai l'articolo corrente", () => {
+    const current = article("current");
+
+    expect(selectNext(current, [], [current])).toBeNull();
+  });
+
+  it("torna null quando non c'e nessun altro articolo", () => {
+    expect(selectNext(article("current"), [], [])).toBeNull();
   });
 });

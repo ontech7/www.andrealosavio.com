@@ -9,7 +9,6 @@ function valid(overrides: Record<string, unknown> = {}) {
       "Una guida pratica ai livelli di cache di Next.js, a come interagiscono tra loro e agli errori che fanno sembrare rotto il revalidate.",
     publishedAt: new Date("2026-09-02T00:00:00Z"),
     translationKey: "nextjs-cache",
-    kind: "tech",
     tags: ["nextjs", "performance"],
     takeaways: ["Primo punto chiave.", "Secondo punto chiave."],
     ...overrides,
@@ -58,12 +57,6 @@ describe("parseFrontmatter", () => {
     expect(() =>
       parseFrontmatter(valid({ tags: ["nextjs", "blockchain"] }), "it/test.mdx")
     ).toThrow(/blockchain/);
-  });
-
-  it("rifiuta un kind sconosciuto", () => {
-    expect(() =>
-      parseFrontmatter(valid({ kind: "opinion" }), "it/test.mdx")
-    ).toThrow(/kind/);
   });
 
   it("rifiuta una description fuori dai limiti", () => {

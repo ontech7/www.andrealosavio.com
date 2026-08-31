@@ -5,20 +5,36 @@
   },
   "index": {
     "title": "Blog",
-    "subtitle": "Note di lavoro su codice, architettura e prodotto. Nessuna teoria che non abbia gia incontrato in produzione.",
-    "empty": "Nessun articolo con questi filtri. Prova a togliere qualche tag.",
+    "subtitle": "Nessuna teoria che non abbia già incontrato in produzione: problemi veri, numeri veri e i compromessi che ho scelto.",
+    "empty": "Nessun articolo corrisponde alla ricerca. Prova con altre parole o togli qualche filtro.",
     "noArticlesYet": "Non ho ancora pubblicato nulla qui. Torna presto.",
     "readMore": "Leggi l'articolo",
     "filter": {
-      "tagsLabel": "Filtra per argomento",
-      "clear": "Azzera i filtri"
+      "tagsLabel": "Filtra per tag",
+      "clear": "Azzera i filtri",
+      "searchLabel": "Cerca tra gli articoli",
+      "searchPlaceholder": "Cerca per titolo, sottotitolo o argomento...",
+      "results": "{count, plural, =0 {Nessun articolo} =1 {1 articolo} other {# articoli}}"
+    },
+    "seriesPart": "Parte {part}",
+    "eyebrow": "Blog",
+    "headline": "Note di lavoro su <highlight>codice e architettura</highlight>",
+    "rss": "Feed RSS",
+    "featuredLabel": "In evidenza",
+    "allArticles": "Tutti gli articoli",
+    "pagination": {
+      "label": "Paginazione degli articoli",
+      "previous": "Pagina precedente",
+      "next": "Pagina successiva",
+      "goToPage": "Vai alla pagina {page}",
+      "status": "Pagina {page} di {total}"
     }
   },
   "article": {
     "publishedOn": "Pubblicato il {date}",
     "updatedOn": "Aggiornato il {date}",
     "readingTime": "{minutes} min di lettura",
-    "takeaways": "In breve",
+    "takeaways": "TL;DR",
     "toc": "In questa pagina",
     "copyCode": "Copia il codice",
     "copied": "Copiato",
@@ -33,13 +49,16 @@
       "title": "Hai un problema simile?",
       "description": "Se stai affrontando qualcosa di analogo sul tuo prodotto, scrivimi: nel peggiore dei casi ti do un'opinione gratis.",
       "action": "Parliamone"
+    },
+    "takeawaysLabel": "Riassunto dell'articolo",
+    "openImage": "Apri a schermo intero in una nuova scheda: {alt}",
+    "openImageBadge": "Schermo intero",
+    "quickActions": {
+      "label": "Scorciatoie dell'articolo",
+      "top": "Torna all'inizio",
+      "takeaways": "Vai al TL;DR",
+      "next": "Prossimo articolo"
     }
-  },
-  "kinds": {
-    "tech": "Tecnico",
-    "business": "Business",
-    "hybrid": "Ibrido",
-    "event": "Evento"
   },
   "tags": {
     "nextjs": "Next.js",

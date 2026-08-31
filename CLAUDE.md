@@ -79,6 +79,7 @@ npx vitest run      # unit tests, alias: npm test (src/libs/blog/* pure function
 | Update OG metadata          | `generateMetadata` inside the relevant `page.tsx`                                                                                   |
 | Touch URL-driven filters    | hand-rolled context provider near the consumer, e.g. `projects-filter-provider.tsx` or `blog-filter-provider.tsx` (see below)       |
 | Write a blog article        | `blog-ghostwriter` skill, or hand-write the `content/blog/{it,en}/` MDX pair                                                        |
+| Design an article cover     | `blog-cover-designer` skill; the automatic fallback lives in `blog/components/article-cover.tsx`                                    |
 | Change how articles render  | `src/mdx-components.tsx`                                                                                                            |
 
 ## Available agent skills (load with the `skill` tool)
@@ -88,6 +89,8 @@ are absolute file URIs — open them to see the full instructions.
 
 - [accessibility-compliance](.claude/skills/accessibility-compliance/SKILL.md) —
   WCAG 2.2 audits, ARIA patterns, screen-reader support.
+- [blog-cover-designer](.claude/skills/blog-cover-designer/SKILL.md) — design a
+  bespoke SVG cover for an article, when the automatic one is not enough.
 - [blog-ghostwriter](.claude/skills/blog-ghostwriter/SKILL.md) — write, draft,
   or translate a paired IT/EN blog article for `content/blog/`.
 - [fixing-motion-performance](.claude/skills/fixing-motion-performance/SKILL.md)

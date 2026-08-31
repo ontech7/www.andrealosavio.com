@@ -16,6 +16,5 @@ export const BLOG_TAGS = [
 
 export type BlogTag = (typeof BLOG_TAGS)[number];
 
-export const BLOG_KINDS = ["tech", "business", "hybrid", "event"] as const;
-
-export type BlogKind = (typeof BLOG_KINDS)[number];
+/** Quanti articoli mostra una pagina dell'indice del blog. */
+export const BLOG_PAGE_SIZE = 6;

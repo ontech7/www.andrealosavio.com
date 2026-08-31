@@ -12,8 +12,13 @@ import {
 
 interface BlogFilterValue {
   selectedTags: string[];
+  query: string;
+  page: number;
+  isFiltering: boolean;
   toggleTag: (tag: string) => void;
-  clearTags: () => void;
+  setQuery: (query: string) => void;
+  setPage: (page: number) => void;
+  clearAll: () => void;
 }
 
 const BlogFilterContext = createContext<BlogFilterValue | null>(null);
@@ -28,15 +33,24 @@ export function useBlogFilter() {
   return value;
 }
 
-function readTagsFromUrl(availableTags: readonly string[]): string[] {
+function readStateFromUrl(availableTags: readonly string[]) {
   const params = new URLSearchParams(window.location.search);
+  const page = Number.parseInt(params.get("page") ?? "", 10);
 
-  return (params.get("tags") ?? "")
-    .split(",")
-    .filter((tag) => availableTags.includes(tag));
+  return {
+    tags: (params.get("tags") ?? "")
+      .split(",")
+      .filter((tag) => availableTags.includes(tag)),
+    query: params.get("q") ?? "",
+    page: Number.isNaN(page) || page < 1 ? 1 : page,
+  };
 }
 
-function buildSearch(selectedTags: string[]): string {
+function buildSearch(
+  selectedTags: string[],
+  query: string,
+  page: number
+): string {
   const params = new URLSearchParams(window.location.search);
 
   if (selectedTags.length > 0) {
@@ -45,9 +59,21 @@ function buildSearch(selectedTags: string[]): string {
     params.delete("tags");
   }
 
-  const query = params.toString();
+  if (query.trim()) {
+    params.set("q", query.trim());
+  } else {
+    params.delete("q");
+  }
 
-  return query ? `?${query}` : "";
+  if (page > 1) {
+    params.set("page", String(page));
+  } else {
+    params.delete("page");
+  }
+
+  const search = params.toString();
+
+  return search ? `?${search}` : "";
 }
 
 interface BlogFilterProviderProps {
@@ -60,12 +86,18 @@ export function BlogFilterProvider({
   children,
 }: BlogFilterProviderProps) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [query, setQueryState] = useState("");
+  const [page, setPage] = useState(1);
   const [isHydrated, setIsHydrated] = useState(false);
   const availableTagsRef = useRef(availableTags);
 
   useEffect(() => {
     const syncFromUrl = () => {
-      setSelectedTags(readTagsFromUrl(availableTagsRef.current));
+      const state = readStateFromUrl(availableTagsRef.current);
+
+      setSelectedTags(state.tags);
+      setQueryState(state.query);
+      setPage(state.page);
       setIsHydrated(true);
     };
 
@@ -80,7 +112,7 @@ export function BlogFilterProvider({
       return;
     }
 
-    const search = buildSearch(selectedTags);
+    const search = buildSearch(selectedTags, query, page);
 
     if (search === window.location.search) {
       return;
@@ -91,7 +123,7 @@ export function BlogFilterProvider({
       "",
       `${window.location.pathname}${search}`
     );
-  }, [selectedTags, isHydrated]);
+  }, [selectedTags, query, page, isHydrated]);
 
   const toggleTag = useCallback((tag: string) => {
     setSelectedTags((previous) =>
@@ -99,13 +131,32 @@ export function BlogFilterProvider({
         ? previous.filter((selected) => selected !== tag)
         : [...previous, tag]
     );
+    setPage(1);
   }, []);
 
-  const clearTags = useCallback(() => setSelectedTags([]), []);
+  const setQuery = useCallback((next: string) => {
+    setQueryState(next);
+    setPage(1);
+  }, []);
+
+  const clearAll = useCallback(() => {
+    setSelectedTags([]);
+    setQueryState("");
+    setPage(1);
+  }, []);
 
   const value = useMemo(
-    () => ({ selectedTags, toggleTag, clearTags }),
-    [selectedTags, toggleTag, clearTags]
+    () => ({
+      selectedTags,
+      query,
+      page,
+      isFiltering: selectedTags.length > 0 || query.trim() !== "",
+      toggleTag,
+      setQuery,
+      setPage,
+      clearAll,
+    }),
+    [selectedTags, query, page, toggleTag, setQuery, clearAll]
   );
 
   return (

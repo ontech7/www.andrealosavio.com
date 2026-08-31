@@ -5,20 +5,36 @@
   },
   "index": {
     "title": "Blog",
-    "subtitle": "Working notes on code, architecture and product. No theory I have not already met in production.",
-    "empty": "No articles match these filters. Try removing a tag.",
-    "noArticlesYet": "Nothing published here yet. Check back soon.",
+    "subtitle": "No theory I have not already met in production: real problems, real numbers and the trade-offs I picked.",
+    "empty": "No article matches your search. Try other words or drop a filter.",
+    "noArticlesYet": "I haven't published anything here yet. Check back soon.",
     "readMore": "Read the article",
     "filter": {
-      "tagsLabel": "Filter by topic",
-      "clear": "Clear filters"
+      "tagsLabel": "Filter by tag",
+      "clear": "Clear filters",
+      "searchLabel": "Search the articles",
+      "searchPlaceholder": "Search by title, subtitle or topic...",
+      "results": "{count, plural, =0 {No articles} =1 {1 article} other {# articles}}"
+    },
+    "seriesPart": "Part {part}",
+    "eyebrow": "Blog",
+    "headline": "Working notes on <highlight>code and architecture</highlight>",
+    "rss": "RSS feed",
+    "featuredLabel": "Featured",
+    "allArticles": "All articles",
+    "pagination": {
+      "label": "Article pagination",
+      "previous": "Previous page",
+      "next": "Next page",
+      "goToPage": "Go to page {page}",
+      "status": "Page {page} of {total}"
     }
   },
   "article": {
     "publishedOn": "Published on {date}",
     "updatedOn": "Updated on {date}",
     "readingTime": "{minutes} min read",
-    "takeaways": "In short",
+    "takeaways": "TL;DR",
     "toc": "On this page",
     "copyCode": "Copy code",
     "copied": "Copied",
@@ -33,13 +49,16 @@
       "title": "Facing something similar?",
       "description": "If you are dealing with the same problem on your product, get in touch. Worst case, you get a free opinion.",
       "action": "Let's talk"
+    },
+    "takeawaysLabel": "Article summary",
+    "openImage": "Open full size in a new tab: {alt}",
+    "openImageBadge": "Full size",
+    "quickActions": {
+      "label": "Article shortcuts",
+      "top": "Back to top",
+      "takeaways": "Jump to TL;DR",
+      "next": "Next article"
     }
-  },
-  "kinds": {
-    "tech": "Technical",
-    "business": "Business",
-    "hybrid": "Hybrid",
-    "event": "Event"
   },
   "tags": {
     "nextjs": "Next.js",

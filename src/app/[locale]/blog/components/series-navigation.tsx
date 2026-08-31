@@ -1,5 +1,6 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import { Card } from "@/components/ui/card";
 import type { BlogArticle } from "@/libs/blog/source";
 import { Link } from "@/libs/i18n/navigation";
 import { cn } from "@/utils/cn";
@@ -24,46 +25,54 @@ export async function SeriesNavigation({
   const previous = index > 0 ? articles[index - 1] : null;
   const next = index < articles.length - 1 ? articles[index + 1] : null;
 
+  const label = t("blog.article.series.label", {
+    part: index + 1,
+    total: articles.length,
+  });
+
   return (
-    <nav
-      aria-label={t("blog.article.series.label", {
-        part: index + 1,
-        total: articles.length,
-      })}
-      className={cn("border-border my-10 rounded-xl border p-5", className)}
-    >
-      <p className="text-muted-foreground mb-4 text-xs font-semibold tracking-wide uppercase">
-        {t("blog.article.series.label", {
-          part: index + 1,
-          total: articles.length,
-        })}
-      </p>
+    <div className={cn("my-10", className)}>
+      <Card className="bg-background gap-4 p-5">
+        <nav aria-label={label} className="flex flex-col gap-4">
+          <p className="text-secondary m-0 text-xs font-semibold tracking-[0.2em] uppercase">
+            {label}
+          </p>
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:justify-between">
-        {previous && (
-          <Link
-            href={`/blog/${previous.slug}`}
-            className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors"
-          >
-            <ArrowLeftIcon className="size-4" aria-hidden="true" />
-            <span className="sr-only">
-              {t("blog.article.series.previous")}:
-            </span>
-            {previous.frontmatter.title}
-          </Link>
-        )}
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-between">
+            {previous && (
+              <Link
+                href={`/blog/${previous.slug}`}
+                className="text-muted-foreground hover:text-foreground group flex items-center gap-2 text-sm transition-colors"
+              >
+                <ArrowLeftIcon
+                  className="size-4 shrink-0 transition-transform group-hover:-translate-x-0.5"
+                  aria-hidden="true"
+                />
+                <span className="sr-only">
+                  {t("blog.article.series.previous")}:
+                </span>
+                {previous.frontmatter.title}
+              </Link>
+            )}
 
-        {next && (
-          <Link
-            href={`/blog/${next.slug}`}
-            className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors sm:ml-auto"
-          >
-            <span className="sr-only">{t("blog.article.series.next")}:</span>
-            {next.frontmatter.title}
-            <ArrowRightIcon className="size-4" aria-hidden="true" />
-          </Link>
-        )}
-      </div>
-    </nav>
+            {next && (
+              <Link
+                href={`/blog/${next.slug}`}
+                className="text-muted-foreground hover:text-foreground group flex items-center gap-2 text-sm transition-colors sm:ml-auto sm:text-right"
+              >
+                <span className="sr-only">
+                  {t("blog.article.series.next")}:
+                </span>
+                {next.frontmatter.title}
+                <ArrowRightIcon
+                  className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
+              </Link>
+            )}
+          </div>
+        </nav>
+      </Card>
+    </div>
   );
 }

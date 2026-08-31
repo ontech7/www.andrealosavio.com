@@ -1,0 +1,135 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img">
+  <defs>
+    <radialGradient id="deepseek-v4-flash-sky" cx="50%" cy="44%" r="85%">
+      <stop offset="0%" stop-color="#101c3d" />
+      <stop offset="55%" stop-color="#050912" />
+      <stop offset="100%" stop-color="#03060c" />
+    </radialGradient>
+
+    <radialGradient id="deepseek-v4-flash-bloom" cx="50%" cy="44%" r="42%">
+      <stop offset="0%" stop-color="#3b6fe0" stop-opacity="0.75" />
+      <stop offset="100%" stop-color="#3b6fe0" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="deepseek-v4-flash-face" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#a3c0ff" />
+      <stop offset="55%" stop-color="#3b6fe0" />
+      <stop offset="100%" stop-color="#2a4a9c" />
+    </linearGradient>
+
+    <linearGradient id="deepseek-v4-flash-plate" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#0b1526" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#060a14" stop-opacity="0.95" />
+    </linearGradient>
+
+    <radialGradient id="deepseek-v4-flash-depth" cx="50%" cy="44%" r="72%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+
+    <mask id="deepseek-v4-flash-depth-mask">
+      <rect width="1200" height="630" fill="url(#deepseek-v4-flash-depth)" />
+    </mask>
+
+    <filter id="deepseek-v4-flash-far-blur">
+      <feGaussianBlur stdDeviation="3.5" />
+    </filter>
+
+    <filter id="deepseek-v4-flash-bloom-filter" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="14" />
+    </filter>
+
+    <filter id="deepseek-v4-flash-subject-glow" x="-45%" y="-45%" width="190%" height="190%">
+      <feGaussianBlur stdDeviation="22" result="blurred" />
+      <feMerge>
+        <feMergeNode in="blurred" />
+        <feMergeNode in="blurred" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="deepseek-v4-flash-mark-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#03102a" flood-opacity="0.55" />
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#deepseek-v4-flash-sky)" />
+
+  <g mask="url(#deepseek-v4-flash-depth-mask)">
+    <g fill="none" stroke="#a3c0ff" stroke-width="1" opacity="0.045" filter="url(#deepseek-v4-flash-far-blur)">
+      <path d="M600 -274 L-504 278" />
+      <path d="M600 -274 L1704 278" />
+      <path d="M692 -228 L-412 324" />
+      <path d="M508 -228 L1612 324" />
+      <path d="M784 -182 L-320 370" />
+      <path d="M416 -182 L1520 370" />
+      <path d="M876 -136 L-228 416" />
+      <path d="M324 -136 L1428 416" />
+      <path d="M968 -90 L-136 462" />
+      <path d="M232 -90 L1336 462" />
+      <path d="M1060 -44 L-44 508" />
+      <path d="M140 -44 L1244 508" />
+      <path d="M1152 2 L48 554" />
+      <path d="M48 2 L1152 554" />
+      <path d="M1244 48 L140 600" />
+      <path d="M-44 48 L1060 600" />
+      <path d="M1336 94 L232 646" />
+      <path d="M-136 94 L968 646" />
+      <path d="M1428 140 L324 692" />
+      <path d="M-228 140 L876 692" />
+      <path d="M1520 186 L416 738" />
+      <path d="M-320 186 L784 738" />
+      <path d="M1612 232 L508 784" />
+      <path d="M-412 232 L692 784" />
+      <path d="M1704 278 L600 830" />
+      <path d="M-504 278 L600 830" />
+    </g>
+
+    <g fill="none" stroke="#3b6fe0" stroke-linecap="round" stroke-linejoin="round" opacity="0.38" filter="url(#deepseek-v4-flash-bloom-filter)">
+      <path d="M477.04 354.52 L247.42 469.33 L61.87 562.11 L342.08 702.21 L461.96 762.15" stroke-width="10.24" opacity="0.652" />
+      <path d="M801.49 315.26 L914.27 371.65 L1028.7 428.86 L1251.38 540.2 L1345.06 587.05" stroke-width="12.04" opacity="0.488" />
+      <path d="M412.44 322.22 L252.83 402.03 L-20.79 265.22 L-206.66 358.15" stroke-width="16.4" opacity="0.45" />
+      <path d="M669.53 174.76 L752.65 133.2 L906.94 56.06 L645.41 -74.7 L774.22 -139.11" stroke-width="17.44" opacity="0.547" />
+      <path d="M675.78 378.11 L810.26 445.35 L552.37 574.29 L759.31 677.76 L933.17 764.7" stroke-width="16.08" opacity="0.509" />
+      <path d="M738.96 209.48 L997.69 80.11 L1117.25 139.89 L1247.57 205.05 L1345.35 253.94" stroke-width="8.04" opacity="0.853" />
+      <path d="M402.3 317.15 L142.89 446.85 L-142.28 589.44" stroke-width="11.56" opacity="0.971" />
+      <path d="M519.98 180.01 L354.68 97.35 L673.83 -62.22 L805.43 -128.02" stroke-width="10.84" opacity="0.591" />
+      <path d="M671.31 380.35 L925.76 507.57 L649.62 645.64 L952.62 797.14" stroke-width="11.08" opacity="0.598" />
+      <path d="M771.78 225.89 L924.5 149.53 L1232.53 303.54 L1319.71 347.13" stroke-width="12.84" opacity="0.924" />
+      <path d="M446.06 216.97 L336.26 162.07 L248.98 118.43 L133.99 175.93 L-28.14 94.87 L-207.86 5.01" stroke-width="14.52" opacity="0.734" />
+    </g>
+
+    <g fill="none" stroke="#a3c0ff" stroke-linecap="round" stroke-linejoin="round" opacity="0.42">
+      <path d="M477.04 354.52 L247.42 469.33 L61.87 562.11 L342.08 702.21 L461.96 762.15" stroke-width="2.56" opacity="0.802" />
+      <path d="M801.49 315.26 L914.27 371.65 L1028.7 428.86 L1251.38 540.2 L1345.06 587.05" stroke-width="3.01" opacity="0.638" />
+      <path d="M412.44 322.22 L252.83 402.03 L-20.79 265.22 L-206.66 358.15" stroke-width="4.1" opacity="0.6" />
+      <path d="M669.53 174.76 L752.65 133.2 L906.94 56.06 L645.41 -74.7 L774.22 -139.11" stroke-width="4.36" opacity="0.697" />
+      <path d="M675.78 378.11 L810.26 445.35 L552.37 574.29 L759.31 677.76 L933.17 764.7" stroke-width="4.02" opacity="0.659" />
+      <path d="M738.96 209.48 L997.69 80.11 L1117.25 139.89 L1247.57 205.05 L1345.35 253.94" stroke-width="2.01" opacity="1" />
+      <path d="M402.3 317.15 L142.89 446.85 L-142.28 589.44" stroke-width="2.89" opacity="1" />
+      <path d="M519.98 180.01 L354.68 97.35 L673.83 -62.22 L805.43 -128.02" stroke-width="2.71" opacity="0.741" />
+      <path d="M671.31 380.35 L925.76 507.57 L649.62 645.64 L952.62 797.14" stroke-width="2.77" opacity="0.748" />
+      <path d="M771.78 225.89 L924.5 149.53 L1232.53 303.54 L1319.71 347.13" stroke-width="3.21" opacity="1" />
+      <path d="M446.06 216.97 L336.26 162.07 L248.98 118.43 L133.99 175.93 L-28.14 94.87 L-207.86 5.01" stroke-width="3.63" opacity="0.884" />
+    </g>
+  </g>
+
+  <ellipse cx="600" cy="278" rx="408" ry="265" fill="url(#deepseek-v4-flash-bloom)" opacity="0.5" />
+
+  <path d="M600.0 82.04 L991.92 278.0 L600.0 473.96 L208.08 278.0 Z" fill="url(#deepseek-v4-flash-plate)" stroke="#2a4a9c" stroke-width="2" stroke-opacity="0.7" stroke-linejoin="round" />
+
+  <g filter="url(#deepseek-v4-flash-subject-glow)">
+    <path d="M324.0 278.0 L600.0 416.0 L600.0 446.0 L324.0 308.0 Z" fill="#2a4a9c" opacity="0.9" />
+    <path d="M600.0 416.0 L876.0 278.0 L876.0 308.0 L600.0 446.0 Z" fill="#101c3d" opacity="0.95" />
+    <path d="M600.0 140.0 L876.0 278.0 L600.0 416.0 L324.0 278.0 Z" fill="url(#deepseek-v4-flash-face)" stroke="url(#deepseek-v4-flash-face)" stroke-width="22" stroke-linejoin="round" />
+  </g>
+
+  <g filter="url(#deepseek-v4-flash-mark-shadow)">
+    <g transform="translate(500.0 178.0) scale(8.33333)">
+      <path d="M23.748 4.651c-.254-.124-.364.113-.512.233-.051.04-.094.09-.137.137-.372.397-.806.657-1.373.626-.829-.046-1.537.214-2.163.848-.133-.782-.575-1.248-1.247-1.548-.352-.155-.708-.311-.955-.65-.172-.24-.219-.509-.305-.774-.055-.16-.11-.323-.293-.35-.2-.031-.278.136-.356.276-.313.572-.434 1.202-.422 1.84.027 1.436.633 2.58 1.838 3.393.137.094.172.187.129.323-.082.28-.18.553-.266.833-.055.179-.137.218-.328.14a5.5 5.5 0 0 1-1.737-1.179c-.857-.828-1.631-1.743-2.597-2.46a12 12 0 0 0-.689-.47c-.985-.957.13-1.743.387-1.836.27-.098.094-.433-.778-.428-.872.003-1.67.295-2.687.685a3 3 0 0 1-.465.136 9.6 9.6 0 0 0-2.883-.101c-1.885.21-3.39 1.1-4.497 2.622C.082 8.776-.231 10.854.152 13.02c.403 2.284 1.568 4.175 3.36 5.653 1.857 1.533 3.997 2.284 6.438 2.14 1.482-.085 3.132-.284 4.994-1.86.47.234.962.328 1.78.398.629.058 1.235-.031 1.705-.129.735-.155.684-.836.418-.961-2.155-1.004-1.682-.595-2.112-.926 1.095-1.295 2.768-3.598 3.284-6.733.05-.346.115-.834.108-1.114-.004-.171.035-.238.23-.257a4.2 4.2 0 0 0 1.545-.475c1.397-.763 1.96-2.016 2.093-3.517.02-.23-.004-.467-.247-.588M11.58 18.168c-2.088-1.642-3.101-2.183-3.52-2.16-.39.024-.32.472-.234.763.09.288.207.487.371.74.114.167.192.416-.113.603-.673.416-1.842-.14-1.897-.168-1.361-.801-2.5-1.86-3.301-3.306-.775-1.393-1.225-2.888-1.299-4.482-.02-.385.094-.522.477-.592a4.7 4.7 0 0 1 1.53-.038c2.131.311 3.946 1.264 5.467 2.774.868.86 1.525 1.887 2.202 2.89.72 1.066 1.494 2.082 2.48 2.915.348.291.626.513.892.677-.802.09-2.14.109-3.055-.615zm1.001-6.44a.306.306 0 0 1 .415-.287.3.3 0 0 1 .113.074.3.3 0 0 1 .086.214c0 .17-.136.307-.308.307a.303.303 0 0 1-.306-.307m3.11 1.596c-.2.081-.4.151-.591.16a1.25 1.25 0 0 1-.798-.254c-.274-.23-.47-.358-.551-.758a1.7 1.7 0 0 1 .015-.588c.07-.327-.007-.537-.238-.727-.188-.156-.426-.199-.689-.199a.6.6 0 0 1-.254-.078.253.253 0 0 1-.114-.358 1 1 0 0 1 .192-.21c.356-.202.767-.136 1.146.016.352.144.618.408 1.001.782.392.451.462.576.685.915.176.264.336.536.446.848.066.194-.02.353-.25.45" fill="#ffffff" />
+    </g>
+  </g>
+
+  <text x="600" y="552" text-anchor="middle" font-family="DM Mono, ui-monospace, monospace" font-size="50" letter-spacing="1.5" fill="#a3c0ff" fill-opacity="0.92">$0.14 in · $0.28 out</text>
+</svg>

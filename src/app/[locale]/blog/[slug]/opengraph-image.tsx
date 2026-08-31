@@ -24,6 +24,16 @@ function loadFont(file: string): Buffer {
 const dmSansRegular = loadFont("dm-sans-400.woff");
 const dmSansBold = loadFont("dm-sans-700.woff");
 
+function inlineCoverDataUri(cover: string): string | null {
+  const file = path.join(process.cwd(), "public", cover.replace(/^\//, ""));
+
+  if (!file.endsWith(".svg") || !fs.existsSync(file)) {
+    return null;
+  }
+
+  return `data:image/svg+xml;base64,${fs.readFileSync(file).toString("base64")}`;
+}
+
 function titleFontSize(title: string): number {
   if (title.length > 90) {
     return 42;
@@ -49,6 +59,16 @@ export default async function OpengraphImage({ params }: ImageProps) {
   }
 
   const { frontmatter } = article;
+  const bespokeCover = frontmatter.cover
+    ? inlineCoverDataUri(frontmatter.cover)
+    : null;
+
+  if (bespokeCover) {
+    return new ImageResponse(
+      <img src={bespokeCover} width={size.width} height={size.height} alt="" />,
+      size
+    );
+  }
 
   return new ImageResponse(
     <div
@@ -58,9 +78,9 @@ export default async function OpengraphImage({ params }: ImageProps) {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        backgroundColor: "#111111",
+        backgroundColor: "#05070c",
         backgroundImage:
-          "radial-gradient(circle at 85% 15%, rgba(13,126,242,0.35), transparent 55%)",
+          "radial-gradient(circle at 78% 18%, rgba(13,126,242,0.45), transparent 58%)",
         padding: "64px",
         fontFamily: "DM Sans",
       }}
@@ -69,7 +89,7 @@ export default async function OpengraphImage({ params }: ImageProps) {
         style={{
           display: "flex",
           gap: "12px",
-          color: "#0d7ef2",
+          color: "#5cb0ff",
           fontSize: 26,
         }}
       >

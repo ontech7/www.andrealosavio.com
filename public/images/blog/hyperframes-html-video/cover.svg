@@ -1,0 +1,210 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient
+      id="hyperframes-html-video-sky"
+      cx="600"
+      cy="305"
+      r="780"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0" stop-color="#062a45" />
+      <stop offset="0.5" stop-color="#050912" />
+      <stop offset="1" stop-color="#03060c" />
+    </radialGradient>
+
+    <radialGradient
+      id="hyperframes-html-video-pane"
+      cx="600"
+      cy="303"
+      r="152"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0" stop-color="#1d7099" />
+      <stop offset="0.55" stop-color="#124f73" />
+      <stop offset="1" stop-color="#0a3450" />
+    </radialGradient>
+
+    <linearGradient
+      id="hyperframes-html-video-edge"
+      x1="482"
+      y1="238"
+      x2="718"
+      y2="371"
+      gradientUnits="userSpaceOnUse"
+          >
+      <stop offset="0" stop-color="#8ad8fb" />
+      <stop offset="0.55" stop-color="#0ea5e9" />
+      <stop offset="1" stop-color="#12587f" />
+    </linearGradient>
+
+    <radialGradient
+      id="hyperframes-html-video-depth"
+      cx="600"
+      cy="305"
+      r="600"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="0.42" stop-color="#ffffff" stop-opacity="0.72" />
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+
+    <mask id="hyperframes-html-video-falloff">
+      <rect width="1200" height="630" fill="url(#hyperframes-html-video-depth)" />
+    </mask>
+
+    <filter
+      id="hyperframes-html-video-bloom"
+      x="-70%"
+      y="-70%"
+      width="240%"
+      height="240%"
+    >
+      <feGaussianBlur stdDeviation="20" result="halo" />
+      <feMerge>
+        <feMergeNode in="halo" />
+        <feMergeNode in="halo" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter
+      id="hyperframes-html-video-defocus"
+      x="-20%"
+      y="-20%"
+      width="140%"
+      height="140%"
+    >
+      <feGaussianBlur stdDeviation="2.4" />
+    </filter>
+
+    <filter
+      id="hyperframes-html-video-seat"
+      x="-40%"
+      y="-40%"
+      width="180%"
+      height="180%"
+    >
+      <feDropShadow
+        dx="0"
+        dy="3"
+        stdDeviation="7"
+        flood-color="#03060c"
+        flood-opacity="0.8"
+      />
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#hyperframes-html-video-sky)" />
+
+  <g mask="url(#hyperframes-html-video-falloff)">
+    <g filter="url(#hyperframes-html-video-defocus)">
+      <g opacity="0.2">
+        <rect x="98" y="263" width="150" height="84" rx="7" fill="#071427" />
+        <rect fill="none"
+          x="98"
+          y="263"
+          width="150"
+          height="84"
+          rx="7"
+          stroke="#12587f"
+          stroke-width="2"
+        />
+        <rect x="952" y="263" width="150" height="84" rx="7" fill="#071427" />
+        <rect fill="none"
+          x="952"
+          y="263"
+          width="150"
+          height="84"
+          rx="7"
+          stroke="#12587f"
+          stroke-width="2"
+        />
+      </g>
+
+      <g opacity="0.36">
+        <rect x="270" y="252" width="186" height="105" rx="8" fill="#08182c" />
+        <rect fill="none"
+          x="270"
+          y="252"
+          width="186"
+          height="105"
+          rx="8"
+          stroke="#1b6a94"
+          stroke-width="2"
+        />
+        <rect x="744" y="252" width="186" height="105" rx="8" fill="#08182c" />
+        <rect fill="none"
+          x="744"
+          y="252"
+          width="186"
+          height="105"
+          rx="8"
+          stroke="#1b6a94"
+          stroke-width="2"
+        />
+      </g>
+    </g>
+  </g>
+
+  <g opacity="0.62">
+    <path
+      d="M600 148V238"
+      stroke="#8ad8fb"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
+    <path
+      d="M600 372V462"
+      stroke="#8ad8fb"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
+    <path d="M586 124H614L600 147Z" fill="#8ad8fb" />
+    <circle cx="600" cy="470" r="4" fill="#8ad8fb" />
+  </g>
+
+  <g filter="url(#hyperframes-html-video-bloom)">
+    <rect x="482" y="238" width="236" height="133" rx="11" fill="#0a3450" />
+    <rect
+      x="482"
+      y="238"
+      width="236"
+      height="133"
+      rx="11"
+      fill="url(#hyperframes-html-video-pane)"
+    />
+    <rect fill="none"
+      x="483"
+      y="239"
+      width="234"
+      height="131"
+      rx="10"
+      stroke="url(#hyperframes-html-video-edge)"
+      stroke-width="2.5"
+    />
+  </g>
+
+  <g transform="translate(600 305) scale(1.48) translate(-50 -50)">
+    <g filter="url(#hyperframes-html-video-defocus)" opacity="0.55">
+      <path
+        d="M10.1851 57.8021L33.1145 73.8313C36.2202 75.9978 41.5173 73.5433 42.4816 69.4984L51.7611 30.4271C52.7253 26.3822 48.5802 23.9277 44.4602 26.0942L13.917 42.1235C6.96677 45.7676 4.97564 54.1579 10.1851 57.8021Z"
+        fill="#8ad8fb"
+      />
+      <path
+        d="M87.5129 57.5141L56.9696 73.5433C52.8371 75.7098 48.7046 73.2553 49.6688 69.2104L58.9483 30.1391C59.9125 26.0942 65.2097 23.6397 68.3154 25.8062L91.2447 41.8354C96.4668 45.4796 94.4631 53.8699 87.5129 57.5141Z"
+        fill="#8ad8fb"
+      />
+    </g>
+    <g filter="url(#hyperframes-html-video-seat)">
+      <path
+        d="M10.1851 57.8021L33.1145 73.8313C36.2202 75.9978 41.5173 73.5433 42.4816 69.4984L51.7611 30.4271C52.7253 26.3822 48.5802 23.9277 44.4602 26.0942L13.917 42.1235C6.96677 45.7676 4.97564 54.1579 10.1851 57.8021Z"
+        fill="#ffffff"
+      />
+      <path
+        d="M87.5129 57.5141L56.9696 73.5433C52.8371 75.7098 48.7046 73.2553 49.6688 69.2104L58.9483 30.1391C59.9125 26.0942 65.2097 23.6397 68.3154 25.8062L91.2447 41.8354C96.4668 45.4796 94.4631 53.8699 87.5129 57.5141Z"
+        fill="#ffffff"
+      />
+    </g>
+  </g>
+</svg>

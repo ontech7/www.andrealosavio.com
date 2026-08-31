@@ -1,9 +1,11 @@
+import { ArrowLeftIcon } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { ArticleCover } from "@/app/[locale]/blog/components/article-cover";
 import { ArticleCta } from "@/app/[locale]/blog/components/article-cta";
 import { ArticleMeta } from "@/app/[locale]/blog/components/article-meta";
+import { ArticleQuickActions } from "@/app/[locale]/blog/components/article-quick-actions";
 import { ArticleTakeaways } from "@/app/[locale]/blog/components/article-takeaways";
 import { ArticleToc } from "@/app/[locale]/blog/components/article-toc";
 import { ReadingProgress } from "@/app/[locale]/blog/components/reading-progress";
@@ -15,6 +17,7 @@ import { locales, type AppLocale } from "@/libs/i18n/utils";
 import {
   getAllArticleParams,
   getArticle,
+  getNextArticle,
   getRelatedArticles,
   getSeriesArticles,
   getTranslatedSlug,
@@ -70,9 +73,10 @@ export async function generateMetadata({
 
   languages["x-default"] = languages.it ?? url;
 
-  const image = frontmatter.cover
-    ? `${siteUrl}${frontmatter.cover}`
-    : `${url}/opengraph-image`;
+  const image =
+    frontmatter.cover && !frontmatter.cover.endsWith(".svg")
+      ? `${siteUrl}${frontmatter.cover}`
+      : `${url}/opengraph-image`;
 
   return {
     title: frontmatter.title,
@@ -137,9 +141,10 @@ export default async function BlogArticlePage({ params }: PageProps) {
     description: frontmatter.description,
     datePublished: frontmatter.publishedAt,
     dateModified: frontmatter.updatedAt,
-    image: frontmatter.cover
-      ? `${siteUrl}${frontmatter.cover}`
-      : `${url}/opengraph-image`,
+    image:
+      frontmatter.cover && !frontmatter.cover.endsWith(".svg")
+        ? `${siteUrl}${frontmatter.cover}`
+        : `${url}/opengraph-image`,
     authorId: `${siteUrl}#person`,
     publisherId: `${siteUrl}#organization`,
     inLanguage: locale,
@@ -161,45 +166,50 @@ export default async function BlogArticlePage({ params }: PageProps) {
       <PageMessages namespaces={["blog"]}>
         <ReadingProgress />
 
-        <article className="mx-auto max-w-5xl px-4 pt-24 pb-16 sm:px-6 lg:px-8">
+        <ArticleQuickActions nextSlug={getNextArticle(article)?.slug} />
+
+        <article className="mx-auto max-w-5xl px-6 pt-24 pb-20 md:pb-24">
           <div className="xl:grid xl:grid-cols-[15rem_minmax(0,1fr)] xl:gap-10">
             <div className="xl:col-start-2">
               <div className="prose-article">
                 <Link
                   href="/blog"
-                  className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                  className="text-muted-foreground hover:text-foreground group inline-flex items-center gap-2 text-sm transition-colors"
                 >
+                  <ArrowLeftIcon
+                    className="size-4 shrink-0 transition-transform group-hover:-translate-x-0.5"
+                    aria-hidden="true"
+                  />
                   {t("blog.article.backToBlog")}
                 </Link>
 
-                <h1 className="text-foreground mt-6 text-3xl leading-tight font-bold md:text-4xl">
+                <h1 className="mt-6 bg-linear-to-t from-white via-white/75 to-white/60 bg-clip-text text-3xl leading-tight font-bold text-transparent md:text-4xl">
                   {frontmatter.title}
                 </h1>
 
-                <p className="text-muted-foreground mt-3 text-lg">
+                <p className="text-muted-foreground mt-4 text-xl leading-relaxed">
                   {frontmatter.subtitle}
                 </p>
 
                 <ArticleMeta article={article} className="mt-6" />
 
                 <ArticleCover
-                  slug={slug}
-                  kind={frontmatter.kind}
-                  title={frontmatter.title}
-                  cover={frontmatter.cover}
-                  coverAlt={frontmatter.coverAlt}
+                  frontmatter={frontmatter}
                   priority
                   className="mt-8"
                 />
 
-                <details className="border-border mt-8 rounded-lg border p-4 xl:hidden">
+                <details className="border-border bg-card mt-8 rounded-lg border px-4 py-3 xl:hidden">
                   <summary className="text-foreground cursor-pointer text-sm font-semibold">
                     {t("blog.article.toc")}
                   </summary>
                   <ArticleToc entries={article.toc} className="mt-3" />
                 </details>
 
-                <ArticleTakeaways items={frontmatter.takeaways} />
+                <ArticleTakeaways
+                  items={frontmatter.takeaways}
+                  locale={locale}
+                />
 
                 <ArticleBody />
 
@@ -214,7 +224,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
               </div>
 
               <RelatedArticles
-                articles={getRelatedArticles(article)}
+                articles={getRelatedArticles(article, 2)}
                 locale={locale}
                 className="mt-12"
               />

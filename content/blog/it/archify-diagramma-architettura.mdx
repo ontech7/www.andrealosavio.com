@@ -1,0 +1,195 @@
+---
+title: "Archify: il diagramma del sistema che stai per cambiare"
+subtitle:
+  "Un agent skill da installare una volta sola: il pilota automatico per la
+  struttura del codice"
+description:
+  "Installi Archify globalmente, apri il repository su cui lavori e chiedi la
+  mappa del sistema. Torna un file HTML navigabile, non uno screenshot."
+publishedAt: 2026-08-20
+translationKey: archify-architecture-diagram
+tags: [architecture, ai]
+cover: /images/blog/archify-architecture-diagram/cover.svg
+coverAlt:
+  "Un esagono luminoso con dentro il marchio di Archify, un box isometrico
+  aperto, fra una specifica spenta a sinistra e tre nodi collegati che escono a
+  destra"
+takeaways:
+  - "Si installa una volta in globale e da quel momento è in ogni repository che
+    apri: niente configurazione per progetto, niente file da committare."
+  - "Torna un file HTML solo, navigabile: clicchi un nodo, tracci un percorso,
+    passi fra capitoli e lo mandi a un collega senza spiegazioni."
+  - "Prima di consegnarlo esegue nove controlli e ti dice di no se il risultato
+    non è leggibile. A me ha detto no per quattro giri di fila."
+faq:
+  - q: "Serve un repository per generare un diagramma?"
+    a:
+      "No. Puoi descrivere il sistema a parole nella chat dell'agent e ottieni
+      lo stesso artefatto. Il repository serve solo se vuoi che i nodi citino
+      file e righe reali, e in quel caso servono anche un remote pubblico e un
+      commit fissato."
+  - q: "Sostituisce Mermaid?"
+    a:
+      "No. Per un diagramma da otto nodi dentro un README, Mermaid resta la
+      scelta giusta: il sorgente si legge nel diff. Archify serve quando il
+      risultato deve reggere una riunione o una revisione di architettura."
+  - q: "In quali agent funziona?"
+    a:
+      "Claude Code, Cursor, Codex CLI e opencode, con lo stesso comando di
+      installazione. Il renderer è Node e gira in locale: non manda il tuo
+      codice da nessuna parte."
+---
+
+## Il momento in cui ti serve davvero un diagramma
+
+Non è quando qualcuno te lo chiede. È il lunedì in cui apri il repository e devi
+mettere le mani in qualcosa di grosso: un rework che passa da cinque file che
+non hai scritto tu, una feature che attraversa il router, due API e una coda.
+
+I singoli pezzi li conosci. Quello che non hai in testa è **la mappa di come
+stanno insieme**, e senza quella le stime sono a caso e ti accorgi delle
+dipendenze quando qualcosa si rompe.
+
+Di solito fai una di queste due cose: apri i file uno per uno e la ricostruisci
+a memoria, oppure la disegni su un foglio che la sera butti via. Nessuna delle
+due ti lascia qualcosa che puoi mandare a un collega.
+
+## La installi una volta, poi è in ogni repository
+
+[Archify](https://github.com/tt-a1i/archify) è una agent skill. Si installa in
+globale, con un comando, e da quel momento è disponibile in qualunque progetto
+apri.
+
+```bash
+npx skills add tt-a1i/archify -g
+```
+
+Funziona in Claude Code, Cursor, Codex CLI e opencode. **Non c'è configurazione
+per repository**: niente da committare, niente da aggiungere al `package.json`,
+nessuna dipendenza nel progetto. Sta fuori, come un comando che hai nel PATH.
+
+Poi apri il progetto su cui stai lavorando e chiedi.
+
+## Cosa gli chiedi e cosa ti torna
+
+Gliel'ho chiesto per questo sito, così, a parole: mappami l'architettura
+runtime, l'App Router bilingue, la pipeline del blog che gira a build time e il
+flusso del form di contatto con i suoi layer di sicurezza.
+
+Ha letto il codice, ha scelto undici nodi e ha prodotto **un file HTML solo**.
+Dalla prima versione a quella buona sono passati 222 secondi, e nel frattempo io
+non ho scritto niente: la specifica la scrive l'agent, in JSON, e un renderer
+Node la compila in locale. Il codice non esce dalla tua macchina.
+
+<Figure
+  src="/images/blog/archify-architecture-diagram/runtime-architecture.webp"
+  alt="Diagramma Archify dell'architettura runtime di andrealosavio.com: la pipeline MDX a build time, il percorso della richiesta localizzata su Vercel e la catena di sicurezza di /api/contact"
+  caption="Undici nodi, generati leggendo il repository. Il file finale pesa 702 KB e non ha dipendenze esterne."
+  width={1600}
+  height={1031}
+/>
+
+Se il repository non ce l'hai sotto mano, funziona lo stesso: gli descrivi il
+sistema a parole e ottieni lo stesso artefatto.
+
+## Non è un'immagine, ci navighi dentro
+
+Questa è la differenza che si sente all'uso. Apri l'HTML con doppio clic e il
+diagramma risponde: clicchi un nodo e vedi cosa tocca a monte e a valle, tracci
+il percorso fra due componenti, cerchi per nome, cambi tema.
+
+Ci ho definito tre capitoli, uno per il percorso della richiesta, uno per la
+catena di sicurezza del form, uno per la pipeline dei contenuti: in
+presentazione ci passi con i tasti e ogni capitolo accende solo i nodi di cui
+stai parlando. **Ogni stato ha un suo link.** Quando in call qualcuno chiede da
+dove arriva un certo dato, mandi `#route=source~seo` invece di uno screenshot
+ritagliato.
+
+<VideoFigure
+  mp4="/images/blog/archify-architecture-diagram/live-proof.mp4"
+  webm="/images/blog/archify-architecture-diagram/live-proof.webm"
+  poster="/images/blog/archify-architecture-diagram/live-proof-poster.webp"
+  alt="Tre diagrammi Archify che scorrono fra i preset Signal Flow, Blueprint e Classic, con i capitoli guidati in alto e il conteggio dei controlli superati in basso a destra"
+  caption="Tre artefatti dalla demo del progetto. Stessi comandi, tre stili diversi."
+  width={960}
+  height={540}
+/>
+
+## Ti dice anche di no
+
+Ed è il motivo per cui quello che esce lo puoi mostrare senza guardarlo prima.
+
+Prima di consegnare il file, Archify lo controlla. Al primo giro mi ha
+restituito **tredici errori**, dodici dei quali lo stesso sbaglio ripetuto.
+
+```text
+Label "unlocalized path" overlaps component "edge"
+  label rect: [376, 311, 87, 14]
+  component "edge" rect: [246, 300, 136, 62]
+```
+
+Avevo lasciato ai nodi 74 pixel di spazio e alle etichette ne servivano 87. Non
+è un'opinione sul gusto: è un rettangolo dentro un altro rettangolo. Allargata
+la griglia sono sceso a tre errori, poi a uno. E quello non me lo aspettavo.
+
+```json
+{
+  "code": "composition/desktop-readability",
+  "viewBoxWidth": 1992,
+  "text": "MDX + YAML frontmatter",
+  "projectedFontPx": 4.2,
+  "minimumProjectedNodeTextPx": 6
+}
+```
+
+Il diagramma era corretto. Era solo largo 1992 pixel, e **su un portatile da
+1440 il sottotesto dei nodi sarebbe finito a 4,2 pixel**: illeggibile, cioè
+inutile. Ho ripiegato le quattro colonne in tre righe e al quarto giro è
+passato.
+
+Poi c'è stata la ciliegina: il controllo finale, quello che apre davvero il file
+in Chrome a quattro risoluzioni, ha bocciato un artefatto che aveva già superato
+tutti e nove i controlli precedenti. Motivo: 49 pixel di troppo in altezza a
+1440x900. Non stava in una schermata. **Uno strumento che si dà ragione da solo
+quella cosa non me l'avrebbe detta.**
+
+## Quando invece non serve
+
+- **Non converte il tuo Mermaid.** L'agent lo legge per capire la topologia, poi
+  riscrive tutto da zero. Non c'è un pulsante "importa".
+- **I comandi del viewer sono solo in inglese o cinese semplificato.** I tuoi
+  contenuti restano nella tua lingua, l'interfaccia no.
+- **Per far citare ai nodi file e righe reali** serve un remote pubblico e un
+  commit fissato: su un branch non ancora pushato non lo usi.
+- **Non è un editor.** Se vuoi trascinare un riquadro con il mouse, hai
+  sbagliato strumento: qui si aggiusta chiedendo, in chat.
+
+<Callout type="info">
+  Per un diagramma da otto nodi dentro un README, Mermaid vince ancora: il
+  sorgente si legge nel diff di GitHub, e questo vale più di qualsiasi
+  validazione.
+</Callout>
+
+## Dove lo apro davvero
+
+Tre casi, tutti e tre già capitati.
+
+**Prima di un rework.** Mappo il sistema com'è oggi, poi gli chiedo com'è dopo
+la modifica che ho in testa. Con `compare` metti le due versioni una accanto
+all'altra e ti torna l'elenco esatto di cosa è stato aggiunto, rimosso,
+spostato. È la discussione di design che di solito fai a voce, con qualcosa da
+guardare davanti.
+
+**Quando entra qualcuno di nuovo.** Il giro del sistema lo fai una volta e resta
+un file. La prossima persona parte da lì invece che da te.
+
+**Quando devi far vedere che una feature tocca più roba di quanto sembri.** Un
+diagramma con la catena evidenziata chiude quella discussione in trenta secondi.
+
+Non ti serve altro per iniziare: il comando di installazione è uno solo, e il
+resto, dagli schemi ai comandi della CLI, sta già nel
+[README del progetto](https://github.com/tt-a1i/archify). La prossima volta che
+apri un rework su una parte di sistema che non hai in testa, prova a chiedere la
+mappa prima di aprire il primo file. Quella qui sopra copre anche la pagina
+[progetti](/projects) di questo sito, e l'ho generata prima di scrivere una riga
+di questo articolo.

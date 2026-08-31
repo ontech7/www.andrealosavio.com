@@ -10,8 +10,7 @@
     "tagline": "I build software for companies and startups, from the idea to the finished product.",
     "sections": {
       "general": "General",
-      "blog": "Blog",
-      "projects": "Projects"
+      "blog": "Blog"
     },
     "links": {
       "homepage": "Homepage",
@@ -19,8 +18,6 @@
       "about": "About me",
       "llmsTxt": "llms.txt",
       "privacyPolicy": "Privacy Policy",
-      "personalIdeas": "Personal & Ideas",
-      "forClients": "For clients",
       "allArticles": "All articles"
     },
     "cta": {

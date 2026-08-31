@@ -10,8 +10,7 @@
     "tagline": "Costruisco software per aziende e startup, dall'idea al prodotto sul mercato.",
     "sections": {
       "general": "Generale",
-      "blog": "Blog",
-      "projects": "Progetti"
+      "blog": "Blog"
     },
     "links": {
       "homepage": "Homepage",
@@ -19,8 +18,6 @@
       "about": "Chi sono",
       "llmsTxt": "llms.txt",
       "privacyPolicy": "Privacy Policy",
-      "personalIdeas": "Personali & Idee",
-      "forClients": "Per clienti",
       "allArticles": "Tutti gli articoli"
     },
     "cta": {

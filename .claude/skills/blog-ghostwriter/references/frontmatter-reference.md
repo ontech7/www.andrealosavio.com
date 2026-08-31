@@ -15,8 +15,7 @@ viene costruito, da `src/libs/blog/source.ts`.
 | `description`    | stringa | tra 120 e 170 caratteri                                          |
 | `publishedAt`    | data    | `YYYY-MM-DD`, data di calendario esistente                       |
 | `translationKey` | stringa | non vuota; univocita e presenza in entrambi i locale controllate da `source.ts` |
-| `kind`           | enum    | `tech`, `business`, `hybrid`, `event`                             |
-| `tags`           | array   | almeno uno, tutti da `BLOG_TAGS` in `src/constants/blog.ts`       |
+| `tags`           | array   | almeno uno, tutti da `BLOG_TAGS` in `src/constants/blog.ts`; il primo secondo l'ordine del vocabolario sceglie il glifo della cover |
 | `takeaways`      | array   | da 2 a 5 stringhe                                                 |
 
 Il validator non impone un limite di caratteri su `title` e `subtitle`, ma
@@ -38,7 +37,8 @@ restano comunque le regole da rispettare in scrittura:
 | `series`    | oggetto  | `{ id: stringa, part: intero >= 1 }`                             |
 | `faq`       | array    | oggetti `{ q, a }`, almeno uno; genera lo schema FAQPage         |
 
-`cover` deve essere per convenzione un percorso sotto `/images/blog/` (e
+`cover` deve essere per convenzione un percorso sotto
+`/images/blog/<translationKey>/` (e
 quello che gli articoli esistenti usano), ma il validator non controlla il
 prefisso: si limita a richiedere che sia una stringa non vuota, e che
 `coverAlt` sia presente quando `cover` c'e.
@@ -58,7 +58,6 @@ description:
 publishedAt: 2026-09-02
 updatedAt: 2026-09-20
 translationKey: nextjs-cache
-kind: tech
 tags: [nextjs, performance]
 draft: false
 series: { id: nextjs-deep-dive, part: 2 }

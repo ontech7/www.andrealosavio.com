@@ -203,6 +203,41 @@ export function getSeriesArticles(
 }
 
 /**
+ * L'articolo da proporre come "prossimo": la parte seguente della serie quando
+ * ce n'e una ancora da leggere, altrimenti il primo dei correlati. Torna `null`
+ * solo se non esiste nessun altro articolo nel locale.
+ */
+export function selectNext(
+  article: BlogArticle,
+  seriesArticles: readonly BlogArticle[],
+  related: readonly BlogArticle[]
+): BlogArticle | null {
+  if (article.frontmatter.series) {
+    const index = seriesArticles.findIndex(
+      (candidate) => candidate.slug === article.slug
+    );
+    const nextInSeries = index >= 0 ? seriesArticles[index + 1] : undefined;
+
+    if (nextInSeries) {
+      return nextInSeries;
+    }
+  }
+
+  return related.find((candidate) => candidate.slug !== article.slug) ?? null;
+}
+
+/**
+ * `selectNext` applicato all'indice degli articoli del locale.
+ */
+export function getNextArticle(article: BlogArticle): BlogArticle | null {
+  const series = article.frontmatter.series
+    ? getSeriesArticles(article.frontmatter.series.id, article.locale)
+    : [];
+
+  return selectNext(article, series, getRelatedArticles(article, 1));
+}
+
+/**
  * Coppie locale/slug per generateStaticParams.
  */
 export function getAllArticleParams(): { locale: AppLocale; slug: string }[] {
@@ -234,4 +269,32 @@ export function getUsedTags(locale: AppLocale): BlogTag[] {
   }
 
   return sortByVocabulary([...used]);
+}
+
+export interface TagCount {
+  tag: BlogTag;
+  count: number;
+}
+
+/**
+ * Conta quanti articoli visibili portano ogni tag, nell'ordine del
+ * vocabolario. Alimenta i contatori accanto ai filtri dell'indice.
+ */
+export function countByTag(articles: readonly BlogArticle[]): TagCount[] {
+  const counts = new Map<BlogTag, number>();
+
+  for (const article of articles) {
+    for (const tag of article.frontmatter.tags) {
+      counts.set(tag, (counts.get(tag) ?? 0) + 1);
+    }
+  }
+
+  return sortByVocabulary([...counts.keys()]).map((tag) => ({
+    tag,
+    count: counts.get(tag) ?? 0,
+  }));
+}
+
+export function getTagCounts(locale: AppLocale): TagCount[] {
+  return countByTag(getArticles(locale));
 }
