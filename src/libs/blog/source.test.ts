@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import type { BlogArticle } from "./source";
-import { assertConsistency, selectRelated } from "./source";
 import type { BlogTag } from "@/constants/blog";
 import type { AppLocale } from "@/libs/i18n/utils";
+import type { BlogArticle } from "./source";
+import { assertConsistency, selectRelated, sortByVocabulary } from "./source";
 
 function article(
   slug: string,
@@ -116,5 +116,30 @@ describe("assertConsistency", () => {
         en: [],
       })
     ).not.toThrow();
+  });
+});
+
+describe("sortByVocabulary", () => {
+  it("ordina i tag secondo l'ordine del vocabolario", () => {
+    expect(sortByVocabulary(["performance", "nextjs"])).toEqual([
+      "nextjs",
+      "performance",
+    ]);
+  });
+
+  it("ordina piu tag rispettando l'ordine di BLOG_TAGS", () => {
+    expect(sortByVocabulary(["seo", "react", "ai"])).toEqual([
+      "react",
+      "seo",
+      "ai",
+    ]);
+  });
+
+  it("non muta l'array in input", () => {
+    const tags: BlogTag[] = ["performance", "nextjs"];
+
+    sortByVocabulary(tags);
+
+    expect(tags).toEqual(["performance", "nextjs"]);
   });
 });

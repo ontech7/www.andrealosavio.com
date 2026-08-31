@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import type { BlogTag } from "@/constants/blog";
+import { BLOG_TAGS, type BlogTag } from "@/constants/blog";
 import { locales, type AppLocale } from "@/libs/i18n/utils";
 import { parseFrontmatter, type BlogFrontmatter } from "./frontmatter";
 import { countProseWords, readingTimeMinutes } from "./reading-time";
@@ -212,6 +212,16 @@ export function getAllArticleParams(): { locale: AppLocale; slug: string }[] {
 }
 
 /**
+ * Ordina i tag secondo la posizione nel vocabolario `BLOG_TAGS`, cosi
+ * l'ordine e stabile e indipendente dall'ordine di pubblicazione degli
+ * articoli o da come un autore ha scritto i tag nel frontmatter. Non muta
+ * l'array in input.
+ */
+export function sortByVocabulary(tags: readonly BlogTag[]): BlogTag[] {
+  return [...tags].sort((a, b) => BLOG_TAGS.indexOf(a) - BLOG_TAGS.indexOf(b));
+}
+
+/**
  * Tag effettivamente usati in un locale, nell'ordine del vocabolario.
  */
 export function getUsedTags(locale: AppLocale): BlogTag[] {
@@ -223,5 +233,5 @@ export function getUsedTags(locale: AppLocale): BlogTag[] {
     }
   }
 
-  return [...used];
+  return sortByVocabulary([...used]);
 }
