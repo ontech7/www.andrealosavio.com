@@ -1,0 +1,40 @@
+---
+title: "La revalidation on-demand, quando basta un tag"
+subtitle: "Il secondo capitolo della cache: revalidatePath e revalidateTag"
+description:
+  "Revalidate non basta quando serve invalidare una singola pagina o un tag di
+  dati: qui entra in gioco la revalidation on-demand."
+publishedAt: 2026-09-16
+translationKey: on-demand-revalidation
+kind: tech
+tags: [nextjs, performance]
+series: { id: nextjs-cache, part: 2 }
+takeaways:
+  - "revalidatePath invalida una route intera, revalidateTag solo i dati marcati
+    con quel tag: la differenza conta in produzione."
+  - "Chiamare revalidateTag dentro una server action e il modo piu affidabile
+    per aggiornare una pagina subito dopo una mutazione."
+draft: false
+---
+
+## Perche revalidate a tempo non basta
+
+Un `revalidate: 60` va bene finche i tuoi dati cambiano a intervalli
+prevedibili. Ma se un utente modifica un record e si aspetta di vederlo subito
+aggiornato, aspettare il prossimo intervallo non e un'opzione.
+
+```ts title="app/actions.ts"
+"use server";
+import { revalidateTag } from "next/cache";
+
+export async function updatePost(id: string) {
+  await db.post.update(id);
+  revalidateTag(`post-${id}`);
+}
+```
+
+## Path o tag: come scegliere
+
+`revalidatePath` invalida tutto quello che dipende da una route, `tag` per
+`fetch` e piu chirurgico: invalida solo i dati che hai marcato esplicitamente,
+anche se sono usati in piu pagine diverse.
