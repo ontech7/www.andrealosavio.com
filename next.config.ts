@@ -1,3 +1,4 @@
+import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
@@ -98,4 +99,19 @@ const nextConfig: NextConfig = {
 
 const withNextIntl = createNextIntlPlugin("./src/libs/i18n/request.ts");
 
-export default withNextIntl(nextConfig);
+const withMDX = createMDX({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: ["remark-frontmatter", "remark-gfm"],
+    rehypePlugins: [
+      "rehype-slug",
+      ["rehype-autolink-headings", { behavior: "wrap" }],
+      [
+        "rehype-pretty-code",
+        { theme: "github-dark-default", keepBackground: false },
+      ],
+    ],
+  },
+});
+
+export default withNextIntl(withMDX(nextConfig));
