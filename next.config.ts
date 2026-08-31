@@ -29,6 +29,14 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/:locale(it|en)/blog/:slug.md",
+        destination: "/api/blog/:locale/:slug",
+      },
+    ];
+  },
   async redirects() {
     return [
       // Retired pages - the homepage is now the single entry point
