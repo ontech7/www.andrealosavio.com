@@ -1,0 +1,182 @@
+---
+title: "Il companion mobile che mancava a Coolify"
+subtitle:
+  "Applicazioni, deploy e log in una app sola: il server self-hosted smette di
+  richiedere una scrivania"
+description:
+  "Coolify Manager è l'app che mi mancava: un token API e hai sul telefono lo
+  stato del server, i controlli, i deploy in corso e i log."
+publishedAt: 2026-02-01
+updatedAt: 2026-08-31
+translationKey: coolify-manager-app
+tags: [devops, mobile, react]
+cover: /images/blog/coolify-manager-app/cover.svg
+coverAlt:
+  "La sagoma di un telefono su fondo scuro, con il logo di Coolify Manager
+  acceso sullo schermo: un ingranaggio bianco che porta la lettera C, sdoppiato
+  da un secondo strato blu sfalsato"
+takeaways:
+  - "Serve solo un token API con permessi read, write e deploy: sul server
+    Coolify non si installa niente."
+  - "URL e token restano nel Keystore del telefono, via Expo Secure Store.
+    Nessun backend mio in mezzo, nessuna analytics."
+  - "Alla 1.0.0 copre le applications: stato, start, stop, restart, deploy e log
+    in streaming. Una istanza alla volta."
+  - "Su Android arriva dal Play Store o come APK dalle release. Su iOS si
+    compila dal sorgente, la licenza è MIT."
+faq:
+  - q: "Devo installare qualcosa sul server Coolify?"
+    a:
+      "No. Basta abilitare l'API Access dalle impostazioni avanzate di Coolify e
+      creare un token con permessi read, write e deploy. L'app usa le API
+      ufficiali e non tocca il server in nessun altro modo."
+  - q: "Funziona su iPhone?"
+    a:
+      "Non c'è sull'App Store. Il progetto è MIT ed è un'app Expo, quindi il
+      sorgente si compila e si installa sul proprio dispositivo, ma un canale di
+      distribuzione iOS pubblico al momento non esiste."
+  - q: "Funziona sia con Coolify cloud sia con un'istanza self-hosted?"
+    a:
+      "Con entrambe. L'app chiede l'URL della tua istanza e ci parla
+      direttamente, quindi va bene sia il cloud ufficiale sia un server tuo,
+      purché sia raggiungibile dal telefono."
+---
+
+## Il container è giù e tu non sei davanti al laptop
+
+Sabato pomeriggio, in fila alla posta. Arriva la notifica di uptime: un servizio
+non risponde più. Il telefono ce l'ho in mano, il laptop è a casa.
+
+Da lì le strade erano due, e nessuna buona. La prima: aprire la web UI di
+Coolify dal browser del telefono, che è un pannello disegnato per uno schermo
+largo e sul mobile diventa un esercizio di zoom e pan per centrare un bottone.
+La seconda: aprire una sessione SSH da un client mobile e scrivere i comandi con
+la tastiera a schermo, senza cronologia, con il cursore che salta dove vuole
+lui.
+
+Il punto è che in quel momento non mi serviva un terminale. Mi servivano due
+cose: **vedere lo stato** e **premere restart**. È il novanta per cento delle
+volte in cui guardo il server dal telefono.
+
+Coolify Manager parte da lì: quelle due cose in tre tap, e dietro il resto del
+pannello. È gratis, è open source, e da oggi c'è.
+
+## L'estensione per il browser non bastava
+
+Il 29 gennaio avevo pubblicato
+[coolify-manager-extension](https://github.com/ontech7/coolify-manager-extension),
+un'estensione Chrome che fa più o meno le stesse cose dentro una popup.
+Funziona, la uso ancora.
+
+Solo che un'estensione presuppone Chrome aperto, e Chrome aperto presuppone un
+laptop davanti. Cioè **esattamente la situazione in cui il problema non
+esiste**: se ho il laptop ho anche il terminale, la web UI vera e tutto il
+resto.
+
+L'ho capito il giorno dopo averla pubblicata. Due giorni ancora ed è uscita la
+[1.0.0 dell'app](https://github.com/ontech7/coolify-manager-app/releases/tag/v1.0.0),
+che porta le stesse funzioni dove servono davvero.
+
+## Tre tap invece di una sessione SSH
+
+Il collegamento si fa una volta sola e non tocca il server. In Coolify apri
+`Settings → Advanced → API Access`, lo abiliti, e crei un token con i permessi
+`read`, `write` e `deploy`. Nell'app vai nelle impostazioni, incolli URL e
+token, premi "Test connection" e salvi.
+
+Se il test fallisce e non capisci perché, quella stessa chiamata la fai dal
+terminale prima di dare la colpa all'app:
+
+```bash
+curl -H "Authorization: Bearer $COOLIFY_TOKEN" \
+  https://coolify.example.com/api/v1/applications
+```
+
+Se questo `curl` non ti restituisce un JSON, il problema non è il telefono: è il
+token, l'URL, o l'API Access rimasto spento.
+
+Da lì la lista si popola. Ogni applicazione mostra **stato, FQDN e repository di
+provenienza**, che è quanto basta per capire in tre secondi chi è caduto. Sulla
+scheda hai start, stop, restart e deploy, un tap ciascuno. Nel dettaglio ci sono
+i log, in streaming. Il tab Deployments mostra i deploy in corso con hash e
+messaggio del commit, così quando vedi rosso sai anche cosa lo ha fatto
+diventare rosso.
+
+## Non c'è un mio server in mezzo
+
+È la domanda che mi farei io prima di incollare un token con permesso `deploy`
+dentro l'app di uno sconosciuto: dove finisce quel token?
+
+Da nessuna parte. L'app parla direttamente con la tua istanza Coolify, cloud o
+self-hosted che sia. Non c'è un backend mio, non c'è un proxy, non c'è un
+account da creare. Tutto il livello di persistenza sono queste righe:
+
+```ts title="lib/storage.ts"
+import * as SecureStore from "expo-secure-store";
+
+export async function getApiToken(): Promise<string | null> {
+  return SecureStore.getItemAsync(STORAGE_KEYS.API_TOKEN);
+}
+
+export async function setApiToken(token: string): Promise<void> {
+  await SecureStore.setItemAsync(STORAGE_KEYS.API_TOKEN, token);
+}
+```
+
+`expo-secure-store` scrive nel Keystore di Android, non in `AsyncStorage` e non
+in un file di preferenze. Niente analytics, niente SDK pubblicitari, niente
+telemetria. E la licenza è MIT: se non ti basta la mia parola, quel file sono
+cinquanta righe e te lo leggi.
+
+## Quello che non fa
+
+Questa è la 1.0.0, e si vede.
+
+- **Una sola istanza alla volta.** Se hai due server Coolify, per ora cambi le
+  impostazioni a mano.
+- **Solo applications.** Database e servizi nella lista non ci sono ancora.
+- **Niente App Store.** Su Android la prendi dal Play Store o come APK dalle
+  release. Su iOS il sorgente è lì e si compila con Expo, ma un canale di
+  distribuzione pubblico non ce l'ho.
+- **Deployments vuol dire "in corso".** È il tab dei deploy che stanno girando
+  adesso, non uno storico.
+
+<Callout type="warning">
+  Se ti serve `docker exec`, ti serve ancora SSH. Questa non è un'app da
+  terminale e non ha intenzione di diventarlo: copre il caso in cui vuoi
+  guardare e premere un bottone, non quello in cui devi entrare dentro il
+  container.
+</Callout>
+
+## Aggiornamento, agosto 2026
+
+Sei mesi dopo questo pezzo va aggiornato, perché l'app ha superato i **mille
+download** e ha visto tre release. Nessuna delle tre l'ho decisa da solo.
+
+La 1.1.0, di febbraio, ha aggiunto la gestione di più istanze. La 1.2.0, di
+maggio, ha unito applications, database e servizi in una vista sola, ha aggiunto
+il tab Servers con lo stato di salute e lo storico deploy per applicazione: metà
+di quella lista nasce dall'
+[issue #2](https://github.com/ontech7/coolify-manager-app/issues/2), dove un
+utente mi ha fatto notare che "Test connection" e "Save connection" non erano la
+stessa cosa e che lo storico non esisteva. La 1.3.0, di agosto, ha chiuso due
+segnalazioni: il pull dell'ultima immagine per i servizi
+([#4](https://github.com/ontech7/coolify-manager-app/issues/4)) e il fatto che
+da Coolify 4.2.0 le azioni di stato vogliono POST e non più GET
+([#6](https://github.com/ontech7/coolify-manager-app/issues/6)), cosa che aveva
+rotto i controlli a chi aveva aggiornato il server. Quella l'ho spedita il
+giorno dopo la segnalazione.
+
+<Callout type="info">
+  La roadmap dei primi sei mesi non l'ho scritta io: sta negli issue, aperti da
+  persone che hanno un Coolify vero e un problema vero. Un repository pubblico
+  con gli issue aperti mi ha detto in sei mesi più di quanto avrebbe fatto
+  qualsiasi form di feedback.
+</Callout>
+
+Il momento in cui la installi, comunque, non è oggi mentre leggi. È il primo
+sabato in cui sei fuori, arriva la notifica, e ti accorgi che tra te e il
+restart c'è solo un laptop che non hai con te. Il token si crea in due minuti, e
+quei due minuti conviene spenderli prima. Il codice sta
+[su GitHub](https://github.com/ontech7/coolify-manager-app), e il resto delle
+cose che tengo in piedi sta nella pagina [progetti](/projects).
