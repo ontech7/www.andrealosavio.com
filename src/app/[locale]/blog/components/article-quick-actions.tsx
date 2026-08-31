@@ -169,7 +169,6 @@ export function ArticleQuickActions({
         inert={!isVisible}
         onPointerEnter={openOnHover}
         onPointerLeave={closeOnHover}
-        onFocus={() => setIsOpen(true)}
         onBlur={onBlur}
         className={cn(
           "fixed right-4 bottom-4 z-40 flex flex-col-reverse items-end gap-2 transition-[opacity,translate] duration-300 motion-reduce:transition-none md:right-6 md:bottom-6",
