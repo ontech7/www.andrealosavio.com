@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { cn } from "@/utils/cn";
 import { useTranslations } from "next-intl";
 import { useBlogFilter } from "./blog-filter-provider";
@@ -12,6 +13,12 @@ interface BlogFilterProps {
 export function BlogFilter({ tags, className }: BlogFilterProps) {
   const t = useTranslations();
   const { selectedTags, toggleTag, clearTags } = useBlogFilter();
+  const groupRef = useRef<HTMLDivElement>(null);
+
+  const handleClear = () => {
+    clearTags();
+    groupRef.current?.focus();
+  };
 
   return (
     <div className={cn("flex flex-col gap-2", className)}>
@@ -20,7 +27,9 @@ export function BlogFilter({ tags, className }: BlogFilterProps) {
       </span>
 
       <div
-        className="flex flex-wrap gap-1.5"
+        ref={groupRef}
+        tabIndex={-1}
+        className="flex flex-wrap gap-1.5 focus:outline-none"
         role="group"
         aria-label={t("blog.index.filter.tagsLabel")}
       >
@@ -51,7 +60,7 @@ export function BlogFilter({ tags, className }: BlogFilterProps) {
         {selectedTags.length > 0 && (
           <button
             type="button"
-            onClick={clearTags}
+            onClick={handleClear}
             className="text-muted-foreground hover:text-foreground cursor-pointer rounded-md px-2 py-1 text-xs underline"
           >
             {t("blog.index.filter.clear")}

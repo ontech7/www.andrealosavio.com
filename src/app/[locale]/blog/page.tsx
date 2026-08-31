@@ -35,6 +35,9 @@ export async function generateMetadata({
         it: `${siteUrl}/it/blog`,
         "x-default": `${siteUrl}/it/blog`,
       },
+      types: {
+        "application/rss+xml": `${siteUrl}/${locale}/blog/rss.xml`,
+      },
     },
     openGraph: {
       title: t("blog.metadata.title"),
