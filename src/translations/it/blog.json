@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "title": "Blog - Andrea Losavio",
+    "description": "Articoli su sviluppo software, architettura, performance e su come le scelte tecniche diventano risultati di business."
+  },
+  "index": {
+    "title": "Blog",
+    "subtitle": "Note di lavoro su codice, architettura e prodotto. Nessuna teoria che non abbia gia incontrato in produzione.",
+    "empty": "Nessun articolo con questi filtri. Prova a togliere qualche tag.",
+    "readMore": "Leggi l'articolo",
+    "filter": {
+      "tagsLabel": "Filtra per argomento",
+      "clear": "Azzera i filtri"
+    }
+  },
+  "article": {
+    "publishedOn": "Pubblicato il {date}",
+    "updatedOn": "Aggiornato il {date}",
+    "readingTime": "{minutes} min di lettura",
+    "takeaways": "In breve",
+    "toc": "In questa pagina",
+    "copyCode": "Copia il codice",
+    "copied": "Copiato",
+    "related": "Da leggere dopo",
+    "backToBlog": "Tutti gli articoli",
+    "series": {
+      "label": "Parte {part} di {total}",
+      "previous": "Parte precedente",
+      "next": "Parte successiva"
+    },
+    "cta": {
+      "title": "Hai un problema simile?",
+      "description": "Se stai affrontando qualcosa di analogo sul tuo prodotto, scrivimi: nel peggiore dei casi ti do un'opinione gratis.",
+      "action": "Parliamone"
+    }
+  },
+  "kinds": {
+    "tech": "Tecnico",
+    "business": "Business",
+    "hybrid": "Ibrido",
+    "event": "Evento"
+  },
+  "tags": {
+    "nextjs": "Next.js",
+    "react": "React",
+    "typescript": "TypeScript",
+    "performance": "Performance",
+    "seo": "SEO",
+    "architecture": "Architettura",
+    "ai": "AI",
+    "devops": "DevOps",
+    "mobile": "Mobile",
+    "career": "Carriera",
+    "business": "Business",
+    "freelance": "Freelance",
+    "events": "Eventi"
+  }
+}

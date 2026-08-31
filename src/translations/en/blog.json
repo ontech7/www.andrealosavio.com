@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "title": "Blog - Andrea Losavio",
+    "description": "Articles on software development, architecture, performance, and how technical decisions turn into business outcomes."
+  },
+  "index": {
+    "title": "Blog",
+    "subtitle": "Working notes on code, architecture and product. No theory I have not already met in production.",
+    "empty": "No articles match these filters. Try removing a tag.",
+    "readMore": "Read the article",
+    "filter": {
+      "tagsLabel": "Filter by topic",
+      "clear": "Clear filters"
+    }
+  },
+  "article": {
+    "publishedOn": "Published on {date}",
+    "updatedOn": "Updated on {date}",
+    "readingTime": "{minutes} min read",
+    "takeaways": "In short",
+    "toc": "On this page",
+    "copyCode": "Copy code",
+    "copied": "Copied",
+    "related": "Read next",
+    "backToBlog": "All articles",
+    "series": {
+      "label": "Part {part} of {total}",
+      "previous": "Previous part",
+      "next": "Next part"
+    },
+    "cta": {
+      "title": "Facing something similar?",
+      "description": "If you are dealing with the same problem on your product, get in touch. Worst case, you get a free opinion.",
+      "action": "Let's talk"
+    }
+  },
+  "kinds": {
+    "tech": "Technical",
+    "business": "Business",
+    "hybrid": "Hybrid",
+    "event": "Event"
+  },
+  "tags": {
+    "nextjs": "Next.js",
+    "react": "React",
+    "typescript": "TypeScript",
+    "performance": "Performance",
+    "seo": "SEO",
+    "architecture": "Architecture",
+    "ai": "AI",
+    "devops": "DevOps",
+    "mobile": "Mobile",
+    "career": "Career",
+    "business": "Business",
+    "freelance": "Freelance",
+    "events": "Events"
+  }
+}

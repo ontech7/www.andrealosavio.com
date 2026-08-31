@@ -1,5 +1,8 @@
 import type {
+  Blog,
+  BlogPosting,
   BreadcrumbList,
+  FAQPage,
   ItemList,
   OfferCatalog,
   Organization,
@@ -347,6 +350,113 @@ export function generateProfilePageSchema({
     name,
     description,
     mainEntity: { "@id": mainEntityPersonId },
+  };
+}
+
+interface GenerateBlogPostingSchemaProps {
+  url: string;
+  headline: string;
+  description: string;
+  datePublished: string;
+  dateModified?: string;
+  image: string;
+  authorId: string;
+  publisherId: string;
+  inLanguage: string;
+  keywords: readonly string[];
+  wordCount: number;
+}
+
+/**
+ * Schema di un singolo articolo. `authorId` e `publisherId` referenziano le
+ * entita Person e Organization dichiarate in homepage, cosi il grafo resta
+ * connesso invece di duplicarle.
+ */
+export function generateBlogPostingSchema({
+  url,
+  headline,
+  description,
+  datePublished,
+  dateModified,
+  image,
+  authorId,
+  publisherId,
+  inLanguage,
+  keywords,
+  wordCount,
+}: GenerateBlogPostingSchemaProps): BlogPosting {
+  return {
+    "@type": "BlogPosting",
+    "@id": `${url}#article`,
+    mainEntityOfPage: url,
+    url,
+    headline,
+    description,
+    datePublished,
+    dateModified: dateModified ?? datePublished,
+    image,
+    author: { "@id": authorId },
+    publisher: { "@id": publisherId },
+    inLanguage,
+    ...(keywords.length > 0 && { keywords: keywords.join(", ") }),
+    wordCount,
+  };
+}
+
+/**
+ * FAQPage, emesso solo quando l'articolo dichiara domande nel frontmatter.
+ */
+export function generateFaqSchema(
+  entries: readonly { q: string; a: string }[]
+): FAQPage {
+  return {
+    "@type": "FAQPage",
+    mainEntity: entries.map((entry) => ({
+      "@type": "Question" as const,
+      name: entry.q,
+      acceptedAnswer: {
+        "@type": "Answer" as const,
+        text: entry.a,
+      },
+    })),
+  };
+}
+
+interface GenerateBlogSchemaProps {
+  url: string;
+  name: string;
+  description: string;
+  authorId: string;
+  inLanguage: string;
+  posts: readonly { url: string; headline: string; datePublished: string }[];
+}
+
+/**
+ * Schema dell'indice del blog, con i post elencati come BlogPosting ridotti.
+ */
+export function generateBlogSchema({
+  url,
+  name,
+  description,
+  authorId,
+  inLanguage,
+  posts,
+}: GenerateBlogSchemaProps): Blog {
+  return {
+    "@type": "Blog",
+    "@id": `${url}#blog`,
+    url,
+    name,
+    description,
+    inLanguage,
+    author: { "@id": authorId },
+    blogPost: posts.map((post) => ({
+      "@type": "BlogPosting" as const,
+      "@id": `${post.url}#article`,
+      url: post.url,
+      headline: post.headline,
+      datePublished: post.datePublished,
+    })),
   };
 }
 
