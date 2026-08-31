@@ -1,8 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { cn } from "@/utils/cn";
 
-export function ReadingProgress() {
+interface ReadingProgressProps {
+  className?: string;
+}
+
+export function ReadingProgress({ className }: ReadingProgressProps = {}) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -39,7 +44,10 @@ export function ReadingProgress() {
   return (
     <div
       aria-hidden="true"
-      className="bg-secondary fixed top-16 left-0 z-40 h-0.5 origin-left"
+      className={cn(
+        "bg-secondary fixed top-16 left-0 z-40 h-0.5 origin-left",
+        className
+      )}
       style={{ width: `${progress}%` }}
     />
   );

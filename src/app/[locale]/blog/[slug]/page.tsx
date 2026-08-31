@@ -157,7 +157,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
         <ReadingProgress />
 
         <article className="mx-auto max-w-5xl px-4 pt-24 pb-16 sm:px-6 lg:px-8">
-          <div className="xl:grid xl:grid-cols-[16rem_minmax(0,1fr)] xl:gap-10">
+          <div className="xl:grid xl:grid-cols-[15rem_minmax(0,1fr)] xl:gap-10">
             <div className="hidden xl:block">
               <ArticleToc entries={article.toc} className="sticky top-24" />
             </div>

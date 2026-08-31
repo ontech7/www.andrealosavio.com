@@ -15,6 +15,10 @@ export function ArticleToc({ entries, className }: ArticleTocProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
+    if (entries.length < 2) {
+      return;
+    }
+
     const headings = entries
       .map((entry) => document.getElementById(entry.id))
       .filter((element): element is HTMLElement => element !== null);
