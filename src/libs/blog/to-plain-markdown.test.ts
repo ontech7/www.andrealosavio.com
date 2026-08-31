@@ -18,10 +18,28 @@ describe("toPlainMarkdown", () => {
     expect(toPlainMarkdown(input)).toBe("> **info:** Testo su piu righe.");
   });
 
+  it("converte i Callout senza type esplicito usando info come default", () => {
+    const input = "<Callout>Testo senza type.</Callout>";
+
+    expect(toPlainMarkdown(input)).toBe("> **info:** Testo senza type.");
+  });
+
   it("converte le Figure in immagini markdown", () => {
     const input = '<Figure src="/a.webp" alt="Un grafico" caption="La resa" />';
 
     expect(toPlainMarkdown(input)).toBe("![Un grafico](/a.webp)\n\n*La resa*");
+  });
+
+  it("converte le Figure non self-closing in immagini markdown", () => {
+    const input = '<Figure src="/a.webp" alt="Un grafico"></Figure>';
+
+    expect(toPlainMarkdown(input)).toBe("![Un grafico](/a.webp)");
+  });
+
+  it("converte le Figure self-closing senza caption", () => {
+    const input = '<Figure src="/a.webp" alt="Un grafico" />';
+
+    expect(toPlainMarkdown(input)).toBe("![Un grafico](/a.webp)");
   });
 
   it("lascia intatti i blocchi di codice", () => {

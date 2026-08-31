@@ -1,6 +1,6 @@
 const CALLOUT_PATTERN =
-  /<Callout\s+type="(\w+)"\s*>\s*([\s\S]*?)\s*<\/Callout>/g;
-const FIGURE_PATTERN = /<Figure\s+([^>]*?)\/>/g;
+  /<Callout(?:\s+type="(\w+)")?\s*>\s*([\s\S]*?)\s*<\/Callout>/g;
+const FIGURE_PATTERN = /<Figure\s+([^>]*?)\s*(?:\/>|>\s*<\/Figure>)/g;
 
 function readAttribute(attributes: string, name: string): string | null {
   const match = new RegExp(`${name}="([^"]*)"`).exec(attributes);
@@ -15,11 +15,14 @@ function readAttribute(attributes: string, name: string): string | null {
  */
 export function toPlainMarkdown(body: string): string {
   return body
-    .replace(CALLOUT_PATTERN, (_match, type: string, content: string) => {
-      const text = content.replace(/\s*\n\s*/g, " ").trim();
+    .replace(
+      CALLOUT_PATTERN,
+      (_match, type: string | undefined, content: string) => {
+        const text = content.replace(/\s*\n\s*/g, " ").trim();
 
-      return `> **${type}:** ${text}`;
-    })
+        return `> **${type ?? "info"}:** ${text}`;
+      }
+    )
     .replace(FIGURE_PATTERN, (_match, attributes: string) => {
       const src = readAttribute(attributes, "src") ?? "";
       const alt = readAttribute(attributes, "alt") ?? "";

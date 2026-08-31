@@ -15,6 +15,38 @@ function isAppLocale(value: string): value is AppLocale {
   return (locales as readonly string[]).includes(value);
 }
 
+const LABELS: Record<
+  AppLocale,
+  {
+    author: string;
+    published: string;
+    updated: string;
+    language: string;
+    tags: string;
+    readingTime: string;
+    takeaways: string;
+  }
+> = {
+  it: {
+    author: "Autore",
+    published: "Pubblicato",
+    updated: "Aggiornato",
+    language: "Lingua",
+    tags: "Tag",
+    readingTime: "Tempo di lettura",
+    takeaways: "In breve",
+  },
+  en: {
+    author: "Author",
+    published: "Published",
+    updated: "Updated",
+    language: "Language",
+    tags: "Tags",
+    readingTime: "Reading time",
+    takeaways: "In short",
+  },
+};
+
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ locale: string; slug: string }> }
@@ -32,22 +64,23 @@ export async function GET(
   }
 
   const { frontmatter } = article;
+  const labels = LABELS[locale];
 
   const document = [
     `# ${frontmatter.title}`,
     "",
     `> ${frontmatter.subtitle}`,
     "",
-    `- Autore: Andrea Losavio`,
-    `- Pubblicato: ${frontmatter.publishedAt}`,
+    `- ${labels.author}: Andrea Losavio`,
+    `- ${labels.published}: ${frontmatter.publishedAt}`,
     ...(frontmatter.updatedAt
-      ? [`- Aggiornato: ${frontmatter.updatedAt}`]
+      ? [`- ${labels.updated}: ${frontmatter.updatedAt}`]
       : []),
-    `- Lingua: ${locale}`,
-    `- Tag: ${frontmatter.tags.join(", ")}`,
-    `- Tempo di lettura: ${article.readingTime} min`,
+    `- ${labels.language}: ${locale}`,
+    `- ${labels.tags}: ${frontmatter.tags.join(", ")}`,
+    `- ${labels.readingTime}: ${article.readingTime} min`,
     "",
-    "## In breve",
+    `## ${labels.takeaways}`,
     "",
     ...frontmatter.takeaways.map((item) => `- ${item}`),
     "",
