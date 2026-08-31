@@ -1,0 +1,31 @@
+---
+title: "La cache di Next.js, spiegata davvero"
+subtitle: "Quando revalidate non fa quello che pensi"
+description:
+  "I quattro livelli di cache di Next.js, come interagiscono tra loro e perche
+  revalidate a volte sembra non funzionare affatto."
+publishedAt: 2026-09-02
+translationKey: nextjs-cache
+kind: tech
+tags: [nextjs, performance]
+takeaways:
+  - "In sviluppo la cache e disattivata: testare revalidate in dev non dimostra
+    niente."
+  - "Il Full Route Cache si invalida solo con un nuovo deploy o una revalidation
+    esplicita."
+draft: false
+---
+
+## Perche la cache sembra rotta
+
+La prima volta che ho visto un `revalidate: 60` ignorato per ore ero convinto di
+aver trovato un bug. Non lo era.
+
+```ts title="app/page.tsx"
+export const revalidate = 60;
+```
+
+## I livelli che contano
+
+Quando una richiesta arriva, attraversa piu di una cache, e ognuna ha regole
+sue.

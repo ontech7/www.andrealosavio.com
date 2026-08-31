@@ -1,0 +1,31 @@
+---
+title: "The Next.js cache, actually explained"
+subtitle: "When revalidate does not do what you think"
+description:
+  "The four caching layers in Next.js, how they interact with each other, and
+  why revalidate sometimes looks like it does nothing at all."
+publishedAt: 2026-09-02
+translationKey: nextjs-cache
+kind: tech
+tags: [nextjs, performance]
+takeaways:
+  - "Caching is off in development, so testing revalidate locally proves
+    nothing."
+  - "The Full Route Cache only clears on a new deploy or an explicit
+    revalidation."
+draft: false
+---
+
+## Why the cache looks broken
+
+The first time I watched a `revalidate: 60` get ignored for hours, I was sure I
+had found a bug. I had not.
+
+```ts title="app/page.tsx"
+export const revalidate = 60;
+```
+
+## The layers that matter
+
+A request passes through more than one cache on its way in, and each one plays
+by its own rules.
