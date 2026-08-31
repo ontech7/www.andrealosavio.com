@@ -7,6 +7,7 @@
     "title": "Blog",
     "subtitle": "Note di lavoro su codice, architettura e prodotto. Nessuna teoria che non abbia gia incontrato in produzione.",
     "empty": "Nessun articolo con questi filtri. Prova a togliere qualche tag.",
+    "noArticlesYet": "Non ho ancora pubblicato nulla qui. Torna presto.",
     "readMore": "Leggi l'articolo",
     "filter": {
       "tagsLabel": "Filtra per argomento",

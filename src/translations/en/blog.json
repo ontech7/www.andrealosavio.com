@@ -7,6 +7,7 @@
     "title": "Blog",
     "subtitle": "Working notes on code, architecture and product. No theory I have not already met in production.",
     "empty": "No articles match these filters. Try removing a tag.",
+    "noArticlesYet": "Nothing published here yet. Check back soon.",
     "readMore": "Read the article",
     "filter": {
       "tagsLabel": "Filter by topic",

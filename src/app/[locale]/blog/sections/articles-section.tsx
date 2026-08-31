@@ -35,7 +35,13 @@ export function ArticlesSection({
       <BlogFilter tags={tags} className="mb-8" />
 
       {visible.length === 0 ? (
-        <BlogEmptyState />
+        <BlogEmptyState
+          messageKey={
+            selectedTags.length === 0
+              ? "blog.index.noArticlesYet"
+              : "blog.index.empty"
+          }
+        />
       ) : (
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
           {visible.map((article) => (

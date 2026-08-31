@@ -4,10 +4,11 @@ import { cn } from "@/utils/cn";
 import { useTranslations } from "next-intl";
 
 interface BlogEmptyStateProps {
+  messageKey: "blog.index.empty" | "blog.index.noArticlesYet";
   className?: string;
 }
 
-export function BlogEmptyState({ className }: BlogEmptyStateProps) {
+export function BlogEmptyState({ messageKey, className }: BlogEmptyStateProps) {
   const t = useTranslations();
 
   return (
@@ -17,7 +18,7 @@ export function BlogEmptyState({ className }: BlogEmptyStateProps) {
         className
       )}
     >
-      {t("blog.index.empty")}
+      {t(messageKey)}
     </p>
   );
 }
