@@ -81,4 +81,36 @@ describe("extractToc", () => {
       level: 2,
     });
   });
+
+  it("preserva i generici TypeScript come List<T>", () => {
+    expect(
+      extractToc("## Comparing `List<T>` and `Map<K,V>`")[0]
+    ).toMatchObject({
+      title: "Comparing List<T> and Map<K,V>",
+    });
+  });
+
+  it("preserva gli operatori di confronto a < b", () => {
+    expect(extractToc("## Why a < b and c > d")[0]).toMatchObject({
+      title: "Why a < b and c > d",
+    });
+  });
+
+  it("estrae il testo alternativo dalle immagini", () => {
+    expect(extractToc("## See ![Diagram](img.png) here")[0]).toMatchObject({
+      title: "See Diagram here",
+    });
+  });
+
+  it("preserva gli underscore nei nomi costanti", () => {
+    expect(extractToc("## NEXT_PUBLIC_SITE_URL spiegata")[0]).toMatchObject({
+      title: "NEXT_PUBLIC_SITE_URL spiegata",
+    });
+  });
+
+  it("elimina gli underscore attorno al testo italico", () => {
+    expect(extractToc("## Il modo _giusto_")[0]).toMatchObject({
+      title: "Il modo giusto",
+    });
+  });
 });
