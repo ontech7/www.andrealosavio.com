@@ -45,4 +45,40 @@ describe("extractToc", () => {
 
     expect(entries.map((entry) => entry.id)).toEqual(["note", "note-1"]);
   });
+
+  it("estrae il testo da link markdown nel titolo", () => {
+    expect(extractToc("## See [the docs](https://example.com) now")[0]).toEqual(
+      {
+        id: "see-the-docs-now",
+        title: "See the docs now",
+        level: 2,
+      }
+    );
+  });
+
+  it("gestisce link con codice inline nel testo", () => {
+    expect(
+      extractToc("## Usare [`revalidate`](https://example.com)")[0]
+    ).toEqual({
+      id: "usare-revalidate",
+      title: "Usare revalidate",
+      level: 2,
+    });
+  });
+
+  it("ripulisce il barrato dal titolo", () => {
+    expect(extractToc("## Il vecchio ~~modo~~")[0]).toEqual({
+      id: "il-vecchio-modo",
+      title: "Il vecchio modo",
+      level: 2,
+    });
+  });
+
+  it("ripulisce gli autolink dal titolo", () => {
+    expect(extractToc("## Vedi <https://example.com>")[0]).toEqual({
+      id: "vedi-httpsexamplecom",
+      title: "Vedi https://example.com",
+      level: 2,
+    });
+  });
 });

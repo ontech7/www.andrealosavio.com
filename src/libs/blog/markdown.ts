@@ -10,10 +10,13 @@ export function stripCodeBlocks(markdown: string): string {
 }
 
 /**
- * Rimuove la formattazione inline (codice, grassetto, corsivo) lasciando il testo.
+ * Rimuove la formattazione inline (link, codice, grassetto, corsivo, barrato, autolink) lasciando il testo.
  */
 export function stripInlineMarkup(text: string): string {
   return text
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/~~([^~]+)~~/g, "$1")
+    .replace(/<([^>]+)>/g, "$1")
     .replace(/`([^`]*)`/g, "$1")
     .replace(/\*\*([^*]+)\*\*/g, "$1")
     .replace(/\*([^*]+)\*/g, "$1")
