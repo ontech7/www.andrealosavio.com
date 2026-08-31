@@ -74,8 +74,13 @@ coherent and easy to navigate.
 
 ## URL State
 
-- `nuqs` for anything that should be shareable via URL (filters, sort order,
-  tabs). Define parsers next to the consumer.
+- For anything that should be shareable via URL (filters, sort order, tabs):
+  a hand-rolled client context provider that reads `window.location.search`
+  on mount, re-syncs on `popstate`, and writes back with
+  `history.replaceState`. Define it next to the consumer — see
+  `src/app/[locale]/projects/components/projects-filter-provider.tsx` and
+  `src/app/[locale]/blog/components/blog-filter-provider.tsx`. No URL-state
+  library is used.
 - Local ephemeral UI state (open/close, hovered, …) stays in `useState`.
 
 ## SEO / Metadata
