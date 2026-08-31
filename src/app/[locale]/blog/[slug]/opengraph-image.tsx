@@ -34,20 +34,22 @@ function inlineCoverDataUri(cover: string): string | null {
   return `data:image/svg+xml;base64,${fs.readFileSync(file).toString("base64")}`;
 }
 
-function titleFontSize(title: string): number {
+function titleFontSize(title: string, narrow: boolean): number {
+  const scale = narrow ? 8 : 0;
+
   if (title.length > 90) {
-    return 42;
+    return 42 - scale;
   }
 
   if (title.length > 65) {
-    return 50;
+    return 50 - scale;
   }
 
   if (title.length > 45) {
-    return 56;
+    return 56 - scale;
   }
 
-  return 62;
+  return 62 - scale;
 }
 
 export default async function OpengraphImage({ params }: ImageProps) {
@@ -63,76 +65,100 @@ export default async function OpengraphImage({ params }: ImageProps) {
     ? inlineCoverDataUri(frontmatter.cover)
     : null;
 
-  if (bespokeCover) {
-    return new ImageResponse(
-      <img src={bespokeCover} width={size.width} height={size.height} alt="" />,
-      size
-    );
-  }
-
   return new ImageResponse(
     <div
       style={{
         width: "100%",
         height: "100%",
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
+        position: "relative",
         backgroundColor: "#05070c",
-        backgroundImage:
-          "radial-gradient(circle at 78% 18%, rgba(13,126,242,0.45), transparent 58%)",
-        padding: "64px",
         fontFamily: "DM Sans",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          gap: "12px",
-          color: "#5cb0ff",
-          fontSize: 26,
-        }}
-      >
-        {frontmatter.tags.slice(0, 3).map((tag) => (
-          <span key={tag}>#{tag}</span>
-        ))}
-      </div>
+      {bespokeCover ? (
+        <img
+          src={bespokeCover}
+          width={size.width}
+          height={size.height}
+          alt=""
+          style={{ position: "absolute", top: 0, left: 300 }}
+        />
+      ) : null}
 
       <div
         style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundImage: bespokeCover
+            ? "linear-gradient(90deg, rgba(5,7,12,1) 44%, rgba(5,7,12,0.72) 56%, rgba(5,7,12,0) 74%)"
+            : "radial-gradient(circle at 78% 18%, rgba(13,126,242,0.45), transparent 58%)",
+        }}
+      />
+
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
           display: "flex",
           flexDirection: "column",
-          gap: "20px",
-          maxWidth: "900px",
-          maxHeight: "380px",
-          overflow: "hidden",
+          justifyContent: "space-between",
+          padding: "64px",
         }}
       >
         <div
           style={{
-            color: "#ffffff",
-            fontSize: titleFontSize(frontmatter.title),
-            fontWeight: 700,
-            lineHeight: 1.15,
+            display: "flex",
+            gap: "12px",
+            color: "#5cb0ff",
+            fontSize: 26,
           }}
         >
-          {frontmatter.title}
+          {frontmatter.tags.slice(0, 3).map((tag) => (
+            <span key={tag}>#{tag}</span>
+          ))}
         </div>
-        <div style={{ color: "#bfbfbf", fontSize: 30 }}>
-          {frontmatter.subtitle}
-        </div>
-      </div>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          color: "#bfbfbf",
-          fontSize: 24,
-        }}
-      >
-        <span>Andrea Losavio</span>
-        <span>{formatArticleDate(frontmatter.publishedAt, locale)}</span>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+            maxWidth: bespokeCover ? "700px" : "900px",
+            maxHeight: "380px",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              color: "#ffffff",
+              fontSize: titleFontSize(frontmatter.title, Boolean(bespokeCover)),
+              fontWeight: 700,
+              lineHeight: 1.15,
+            }}
+          >
+            {frontmatter.title}
+          </div>
+          <div style={{ color: "#bfbfbf", fontSize: bespokeCover ? 27 : 30 }}>
+            {frontmatter.subtitle}
+          </div>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            color: "#bfbfbf",
+            fontSize: 24,
+          }}
+        >
+          <span>Andrea Losavio</span>
+          <span>{formatArticleDate(frontmatter.publishedAt, locale)}</span>
+        </div>
       </div>
     </div>,
     {
