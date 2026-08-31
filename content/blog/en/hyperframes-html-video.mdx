@@ -1,0 +1,250 @@
+---
+title: "HyperFrames: the launch video is just an HTML file"
+subtitle:
+  "Motion graphics written by a prompt: studio-grade work, minus the studio"
+description:
+  "HyperFrames renders an MP4 from one HTML file: timing lives in data-
+  attributes, motion in a paused GSAP timeline. And how it differs from
+  Remotion."
+publishedAt: 2026-08-28
+translationKey: hyperframes-html-video
+tags: [ai, architecture, business]
+cover: /images/blog/hyperframes-html-video/cover.svg
+coverAlt:
+  "A row of unlit frames with the playhead stopped on a single one, lit and
+  carrying the HyperFrames mark"
+takeaways:
+  - "A video is an HTML file. Timing lives in `data-*` attributes, motion in a
+    paused GSAP timeline. No build step: open the file in a browser and it is
+    already moving."
+  - "The renderer never watches a clock. It holds the animation still, seeks it
+    to the exact moment it needs, captures. The same file renders the same MP4
+    every time."
+  - "Installed inside your own project, the video inherits your design tokens,
+    components and images. That is where it stops looking like a video generator
+    and starts looking like your product."
+  - "Claude Design or Open Design cut the first pass, your local agent refines
+    it, `npx hyperframes render` closes it."
+  - "Against Remotion: same engine underneath, different license. Apache-2.0
+    versus free up to three employees."
+faq:
+  - q: "Do I need animation skills to use it?"
+    a:
+      "No, but you need to be able to read CSS. The agent writes the first cut,
+      and what you fix afterwards are numbers: a scene duration, an ease, a
+      delay. If you can say that something enters too slowly, you can fix it."
+  - q: "Can I bring an existing Remotion project over?"
+    a:
+      "Partly. Migration runs one way only, and the port stops on compositions
+      driven by `useState` or a `useEffect` with dependencies, because a React
+      state machine is not a deterministic capture target. What it does
+      translate, it grades with an SSIM diff against the original render rather
+      than trusting your eyes."
+  - q: "Does rendering cost anything?"
+    a:
+      "Not locally. The framework is Apache-2.0 and the render runs on your
+      machine. The paid path is the hosted cloud one, where importing is free
+      and rendering is what burns credits. There is also an AWS Lambda path, and
+      there you pay AWS."
+---
+
+## The feature is live, the video isn't
+
+Friday afternoon. The feature is deployed, it works, and in two hours you will
+have forgotten about it. What is left is telling someone: a post, a changelog
+card, three lines to the customer who asked for it six weeks ago.
+
+I have always done one of two things here. Post a screenshot, which slides past
+in the feed without anyone slowing down. Or open OBS, record the flow, trim it,
+and ship something that is visibly a screen recording: the cursor hunting for
+the button, the system font, the browser chrome with my twenty-seven tabs in it.
+
+Knowing what to show was never the bottleneck. The bottleneck was that showing
+it decently went through someone who opens After Effects, and that person has a
+two-week queue.
+
+## A video is an HTML file with time in it
+
+[HyperFrames](https://github.com/heygen-com/hyperframes) is an Apache-2.0
+framework from HeyGen that renders MP4s out of HTML. Not "exports to HTML", not
+HTML as a template format. The composition **is** an `.html` file you can open
+in a browser and watch move, with no build step and no bundler.
+
+The contract lives in two places. `data-*` attributes say when things are on
+screen. A paused GSAP timeline says how they move.
+
+```html title="index.html"
+<div
+  id="stage"
+  data-composition-id="feature"
+  data-start="0"
+  data-width="1920"
+  data-height="1080"
+  data-duration="4"
+  data-fps="30"
+>
+  <div
+    id="card"
+    class="clip"
+    data-start="0"
+    data-duration="4"
+    data-track-index="0"
+  >
+    <h1 id="title">Saved filters</h1>
+    <p id="sub">Shipping today</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<script>
+  const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo(
+    "#title",
+    { y: 40, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.6 },
+    0
+  );
+  tl.fromTo(
+    "#sub",
+    { y: 20, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.5 },
+    0.25
+  );
+  tl.to("#card", { opacity: 0, duration: 0.4 }, 3.6);
+
+  window.__timelines["feature"] = tl;
+</script>
+```
+
+Three things make it render. Every visible slot carries `class="clip"` with
+`data-start` and `data-duration`. The timeline is created paused. It is
+registered on `window.__timelines` under the same id as the root. Everything
+else is ordinary CSS, so the stylesheet your product already has works in here
+untranslated.
+
+Then there is the part that actually changes the model. **The renderer never
+watches a clock.** It does not press play and film the result. It holds the
+animation still, seeks it to the moment it needs, captures the frame, moves on.
+That is why the same file renders the same MP4 today and six months from now,
+and why GSAP, Lottie and Web Animations all behave identically here: none of
+them is deciding the time.
+
+The price is a rule worth knowing up front. Inside a composition there is no
+`Date.now()`, no unseeded `Math.random()`, no infinite loops. A `repeat: -1` is
+not a syntax error. It is a frame you cannot reproduce.
+
+<Callout type="warning">
+  Register the timeline under an id that does not match the root and you get no
+  error. You get a video that starts, runs the right length, and never moves. It
+  is the first way to lose half an hour.
+</Callout>
+
+## What actually happens when you run it
+
+```bash
+npx skills add heygen-com/hyperframes   # teach the framework to your agent
+npx hyperframes init feature-video
+cd feature-video
+npx hyperframes preview                 # browser, live reload
+npx hyperframes check                   # lint, layout, motion, contrast
+npx hyperframes render                  # MP4
+```
+
+It is the same shape as
+[Archify, the skill I use for architecture diagrams](/blog/archify-architecture-diagram):
+one command, and from then on the agent can do something it could not do before.
+
+What I did not expect is that it does not start writing. It asks questions, and
+they are the right ones. What kind of video, who for, how long, what aspect
+ratio, what should stick in the viewer's head. Then it closes the interview by
+writing a `BRIEF.md`, and from that point the brief is the only document the
+rest of the pipeline reads. When the video comes out wrong you have a file to
+fix, not a conversation to run again.
+
+From there it picks a route based on what you handed it: a product URL, a pull
+request, an article, an audio track, existing footage with a face in it. Those
+are genuinely different paths with different rules, not one generator behind
+different prompts.
+
+The part that changed the output for me is something else though. **Install it
+inside the project rather than in a scratch folder and the video inherits the
+project**: the design tokens sitting in `globals.css`, the components, the logo,
+the screenshots already in `public/`. You do not explain them, it finds them.
+The gap between a video that looks generated and a video that looks like your
+product is almost entirely there.
+
+`npx hyperframes check` is where it stops feeling like a toy. It runs lint,
+layout, motion and contrast checks, and tells you no before you have waited
+three minutes on a render to find out.
+
+## When a design tool cuts the first pass
+
+There is one job a coding agent does worse than a design tool: deciding what the
+video looks like. Palette, type, hierarchy, what each scene actually says.
+
+The HyperFrames repo ships a guide that teaches
+[Claude Design](https://hyperframes.heygen.com/guides/claude-design) to emit a
+valid composition directly instead of its own default video artifact. Two paths
+come out of that, and they are not interchangeable:
+
+- **Download ZIP.** You get a real HyperFrames project, open it with the agent
+  you already use, and refine locally. Eases, scene durations, pacing. Then
+  `npx hyperframes render` on your own machine.
+- **Send to HyperFrames.** One self-contained HTML file, fonts and images
+  inlined as base64, imported into a hosted project and rendered in the cloud. A
+  relative path to a `fonts/` folder simply does not arrive on the other side.
+
+If you would rather not depend on a closed product for the first pass,
+[Open Design](https://github.com/nexu-io/open-design) does the same job under
+Apache-2.0, locally, on your own API key instead of a subscription. And this is
+not a third-party bolt-on: the HyperFrames repo itself publishes the `SKILL.md`
+you drop into an Open Design checkout.
+
+<Callout type="info">
+  On the cloud path importing is free and so are the enhancement passes. What
+  costs is the render. Locally you pay for it in CPU and fan noise instead.
+</Callout>
+
+## HyperFrames or Remotion
+
+Underneath they are the same machine: headless Chrome drawing frames, FFmpeg
+packing them. HyperFrames says openly that it is inspired by
+[Remotion](https://www.remotion.dev). The bet is what differs.
+
+|                       | HyperFrames                                                      | Remotion                                            |
+| --------------------- | ---------------------------------------------------------------- | --------------------------------------------------- |
+| What you write        | HTML, CSS and JavaScript                                         | React components and TypeScript                     |
+| How motion is timed   | the renderer seeks your animation to a moment, then captures     | your code reads the frame number and returns values |
+| Web material you have | HTML, CSS and a GSAP or Lottie animation mostly drop straight in | gets rewritten as components                        |
+| License               | Apache-2.0                                                       | its own license, free up to three employees         |
+
+Said plainly, because it is the thing that matters most if you are choosing
+today: **Remotion is more mature**. More templates, more tutorials, more
+answered questions, far more production history, and a Remotion Lambda that has
+been hardened for years against a much younger distributed render path. If your
+team already writes React and keeps its design system in components, Remotion
+hands you those components, your charting libraries and typed composition
+inputs.
+
+HyperFrames wins when the video has to be written by an agent, when you are
+starting from web material that already exists, or when the license is a
+procurement problem. In my experience those three arrive together more often
+than I expected.
+
+One thing to know before attempting a migration: it runs one way, Remotion to
+HyperFrames. The port lints the source first and refuses compositions driven by
+`useState` or a `useEffect` with dependencies, because a React state machine is
+not a deterministic capture target. What it does translate, it grades: render
+the original with Remotion, render the translation, diff the two with SSIM. A
+translation that looks right but lands a few hundredths under the threshold is
+wrong, and it says so instead of letting you find out after publishing.
+
+## When I open it again
+
+At the next feature that deserves a video instead of a screenshot. At the
+changelog for the big PR nobody will read line by line. At the chart for the
+monthly report, which people watch in a twelve-second MP4 and skip in a table.
+
+The file stays in the repository next to the code it describes. When the feature
+changes, the video updates in a diff instead of an email to somebody.

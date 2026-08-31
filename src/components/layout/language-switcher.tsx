@@ -20,9 +20,39 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
 
   const isEnglish = locale === "en";
 
+  function localizedPathFor(newLocale: AppLocale): string | null {
+    const alternate = document.querySelector<HTMLLinkElement>(
+      `link[rel="alternate"][hreflang="${newLocale}"]`
+    );
+
+    if (!alternate) {
+      return null;
+    }
+
+    const match = /^(?:https?:\/\/[^/]*)?\/[a-z]{2}(\/.*)?$/.exec(
+      alternate.getAttribute("href") ?? ""
+    );
+
+    return match ? (match[1] ?? "/") : null;
+  }
+
+  function firstPathSegment(path: string): string {
+    return path.split("/")[1] ?? "";
+  }
+
+  function isSameSection(candidatePath: string, currentPath: string): boolean {
+    return firstPathSegment(candidatePath) === firstPathSegment(currentPath);
+  }
+
   function handleLocaleChange(newLocale: AppLocale) {
+    const alternatePath = localizedPathFor(newLocale);
+    const target =
+      alternatePath && isSameSection(alternatePath, pathname)
+        ? alternatePath
+        : pathname;
+
     startTransition(() => {
-      router.replace(pathname, { locale: newLocale });
+      router.replace(target, { locale: newLocale });
     });
   }
 

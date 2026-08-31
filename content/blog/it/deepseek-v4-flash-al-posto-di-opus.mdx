@@ -1,0 +1,178 @@
+---
+title: "DeepSeek V4-Flash al posto di Opus: dove regge"
+subtitle:
+  "Tre settimane col preview dentro Claude Code, e stamattina i pesi 0731 sotto
+  licenza MIT"
+description:
+  "L'ho collegato a Claude Code via Ollama Cloud e gli ho fatto fare refactor
+  veri: dove regge quanto Opus 4.7, dove si perde, e quanto costa davvero."
+publishedAt: 2026-07-31
+translationKey: deepseek-v4-flash
+tags: [ai, devops]
+cover: /images/blog/deepseek-v4-flash/cover.svg
+coverAlt:
+  "La balena di DeepSeek, bianca e frontale, sulla faccia superiore di un chip
+  isometrico luminoso, e sotto la riga $0.14 in, $0.28 out"
+takeaways:
+  - "0.14 dollari per milione in input e 0.28 in output contro i 5 e i 25 di
+    Opus 4.7: trentacinque volte meno in input, ottantanove in output."
+  - "Il cache hit a 0.0028 è dove si vede davvero, perché un agent rimanda lo
+    stesso contesto a ogni giro."
+  - "Sui refactor da dieci file e sulla costruzione di una feature intera ha
+    seguito i flussi senza inventare API: lì la distanza da Opus l'ho sentita
+    poco."
+  - "Si perde sui task lunghi: intorno alla ventesima tool call dimentica un
+    vincolo dato all'inizio, e nel diff lo vedi solo se guardi."
+faq:
+  - q: "Serve una GPU per usarlo?"
+    a:
+      "No, se lo chiami via API o via Ollama Cloud: gira sui loro server. I pesi
+      sono MIT e scaricabili, ma sono 167 GB per 284 miliardi di parametri,
+      quindi in casa serve hardware serio o una quantizzazione."
+  - q: "Che senso hanno i pesi aperti se poi lo uso via API?"
+    a:
+      "Il senso è che l'API non è l'unica strada. Se domani il prezzo cambia, o
+      hai un vincolo su dove i dati possono andare, lo stesso checkpoint lo fai
+      girare da un'altra parte senza riscrivere i prompt."
+  - q: "Perché il cache hit costa cinquanta volte meno dell'input normale?"
+    a:
+      "Perché il contesto già visto non viene ricalcolato. In un agent che
+      rimanda system prompt e cronologia a ogni tool call è la parte più grossa
+      dell'input, ma lo sconto lo vedi solo se le chiamate arrivano ravvicinate
+      e con lo stesso prefisso."
+---
+
+## Il conto di fine mese, non il benchmark
+
+Una sessione di lavoro con l'agent, di quelle in cui gli fai leggere mezzo
+repository e poi riscrivere venti file, mi consuma sui due milioni di token in
+input e trecentomila in output. Con Claude Opus 4.7, a 5 dollari per milione in
+input e 25 in output, sono 17 dollari e 50. Per una sessione. Falle tre al
+giorno e il modello costa più dell'infrastruttura su cui gira quello che scrive.
+
+Quando l'agent sta decidendo qualcosa di difficile, quella cifra non mi
+disturba. Mi disturba quando gli sto facendo fare lavoro meccanico, **che è la
+maggior parte del tempo**.
+
+## Cosa è uscito il 31 luglio
+
+Stamattina DeepSeek ha pubblicato i pesi di
+[V4-Flash-0731](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731) su
+Hugging Face, licenza MIT, 167 GB. Il preview lo uso da tre settimane: questo
+checkpoint rifà solo il post-training, l'architettura è identica. 284 miliardi
+di parametri totali, 13 attivi per token, attenzione ibrida CSA più HCA, un
+milione di token di contesto in input e 384 mila in output.
+
+La riga che conta è il listino.
+
+| Per 1M token | Input | Output | Input da cache |
+| ------------ | ----- | ------ | -------------- |
+| V4-Flash     | $0.14 | $0.28  | $0.0028        |
+| Opus 4.7     | $5.00 | $25.00 | n/d            |
+
+Trentacinque volte meno in input, ottantanove in output. E lo 0.0028 non è uno
+sconto, è un altro ordine di grandezza: **1785 volte sotto il prezzo di Opus**.
+Su un agent che rimanda system prompt e cronologia a ogni tool call, quella
+colonna è quasi tutta la bolletta.
+
+Sui benchmark DeepSeek dichiara 82.7 su Terminal Bench 2.1 e 54.4 su DeepSWE,
+sopra il preview di V4-Pro su tutti e nove i benchmark agentici che pubblica.
+Non lo metto accanto al 69.4 di Opus 4.7 su Terminal-Bench 2.0, perché è
+un'altra versione del benchmark e il confronto non regge. Quello che regge è
+cosa ho visto girare.
+
+## Due variabili d'ambiente, e Claude Code parla con Ollama Cloud
+
+La cosa che mi ha convinto a provarlo sul serio è che non ho dovuto aprire
+nessun account nuovo. L'abbonamento
+[Ollama Cloud](https://ollama.com/library/deepseek-v4-flash) ce l'avevo già, e
+il modello è lì dentro.
+
+```bash
+ollama signin
+ollama run deepseek-v4-flash:cloud
+```
+
+Da terminale funziona subito, ma da solo non mi serviva: volevo l'agent, con i
+suoi tool e i suoi permessi. Claude Code parla il formato Messages di Anthropic,
+Ollama espone un endpoint OpenAI-compatibile, quindi in mezzo ci va qualcosa che
+traduce. Ho usato [LiteLLM](https://docs.litellm.ai/docs/anthropic_unified/),
+che espone `/v1/messages` e lo gira sul provider che gli dici.
+
+```yaml title="config.yaml"
+model_list:
+  - model_name: flash
+    litellm_params:
+      model: openai/deepseek-v4-flash:cloud
+      api_base: https://ollama.com/v1
+      api_key: os.environ/OLLAMA_API_KEY
+```
+
+```bash
+litellm --config config.yaml --port 4000
+
+export ANTHROPIC_BASE_URL=http://localhost:4000
+export ANTHROPIC_AUTH_TOKEN=qualsiasi-cosa
+export ANTHROPIC_MODEL=flash
+claude
+```
+
+Quattro righe, e la stessa CLI che apro tutti i giorni, con lo stesso prompt e
+gli stessi tool, sta parlando con un altro modello. È l'unico modo onesto di
+confrontarli: se cambi anche l'harness non stai più misurando il modello.
+
+Una nota sui conti: **Ollama Cloud fattura tempo GPU, non token**, quindi dentro
+l'abbonamento i numeri della tabella qui sopra non li vedi nemmeno. Tre
+settimane di uso quotidiano e non ho toccato il limite del piano da 20 dollari.
+
+## Dove ha tenuto: refactor e feature intere
+
+Gli ho dato quello che gli avrei dato comunque. Un refactor che passava per
+dodici file, di quelli in cui la singola modifica è banale e la difficoltà è
+tutta nel ricordarsi al nono file cosa hai deciso al secondo. Poi una feature
+intera: provider, componente, traduzioni nei due locale, test.
+
+La cosa che non mi aspettavo è che **seguisse i flussi**. Apriva i file
+nell'ordine giusto, non inventava funzioni che nel repository non esistono, e
+arrivava in fondo con qualcosa che compilava. Su questo tipo di lavoro,
+costruire e non decidere, la distanza da Opus 4.7 l'ho sentita poco. Abbastanza
+poco da non voler tornare indietro per un fattore ottantanove sul prezzo.
+
+Il rito prima di un rework grosso non è cambiato: gli faccio disegnare
+[la mappa del sistema](/blog/archify-diagramma-architettura) e poi lo lascio
+lavorare. Anche lì si è comportato come mi aspettavo.
+
+## Dove mi ha fatto tornare indietro
+
+Poi c'è il punto in cui si rompe, ed è sempre lo stesso: i task lunghi.
+
+Il pattern l'ho visto tre volte. Gli do un vincolo all'inizio, del tipo _non
+toccare i file di traduzione finché non te lo dico io_. Lo rispetta per dieci,
+dodici tool call. Intorno alla ventesima li tocca. Non sbaglia il codice:
+dimentica l'istruzione. E in un agent questo è peggio di un errore di sintassi,
+perché l'errore lo vedi subito e il vincolo saltato lo vedi nel diff, ammesso
+che tu guardi.
+
+<Callout type="warning">
+  Sopra i venti passi ho smesso di lasciarlo correre. Se il lavoro non sta in
+  una decina di tool call, o lo spezzo io in pezzi più corti, o lo mando su Opus
+  e non ci penso più.
+</Callout>
+
+## Come ho diviso il lavoro adesso
+
+Non ho sostituito niente. Ho spostato una linea.
+
+- **Su Flash**: lettura di repository, primi giri di refactor, test su codice
+  che esiste già, traduzioni, e in generale tutto quello che ha un output
+  verificabile in trenta secondi.
+- **Su Opus**: la sessione lunga, la scelta architetturale, il debug di qualcosa
+  che non ho ancora capito.
+
+Il criterio non è quanto è difficile il task. È quanti passi ha, e quanto costa
+accorgersi tardi che è andato storto.
+
+La prossima volta che apri una sessione per un lavoro meccanico, di quelli in
+cui sai già cosa deve venire fuori e ti serve solo che qualcuno lo digiti,
+guarda quanto ti è costata. Se hai già l'abbonamento Ollama Cloud, provare
+l'alternativa sono due comandi.

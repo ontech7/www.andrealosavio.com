@@ -1,0 +1,232 @@
+---
+title: "Animated Lucide icons: what Animate UI costs"
+subtitle:
+  "A hover that answers back: the difference between a correct site and one that
+  keeps people on it"
+description:
+  "I installed it in a real project: what the first icon actually weighs, which
+  props earn their place, and where reducedMotion stops covering you."
+publishedAt: 2026-04-21
+translationKey: animate-ui-icons
+tags: [react]
+cover: /images/blog/animate-ui-icons/cover.svg
+coverAlt:
+  "A grid of dimmed blue Lucide icons fading out toward the edges, with a
+  glowing glass tile at the center holding a white arrow that trails its own
+  motion"
+takeaways:
+  - "The first icon costs 4 files and 930 lines copied into your repo; every
+    icon after that is under a hundred lines and no new npm dependency."
+  - 'MotionConfig reducedMotion="user" only skips width, height, top, left,
+    right, bottom and the transforms: animations on pathLength and d keep
+    running.'
+  - "It is 260 icons against the 1900+ modules lucide-react ships: check that
+    yours is in there before you design the interaction around it."
+  - "Default size is 28, not Lucide's 24, so dropping one into an existing
+    layout is not a neutral swap."
+faq:
+  - q: "Do I need to install an npm package?"
+    a:
+      "No. The shadcn CLI copies the source files into your project. The only
+      real dependency is motion, and if you are already animating anything with
+      Motion it is in your package.json already."
+  - q: "Do they coexist with lucide-react?"
+    a:
+      "Yes, they are separate things. The animated icons are your own components
+      under components/animate-ui/icons, and lucide-react stays where it is. You
+      swap them one at a time, only where the motion earns it."
+  - q: "Do they respect prefers-reduced-motion?"
+    a:
+      'Partly. With MotionConfig reducedMotion="user", Motion skips transform
+      and positional animations, so icons that rotate or shift do stop. Icons
+      that morph the SVG path, meaning pathLength and d, are not transforms and
+      keep animating. You have to turn those off yourself with useReducedMotion.'
+---
+
+## The page is done and it feels dead
+
+It is always the same moment. The landing page is ready, Lighthouse is green,
+the copy says what it should. You open it, you look at it, and nothing happens.
+
+The icons are already there. This site has had `lucide-react` since the first
+commit, and it does its job: an arrow next to a CTA, an envelope next to the
+form, a chevron next to an accordion. They sit still. They are fine, and they
+keep nobody.
+
+When someone lands on a pricing or contact page with fifteen seconds of
+attention to spend, what decides between staying and closing the tab is not the
+copy. They read that later, if they stay. What decides is whether the page
+**answers back**. An arrow that shifts a quarter of its width when you hover it
+costs nothing and says exactly one thing: somebody on the other side paid
+attention.
+
+[Animate UI](https://animate-ui.com/docs/icons) starts right there. It took the
+[Lucide](https://lucide.dev) icon set and rebuilt it with
+[Motion](https://motion.dev). Same paths, same 24 grid, same
+`stroke="currentColor"`. Plus an animation.
+
+## What I typed and what showed up
+
+I installed it in this repository, because I wanted the real cost rather than
+the documented one.
+
+```bash
+npx shadcn@latest add @animate-ui/icons-arrow-right
+```
+
+```text
+✔ Created 4 files:
+  - src/hooks/use-is-in-view.tsx
+  - src/components/animate-ui/primitives/animate/slot.tsx
+  - src/components/animate-ui/icons/icon.tsx
+  - src/components/animate-ui/icons/arrow-right.tsx
+```
+
+Four files, **930 lines**, and not one line of diff in `package.json`. The only
+declared dependency is `motion`, which was already here at 12.26.1 because the
+site animates other things. From a cold start it is one extra package, but that
+is the package, not an icon library.
+
+Of those 930 lines, 655 are the shared `icon.tsx` wrapper: the context, the
+triggers, the loop logic. You pay it once. The second icon looks like this:
+
+```bash
+npx shadcn@latest add @animate-ui/icons-bell
+```
+
+```text
+✔ Created 1 file:
+ℹ Skipped 3 files: (files might be identical, use --overwrite to overwrite)
+```
+
+Eighty-six lines. On the way there the CLI asked me three times whether to
+overwrite `index.tsx`, which is the three shared files already on disk. The
+right answer is no, three times, and that is the only friction in the whole
+thing.
+
+Two numbers worth holding before you design around it. There are **260**
+animated icons, while `lucide-react` 0.562 ships more than 1900 modules: the
+animated set is a selection, not a mirror. And the default `size` is **28**, not
+Lucide's 24, so swapping one into an existing layout will move things.
+
+## The three props I actually use
+
+There are thirteen common props across triggers, timing and persistence. In
+practice I touch three.
+
+The first is `animateOnHover`, and the obvious way to use it is the wrong one.
+Put it on the icon and the animation fires when the pointer enters the icon,
+which is a twenty pixel target inside a two hundred pixel button. You want it to
+fire on the whole button. That is what the `AnimateIcon` wrapper with `asChild`
+is for: it adds no element, it hands the handlers to the child.
+
+```tsx title="components/cta.tsx"
+import { AnimateIcon } from "@/components/animate-ui/icons/icon";
+import { ArrowRight } from "@/components/animate-ui/icons/arrow-right";
+
+export function Cta() {
+  return (
+    <AnimateIcon animateOnHover asChild>
+      <a href="#contact" className="inline-flex items-center gap-2">
+        Let's talk
+        <ArrowRight animation="pointing" size={20} />
+      </a>
+    </AnimateIcon>
+  );
+}
+```
+
+The second is `animation`. Every icon declares at least three, and `arrow-right`
+has five: `default` shifts the group 25% along x, `pointing` extends the head
+while shortening the shaft, `out` throws it off one side and brings it back from
+the other. On a CTA, `pointing` is the polite one, because the center of mass
+stays put and the label next to it does not look like it is running away.
+
+The third is `completeOnStop`, and it only matters with `animateOnTap`. Without
+it, the animation reverses halfway the moment the finger lifts, and it reads as
+a glitch rather than a response.
+
+The other ten props exist and are documented well. I skipped them because an
+icon that fires on first scroll into view, with a delay and a timed loop, is no
+longer a detail. It is something asking for attention, and on a page whose job
+is to get text read, attention belongs somewhere else.
+
+## Where `reducedMotion` stops covering you
+
+The Animate UI accessibility page tells you to wrap the app in
+`<MotionConfig reducedMotion="user">` and says components will then respect the
+user preference. That is the right advice, and for icons it is only half true.
+The reason is in Motion's own source.
+
+```js title="motion-dom/render/utils/keys-position.mjs"
+const positionalKeys = new Set([
+  "width",
+  "height",
+  "top",
+  "left",
+  "right",
+  "bottom",
+  ...transformPropOrder,
+]);
+```
+
+When `shouldReduceMotion` is on, Motion replaces the transition with
+`{ type: false }` **only for keys in that Set**. Everything else animates as
+before.
+
+Which plays out icon by icon. The default `bell` animates `rotate` and `x`, both
+transforms, so it correctly goes still. But `arrow-right` with
+`animation="pointing"` animates no transform at all: it morphs the `d` attribute
+from `M5 12h14` to `M5 12h10`. And the two generic animations every icon
+inherits, `path` and `path-loop`, animate `pathLength`. Neither is in the Set,
+so both keep moving for the person who asked for less movement.
+
+<Callout type="warning">
+  With `loop` this is not a nuance. Motion that starts on its own, runs longer
+  than five seconds and cannot be stopped fails WCAG 2.2.2. If you loop an icon
+  that morphs its path, `MotionConfig` is not covering you.
+</Callout>
+
+The safety net is one line.
+
+```tsx title="components/notifications.tsx"
+"use client";
+
+import { useReducedMotion } from "motion/react";
+import { Bell } from "@/components/animate-ui/icons/bell";
+
+export function Notifications() {
+  const reduceMotion = useReducedMotion();
+
+  return <Bell animateOnHover loop={!reduceMotion} />;
+}
+```
+
+## Components and primitives, and why I stopped at the icons
+
+Animate UI is not only icons. The distribution also ships animated
+**primitives**, including ports of Radix, Base UI and Headless UI, and
+**components** with baseline styling inspired by shadcn/ui built on top of those
+primitives. They are good work and worth a look.
+
+I did not try them here, for a reason that has nothing to do with quality.
+Adopting an accordion or a dialog from another distribution means running two
+layers of components that solve the same problem, with two variant conventions
+and two ways of handling focus, and sooner or later somebody imports the wrong
+one. That is an architecture decision and it deserves to be made as one.
+
+An icon is not. An icon is a leaf: no state, no children, nothing decided on
+anyone else's behalf. You try it on a CTA, and if you do not like it you delete
+one file and the project never notices. That is why, out of the whole library,
+the icons are the part you actually try. When the animation is the product
+rather than the detail, the problem is a different one, and it
+[gets solved elsewhere](/blog/hyperframes-html-video).
+
+One thing to know going in: the icons are marked **beta** in the docs, and the
+files live in your repository. An upstream fix does not reach you on its own,
+and updating means running `add` again, file by file. Across three icons that is
+nothing. Across thirty it is an afternoon.
+
+Next time you open a nav, a CTA button, or a card with an arrow at the bottom,
+that is the icon to start from. One of them, with `animateOnHover` on the whole
+button. If it still does not annoy you a day later, add the second.

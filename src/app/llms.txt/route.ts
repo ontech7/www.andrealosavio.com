@@ -1,4 +1,5 @@
 import { SERVICE_PRICES, type ServiceId } from "@/constants/services";
+import { getArticles } from "@/libs/blog/source";
 import { formatEuro } from "@/utils/format-price";
 
 export const dynamic = "force-static";
@@ -23,6 +24,26 @@ function priceOf(id: ServiceId): string {
   const amount = `${formatEuro(price.amount, "en")}${PRICE_UNIT_LABEL[price.unit]}`;
 
   return price.from ? `from ${amount}` : amount;
+}
+
+function articlesSection(): string {
+  const articles = getArticles("en");
+
+  if (articles.length === 0) {
+    return "";
+  }
+
+  return [
+    "",
+    "## Articles",
+    "",
+    "> Each article is also available as plain Markdown at the `.md` URL below.",
+    "",
+    ...articles.map(
+      (article) =>
+        `- **${article.frontmatter.title}** (${article.frontmatter.publishedAt}) — ${article.frontmatter.description}\n  - HTML: ${SITE_URL}/en/blog/${article.slug}\n  - Markdown: ${SITE_URL}/en/blog/${article.slug}.md`
+    ),
+  ].join("\n");
 }
 
 const LLMS_TXT = `# Andrea Losavio - AI/LLM Briefing Document
@@ -159,6 +180,7 @@ There is no separate services page: the homepage is the single entry point and c
 - [Projects](${SITE_URL}/en/projects): own products in the spotlight, then client work and personal projects
 - [About](${SITE_URL}/en/about): background, experience and skills
 - [Privacy Policy](${SITE_URL}/en/privacy): data handling for the contact form, plus a note on AI-assisted copywriting
+${articlesSection()}
 
 ## Site Content
 

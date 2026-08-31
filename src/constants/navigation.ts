@@ -9,8 +9,8 @@ export type NavLink = {
 export const NAV_LINKS: readonly NavLink[] = [
   { href: "/", labelKey: "navigation.home" },
   { href: "/projects", labelKey: "navigation.projects" },
+  { href: "/blog", labelKey: "navigation.blog" },
   { href: "/about", labelKey: "navigation.about" },
-  { href: "/llms.txt", labelKey: "navigation.llmsTxt", external: true },
 ] as const;
 
 export const CONTACT_HREF = "/#contact";
@@ -26,14 +26,10 @@ export const FOOTER_LINKS = {
       { href: "/privacy", labelKey: "footer.links.privacyPolicy" },
     ] as readonly NavLink[],
   },
-  projects: {
-    titleKey: "footer.sections.projects",
+  blog: {
+    titleKey: "footer.sections.blog",
     links: [
-      {
-        href: "/projects?tags=personal",
-        labelKey: "footer.links.personalIdeas",
-      },
-      { href: "/projects?tags=customer", labelKey: "footer.links.forClients" },
+      { href: "/blog", labelKey: "footer.links.allArticles" },
     ] as readonly NavLink[],
   },
 } as const;

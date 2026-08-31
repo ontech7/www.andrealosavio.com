@@ -231,3 +231,90 @@ html {
     --contact-cta-angle: 360deg;
   }
 }
+
+/* TL;DR - due archi blu che ruotano lenti lungo il bordo del riassunto.
+   Stessa grammatica del CTA contatti, ma piu lento, senza il picco bianco
+   e in senso opposto, cosi i due anelli non si confondono. */
+
+@property --tldr-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.tldr-outline {
+  background:
+    conic-gradient(
+      from var(--tldr-angle),
+      transparent 0%,
+      color-mix(in srgb, var(--secondary) 70%, transparent) 10%,
+      transparent 25%,
+      transparent 50%,
+      color-mix(in srgb, var(--secondary) 70%, transparent) 60%,
+      transparent 75%
+    ),
+    var(--border-gradient);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tldr-outline {
+    animation: tldr-spin 7s linear infinite;
+  }
+}
+
+@keyframes tldr-spin {
+  to {
+    --tldr-angle: -360deg;
+  }
+}
+
+/* Code block MDX - selettori emessi da rehype-pretty-code */
+
+figure[data-rehype-pretty-code-figure] {
+  @apply my-6;
+}
+
+figcaption[data-rehype-pretty-code-title] {
+  @apply bg-muted text-muted-foreground border-border rounded-t-lg border border-b-0 px-4 py-2 font-mono text-xs;
+}
+
+figcaption[data-rehype-pretty-code-title] + div > pre {
+  @apply rounded-t-none;
+}
+
+code[data-line-numbers] {
+  counter-reset: line;
+}
+
+code[data-line-numbers] > span[data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  @apply text-muted-foreground/50 mr-4 inline-block w-4 text-right;
+}
+
+span[data-line] {
+  @apply inline-block w-full px-1;
+}
+
+span[data-highlighted-line] {
+  @apply bg-secondary/10 border-l-secondary border-l-2;
+}
+
+span[data-highlighted-chars] {
+  @apply bg-secondary/20 rounded px-1;
+}
+
+/* Ancore sugli heading, rese da rehype-autolink-headings con behavior "wrap" */
+
+.prose-article :is(h2, h3) > a {
+  @apply text-inherit no-underline;
+}
+
+.prose-article :is(h2, h3) > a:hover::after {
+  content: " #";
+  @apply text-muted-foreground;
+}
+
+.prose-article {
+  @apply mx-auto max-w-[42.5rem];
+}

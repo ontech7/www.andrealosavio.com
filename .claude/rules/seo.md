@@ -21,22 +21,32 @@ detailed instructions on how to test and configure each aspect.
 ### 1. Multi-language XML Sitemap
 
 **What it does**: Automatically generates a sitemap with every URL on the site
-in both languages (IT/EN).
+in both languages (IT/EN), plus one entry pair per published blog article.
 
 **Implementation**:
 
 - File: `src/app/sitemap.ts`
-- Generates 8 URLs (4 pages × 2 locales)
+- Static pages: `lastModified` is a hard-coded date per route, updated by hand
+  when that page's content changes.
+- Blog articles: `lastModified` comes from the article's own frontmatter
+  (`updatedAt` or `publishedAt`) — not a per-build `new Date()`, so the date
+  only changes when the content actually does.
+- Each locale gets its own path (`pathByLocale`) built from the article's
+  localized slug, resolved through `translationKey` — the sitemap does not
+  assume IT and EN share the same slug.
 - Includes: priority, changeFrequency, lastModified
 - Supports hreflang alternates
 
-**Pages included**:
+**Pages included** (static routes; blog articles are appended dynamically,
+one pair of URLs per published `translationKey`):
 
 ```
 https://www.andrealosavio.com/it
 https://www.andrealosavio.com/en
 https://www.andrealosavio.com/it/projects
 https://www.andrealosavio.com/en/projects
+https://www.andrealosavio.com/it/blog
+https://www.andrealosavio.com/en/blog
 https://www.andrealosavio.com/it/about
 https://www.andrealosavio.com/en/about
 https://www.andrealosavio.com/it/privacy
@@ -312,6 +322,86 @@ Knowledge Graph.
 
 ---
 
+### 8. Blog Structured Data — BlogPosting & FAQPage
+
+**What it does**: Each article page carries its own structured data, in
+addition to the `BreadcrumbList` every non-homepage page already emits.
+
+**Implementation**:
+
+- Helpers: `generateBlogPostingSchema` and `generateFaqSchema` in
+  `src/utils/seo-schema.ts`.
+- Wired in `src/app/[locale]/blog/[slug]/page.tsx`: every article emits
+  `BreadcrumbList` + `BlogPosting`; `FAQPage` is added only when the article's
+  frontmatter has a `faq` array.
+- `BlogPosting` references the homepage's `Person` and `Organization` entities
+  by `@id` (`authorId`, `publisherId`) instead of duplicating them, so the
+  `@graph` stays connected.
+
+**How to test**:
+
+1. Open an article, e.g. `https://www.andrealosavio.com/it/blog/<slug>`.
+2. View Page Source, find the `<script type="application/ld+json">` block.
+3. Paste the JSON into [Schema Markup Validator](https://validator.schema.org/)
+   or [Rich Results Test](https://search.google.com/test/rich-results).
+4. Confirm `@type` includes `BreadcrumbList` and `BlogPosting` (and `FAQPage`
+   for articles with FAQ content).
+
+---
+
+### 9. RSS Feed
+
+**What it does**: Publishes a per-locale RSS 2.0 feed of blog articles.
+
+**Implementation**:
+
+- Route: `src/app/[locale]/blog/rss.xml/route.ts`, statically generated
+  (`dynamic = "force-static"`, `dynamicParams = false`).
+- One feed per locale: `/it/blog/rss.xml`, `/en/blog/rss.xml`.
+- Linked from each article's metadata via
+  `alternates.types["application/rss+xml"]`.
+
+**How to test**:
+
+```bash
+curl -s https://www.andrealosavio.com/it/blog/rss.xml | grep -c "<item>"
+```
+
+Should return the number of published Italian articles.
+
+---
+
+### 10. Plain-Markdown Article URLs (LLM crawlers)
+
+**What it does**: Serves every article as plain Markdown at a `.md` URL,
+alongside the normal HTML page, for LLM/agent crawlers that prefer Markdown
+over HTML parsing.
+
+**Implementation**:
+
+- `next.config.ts` rewrites `/:locale(it|en)/blog/:slug.md` to
+  `/api/blog/:locale/:slug`.
+- Handler: `src/app/api/blog/[locale]/[slug]/route.ts`. Returns
+  `Content-Type: text/markdown; charset=utf-8` and
+  `X-Robots-Tag: noindex, follow` — indexable pages stay the HTML versions;
+  this is a machine-readable mirror, not a duplicate to rank.
+- `src/app/llms.txt/route.ts` lists every published article with links to
+  both the HTML and the `.md` version (replaces the old static
+  `public/llms.txt` — that file no longer exists).
+
+**How to test**:
+
+```bash
+curl -sI https://www.andrealosavio.com/it/blog/<slug>.md | grep -i "content-type\|x-robots"
+# Expect: Content-Type: text/markdown; charset=utf-8
+#         X-Robots-Tag: noindex, follow
+
+curl -s https://www.andrealosavio.com/llms.txt | grep -c "## Articles"
+# Expect: 1
+```
+
+---
+
 ## Testing and Verification
 
 ### Full Pre-deploy Checklist
@@ -343,7 +433,15 @@ Before considering the site "SEO-ready", verify:
   - [ ] Valid Person schema (homepage)
   - [ ] Valid Organization schema (homepage)
   - [ ] Breadcrumb schema on other pages
+  - [ ] Valid BlogPosting schema on articles (FAQPage too, when the article
+        has FAQ content)
   - [ ] No errors on the Schema Validator
+
+- [ ] **Blog**
+  - [ ] RSS feed reachable at `/it/blog/rss.xml` and `/en/blog/rss.xml`
+  - [ ] Every article reachable at its `.md` URL with `text/markdown` and
+        `X-Robots-Tag: noindex, follow`
+  - [ ] `/llms.txt` lists published articles
 
 - [ ] **Performance**
   - [ ] PageSpeed score > 90

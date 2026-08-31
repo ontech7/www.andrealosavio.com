@@ -84,7 +84,8 @@
   "products": {
     "title": "I do not build only for other people",
     "subtitle": "Two apps of mine, published and used by real people.",
-    "cta": "See all the projects"
+    "cta": "See all the projects",
+    "blogCta": "Read the blog"
   },
   "youCouldBeNext": {
     "title": "You could be next",

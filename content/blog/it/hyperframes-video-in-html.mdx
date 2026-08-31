@@ -1,0 +1,256 @@
+---
+title: "HyperFrames: il video della feature lo scrivi in HTML"
+subtitle:
+  "Motion graphics scritte da un prompt: roba da studio di produzione, senza lo
+  studio di produzione"
+description:
+  "HyperFrames rende un MP4 da un file HTML: il tempo sta negli attributi data-,
+  il movimento in una timeline GSAP in pausa. E cosa cambia rispetto a Remotion."
+publishedAt: 2026-08-28
+translationKey: hyperframes-html-video
+tags: [ai, architecture, business]
+cover: /images/blog/hyperframes-html-video/cover.svg
+coverAlt:
+  "Una fila di fotogrammi spenti con la testina di lettura ferma su uno solo,
+  acceso e con dentro il marchio HyperFrames"
+takeaways:
+  - "Un video è un file HTML: il tempo sta negli attributi `data-*`, il
+    movimento in una timeline GSAP in pausa. Nessun build step, lo apri nel
+    browser e lo vedi già muoversi."
+  - "Il renderer non guarda l'orologio, fa seek: tiene ferma l'animazione, la
+    porta all'istante che gli serve e cattura. Lo stesso file rende lo stesso
+    MP4 ogni volta."
+  - "Installato dentro il tuo progetto eredita i tuoi design token, i componenti
+    e le immagini che hai già. È lì che smette di sembrare un generatore di
+    video e inizia a sembrare il tuo prodotto."
+  - "Claude Design o Open Design fanno il primo taglio visivo, l'agent locale lo
+    rifinisce, `npx hyperframes render` chiude."
+  - "Contro Remotion: stesso motore sotto, licenza diversa. Apache-2.0 contro
+    gratis fino a tre dipendenti."
+faq:
+  - q: "Serve saper animare per usarlo?"
+    a:
+      "No, ma serve saper leggere del CSS. Il primo taglio lo scrive l'agent, e
+      quello che tu correggi sono numeri: la durata di una scena, una ease, un
+      ritardo. Se sai dire che una cosa entra troppo lenta, sai correggerla."
+  - q: "Posso portarci un progetto Remotion che ho già?"
+    a:
+      "In parte. La migrazione va in una direzione sola e il porting si ferma
+      sulle composizioni guidate da `useState` o da un `useEffect` con
+      dipendenze, perché una macchina a stati React non è un target
+      deterministico. Il resto lo traduce e poi confronta i due render con un
+      diff SSIM invece di fidarsi a occhio."
+  - q: "Il render costa qualcosa?"
+    a:
+      "In locale no: il framework è Apache-2.0 e il render gira sulla tua
+      macchina. A pagamento è il percorso in cloud ospitato, dove l'import è
+      gratis e a consumare crediti è il rendering. Esiste anche il render su AWS
+      Lambda, e lì paghi AWS."
+---
+
+## La feature è in produzione, il video no
+
+Venerdì pomeriggio. La feature è deployata, funziona, e fra due ore te ne sarai
+dimenticato. Quello che resta da fare è dirlo a qualcuno: un post, una card nel
+changelog, tre righe al cliente che l'aveva chiesta sei settimane fa.
+
+A quel punto ho sempre fatto una di due cose. Ho pubblicato uno screenshot, e
+nel feed lo screenshot passa senza che nessuno rallenti. Oppure ho aperto OBS,
+ho registrato il flusso e ho tagliato il video, e si vede che è una
+registrazione dello schermo: il cursore che cerca il bottone, il font di
+sistema, la barra del browser con dentro le mie ventisette tab.
+
+Il collo di bottiglia non è mai stato sapere cosa mostrare. È che l'unico modo
+di mostrarlo decentemente passava da qualcuno che apre After Effects, e quel
+qualcuno ha una coda di due settimane.
+
+## Un video è un file HTML con dentro il tempo
+
+[HyperFrames](https://github.com/heygen-com/hyperframes) è un framework
+Apache-2.0 di HeyGen che rende MP4 partendo da HTML. Non "esporta in HTML" e non
+usa HTML come formato di template: la composizione **è** un file `.html` che
+apri nel browser e vedi già muoversi, senza build step e senza bundler.
+
+Il contratto sta in due posti. Gli attributi `data-*` dicono quando le cose
+stanno sullo schermo, una timeline GSAP in pausa dice come si muovono.
+
+```html title="index.html"
+<div
+  id="stage"
+  data-composition-id="feature"
+  data-start="0"
+  data-width="1920"
+  data-height="1080"
+  data-duration="4"
+  data-fps="30"
+>
+  <div
+    id="card"
+    class="clip"
+    data-start="0"
+    data-duration="4"
+    data-track-index="0"
+  >
+    <h1 id="title">Filtri salvati</h1>
+    <p id="sub">Da oggi in produzione</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<script>
+  const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo(
+    "#title",
+    { y: 40, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.6 },
+    0
+  );
+  tl.fromTo(
+    "#sub",
+    { y: 20, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.5 },
+    0.25
+  );
+  tl.to("#card", { opacity: 0, duration: 0.4 }, 3.6);
+
+  window.__timelines["feature"] = tl;
+</script>
+```
+
+Tre cose lo fanno rendere: ogni slot visibile porta `class="clip"` con
+`data-start` e `data-duration`, la timeline nasce in pausa, e viene registrata
+su `window.__timelines` con lo stesso id del root. Tutto il resto è CSS normale,
+quindi il foglio di stile che il tuo prodotto ha già funziona qui dentro senza
+traduzioni.
+
+Poi c'è la cosa che cambia davvero il modello. **Il renderer non guarda
+l'orologio.** Non fa partire l'animazione e la filma: la tiene ferma, la porta
+all'istante che gli serve, cattura il fotogramma, avanza. Per questo lo stesso
+file rende lo stesso MP4 oggi e fra sei mesi, e per questo GSAP, Lottie e le Web
+Animations si comportano tutte allo stesso modo: nessuna di loro sta decidendo
+il tempo.
+
+Il prezzo di questo modello è una regola da sapere prima, non dopo: dentro una
+composizione niente `Date.now()`, niente `Math.random()` senza seme, niente loop
+infiniti. Un `repeat: -1` non è un errore di sintassi, è un fotogramma che non
+sai riprodurre.
+
+<Callout type="warning">
+  Registri la timeline con un id diverso da quello del root e non ottieni un
+  errore. Ottieni un video che parte, dura il tempo giusto e non si muove. È il
+  primo modo in cui ci si perde mezz'ora.
+</Callout>
+
+## Cosa succede davvero quando lo lanci
+
+```bash
+npx skills add heygen-com/hyperframes   # insegna il framework al tuo agent
+npx hyperframes init video-feature
+cd video-feature
+npx hyperframes preview                 # browser, con live reload
+npx hyperframes check                   # lint, layout, motion, contrasto
+npx hyperframes render                  # MP4
+```
+
+È la stessa forma di
+[Archify, la skill che uso per i diagrammi di architettura](/blog/archify-diagramma-architettura):
+un comando, e da quel momento l'agent sa fare una cosa che prima non sapeva
+fare.
+
+Quello che non mi aspettavo è che non parta a scrivere. Fa domande, e sono
+quelle giuste: che video è, per chi, quanto lungo, in che formato, cosa deve
+restare in testa a chi guarda. Poi chiude l'intervista scrivendo un `BRIEF.md`,
+e da quel momento quello è l'unico documento che il resto della pipeline legge.
+Se il video esce sbagliato hai un file da correggere, non una conversazione da
+rifare da capo.
+
+Da lì sceglie una strada in base a cosa gli hai dato: un URL di prodotto, una
+pull request, un articolo, una traccia audio, del girato con una faccia dentro.
+Sono percorsi diversi con regole diverse, non lo stesso generatore con un prompt
+cambiato.
+
+Ma la parte che ha cambiato il risultato, per me, è un'altra. **Se lo installi
+dentro il progetto invece che in una cartella a parte, il video eredita il
+progetto**: i design token che hai in `globals.css`, i componenti, il logo, gli
+screenshot che stanno già in `public/`. Non glieli spieghi, li trova. La
+differenza fra un video che sembra uscito da un generatore e un video che sembra
+il tuo prodotto sta quasi tutta lì.
+
+`npx hyperframes check` è il momento in cui capisci che è un progetto e non un
+artefatto: passa lint, layout, motion e contrasto, e ti dice di no prima che tu
+abbia aspettato tre minuti di rendering per scoprirlo.
+
+## Se il primo taglio lo fa un tool di design
+
+C'è un pezzo che un agent che scrive codice fa peggio di uno strumento di
+design: decidere che faccia ha il video. Palette, tipografia, gerarchia, cosa
+dice ogni scena.
+
+Il repo di HyperFrames ha una guida che insegna a
+[Claude Design](https://hyperframes.heygen.com/guides/claude-design) a produrre
+direttamente una composizione valida invece del suo formato video di default. Da
+lì escono due strade, e non sono intercambiabili:
+
+- **Download-ZIP**: scarichi un progetto HyperFrames vero, lo apri con l'agent
+  che usi già, e la rifinitura la fai in locale. Le ease, la durata delle scene,
+  il ritmo. Poi `npx hyperframes render` sulla tua macchina.
+- **Send to HyperFrames**: un solo file HTML autosufficiente, con font e
+  immagini inline in base64, che viene importato in un progetto ospitato e reso
+  in cloud. Qui un percorso relativo verso una cartella `fonts/` semplicemente
+  non arriva dall'altra parte.
+
+Se non vuoi dipendere da un prodotto chiuso per il primo taglio,
+[Open Design](https://github.com/nexu-io/open-design) fa la stessa cosa in
+Apache-2.0, in locale, con la tua API key al posto di un abbonamento. E non è un
+aggancio arrangiato da terzi: è il repo di HyperFrames stesso a pubblicare la
+`SKILL.md` da mettere nel checkout di Open Design.
+
+<Callout type="info">
+  Sul percorso in cloud l'import è gratis e le passate di rifinitura pure. A
+  consumare è il render. In locale il render lo paghi in CPU e in ventilatore.
+</Callout>
+
+## HyperFrames o Remotion
+
+Sotto sono la stessa macchina: un Chrome headless che disegna fotogrammi e
+FFmpeg che li impacchetta. HyperFrames dice apertamente di essere ispirato a
+[Remotion](https://www.remotion.dev). La scommessa è diversa.
+
+|                            | HyperFrames                                                         | Remotion                                                     |
+| -------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Cosa scrivi                | HTML, CSS e JavaScript                                              | Componenti React e TypeScript                                |
+| Come è timato il movimento | il renderer porta la tua animazione all'istante esatto, poi cattura | il tuo codice legge il numero di fotogramma e torna i valori |
+| Materiale web che hai già  | HTML, CSS e una animazione GSAP o Lottie entrano quasi come sono    | si riscrive in componenti                                    |
+| Licenza                    | Apache-2.0                                                          | licenza propria, gratis fino a tre dipendenti                |
+
+Detto onestamente, perché se stai scegliendo oggi è la cosa che conta di più:
+**Remotion è più maturo**. Più template, più tutorial, più domande già risposte,
+molta più storia in produzione, e un Remotion Lambda rodato da anni contro un
+percorso di rendering distribuito molto più giovane. Se il tuo team scrive già
+React e ha il design system in componenti, Remotion ti dà quei componenti, le
+tue librerie di grafici e input di composizione tipizzati.
+
+HyperFrames conviene quando il video deve essere scritto da un agent, quando
+parti da materiale web che esiste già, o quando la licenza è un problema
+aziendale. Nella mia esperienza le tre cose capitano insieme più spesso di
+quanto pensassi.
+
+Sulla migrazione, una cosa da sapere prima di provarci: va in una direzione
+sola, da Remotion verso HyperFrames. Il porting fa prima un lint del sorgente e
+si ferma sulle composizioni guidate da `useState` o da un `useEffect` con
+dipendenze, perché una macchina a stati React non è un target deterministico.
+Quello che traduce lo grada: rende l'originale con Remotion, rende la
+traduzione, e confronta i due con un diff SSIM. Una traduzione che sembra giusta
+ma sta qualche centesimo sotto la soglia è sbagliata, e te lo dice invece di
+lasciartelo scoprire in pubblicazione.
+
+## Quando lo riapro
+
+Alla prossima feature che merita un video invece di uno screenshot. Al changelog
+della PR grossa, quella che nessuno leggerà mai riga per riga. Al grafico da
+mettere nel report di fine mese, che in un MP4 di dodici secondi si guarda e in
+una tabella no.
+
+Il file resta nel repository accanto al codice che racconta. Quando la feature
+cambia, il video si aggiorna con un diff invece che con una mail a qualcuno.

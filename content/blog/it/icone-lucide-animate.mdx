@@ -1,0 +1,234 @@
+---
+title: "Icone Lucide animate: quanto costa Animate UI"
+subtitle:
+  "Un hover che risponde: la differenza fra un sito corretto e un sito che
+  trattiene"
+description:
+  "L'ho installata in un progetto vero: quanto pesa la prima icona, quali props
+  servono davvero e il punto in cui reducedMotion non ti copre."
+publishedAt: 2026-04-21
+translationKey: animate-ui-icons
+tags: [react]
+cover: /images/blog/animate-ui-icons/cover.svg
+coverAlt:
+  "Una griglia di icone Lucide blu e spente che sfuma verso i bordi, e al centro
+  una tessera di vetro luminosa con dentro una freccia bianca che lascia una
+  scia di movimento"
+takeaways:
+  - "La prima icona costa 4 file e 930 righe di codice copiato in casa; dalla
+    seconda in poi sono meno di cento righe e nessuna dipendenza npm nuova."
+  - 'MotionConfig reducedMotion="user" spegne solo width, height, top, left,
+    right, bottom e le transform: le animazioni su pathLength e su d continuano
+    a girare.'
+  - "Sono 260 icone su un catalogo Lucide che ne esporta più di 1900: controlla
+    che ci sia la tua prima di progettare l'interazione."
+  - "La size di default è 28, non 24 come in lucide-react: se sostituisci
+    un'icona in un layout esistente, te ne accorgi dall'allineamento."
+faq:
+  - q: "Devo installare un pacchetto npm?"
+    a:
+      "No. La CLI di shadcn copia i file sorgente dentro il tuo progetto.
+      L'unica dipendenza reale è motion, e se stai già animando qualcosa con
+      Motion ce l'hai già nel package.json."
+  - q: "Convivono con lucide-react?"
+    a:
+      "Sì, sono cose separate. Le icone animate sono componenti tuoi sotto
+      components/animate-ui/icons, lucide-react resta dov'è. Le sostituisci una
+      alla volta, solo dove l'animazione serve davvero."
+  - q: "Rispettano prefers-reduced-motion?"
+    a:
+      'In parte. Con MotionConfig reducedMotion="user" Motion salta le
+      animazioni di transform e di posizione, quindi le icone che ruotano o si
+      spostano si fermano. Le animazioni che morfano il tracciato SVG, cioè
+      pathLength e d, non sono transform e continuano a girare: quelle le devi
+      spegnere tu con useReducedMotion.'
+---
+
+## La pagina è finita e sembra spenta
+
+Il momento è sempre lo stesso. La landing è pronta, il Lighthouse è verde, il
+contenuto dice quello che deve dire. La apri, la guardi, e non succede niente.
+
+Le icone ci sono già. In questo sito `lucide-react` c'è dalla prima riga di
+codice, e fa esattamente il suo lavoro: disegna una freccia accanto a una CTA,
+una busta accanto al form, un chevron accanto a un accordion. Sono ferme. Vanno
+benissimo, e non trattengono nessuno.
+
+Quando qualcuno arriva su una pagina di preventivo e ha quindici secondi di
+attenzione, la differenza fra restare e chiudere la scheda non la fa il
+contenuto: quello lo legge dopo, se resta. La fa il fatto che la pagina
+**risponda**. Una freccia che si sposta di un quarto della sua larghezza quando
+ci passi sopra costa nulla e comunica una cosa sola, che dall'altra parte c'è
+qualcuno che ci ha messo attenzione.
+
+[Animate UI](https://animate-ui.com/docs/icons) parte esattamente da lì: ha
+preso le icone di [Lucide](https://lucide.dev) e le ha rifatte con
+[Motion](https://motion.dev). Stesso tracciato, stessa griglia da 24, stesso
+`stroke="currentColor"`. In più, un'animazione.
+
+## Cosa ho digitato e cosa è arrivato
+
+L'ho installata in questo repository, per vedere il costo reale invece di
+leggerlo nella documentazione.
+
+```bash
+npx shadcn@latest add @animate-ui/icons-arrow-right
+```
+
+```text
+✔ Created 4 files:
+  - src/hooks/use-is-in-view.tsx
+  - src/components/animate-ui/primitives/animate/slot.tsx
+  - src/components/animate-ui/icons/icon.tsx
+  - src/components/animate-ui/icons/arrow-right.tsx
+```
+
+Quattro file, **930 righe**, e zero righe di differenza nel `package.json`.
+L'unica dipendenza dichiarata è `motion`, che qui c'era già alla versione
+12.26.1 perché il sito anima altre cose. Se stai partendo da zero è un pacchetto
+in più, ma è quello, non una libreria di icone.
+
+Delle 930 righe, 655 sono il wrapper condiviso `icon.tsx`: il contesto, i
+trigger, la logica di loop. Si paga una volta. La seconda icona è questa:
+
+```bash
+npx shadcn@latest add @animate-ui/icons-bell
+```
+
+```text
+✔ Created 1 file:
+ℹ Skipped 3 files: (files might be identical, use --overwrite to overwrite)
+```
+
+Ottantasei righe. Prima di arrivarci la CLI mi ha chiesto tre volte se volevo
+sovrascrivere `index.tsx`, che sono i tre file condivisi già installati: la
+risposta giusta è no, tre volte, ed è l'unico attrito di tutta l'operazione.
+
+Due numeri da tenere a mente prima di progettarci sopra. Le icone animate sono
+**260**, mentre `lucide-react` 0.562 esporta più di 1900 moduli: il catalogo
+animato è una selezione, non la copia. E la `size` di default è **28**, non 24
+come in Lucide, quindi la sostituzione dentro un layout esistente non è
+neutrale.
+
+## Le tre leve che uso davvero
+
+I props comuni sono tredici, fra trigger, timing e persistenza. In pratica ne
+tocco tre.
+
+Il primo è `animateOnHover`, e il modo ovvio di usarlo è anche quello sbagliato:
+messo sull'icona, l'animazione parte quando il puntatore entra nell'icona, che è
+un bersaglio da venti pixel dentro un bottone da duecento. Quello che vuoi è che
+parta sul bottone intero. Per questo esiste il wrapper `AnimateIcon` con
+`asChild`, che non aggiunge un elemento ma passa i gestori al figlio.
+
+```tsx title="components/cta.tsx"
+import { AnimateIcon } from "@/components/animate-ui/icons/icon";
+import { ArrowRight } from "@/components/animate-ui/icons/arrow-right";
+
+export function Cta() {
+  return (
+    <AnimateIcon animateOnHover asChild>
+      <a href="#contact" className="inline-flex items-center gap-2">
+        Parliamone
+        <ArrowRight animation="pointing" size={20} />
+      </a>
+    </AnimateIcon>
+  );
+}
+```
+
+Il secondo è `animation`. Ogni icona ne dichiara almeno tre, e `arrow-right` ne
+ha cinque: la `default` sposta il gruppo del 25% sull'asse x, `pointing` allunga
+la punta accorciando l'asta, `out` la fa uscire da un lato e rientrare
+dall'altro. Su una CTA `pointing` è più educata, perché il baricentro non si
+sposta e il testo accanto non sembra scappare.
+
+Il terzo è `completeOnStop`, e serve solo con `animateOnTap`. Senza, al rilascio
+del dito l'animazione torna indietro a metà strada e sembra un glitch.
+
+Gli altri dieci props esistono e sono documentati bene. Non li ho usati perché
+un'icona che si anima al primo scroll in viewport, con un delay e un loop
+temporizzato, non è più un dettaglio: è una cosa che chiede attenzione, e in una
+pagina che deve far leggere del testo l'attenzione la vuoi altrove.
+
+## Il punto in cui `reducedMotion` non ti copre
+
+La pagina Accessibility di Animate UI dice di avvolgere l'app in
+`<MotionConfig reducedMotion="user">` e che così i componenti rispetteranno la
+preferenza dell'utente. È il consiglio giusto, ma per le icone è vero solo a
+metà, e la ragione sta nel sorgente di Motion.
+
+```js title="motion-dom/render/utils/keys-position.mjs"
+const positionalKeys = new Set([
+  "width",
+  "height",
+  "top",
+  "left",
+  "right",
+  "bottom",
+  ...transformPropOrder,
+]);
+```
+
+Quando `shouldReduceMotion` è attivo, Motion sostituisce la transizione con
+`{ type: false }` **solo per le chiavi che stanno in questo Set**. Tutto il
+resto anima come prima.
+
+Le conseguenze si vedono icona per icona. La `bell` di default anima `rotate` e
+`x`, che sono transform: con la preferenza attiva si ferma, correttamente. Ma
+`arrow-right` con `animation="pointing"` non anima una transform, morfa
+l'attributo `d` da `M5 12h14` a `M5 12h10`. E le due animazioni generiche che
+ogni icona eredita, `path` e `path-loop`, animano `pathLength`. Nessuna delle
+due è nel Set, quindi continuano a muoversi anche a chi ha chiesto di non farle
+muovere.
+
+<Callout type="warning">
+  Con `loop` non è una sfumatura: un'animazione che parte da sola, dura più di
+  cinque secondi e non si può fermare viola il criterio WCAG 2.2.2. Se metti in
+  loop un'icona che morfa il tracciato, `MotionConfig` non ti sta coprendo.
+</Callout>
+
+La rete è una riga.
+
+```tsx title="components/notifications.tsx"
+"use client";
+
+import { useReducedMotion } from "motion/react";
+import { Bell } from "@/components/animate-ui/icons/bell";
+
+export function Notifications() {
+  const reduceMotion = useReducedMotion();
+
+  return <Bell animateOnHover loop={!reduceMotion} />;
+}
+```
+
+## Componenti e primitivi, e perché mi sono fermato alle icone
+
+Animate UI non è solo icone. La distribuzione ha anche dei **primitivi**
+animati, fra cui port di Radix, Base UI e Headless UI, e dei **componenti** con
+uno stile di base ispirato a shadcn/ui costruiti sopra quei primitivi. Sono
+fatti bene e vale la pena guardarli.
+
+Non li ho provati qui, per un motivo che non ha a che fare con la qualità.
+Adottare un accordion o un dialog di un'altra distribuzione significa avere due
+strati di componenti che risolvono lo stesso problema, con due convenzioni di
+varianti e due modi di gestire il focus, e prima o poi qualcuno importa quello
+sbagliato. È una decisione di architettura, e va presa in quel modo.
+
+Un'icona no. Un'icona è una foglia: non ha stato, non ha figli, non decide
+niente per nessun altro. La provi su una CTA, se non ti piace cancelli un file e
+il progetto non se ne accorge. È la ragione per cui, di tutta la libreria, le
+icone sono la parte che si prova davvero. Quando invece l'animazione è il
+prodotto e non il dettaglio, il problema è un altro, e
+[si risolve altrove](/blog/hyperframes-video-in-html).
+
+Una cosa da sapere prima di partire: le icone sono dichiarate **in beta** nella
+documentazione, e i file sono copiati dentro il tuo repository. Vuol dire che un
+fix a monte non ti arriva da solo, e che l'aggiornamento è un `add` di nuovo,
+file per file. Su tre icone è niente. Su trenta è un lavoro.
+
+La prossima volta che apri una nav, un bottone di CTA o una card con la freccia
+in fondo, quella è l'icona da cui partire. Una sola, con `animateOnHover` sul
+bottone intero. Se dopo un giorno che la guardi non ti dà fastidio, ne aggiungi
+una seconda.

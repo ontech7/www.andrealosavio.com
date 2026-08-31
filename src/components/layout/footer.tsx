@@ -1,6 +1,7 @@
 import { FOOTER_LINKS, SOCIAL_LINKS } from "@/constants/navigation";
 import { Link } from "@/libs/i18n/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
+import { FooterBlogLinks } from "./footer-blog-links";
 import { FooterCatCta } from "./footer-cat-cta";
 
 export async function Footer() {
@@ -47,7 +48,7 @@ export async function Footer() {
               aria-label={t("common.accessibility.footerNavigation")}
               className="lg:col-span-6"
             >
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
                 <div>
                   <h4 className="text-foreground mb-3 text-sm font-semibold">
                     {t(`common.${FOOTER_LINKS.general.titleKey}`)}
@@ -79,20 +80,9 @@ export async function Footer() {
 
                 <div>
                   <h4 className="text-foreground mb-3 text-sm font-semibold">
-                    {t(`common.${FOOTER_LINKS.projects.titleKey}`)}
+                    {t(`common.${FOOTER_LINKS.blog.titleKey}`)}
                   </h4>
-                  <ul className="space-y-2 p-0">
-                    {FOOTER_LINKS.projects.links.map((link) => (
-                      <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-                        >
-                          {t(`common.${link.labelKey}`)}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                  <FooterBlogLinks />
                 </div>
               </div>
             </nav>

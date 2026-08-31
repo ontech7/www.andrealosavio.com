@@ -1,0 +1,5 @@
+# Vendored agent skill docs and superpowers artifacts: formatted by their
+# authors, and `proseWrap: always` rewrites them wholesale on every run.
+.claude/
+docs/superpowers/
+.superpowers/

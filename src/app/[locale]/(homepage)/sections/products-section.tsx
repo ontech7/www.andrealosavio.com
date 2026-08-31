@@ -9,6 +9,9 @@ import { ArrowRightIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 
+const sectionLinkClassName =
+  "text-foreground hover:text-secondary group inline-flex items-center gap-2 text-sm font-medium underline decoration-dotted underline-offset-4 transition-colors";
+
 interface ProductsSectionProps {
   id: string;
   className?: string;
@@ -68,19 +71,27 @@ export function ProductsSection({ id, className }: ProductsSectionProps) {
       </motion.div>
 
       <motion.div
-        className="mt-8 text-center"
+        className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3"
         variants={fadeInUpAnim}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <Link
-          href="/projects"
-          className="text-foreground hover:text-secondary inline-flex items-center gap-2 text-sm font-medium underline decoration-dotted underline-offset-4 transition-colors"
-        >
+        <Link href="/projects" className={sectionLinkClassName}>
           {t("homepage.products.cta")}
-          <ArrowRightIcon className="size-3.5" aria-hidden="true" />
+          <ArrowRightIcon
+            className="size-3.5 transition-transform group-hover:translate-x-1"
+            aria-hidden="true"
+          />
+        </Link>
+
+        <Link href="/blog" className={sectionLinkClassName}>
+          {t("homepage.products.blogCta")}
+          <ArrowRightIcon
+            className="size-3.5 transition-transform group-hover:translate-x-1"
+            aria-hidden="true"
+          />
         </Link>
       </motion.div>
     </section>
