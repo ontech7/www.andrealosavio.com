@@ -64,6 +64,14 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         );
       }
 
+      if (href.startsWith("#")) {
+        return (
+          <a href={href} className="text-secondary hover:underline" {...props}>
+            {children}
+          </a>
+        );
+      }
+
       return (
         <a
           href={href}

@@ -278,3 +278,13 @@ span[data-highlighted-chars] {
   content: " #";
   @apply text-muted-foreground;
 }
+
+.prose-article {
+  @apply mx-auto max-w-[42.5rem];
+}
+
+.prose-article > figure[data-rehype-pretty-code-figure],
+.prose-article > .group,
+.prose-article > figure {
+  @apply lg:-mx-14 lg:max-w-[calc(100%+7rem)];
+}
