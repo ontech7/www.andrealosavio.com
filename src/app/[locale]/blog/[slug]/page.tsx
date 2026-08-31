@@ -163,11 +163,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
 
         <article className="mx-auto max-w-5xl px-4 pt-24 pb-16 sm:px-6 lg:px-8">
           <div className="xl:grid xl:grid-cols-[15rem_minmax(0,1fr)] xl:gap-10">
-            <div className="hidden xl:block">
-              <ArticleToc entries={article.toc} className="sticky top-24" />
-            </div>
-
-            <div>
+            <div className="xl:col-start-2">
               <div className="prose-article">
                 <Link
                   href="/blog"
@@ -222,6 +218,10 @@ export default async function BlogArticlePage({ params }: PageProps) {
                 locale={locale}
                 className="mt-12"
               />
+            </div>
+
+            <div className="hidden xl:col-start-1 xl:row-start-1 xl:block">
+              <ArticleToc entries={article.toc} className="sticky top-24" />
             </div>
           </div>
         </article>
