@@ -84,7 +84,11 @@ export default async function BlogPage({ params }: PageProps) {
     url: pageUrl,
     name: t("blog.metadata.title"),
     description: t("blog.metadata.description"),
-    authorId: `${siteUrl}#person`,
+    author: {
+      id: `${siteUrl}#person`,
+      name: "Andrea Losavio",
+      url: siteUrl,
+    },
     inLanguage: locale,
     posts: articles.map((article) => ({
       url: `${siteUrl}/${locale}/blog/${article.slug}`,

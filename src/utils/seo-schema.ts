@@ -353,6 +353,16 @@ export function generateProfilePageSchema({
   };
 }
 
+interface SchemaEntityReference {
+  id: string;
+  name: string;
+  url: string;
+}
+
+function toIsoDateTime(date: string): string {
+  return date.includes("T") ? date : `${date}T00:00:00Z`;
+}
+
 interface GenerateBlogPostingSchemaProps {
   url: string;
   headline: string;
@@ -360,17 +370,20 @@ interface GenerateBlogPostingSchemaProps {
   datePublished: string;
   dateModified?: string;
   image: string;
-  authorId: string;
-  publisherId: string;
+  author: SchemaEntityReference;
+  publisher: SchemaEntityReference;
   inLanguage: string;
   keywords: readonly string[];
   wordCount: number;
 }
 
 /**
- * Schema di un singolo articolo. `authorId` e `publisherId` referenziano le
- * entita Person e Organization dichiarate in homepage, cosi il grafo resta
- * connesso invece di duplicarle.
+ * Schema di un singolo articolo.
+ *
+ * `author` e `publisher` sono inlineati con nome e url, non ridotti a un
+ * `@id` verso la homepage: ogni pagina viene valutata da sola dai crawler, e
+ * un riferimento che punta a un nodo dichiarato altrove risulta privo di
+ * `name` e `url`. L'`@id` resta, cosi le entita restano le stesse.
  */
 export function generateBlogPostingSchema({
   url,
@@ -379,8 +392,8 @@ export function generateBlogPostingSchema({
   datePublished,
   dateModified,
   image,
-  authorId,
-  publisherId,
+  author,
+  publisher,
   inLanguage,
   keywords,
   wordCount,
@@ -392,11 +405,21 @@ export function generateBlogPostingSchema({
     url,
     headline,
     description,
-    datePublished,
-    dateModified: dateModified ?? datePublished,
+    datePublished: toIsoDateTime(datePublished),
+    dateModified: toIsoDateTime(dateModified ?? datePublished),
     image,
-    author: { "@id": authorId },
-    publisher: { "@id": publisherId },
+    author: {
+      "@type": "Person",
+      "@id": author.id,
+      name: author.name,
+      url: author.url,
+    },
+    publisher: {
+      "@type": "Organization",
+      "@id": publisher.id,
+      name: publisher.name,
+      url: publisher.url,
+    },
     inLanguage,
     ...(keywords.length > 0 && { keywords: keywords.join(", ") }),
     wordCount,
@@ -426,19 +449,20 @@ interface GenerateBlogSchemaProps {
   url: string;
   name: string;
   description: string;
-  authorId: string;
+  author: SchemaEntityReference;
   inLanguage: string;
   posts: readonly { url: string; headline: string; datePublished: string }[];
 }
 
 /**
  * Schema dell'indice del blog, con i post elencati come BlogPosting ridotti.
+ * `author` e inlineato per la stessa ragione di `generateBlogPostingSchema`.
  */
 export function generateBlogSchema({
   url,
   name,
   description,
-  authorId,
+  author,
   inLanguage,
   posts,
 }: GenerateBlogSchemaProps): Blog {
@@ -449,13 +473,18 @@ export function generateBlogSchema({
     name,
     description,
     inLanguage,
-    author: { "@id": authorId },
+    author: {
+      "@type": "Person",
+      "@id": author.id,
+      name: author.name,
+      url: author.url,
+    },
     blogPost: posts.map((post) => ({
       "@type": "BlogPosting" as const,
       "@id": `${post.url}#article`,
       url: post.url,
       headline: post.headline,
-      datePublished: post.datePublished,
+      datePublished: toIsoDateTime(post.datePublished),
     })),
   };
 }

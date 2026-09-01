@@ -146,8 +146,16 @@ export default async function BlogArticlePage({ params }: PageProps) {
       frontmatter.cover && !frontmatter.cover.endsWith(".svg")
         ? `${siteUrl}${frontmatter.cover}`
         : `${url}/opengraph-image`,
-    authorId: `${siteUrl}#person`,
-    publisherId: `${siteUrl}#organization`,
+    author: {
+      id: `${siteUrl}#person`,
+      name: "Andrea Losavio",
+      url: siteUrl,
+    },
+    publisher: {
+      id: `${siteUrl}#organization`,
+      name: "Andrea Losavio",
+      url: siteUrl,
+    },
     inLanguage: locale,
     keywords: frontmatter.tags,
     wordCount: article.wordCount,

@@ -334,9 +334,16 @@ addition to the `BreadcrumbList` every non-homepage page already emits.
 - Wired in `src/app/[locale]/blog/[slug]/page.tsx`: every article emits
   `BreadcrumbList` + `BlogPosting`; `FAQPage` is added only when the article's
   frontmatter has a `faq` array.
-- `BlogPosting` references the homepage's `Person` and `Organization` entities
-  by `@id` (`authorId`, `publisherId`) instead of duplicating them, so the
-  `@graph` stays connected.
+- `BlogPosting` inlines `author` and `publisher` with `@id`, `name` and `url`.
+  Referencing the homepage entities by bare `@id` does **not** work: crawlers
+  evaluate each page's structured data on its own, so a node declared only on
+  another page resolves to nothing and the Rich Results Test reports
+  "Missing field name" and "Missing field url". The `@id` is kept so the two
+  pages still describe the same entity.
+- Dates in JSON-LD go through `toIsoDateTime` in `src/utils/seo-schema.ts`.
+  Frontmatter stores `YYYY-MM-DD`, but schema.org wants full ISO 8601 with a
+  timezone, otherwise the Rich Results Test reports "Invalid datePublished
+  value" and "Missing timezone".
 
 **How to test**:
 
