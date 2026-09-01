@@ -1,7 +1,7 @@
 ---
-title: "Vado più lento di proposito"
+title: "Shippare veloce è la parte facile"
 subtitle:
-  "Perché l'illusione di shippare 10 PR al giorno sta distruggendo la qualità
+  "Perché l'illusione di chiudere 10 PR al giorno sta distruggendo la qualità
   del codice"
 description:
   "Analisi lunga, guardrail scritti a mano e subagent che tengono l'ordine: il
@@ -40,9 +40,9 @@ faq:
       scrivi, stai pagando contesto per un riassunto."
   - q: "Con questo metodo si scrive ancora codice a mano?"
     a:
-      "Quasi mai. Nei miei progetti il 95% delle righe le scrive l'agente. Quello
-      che resta mio è decidere cosa va fatto, dove va messo, e leggere il diff
-      come se lo avesse aperto qualcun altro."
+      "Quasi mai. Nei miei progetti il 95% delle righe le scrive l'agente.
+      Quello che resta mio è decidere cosa va fatto, dove va messo, e leggere il
+      diff come se lo avesse aperto qualcun altro."
 ---
 
 ## Come va va
@@ -59,8 +59,8 @@ assunto: **se compila e i test passano, è fatto.**
 
 E funziona. È questo che rende il discorso scomodo, perché funziona abbastanza
 spesso da sembrare la scelta razionale. Io faccio il contrario: shippo molto
-meno, ci metto molte più ore di agente, e brucio molti più token. Non per
-gusto del rito.
+meno, ci metto molte più ore di agente, e brucio molti più token. Non per gusto
+del rito.
 
 ## I test che l'agente scrive a se stesso
 
@@ -123,8 +123,8 @@ Conta cosa ci metti dentro. Questo è un estratto vero da quello di questo sito:
 - `src/mdx-components.tsx` must stay at exactly that path. Next only looks in
   the project root or the `src` root.
 - MDX plugins in `next.config.ts` must be passed as strings, never function
-  references. Turbopack ships the config to a Rust engine that cannot
-  serialize functions.
+  references. Turbopack ships the config to a Rust engine that cannot serialize
+  functions.
 ```
 
 Nessuna di queste tre è deducibile leggendo il codice. Un agente che scrive
@@ -164,11 +164,11 @@ Prima di aprirla, l'agente fa un giro di self-review e uno di tidying. Poi la
 apro io e la leggo come se l'avesse scritta un altro, perché a tutti gli effetti
 è così.
 
-Cerco sempre le stesse cose: astrazioni comparse per un solo caso d'uso,
-opzioni che nessuno ha chiesto, file finiti dove non appartengono. YAGNI non è
-un principio che si spiega a un agente una volta e poi tiene: va rimesso in
-mezzo ogni volta, perché la sua tendenza naturale è coprire anche il caso che
-non esiste.
+Cerco sempre le stesse cose: astrazioni comparse per un solo caso d'uso, opzioni
+che nessuno ha chiesto, file finiti dove non appartengono. YAGNI non è un
+principio che si spiega a un agente una volta e poi tiene: va rimesso in mezzo
+ogni volta, perché la sua tendenza naturale è coprire anche il caso che non
+esiste.
 
 Per questo le skill e i subagent che tengono l'ordine non li lancio sempre a
 mano. Alcuni si attivano all'apertura della PR, alcuni li chiamo io quando il
@@ -184,8 +184,8 @@ C'è una prova sola che dice se tutto questo è servito, e non è la PR verde.
 Se domani il tuo LLM resta giù per l'intera giornata, ti fermi o continui? Il
 codice tenuto insieme con la colla si legge solo con l'agente che l'ha scritto:
 la struttura c'è, ma esiste nel suo contesto, non nel repository. Quello scritto
-perché lo capisca anche una persona si riprende in mano, più lentamente, e si
-va avanti.
+perché lo capisca anche una persona si riprende in mano, più lentamente, e si va
+avanti.
 
 Il cliente non aspetta te, e non aspetta nemmeno Claude Code.
 

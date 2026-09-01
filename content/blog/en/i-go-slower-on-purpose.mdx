@@ -1,7 +1,6 @@
 ---
-title: "I go slower on purpose"
-subtitle:
-  "Why the illusion of shipping 10 PRs a day is destroying code quality"
+title: "Shipping fast is the easy part"
+subtitle: "Why the illusion of merging 10 PRs a day is destroying code quality"
 description:
   "Long analysis, hand-written guardrails and subagents that hold the line: the
   slow method I use with coding agents, and what it has spared me so far."
@@ -121,8 +120,8 @@ is what goes in it. This is a real excerpt from the one on this site:
 - `src/mdx-components.tsx` must stay at exactly that path. Next only looks in
   the project root or the `src` root.
 - MDX plugins in `next.config.ts` must be passed as strings, never function
-  references. Turbopack ships the config to a Rust engine that cannot
-  serialize functions.
+  references. Turbopack ships the config to a Rust engine that cannot serialize
+  functions.
 ```
 
 None of those three can be inferred from the code. An agent that writes
