@@ -24,6 +24,11 @@ npx tsc --noEmit   # type check (run this after any TS edit)
 npx vitest run      # unit tests, alias: npm test (src/libs/blog/* pure functions;
                      # components are not unit-tested, covered by tsc + lint +
                      # build + manual checks)
+npm run indexnow   # ping IndexNow (Bing/Yandex/Seznam/Naver, NOT Google) with
+                     # the URLs whose sitemap <lastmod> is within 7 days.
+                     # Run it AFTER the deploy is live, never before: it refuses
+                     # to submit URLs that are not yet fetchable.
+                     # --all | --since=N | --dry-run | <url>...
 ```
 
 ## Must-read docs (in this order)
@@ -49,6 +54,13 @@ npx vitest run      # unit tests, alias: npm test (src/libs/blog/* pure function
   there.
 - `src/proxy.ts` is the Next.js 16 equivalent of `middleware.ts`. Do not add a
   `middleware.ts` file.
+- **A file that must answer at the domain root needs two changes, not one**:
+  drop it in `public/` **and** add it to the `matcher` exclusions in
+  `src/proxy.ts`. Otherwise `next-intl` redirects it to `/it/<file>` and the
+  caller gets a 307 instead of the file. This is why `favicon.*`, `robots.txt`,
+  `sitemap.xml`, `llms.txt`, `BingSiteAuth.xml` and root-level `*.txt` (the
+  IndexNow key) are all listed there. Search-engine ownership proofs fail
+  silently when this is missed.
 - `src/app/llms.txt/route.ts` generates the LLM briefing dynamically (it lists
   published articles). There is no `public/llms.txt` anymore — do not add one
   back as a static file.

@@ -16,9 +16,10 @@ export const config: ProxyConfig = {
      * - images/videos/documents/icons (assets in public folder)
      * - sitemap.xml, robots.txt, llms.txt (SEO / LLM files)
      * - BingSiteAuth.xml (Bing Webmaster Tools site ownership proof)
+     * - *.txt at the root (IndexNow key file, named after the key itself)
      * - .well-known (devtools)
      * - manifest.json, robots.txt (metadata files)
      */
-    "/((?!api|trcp|_next/static|_next|_vercel|icons|videos|images|documents|.well-known|favicon.ico|favicon.png|favicon.svg|apple-touch-icon.png|robots.txt|sitemap.xml|llms.txt|manifest.json|BingSiteAuth.xml).*)",
+    "/((?!api|trcp|_next/static|_next|_vercel|icons|videos|images|documents|.well-known|favicon.ico|favicon.png|favicon.svg|apple-touch-icon.png|robots.txt|sitemap.xml|llms.txt|manifest.json|BingSiteAuth.xml|[^/]+\\.txt$).*)",
   ],
 };
