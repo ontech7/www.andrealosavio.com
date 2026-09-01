@@ -5,7 +5,7 @@ subtitle:
   licenza MIT"
 description:
   "L'ho collegato a Claude Code via Ollama Cloud e gli ho fatto fare refactor
-  veri: dove regge quanto Opus 4.7, dove si perde, e quanto costa davvero."
+  veri: dove regge quanto Opus 4.8, dove si perde, e quanto costa davvero."
 publishedAt: 2026-07-31
 translationKey: deepseek-v4-flash
 tags: [ai, devops]
@@ -15,7 +15,7 @@ coverAlt:
   isometrico luminoso, e sotto la riga $0.14 in, $0.28 out"
 takeaways:
   - "0.14 dollari per milione in input e 0.28 in output contro i 5 e i 25 di
-    Opus 4.7: trentacinque volte meno in input, ottantanove in output."
+    Opus 4.8: trentacinque volte meno in input, ottantanove in output."
   - "Il cache hit a 0.0028 è dove si vede davvero, perché un agent rimanda lo
     stesso contesto a ogni giro."
   - "Sui refactor da dieci file e sulla costruzione di una feature intera ha
@@ -23,12 +23,21 @@ takeaways:
     poco."
   - "Si perde sui task lunghi: intorno alla ventesima tool call dimentica un
     vincolo dato all'inizio, e nel diff lo vedi solo se guardi."
+  - "La tabella di DeepSeek ha la stessa forma: 2.3 punti sotto Opus su Terminal
+    Bench 2.1, 15.5 sotto su NL2Repo, dove il repository te lo costruisci da una
+    frase."
 faq:
   - q: "Serve una GPU per usarlo?"
     a:
       "No, se lo chiami via API o via Ollama Cloud: gira sui loro server. I pesi
       sono MIT e scaricabili, ma sono 167 GB per 284 miliardi di parametri,
       quindi in casa serve hardware serio o una quantizzazione."
+  - q: "Se sui benchmark è a due punti da Opus, perché non lo usi sempre?"
+    a:
+      "Perché i due punti sono su Terminal Bench 2.1, dove i task sono corti e
+      il target è definito. Su NL2Repo, che parte da una frase e chiede un
+      repository intero, sono quindici e mezzo. Il lavoro che do all'agent
+      somiglia al secondo caso più spesso di quanto vorrei."
   - q: "Che senso hanno i pesi aperti se poi lo uso via API?"
     a:
       "Il senso è che l'API non è l'unica strada. Se domani il prezzo cambia, o
@@ -46,7 +55,7 @@ faq:
 
 Una sessione di lavoro con l'agent, di quelle in cui gli fai leggere mezzo
 repository e poi riscrivere venti file, mi consuma sui due milioni di token in
-input e trecentomila in output. Con Claude Opus 4.7, a 5 dollari per milione in
+input e trecentomila in output. Con Claude Opus 4.8, a 5 dollari per milione in
 input e 25 in output, sono 17 dollari e 50. Per una sessione. Falle tre al
 giorno e il modello costa più dell'infrastruttura su cui gira quello che scrive.
 
@@ -68,18 +77,15 @@ La riga che conta è il listino.
 | Per 1M token | Input | Output | Input da cache |
 | ------------ | ----- | ------ | -------------- |
 | V4-Flash     | $0.14 | $0.28  | $0.0028        |
-| Opus 4.7     | $5.00 | $25.00 | n/d            |
+| Opus 4.8     | $5.00 | $25.00 | n/d            |
 
 Trentacinque volte meno in input, ottantanove in output. E lo 0.0028 non è uno
 sconto, è un altro ordine di grandezza: **1785 volte sotto il prezzo di Opus**.
 Su un agent che rimanda system prompt e cronologia a ogni tool call, quella
 colonna è quasi tutta la bolletta.
 
-Sui benchmark DeepSeek dichiara 82.7 su Terminal Bench 2.1 e 54.4 su DeepSWE,
-sopra il preview di V4-Pro su tutti e nove i benchmark agentici che pubblica.
-Non lo metto accanto al 69.4 di Opus 4.7 su Terminal-Bench 2.0, perché è
-un'altra versione del benchmark e il confronto non regge. Quello che regge è
-cosa ho visto girare.
+Un listino però non dice se il lavoro esce fatto. Per saperlo ho dovuto metterlo
+dove lavoro.
 
 ## Due variabili d'ambiente, e Claude Code parla con Ollama Cloud
 
@@ -135,7 +141,7 @@ intera: provider, componente, traduzioni nei due locale, test.
 La cosa che non mi aspettavo è che **seguisse i flussi**. Apriva i file
 nell'ordine giusto, non inventava funzioni che nel repository non esistono, e
 arrivava in fondo con qualcosa che compilava. Su questo tipo di lavoro,
-costruire e non decidere, la distanza da Opus 4.7 l'ho sentita poco. Abbastanza
+costruire e non decidere, la distanza da Opus 4.8 l'ho sentita poco. Abbastanza
 poco da non voler tornare indietro per un fattore ottantanove sul prezzo.
 
 Il rito prima di un rework grosso non è cambiato: gli faccio disegnare
@@ -159,6 +165,47 @@ che tu guardi.
   e non ci penso più.
 </Callout>
 
+## La tabella di DeepSeek ha la stessa forma
+
+Quelle tre settimane me le sono fatte senza numeri, perché non c'erano.
+Stamattina, insieme ai pesi, DeepSeek ha pubblicato i suoi. La riga che mi
+interessa non è quella in cui vince: è dove perde.
+
+<Figure
+  src="/images/blog/deepseek-v4-flash/benchmarks.webp"
+  alt="Tabella di DeepSeek con nove benchmark agentici in riga e cinque modelli in colonna: V4-Flash-0731, V4-Flash-Preview, V4-Pro-Preview, GLM-5.2 e Opus-4.8. Flash-0731 fa 82.7 su Terminal Bench 2.1 contro gli 85.0 di Opus, e 54.2 su NL2Repo contro 69.7"
+  caption="Nove benchmark agentici: i pesi di stamattina, il preview che ho usato io, V4-Pro-Preview, GLM-5.2 e Opus 4.8."
+  width={2000}
+  height={1102}
+/>
+
+Guarda la distanza da Opus riga per riga. Su Terminal Bench 2.1 sono 2.3 punti.
+Su DeepSWE 3.6. Su Agents' Last Exam mezzo punto, che è rumore. Poi arrivi a
+DSBench-Hard e sono 12.1, e a NL2Repo sono 15.5. NL2Repo è il benchmark in cui
+parti da una descrizione a parole e devi tirare fuori un repository intero:
+nessuno ti dice quali file esistono, e nessuno ti ferma quando ti allontani.
+
+Quel salto è il grafico della cosa che avevo sentito col diff aperto. **Dove il
+target è definito e i passi sono pochi, il gap è rumore. Dove il target te lo
+costruisci mentre procedi, si apre.** Non l'ho dedotto dalla tabella: l'ho
+ritrovato lì dopo averlo già pagato in ore.
+
+C'è una seconda colonna che vale la pena guardare, ed è quella che riguarda me.
+`V4-Flash-Preview` è il modello che ho usato per tre settimane, ed è un'altra
+cosa: 7.3 su DeepSWE contro i 54.4 del checkpoint di stamattina, 38.7 su
+Cybergym contro 76.7. Stessa architettura, solo il post-training rifatto, e i
+numeri non si somigliano.
+
+Quindi tutto quello che ho scritto qui sopra, i refactor che hanno tenuto e il
+vincolo dimenticato alla ventesima tool call, riguarda il peggiore dei due. I
+pesi 0731 li ho da qualche ora. Rimetterò gli stessi task nella stessa CLI, ma
+per ora non ho niente da raccontare, e preferisco dirlo che spacciare le
+impressioni del preview per queste.
+
+Nella tabella c'è anche GLM-5.2, l'altro checkpoint aperto che la gente usa
+davvero, e Flash gli sta davanti su tutte le righe. Ma quello è un confronto tra
+pesi aperti, e non è quello che finisce sulla mia fattura.
+
 ## Come ho diviso il lavoro adesso
 
 Non ho sostituito niente. Ho spostato una linea.
@@ -170,7 +217,9 @@ Non ho sostituito niente. Ho spostato una linea.
   che non ho ancora capito.
 
 Il criterio non è quanto è difficile il task. È quanti passi ha, e quanto costa
-accorgersi tardi che è andato storto.
+accorgersi tardi che è andato storto. La linea l'ho tracciata sul preview, e la
+tabella di stamattina non mi dà un motivo per spostarla oggi: i due gap grossi
+cadono ancora esattamente sui task che tengo su Opus.
 
 La prossima volta che apri una sessione per un lavoro meccanico, di quelli in
 cui sai già cosa deve venire fuori e ti serve solo che qualcuno lo digiti,

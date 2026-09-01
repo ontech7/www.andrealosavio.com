@@ -5,7 +5,7 @@ subtitle:
   weights under MIT"
 description:
   "I wired it into Claude Code through Ollama Cloud and gave it real refactors:
-  where it matches Opus 4.7, where it drops the thread, what it costs."
+  where it matches Opus 4.8, where it drops the thread, what it costs."
 publishedAt: 2026-07-31
 translationKey: deepseek-v4-flash
 tags: [ai, devops]
@@ -14,7 +14,7 @@ coverAlt:
   "The DeepSeek whale, white and front-facing, on the top face of a glowing
   isometric chip, with the line $0.14 in, $0.28 out below it"
 takeaways:
-  - "$0.14 per million in, $0.28 out, against Opus 4.7 at $5 and $25: 35x
+  - "$0.14 per million in, $0.28 out, against Opus 4.8 at $5 and $25: 35x
     cheaper on input, 89x on output."
   - "The $0.0028 cache hit is where it really shows, because an agent resends
     the same context on every turn."
@@ -22,6 +22,9 @@ takeaways:
     thread without inventing APIs. That is where the gap to Opus felt small."
   - "It drifts on long tasks: around the twentieth tool call it forgets a
     constraint you set at the start, and you only catch it in the diff."
+  - "DeepSeek's own table has the same shape: 2.3 points behind Opus on Terminal
+    Bench 2.1, 15.5 behind on NL2Repo, where the repository has to come out of a
+    single sentence."
 faq:
   - q: "Do I need a GPU to use it?"
     a:
@@ -29,6 +32,14 @@ faq:
       their hardware. The weights are MIT and downloadable, but that is 167 GB
       for 284 billion parameters, so running it yourself means serious hardware
       or a quantized build."
+  - q:
+      "If it is two points off Opus on benchmarks, why not use it for
+      everything?"
+    a:
+      "Because those two points are on Terminal Bench 2.1, where tasks are short
+      and the target is given. On NL2Repo, which starts from a sentence and
+      wants a whole repository, the gap is fifteen and a half. The work I hand
+      an agent looks like the second case more often than I would like."
   - q: "Why do open weights matter if I call it as an API anyway?"
     a:
       "Because the API stops being the only door. If the price moves, or a
@@ -46,7 +57,7 @@ faq:
 
 One agent session, the kind where it reads half a repository and then rewrites
 twenty files, burns roughly two million input tokens and three hundred thousand
-output. On Claude Opus 4.7, at $5 per million in and $25 out, that is $17.50.
+output. On Claude Opus 4.8, at $5 per million in and $25 out, that is $17.50.
 For one session. Run three a day and the model costs more than the
 infrastructure serving what it wrote.
 
@@ -67,18 +78,15 @@ The line that matters is the price list.
 | Per 1M tokens | Input | Output | Cached input |
 | ------------- | ----- | ------ | ------------ |
 | V4-Flash      | $0.14 | $0.28  | $0.0028      |
-| Opus 4.7      | $5.00 | $25.00 | n/a          |
+| Opus 4.8      | $5.00 | $25.00 | n/a          |
 
 35x cheaper on input, 89x on output. And $0.0028 is not a discount, it is a
 different order of magnitude: **1785x under Opus**. For an agent that resends
 the system prompt and the conversation on every tool call, that column is most
 of the bill.
 
-On benchmarks DeepSeek reports 82.7 on Terminal Bench 2.1 and 54.4 on DeepSWE,
-above the V4-Pro preview on all nine agentic benchmarks it publishes. I am not
-putting that next to Opus 4.7's 69.4 on Terminal-Bench 2.0. Different version of
-the benchmark, so the comparison does not hold. What holds is what I watched it
-do.
+A price list does not tell you whether the work comes out done, though. To find
+that out I had to put it where I work.
 
 ## Two environment variables, and Claude Code talks to Ollama Cloud
 
@@ -134,7 +142,7 @@ end: provider, component, translations in both locales, tests.
 What I did not expect is that it **followed the thread**. It opened files in a
 sensible order, did not invent functions that are not in the repository, and got
 to the end with something that compiled. On that kind of work, building rather
-than deciding, the gap to Opus 4.7 felt small. Small enough that I am not paying
+than deciding, the gap to Opus 4.8 felt small. Small enough that I am not paying
 89x to close it.
 
 The habit before a big rework did not change either: I have it draw
@@ -158,6 +166,47 @@ if you look.
   stop thinking about it.
 </Callout>
 
+## DeepSeek's own table has the same shape
+
+I ran those three weeks without numbers, because there were none. This morning,
+alongside the weights, DeepSeek published its own. The row I care about is not
+the one where it wins. It is where it loses.
+
+<Figure
+  src="/images/blog/deepseek-v4-flash/benchmarks.webp"
+  alt="DeepSeek table with nine agentic benchmarks as rows and five models as columns: V4-Flash-0731, V4-Flash-Preview, V4-Pro-Preview, GLM-5.2 and Opus-4.8. Flash-0731 scores 82.7 on Terminal Bench 2.1 against 85.0 for Opus, and 54.2 on NL2Repo against 69.7"
+  caption="Nine agentic benchmarks: this morning's weights, the preview I actually ran, V4-Pro-Preview, GLM-5.2 and Opus 4.8."
+  width={2000}
+  height={1102}
+/>
+
+Read the distance from Opus row by row. Terminal Bench 2.1 is 2.3 points.
+DeepSWE is 3.6. Agents' Last Exam is half a point, which is noise. Then
+DSBench-Hard is 12.1, and NL2Repo is 15.5. NL2Repo is the one where you start
+from a description in plain English and have to produce an entire repository:
+nothing tells you which files exist, and nothing stops you when you wander off.
+
+That jump is a chart of the thing I had felt with the diff open. **Where the
+target is given and the steps are few, the gap is noise. Where you build the
+target as you go, it opens up.** I did not infer that from the table. I found it
+there after already paying for it in hours.
+
+There is a second column worth reading, and it is the one that concerns me.
+`V4-Flash-Preview` is what I ran for three weeks, and it is a different animal:
+7.3 on DeepSWE against 54.4 for this morning's checkpoint, 38.7 on Cybergym
+against 76.7. Same architecture, post-training redone, and the numbers are not
+related.
+
+So everything above, the refactors that held and the constraint dropped at tool
+call twenty, describes the weaker of the two. I have had the 0731 weights for a
+few hours. I will put the same tasks through the same CLI, but I have nothing to
+report yet, and I would rather say so than pass the preview's impressions off as
+these.
+
+The table also carries GLM-5.2, the other open checkpoint people actually run,
+and Flash is ahead of it on every row. That is a fight between open weights,
+though, and it is not the one that shows up on my invoice.
+
 ## How the work is split now
 
 I did not replace anything. I moved a line.
@@ -169,7 +218,9 @@ I did not replace anything. I moved a line.
   do not understand yet.
 
 The rule is not how hard the task is. It is how many steps it has, and how
-expensive it is to notice late that it went wrong.
+expensive it is to notice late that it went wrong. I drew that line on the
+preview, and this morning's table gives me no reason to move it today: the two
+big gaps still land exactly on the work I keep on Opus.
 
 Next time you open a session for mechanical work, the kind where you already
 know what has to come out and you just need someone to type it, check what it
