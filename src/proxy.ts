@@ -15,9 +15,10 @@ export const config: ProxyConfig = {
      * - favicon.ico, favicon.png, favicon.svg, apple-touch-icon.png (browser icons)
      * - images/videos/documents/icons (assets in public folder)
      * - sitemap.xml, robots.txt, llms.txt (SEO / LLM files)
+     * - BingSiteAuth.xml (Bing Webmaster Tools site ownership proof)
      * - .well-known (devtools)
      * - manifest.json, robots.txt (metadata files)
      */
-    "/((?!api|trcp|_next/static|_next|_vercel|icons|videos|images|documents|.well-known|favicon.ico|favicon.png|favicon.svg|apple-touch-icon.png|robots.txt|sitemap.xml|llms.txt|manifest.json).*)",
+    "/((?!api|trcp|_next/static|_next|_vercel|icons|videos|images|documents|.well-known|favicon.ico|favicon.png|favicon.svg|apple-touch-icon.png|robots.txt|sitemap.xml|llms.txt|manifest.json|BingSiteAuth.xml).*)",
   ],
 };
