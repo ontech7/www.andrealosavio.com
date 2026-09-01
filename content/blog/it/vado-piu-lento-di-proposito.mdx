@@ -1,0 +1,195 @@
+---
+title: "Vado più lento di proposito"
+subtitle:
+  "Perché l'illusione di shippare 10 PR al giorno sta distruggendo la qualità
+  del codice"
+description:
+  "Analisi lunga, guardrail scritti a mano e subagent che tengono l'ordine: il
+  metodo lento con cui lavoro con gli agenti, e cosa mi ha evitato finora."
+publishedAt: 2026-09-01
+translationKey: slower-on-purpose
+tags: [architecture, ai, career]
+cover: /images/blog/slower-on-purpose/cover.svg
+coverAlt:
+  "Un anello ellittico luminoso inclinato nel buio, con quattro nodi accesi
+  lungo il percorso, tagliato da una linea tratteggiata e spenta che unisce il
+  primo nodo all'ultimo saltando gli altri due"
+takeaways:
+  - "I test che l'agente scrive per il proprio codice nascono dalla stessa
+    lettura della spec: se la lettura è sbagliata, il test verde conferma
+    l'errore invece di trovarlo."
+  - "Un guardrail utile è solo ciò che l'agente non può dedurre leggendo il
+    repository. Il resto è un riassunto del codice, e lo paghi in token a ogni
+    giro."
+  - "Il prompt generico non sbaglia la sintassi, sbaglia la collocazione: file
+    giusti nella cartella sbagliata, che compilano e passano il lint."
+  - "Il codice deve restare leggibile da un umano, perché l'LLM può andare giù
+    per un giorno intero e il cliente no."
+faq:
+  - q: "Quanto tempo si perde davvero con l'analisi iniziale?"
+    a:
+      "Su una feature media passo più tempo a rispondere alle domande
+      dell'agente che a guardarlo scrivere. Su un progetto intero diviso in fasi
+      l'analisi è la parte più lunga di tutte. Non si recupera in velocità, si
+      recupera in hotfix che non arrivano."
+  - q: "Serve un CLAUDE.md lungo?"
+    a:
+      "No, serve un CLAUDE.md che contenga solo le cose non deducibili dal
+      codice. La descrizione dello stack, l'albero delle cartelle e le
+      convenzioni di naming l'agente le ricava da solo leggendo tre file: se le
+      scrivi, stai pagando contesto per un riassunto."
+  - q: "Con questo metodo si scrive ancora codice a mano?"
+    a:
+      "Quasi mai. Nei miei progetti il 95% delle righe le scrive l'agente. Quello
+      che resta mio è decidere cosa va fatto, dove va messo, e leggere il diff
+      come se lo avesse aperto qualcun altro."
+---
+
+## Come va va
+
+Apri il terminale, lanci l'agente, scrivi cosa vuoi. Un minuto dopo hai un diff
+da quattordici file, i test ci sono e sono verdi, la PR si apre da sola. Giro
+chiuso. C'è chi lo fa dieci volte al giorno, e non è una caricatura: è il modo
+più diffuso di lavorare con un agente oggi.
+
+Nessun plugin. Nessuna skill. Nessun `CLAUDE.md`, nessun `AGENTS.md`, nessun MCP
+collegato. Si scrive cosa si vuole ottenere, si guarda cosa esce, si prompta
+ancora finché non funziona, un minimo di tuning, e si shippa. Sotto c'è un solo
+assunto: **se compila e i test passano, è fatto.**
+
+E funziona. È questo che rende il discorso scomodo, perché funziona abbastanza
+spesso da sembrare la scelta razionale. Io faccio il contrario: shippo molto
+meno, ci metto molte più ore di agente, e brucio molti più token. Non per
+gusto del rito.
+
+## I test che l'agente scrive a se stesso
+
+L'assunto regge su una gamba sola, ed è il TDD automatico che ormai fanno tutti
+i modelli recenti. Scrivono il test, poi l'implementazione, e la suite passa.
+Sembra la garanzia che mancava.
+
+Non lo è, per un motivo strutturale. Il test e il codice nascono dalla **stessa
+lettura della specifica**, fatta dallo stesso modello, nello stesso contesto. Se
+quella lettura è giusta hai due artefatti che concordano. Se è sbagliata ne hai
+sempre due che concordano, e il verde non ti dice quale dei due casi stai
+guardando.
+
+Un test scritto così ti dimostra che il codice fa quello che fa. Non che fa
+quello che serve.
+
+<Callout type="warning">
+  Il momento in cui te ne accorgi non è la review. È tre settimane dopo, quando
+  qualcuno cambia un requisito e il test si aggiorna insieme al codice, ancora
+  una volta senza mai passare da una persona che sapeva cosa doveva succedere.
+</Callout>
+
+## Voglio che mi bombardi di domande
+
+Per questo la parte che curo di più viene prima che venga scritta una riga.
+
+Voglio che l'agente sappia vita, morte e miracoli di quello che sto per fare.
+Che sia una feature da mezz'ora, una da tre giorni o un progetto intero diviso
+in fasi, cambia la lunghezza dell'intervista, non il fatto che ci sia. E le
+domande giuste non sono quelle sul come: sono quelle che tirano fuori le
+decisioni che non avevo ancora preso, e che avrei preso male alle undici di sera
+guardando un diff.
+
+L'altra metà è non trattare la spec come definitiva. Sulla carta sembra ovvio,
+in pratica quasi nessuno torna indietro: la spec è stata approvata, quindi si
+esegue. Io la riapro finché non sono convinto, e a volte la riapro dopo, quando
+la prima fase ha mostrato qualcosa che dalla scrivania non si vedeva.
+
+Questo tempo sembra perso. È l'unico che non si ripaga in hotfix.
+
+## Il setup che monto prima di partire
+
+Poi c'è l'infrastruttura, e qui la differenza con il prompt secco è netta.
+
+Un `CLAUDE.md` scritto davvero, non la descrizione dello stack. Le skill già
+esistenti agganciate al progetto, più quelle che mi scrivo su misura quando un
+lavoro si ripete. Subagent con un compito preciso e circoscritto, non un
+assistente generico. [Superpowers](https://github.com/obra/superpowers) per la
+parte di processo, [Serena](https://github.com/oraios/serena) per l'analisi
+semantica del codice, gli MCP che servono a quel progetto e nessun altro.
+
+Il pezzo che pesa più di tutti è il file delle regole, e non per la lunghezza.
+Conta cosa ci metti dentro. Questo è un estratto vero da quello di questo sito:
+
+```md title="CLAUDE.md"
+## Non-obvious rules to respect
+
+- `src/proxy.ts` is the Next.js 16 equivalent of `middleware.ts`. Do not add a
+  `middleware.ts` file.
+- `src/mdx-components.tsx` must stay at exactly that path. Next only looks in
+  the project root or the `src` root.
+- MDX plugins in `next.config.ts` must be passed as strings, never function
+  references. Turbopack ships the config to a Rust engine that cannot
+  serialize functions.
+```
+
+Nessuna di queste tre è deducibile leggendo il codice. Un agente che scrive
+ottimo Next.js crea `middleware.ts`, perché è quello che ha visto un milione di
+volte. Sposta `mdx-components.tsx` dentro `src/components/`, perché è dove
+stanno i componenti. Passa una funzione a `remarkPlugins`, perché è l'API. Tre
+scelte ragionevoli, tre modi di rompere il progetto in silenzio.
+
+Ed è questa la definizione operativa che uso: **un guardrail è ciò che l'agente
+non può dedurre.** Tutto il resto, lo stack, l'albero delle cartelle, il naming,
+è un riassunto del repository restituito al repository, e lo paghi in contesto a
+ogni singolo prompt.
+
+Il prompt generico, infatti, non sbaglia quasi mai la sintassi. Sbaglia dove
+mette le cose. Crea un componente in `src/components/` quando serve a una rotta
+sola, inventa una cartella che non c'entra con le altre, chiama
+`useTranslations("blog")` dove la convenzione è il namespace radice. Compila.
+Passa il lint. Ed è già debito.
+
+## Il 95% del codice non lo scrivo io
+
+Tanto vale dirlo: nei miei progetti quasi tutte le righe le scrive l'agente.
+Negarlo nel 2026 è una posa, lo sviluppo agentico è diventato accurato e
+complesso al punto che scrivere a mano è la scelta lenta anche quando sai
+esattamente cosa scrivere.
+
+Quello che è rimasto mio è il mestiere di prima. Il bagaglio da software
+engineer e da solution architect non serve più a produrre le righe, serve a
+decidere cosa va fatto, in che ordine, dove va messo e quando quello che è
+uscito è sbagliato. Ed è la stessa cosa che mi ha sbloccato linguaggi e
+framework che non avrei mai avuto il tempo di approfondire: non devo saperli
+scrivere, devo saper riconoscere quando la struttura non regge.
+
+## Review della mia stessa PR
+
+Prima di aprirla, l'agente fa un giro di self-review e uno di tidying. Poi la
+apro io e la leggo come se l'avesse scritta un altro, perché a tutti gli effetti
+è così.
+
+Cerco sempre le stesse cose: astrazioni comparse per un solo caso d'uso,
+opzioni che nessuno ha chiesto, file finiti dove non appartengono. YAGNI non è
+un principio che si spiega a un agente una volta e poi tiene: va rimesso in
+mezzo ogni volta, perché la sua tendenza naturale è coprire anche il caso che
+non esiste.
+
+Per questo le skill e i subagent che tengono l'ordine non li lancio sempre a
+mano. Alcuni si attivano all'apertura della PR, alcuni li chiamo io quando il
+diff è cresciuto troppo, altri partono da soli in base a cosa sto toccando. È lo
+stesso schema di
+[Archify, la skill che uso per i diagrammi di architettura](/blog/archify-architecture-diagram):
+si installa una volta, e da lì in poi c'è.
+
+## Il giorno che Claude Code è giù
+
+C'è una prova sola che dice se tutto questo è servito, e non è la PR verde.
+
+Se domani il tuo LLM resta giù per l'intera giornata, ti fermi o continui? Il
+codice tenuto insieme con la colla si legge solo con l'agente che l'ha scritto:
+la struttura c'è, ma esiste nel suo contesto, non nel repository. Quello scritto
+perché lo capisca anche una persona si riprende in mano, più lentamente, e si
+va avanti.
+
+Il cliente non aspetta te, e non aspetta nemmeno Claude Code.
+
+Il file delle regole lo riapro all'inizio di ogni feature grossa, prima
+dell'intervista, e ogni volta ci finisce dentro una riga nuova: quella cosa che
+l'agente ha sbagliato in un modo perfettamente ragionevole, e che non deve
+sbagliare di nuovo.

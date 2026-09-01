@@ -1,0 +1,142 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Un anello ellittico luminoso tagliato da una corda tratteggiata e spenta">
+  <defs>
+    <radialGradient id="slower-on-purpose-sky" cx="50%" cy="50%" r="64%">
+      <stop offset="0%" stop-color="#08203f" />
+      <stop offset="50%" stop-color="#050912" />
+      <stop offset="100%" stop-color="#03060c" />
+    </radialGradient>
+
+    <radialGradient id="slower-on-purpose-pool" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0d7ef2" stop-opacity="0.24" />
+      <stop offset="60%" stop-color="#08203f" stop-opacity="0.16" />
+      <stop offset="100%" stop-color="#03060c" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="slower-on-purpose-arc" x1="8%" y1="84%" x2="96%" y2="14%">
+      <stop offset="0%" stop-color="#dcefff" />
+      <stop offset="18%" stop-color="#7cc0ff" />
+      <stop offset="46%" stop-color="#0d7ef2" />
+      <stop offset="78%" stop-color="#1b4d8f" />
+      <stop offset="100%" stop-color="#123763" />
+    </linearGradient>
+
+    <radialGradient id="slower-on-purpose-node" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#eaf5ff" />
+      <stop offset="40%" stop-color="#7cc0ff" />
+      <stop offset="100%" stop-color="#0d7ef2" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="slower-on-purpose-falloff" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="46%" stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="78%" stop-color="#ffffff" stop-opacity="0.34" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+
+    <mask id="slower-on-purpose-depth">
+      <rect width="1200" height="630" fill="#000000" />
+      <ellipse cx="600" cy="315" rx="640" ry="352" fill="url(#slower-on-purpose-falloff)" />
+    </mask>
+
+    <filter id="slower-on-purpose-bloom" x="-30%" y="-70%" width="160%" height="240%">
+      <feGaussianBlur stdDeviation="20" />
+    </filter>
+
+    <filter id="slower-on-purpose-haze" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="2.2" />
+    </filter>
+
+    <filter id="slower-on-purpose-spark" x="-140%" y="-140%" width="380%" height="380%">
+      <feGaussianBlur stdDeviation="8" />
+    </filter>
+
+    <filter id="slower-on-purpose-chordglow" x="-20%" y="-200%" width="140%" height="500%">
+      <feGaussianBlur stdDeviation="6" />
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#slower-on-purpose-sky)" />
+  <ellipse cx="600" cy="315" rx="470" ry="250" fill="url(#slower-on-purpose-pool)" />
+
+  <g mask="url(#slower-on-purpose-depth)">
+    <g filter="url(#slower-on-purpose-haze)">
+      <g fill="none" stroke="#2a5f9e" stroke-width="1.6" opacity="0.34">
+        <ellipse cx="600" cy="315" rx="424" ry="172" transform="rotate(-12 600 315)" />
+        <ellipse cx="600" cy="315" rx="522" ry="212" transform="rotate(-12 600 315)" />
+        <ellipse cx="600" cy="315" rx="624" ry="253" transform="rotate(-12 600 315)" />
+      </g>
+      <g stroke="#1b4d8f" stroke-width="1.1" opacity="0.22" fill="none">
+        <path d="M40 315H1160M600 74V556" />
+        <path d="M152 196H1048M152 434H1048" />
+        <path d="M318 104V526M882 104V526" />
+      </g>
+    </g>
+    <g fill="#7cc0ff" opacity="0.34">
+      <circle cx="214" cy="182" r="2.2" />
+      <circle cx="388" cy="536" r="1.7" />
+      <circle cx="1016" cy="470" r="2.5" />
+      <circle cx="922" cy="118" r="1.8" />
+      <circle cx="666" cy="574" r="2" />
+      <circle cx="142" cy="404" r="1.6" />
+      <circle cx="1078" cy="238" r="1.5" />
+      <circle cx="268" cy="486" r="1.4" />
+    </g>
+  </g>
+
+  <g filter="url(#slower-on-purpose-chordglow)" opacity="0.5">
+    <path
+      d="M289 337 L911 293"
+      stroke="#1b4d8f"
+      stroke-width="6"
+      stroke-linecap="round"
+      stroke-dasharray="20 26"
+      fill="none"
+    />
+  </g>
+  <path
+    d="M289 337 L911 293"
+    stroke="#3f7bc4"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-dasharray="20 26"
+    fill="none"
+    opacity="0.9"
+  />
+
+  <ellipse
+    cx="600"
+    cy="315"
+    rx="340"
+    ry="138"
+    transform="rotate(-12 600 315)"
+    fill="none"
+    stroke="url(#slower-on-purpose-arc)"
+    stroke-width="17"
+    opacity="0.6"
+    filter="url(#slower-on-purpose-bloom)"
+  />
+  <ellipse
+    cx="600"
+    cy="315"
+    rx="340"
+    ry="138"
+    transform="rotate(-12 600 315)"
+    fill="none"
+    stroke="url(#slower-on-purpose-arc)"
+    stroke-width="3.6"
+    stroke-linecap="round"
+  />
+
+  <g filter="url(#slower-on-purpose-spark)" opacity="0.9">
+    <circle cx="289" cy="337" r="26" fill="url(#slower-on-purpose-node)" />
+    <circle cx="688" cy="167" r="15" fill="url(#slower-on-purpose-node)" />
+    <circle cx="911" cy="293" r="12" fill="url(#slower-on-purpose-node)" />
+    <circle cx="513" cy="463" r="15" fill="url(#slower-on-purpose-node)" />
+  </g>
+  <g>
+    <circle cx="289" cy="337" r="10" fill="#f2f9ff" />
+    <circle cx="688" cy="167" r="6" fill="#c8e4ff" />
+    <circle cx="911" cy="293" r="5" fill="#8fc8ff" />
+    <circle cx="513" cy="463" r="6" fill="#c8e4ff" />
+  </g>
+</svg>

@@ -1,0 +1,192 @@
+---
+title: "I go slower on purpose"
+subtitle:
+  "Why the illusion of shipping 10 PRs a day is destroying code quality"
+description:
+  "Long analysis, hand-written guardrails and subagents that hold the line: the
+  slow method I use with coding agents, and what it has spared me so far."
+publishedAt: 2026-09-01
+translationKey: slower-on-purpose
+tags: [architecture, ai, career]
+cover: /images/blog/slower-on-purpose/cover.svg
+coverAlt:
+  "A luminous tilted elliptical ring in the dark, four lit nodes along its path,
+  cut by a dim dashed line joining the first node to the last and skipping the
+  other two"
+takeaways:
+  - "The tests an agent writes for its own code come from the same reading of
+    the spec. If that reading is wrong, the green test confirms the mistake
+    instead of catching it."
+  - "A useful guardrail is only what the agent cannot infer by reading the
+    repository. Everything else is a summary of your code, and you pay for it in
+    tokens on every turn."
+  - "A generic prompt rarely gets the syntax wrong. It gets the placement wrong:
+    right files in the wrong folder, compiling and passing lint."
+  - "The code has to stay readable by a human, because the LLM can be down for a
+    whole day and the client cannot."
+faq:
+  - q: "How much time does the upfront analysis really cost?"
+    a:
+      "On an average feature I spend more time answering the agent's questions
+      than watching it write. On a whole project split into phases, the analysis
+      is the longest part of the job. You never win that time back in speed. You
+      win it back in hotfixes that never arrive."
+  - q: "Does a CLAUDE.md need to be long?"
+    a:
+      "No. It needs to contain only what cannot be inferred from the code. The
+      stack, the folder tree and the naming conventions are things the agent
+      works out on its own from three files. Writing them down means paying
+      context for a summary."
+  - q: "Do you still write code by hand with this method?"
+    a:
+      "Almost never. In my projects the agent writes about 95% of the lines.
+      What stays mine is deciding what gets built, where it goes, and reading
+      the diff as if someone else had opened it."
+---
+
+## Ship it and see
+
+Open the terminal, start the agent, type what you want. A minute later there is
+a fourteen-file diff, the tests are there, they are green, and the PR opens
+itself. Loop closed. Some people run it ten times a day, and that is not a
+caricature. It is the most common way to work with an agent right now.
+
+No plugins. No skills. No `CLAUDE.md`, no `AGENTS.md`, no MCP server attached.
+You describe the outcome, look at what comes back, prompt again until it works,
+tune a little, ship. One assumption underneath: **if it compiles and the tests
+pass, it is done.**
+
+And it works. That is what makes this awkward to argue, because it works often
+enough to look like the rational choice. I do the opposite. I ship far less, I
+burn far more agent hours and far more tokens, and not out of ceremony.
+
+## The tests the agent writes for itself
+
+The whole assumption rests on one leg: the automatic TDD that recent models do
+without being asked. They write the test, then the implementation, and the suite
+goes green. It looks like the missing guarantee.
+
+It is not, for a structural reason. The test and the code come from the **same
+reading of the spec**, by the same model, in the same context. If that reading
+is correct you get two artifacts that agree. If it is wrong you still get two
+artifacts that agree, and green does not tell you which of the two you are
+looking at.
+
+A test written that way proves the code does what the code does. Not that it
+does what was needed.
+
+<Callout type="warning">
+  You do not find out at review time. You find out three weeks later, when
+  someone changes a requirement and the test updates alongside the code, once
+  again without passing through anyone who knew what was supposed to happen.
+</Callout>
+
+## I want it to interrogate me
+
+So the part I care about most happens before a single line gets written.
+
+I want the agent to know everything about what I am about to build. Half an hour
+of work, three days, or an entire project split into phases: the length of the
+interview changes, not whether there is one. And the useful questions are never
+about the how. They surface the decisions I had not made yet, the ones I would
+have made badly at eleven at night while staring at a diff.
+
+The other half is refusing to treat the spec as final. On paper that sounds
+obvious. In practice almost nobody reopens it, because the spec was approved, so
+it gets executed. I keep reopening mine until I am convinced, and sometimes
+after that, when phase one shows something the desk view did not.
+
+This time looks wasted. It is the only time that pays itself back.
+
+## The setup I build before starting
+
+Then there is the infrastructure, and this is where the gap with a bare prompt
+gets wide.
+
+A `CLAUDE.md` that was actually written, not a description of the stack.
+Existing skills wired into the project, plus the ones I write myself when a job
+starts repeating. Subagents with one narrow, specific task instead of a generic
+assistant. [Superpowers](https://github.com/obra/superpowers) for the process
+side, [Serena](https://github.com/oraios/serena) for semantic analysis of the
+codebase, and the MCP servers that particular project needs and no others.
+
+The heaviest piece is the rules file, and not because of its length. What counts
+is what goes in it. This is a real excerpt from the one on this site:
+
+```md title="CLAUDE.md"
+## Non-obvious rules to respect
+
+- `src/proxy.ts` is the Next.js 16 equivalent of `middleware.ts`. Do not add a
+  `middleware.ts` file.
+- `src/mdx-components.tsx` must stay at exactly that path. Next only looks in
+  the project root or the `src` root.
+- MDX plugins in `next.config.ts` must be passed as strings, never function
+  references. Turbopack ships the config to a Rust engine that cannot
+  serialize functions.
+```
+
+None of those three can be inferred from the code. An agent that writes
+excellent Next.js will create `middleware.ts`, because that is what it has seen
+a million times. It will move `mdx-components.tsx` into `src/components/`,
+because that is where components live. It will pass a function to
+`remarkPlugins`, because that is the API. Three reasonable calls, three ways to
+break the project quietly.
+
+That is the working definition I use: **a guardrail is what the agent cannot
+infer.** Everything else, the stack, the folder tree, the naming rules, is a
+summary of the repository handed back to the repository, and you pay for it in
+context on every single prompt.
+
+A generic prompt, in fact, almost never gets the syntax wrong. It gets the
+placement wrong. It puts a component in `src/components/` when one route uses
+it. It invents a folder that matches nothing around it. It calls
+`useTranslations("blog")` where the convention is the root namespace. It
+compiles. It passes lint. It is already debt.
+
+## I do not write 95% of the code
+
+Worth saying plainly: in my projects the agent writes nearly every line. Denying
+that in 2026 is a pose. Agentic development got accurate enough that typing it
+yourself is the slow option even when you know exactly what to type.
+
+What stayed mine is the old job. The software engineer and solution architect
+background is no longer there to produce lines. It is there to decide what gets
+built, in what order, where it goes, and when the thing that came back is wrong.
+That is also what unlocked languages and frameworks I would never have found
+time to learn properly. I do not need to be able to write them. I need to
+recognise when the structure does not hold.
+
+## Reviewing my own PR
+
+Before it opens, the agent runs a self-review pass and a tidying pass. Then I
+open it and read it as if someone else had written it, which is functionally
+true.
+
+I look for the same things every time. Abstractions that appeared for exactly
+one caller. Options nobody asked for. Files that ended up somewhere they do not
+belong. YAGNI is not a principle you explain to an agent once and then rely on.
+It has to be put back in every time, because its natural pull is to cover the
+case that does not exist yet.
+
+That is why the skills and subagents that hold the line are not all manual. Some
+fire when the PR opens, some I call when a diff has grown too big, some trigger
+on their own depending on what I am touching. Same shape as
+[Archify, the skill I use for architecture diagrams](/blog/archify-architecture-diagram):
+install it once, and from then on it is simply there.
+
+## The day Claude Code is down
+
+There is exactly one test that says whether any of this was worth it, and it is
+not a green PR.
+
+If your LLM goes down for a full working day tomorrow, do you stop or do you
+keep going? Code held together with glue can only be read by the agent that
+wrote it: the structure exists, but it lives in that context, not in the
+repository. Code written so a person can follow it gets picked back up, more
+slowly, and the work continues.
+
+The client is not waiting for you, and is not waiting for Claude Code either.
+
+I reopen the rules file at the start of every large feature, right before the
+interview, and every time one more line goes in: the thing the agent got wrong
+in a perfectly reasonable way, and must not get wrong again.
