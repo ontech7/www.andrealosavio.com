@@ -280,9 +280,10 @@ export function HomepageHeroDecoration() {
         />
       </g>
       <motion.rect
-        width="69"
-        height="16"
-        transform="translate(156.93 233.43)"
+        x="160.43"
+        y="241.43"
+        width="61.5"
+        height="2"
         fill="#111111"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
