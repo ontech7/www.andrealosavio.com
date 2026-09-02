@@ -41,7 +41,7 @@ incompleta finché i contenuti lunghi non esistono.
 | Tassonomia | `kind` (`client`/`product`/`personal`) fuori dai tag, più vocabolario `roles` | Tenere `customer`/`personal` in mezzo ai tag tecnologici |
 | `fde` tra i ruoli | No: resta narrativa dentro il case study di Quido | Chip di filtro `fde` |
 | Griglia del lavoro cliente | Una card a riga intera, split orizzontale | Due card per riga, come oggi |
-| Ordine dei blocchi | Clienti → prodotti → esperimenti | Prodotti per primi, come oggi |
+| Ordine dei blocchi | Clienti → esperimenti → prodotti (i prodotti stanno fuori dal filtro, vedi §6) | Prodotti per primi, come oggi |
 | Immagine della card | Riconoscimento del cliente, non prova del lavoro | Sostituire ovunque con screenshot di prodotto |
 | JSON-LD del case study | `BreadcrumbList` + `CreativeWork` | `Article` / `BlogPosting` |
 | `llms.txt` | Elenca i case study | Non elencarli, per coerenza con la scelta fatta sugli articoli |
