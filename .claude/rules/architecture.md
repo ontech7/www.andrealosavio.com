@@ -334,6 +334,34 @@ article index.
 The `blog` translation namespace is registered in `src/libs/i18n/request.ts`
 alongside the others.
 
+## Projects
+
+`/projects` carries three axes that used to be collapsed into one list of
+tags. `kind` (`client` / `product` / `personal`) groups the page into three
+blocks; `roles`, drawn from the `PROJECT_ROLES` vocabulary, says how deep the
+work went; `tags` is left to the stack alone. `customer` and `personal` used
+to sit among `nextjs` and `prisma`, which made "is a client" and "uses React"
+look like the same kind of fact.
+
+Each project's copy is two fields, not one. `context` is a single line naming
+what the client or product is; `contribution` is first-person prose, ~40
+words, saying what Andrea did. The old single `description` described the
+client's business, which — next to a screenshot of their landing page and a
+"Visit the website" primary button — made the page read as a list of
+marketing sites he had built. The external link is now a secondary link
+labelled "Client website", and the screenshot is client recognition, not
+proof of work: the proof lives in the case study, where images can be
+captioned.
+
+Client cards are full-width with a horizontal split, because at two per row
+there was no room for anything but a description and a button. Personal
+experiments stay two per row. `FeaturedProductsSection` renders the two own
+products and the `product` kind is therefore skipped by `ProjectsSection`, so
+nothing appears twice.
+
+Group headings collapse while a filter is active, the same way the blog index
+suspends its featured block — a filtered page is just the result list.
+
 ## SEO
 
 - `src/app/sitemap.ts` generates the multi-locale sitemap from the route table
