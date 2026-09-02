@@ -1333,6 +1333,7 @@ EOF
 **Files:**
 - Create: `src/libs/case-studies/frontmatter.ts`
 - Test: `src/libs/case-studies/frontmatter.test.ts`
+- Modify: `vitest.config.ts` — nuova entry in `include` (vedi Step 4)
 
 **Interfaces:**
 - Produces: `interface CaseStudyFrontmatter { project, title, summary, period, publishedAt, updatedAt?, cover, coverAlt, draft }`, `parseFrontmatter(data: unknown, source: string): CaseStudyFrontmatter`.
@@ -1548,6 +1549,12 @@ export function parseFrontmatter(
 
 Run: `npx vitest run src/libs/case-studies/frontmatter.test.ts`
 Expected: PASS, 8 test.
+
+`vitest.config.ts` elenca le directory dei test una per una (`include:
+["src/libs/blog/**/*.test.ts"]`), quindi finché non si aggiunge
+`"src/libs/case-studies/**/*.test.ts"` il runner risponde "No test files found"
+e il RED si legge come un GREEN. Aggiungere quella riga fa parte di questo task,
+e va nello stesso commit: un test che non gira non è un test.
 
 - [ ] **Step 5: Commit**
 
