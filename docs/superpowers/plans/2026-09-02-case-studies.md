@@ -716,13 +716,21 @@ const GROUPS: { kind: ProjectKind; key: string }[] = [
   { kind: "personal", key: "experiments" },
 ];
 
-const ALL_TAGS = [...new Set(PROJECTS.flatMap((p) => p.tags))].sort();
-const ALL_ROLES = [...new Set(PROJECTS.flatMap((p) => p.roles))].sort();
+const FILTERABLE_PROJECTS = PROJECTS.filter(
+  (project) => project.kind !== "product"
+);
+
+const ALL_TAGS = [
+  ...new Set(FILTERABLE_PROJECTS.flatMap((p) => p.tags)),
+].sort();
+const ALL_ROLES = [
+  ...new Set(FILTERABLE_PROJECTS.flatMap((p) => p.roles)),
+].sort();
 
 export async function ProjectsSection({ id, className }: ProjectsSectionProps) {
   const t = await getTranslations();
 
-  const sortKeys = PROJECTS.map((project) => ({
+  const sortKeys = FILTERABLE_PROJECTS.map((project) => ({
     id: project.id,
     name: t(`projects.items.${project.id}.name`).toLowerCase(),
   }));
@@ -744,7 +752,9 @@ export async function ProjectsSection({ id, className }: ProjectsSectionProps) {
         <ProjectsFilter tags={ALL_TAGS} roles={ALL_ROLES} />
 
         {GROUPS.map(({ kind, key }) => {
-          const projects = PROJECTS.filter((project) => project.kind === kind);
+          const projects = FILTERABLE_PROJECTS.filter(
+            (project) => project.kind === kind
+          );
 
           return (
             <div key={kind} className="mb-12 last:mb-0">
@@ -764,11 +774,11 @@ export async function ProjectsSection({ id, className }: ProjectsSectionProps) {
                     key={project.id}
                     tags={project.tags}
                     roles={project.roles}
-                    sourceIndex={PROJECTS.indexOf(project)}
+                    sourceIndex={FILTERABLE_PROJECTS.indexOf(project)}
                     alphabeticalIndex={
                       alphabeticalIndexById.get(project.id) ?? 0
                     }
-                    total={PROJECTS.length}
+                    total={FILTERABLE_PROJECTS.length}
                   >
                     <ProjectCard project={project} />
                   </ProjectItem>
@@ -779,7 +789,7 @@ export async function ProjectsSection({ id, className }: ProjectsSectionProps) {
         })}
 
         <ProjectsEmptyState
-          projects={PROJECTS.map((project) => ({
+          projects={FILTERABLE_PROJECTS.map((project) => ({
             tags: project.tags,
             roles: project.roles,
           }))}
@@ -792,6 +802,8 @@ export async function ProjectsSection({ id, className }: ProjectsSectionProps) {
 ```
 
 Il gruppo `product` non compare qui: i due prodotti hanno già la loro sezione dedicata (`FeaturedProductsSection`), e ripeterli nella lista li mostrerebbe due volte sulla stessa pagina.
+
+`FILTERABLE_PROJECTS` è la ragione per cui l'esclusione va fatta una volta sola e riusata ovunque. Se i chip nascessero da tutto `PROJECTS`, `tauri`, `javascript` ed `extension` — tag che vivono solo sui due prodotti — sarebbero chip cliccabili che non possono corrispondere a niente di renderizzato. Peggio: l'empty state troverebbe la corrispondenza in un prodotto mai mostrato e resterebbe zitto, lasciando un'area vuota senza spiegazione. L'insieme che si filtra e l'insieme che si rende devono essere lo stesso.
 
 - [ ] **Step 3: Aggiornare `project-item.tsx` per filtrare anche sui ruoli**
 
