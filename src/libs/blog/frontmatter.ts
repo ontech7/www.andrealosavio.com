@@ -210,6 +210,10 @@ export function parseFrontmatter(
     requireString(item, `takeaways[${index}]`, source)
   );
 
+  if (raw.draft !== undefined && typeof raw.draft !== "boolean") {
+    fail(source, "draft deve essere true o false");
+  }
+
   return {
     title,
     subtitle,

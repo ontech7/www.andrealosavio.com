@@ -90,6 +90,18 @@ describe("parseFrontmatter", () => {
     expect(result.faq).toHaveLength(1);
   });
 
+  it("rifiuta un draft che non è un booleano", () => {
+    expect(() =>
+      parseFrontmatter(valid({ draft: "Yes" }), "it/test.mdx")
+    ).toThrow(/draft/);
+  });
+
+  it("onora un draft booleano esplicito", () => {
+    const result = parseFrontmatter(valid({ draft: true }), "it/test.mdx");
+
+    expect(result.draft).toBe(true);
+  });
+
   it("rifiuta series con part non positivo", () => {
     expect(() =>
       parseFrontmatter(valid({ series: { id: "x", part: 0 } }), "it/test.mdx")
