@@ -107,6 +107,10 @@ export function parseFrontmatter(
     updatedAt = parsed;
   }
 
+  if (raw.draft !== undefined && typeof raw.draft !== "boolean") {
+    fail(source, "draft deve essere true o false");
+  }
+
   const cover = requireString(raw.cover, "cover", source);
   const coverAlt = requireString(
     raw.coverAlt,

@@ -65,5 +65,27 @@ describe("parseFrontmatter", () => {
     expect(
       parseFrontmatter({ ...valid, draft: true }, "it/quido.mdx").draft
     ).toBe(true);
+    expect(parseFrontmatter(valid, "it/quido.mdx").draft).toBe(false);
+  });
+
+  it("rifiuta un draft che non è un booleano", () => {
+    expect(() =>
+      parseFrontmatter({ ...valid, draft: "yes" }, "it/quido.mdx")
+    ).toThrow(/draft/);
+  });
+
+  it("accetta un summary sui bordi della fascia", () => {
+    expect(() =>
+      parseFrontmatter({ ...valid, summary: "x".repeat(120) }, "it/quido.mdx")
+    ).not.toThrow();
+    expect(() =>
+      parseFrontmatter({ ...valid, summary: "x".repeat(170) }, "it/quido.mdx")
+    ).not.toThrow();
+  });
+
+  it("rifiuta una data ben formata ma inesistente", () => {
+    expect(() =>
+      parseFrontmatter({ ...valid, publishedAt: "2026-02-31" }, "it/quido.mdx")
+    ).toThrow(/publishedAt/);
   });
 });
