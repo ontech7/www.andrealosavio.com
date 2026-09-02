@@ -1,0 +1,252 @@
+---
+title: "brainless: la CLI degli agent come componenti React"
+subtitle:
+  "Claude Code, Codex e Grok smontati in componenti: la UI da terminale perfetta
+  per i tuoi progetti Next.js"
+description:
+  "L'ho installato in un progetto di prova: nove file, zero dipendenze npm, e un
+  terminale che si seleziona, si cerca e si annuncia a uno screen reader."
+publishedAt: 2026-09-02
+translationKey: brainless-agent-terminals
+tags: [react, nextjs, ai]
+cover: /images/blog/brainless-agent-terminals/cover.svg
+coverAlt:
+  "Una finestra di terminale scura e luminosa al centro di uno sfondo nero che
+  sfuma verso il blu, con il cursore a blocco chiaro del logo brainless che
+  lampeggia sulla riga del prompt"
+takeaways:
+  - "Il blocco claude-session sono 9 file e 943 righe copiate dentro il tuo
+    repository, e zero dipendenze npm nuove: il package.json non si muove di una
+    riga."
+  - "Sono componenti shadcn, quindi il codice è tuo dal momento in cui atterra:
+    lo modifichi come modifichi il resto, senza combattere il tema di una UI
+    library."
+  - "I colori sono 61 hex letterali e nessuna CSS variable: la fedeltà alla CLI
+    originale è cablata nel file, e personalizzarla vuol dire riscrivere quei
+    valori."
+  - 'Sono WCAG-ready senza lavoro tuo: fieldset e legend per l''header, un
+    details vero per le chiamate ai tool, aria-hidden sui glifi decorativi,
+    role="status" sulla riga di lavorazione e prefers-reduced-motion rispettato.'
+faq:
+  - q: "Serve avere shadcn nel progetto?"
+    a:
+      "Sì. brainless è un registry di shadcn, non un pacchetto npm: ti serve un
+      components.json valido e la CLI di shadcn, che è la stessa che useresti
+      per un button o un dialog."
+  - q: "Aggiunge dipendenze al package.json?"
+    a:
+      "No. Ho installato il blocco completo della sessione di Claude Code e il
+      package.json è rimasto identico. I componenti importano solo React e la cn
+      del tuo progetto."
+  - q: "Funziona con l'App Router e i Server Components?"
+    a:
+      'Sì. La maggior parte dei file non ha "use client": nel blocco della
+      sessione di Claude solo tre file su nove sono client, quelli che hanno un
+      input o un''animazione. Il resto resta sul server.'
+  - q: "Posso cambiare i colori per adattarli al mio brand?"
+    a:
+      "Sì, ed è il punto dei componenti shadcn: il file è nel tuo repository e
+      lo modifichi come qualsiasi altro tuo componente. I colori sono scritti
+      come valori hex dentro il file, non come CSS variable, quindi la modifica
+      è nel codice e non in un tema."
+---
+
+## Il terminale sul web si fa sempre nello stesso modo sbagliato
+
+Il momento è quello in cui decidi che il tuo prodotto deve avere l'aria del
+terminale. Una dashboard per sviluppatori con dentro una console, la pagina che
+deve mostrare un agent al lavoro, un tool interno che parla la lingua di chi lo
+usa. Apri l'editor, e ti accorgi che le strade sono tre, e nessuna è buona.
+
+La prima è la **PNG**. Costa dieci minuti e invecchia in due settimane: cambia
+una label nella CLI e l'immagine mente. Non si seleziona, non si cerca con
+Ctrl+F, non si legge con uno screen reader, e su un display retina o è sfocata o
+pesa mezzo megabyte.
+
+La seconda è [`xterm.js`](https://xtermjs.org/). È un emulatore di terminale
+vero, e per questo caso è un cannone: ti porta in casa un parser ANSI, un
+modello di buffer e un canvas, quando quello che volevi era un componente React
+che assomiglia a Claude Code.
+
+La terza è rifarlo a mano. Sembra facile finché non ci provi. Il monospace
+giusto, il caret che lampeggia alla velocità giusta, lo spinner che non è la
+solita rotellina, e i colori di un tema che hai davanti agli occhi tutti i
+giorni e non sapresti citare a memoria. Due giorni di lavoro, e il risultato è
+ancora "quasi".
+
+[brainless](https://github.com/theswerd/brainless) è la quarta strada, ed è
+quella che non mi aspettavo: le interfacce di Claude Code, Codex e Grok smontate
+in componenti React, distribuite come registry di
+[shadcn](https://ui.shadcn.com). Quaranta pezzi in tutto, trentaquattro
+componenti e sei blocchi già montati, licenza MIT.
+
+La somiglianza non è a occhio. Il repository ha un harness sotto
+`tools/capture/` che pilota gli agent dentro tmux e salva i frame come ANSI,
+HTML e testo, e i componenti sono costruiti contro quelle catture.
+
+<Figure
+  src="/images/blog/brainless-agent-terminals/homepage.webp"
+  alt="La homepage di brainless: a sinistra il logo con il cursore a blocco e il titolo, a destra una finestra di terminale che mostra una sessione di Claude Code con header, prompt, chiamata a un tool, diff e riga di thinking"
+  caption="La finestra a destra è il blocco claude-session, che gira nella pagina come componente React."
+  width={1440}
+  height={900}
+/>
+
+## Cosa ho digitato e cosa è arrivato
+
+L'ho installato in un progetto di prova, non in produzione. Volevo il costo
+reale invece del README.
+
+Il primo comando aggancia il registry al progetto. È lo stesso meccanismo che
+usi per un registry qualsiasi, e non è specifico di brainless:
+
+```bash
+npx shadcn@latest registry add @brainless=https://brainless.swerdlow.dev/r/{name}.json
+```
+
+Da lì in avanti il namespace `@brainless` vive nel tuo `components.json` accanto
+agli altri:
+
+```json title="components.json" {3}
+{
+  "registries": {
+    "@brainless": "https://brainless.swerdlow.dev/r/{name}.json"
+  }
+}
+```
+
+Poi ho chiesto il blocco più grosso, la sessione completa di Claude Code:
+
+```bash
+npx shadcn@latest add @brainless/claude-session
+```
+
+```text
+✔ Created 9 files:
+  - src/components/brainless/claude/claude-header.tsx
+  - src/components/brainless/claude/claude-message.tsx
+  - src/components/brainless/claude/claude-todo-list.tsx
+  - src/components/brainless/claude/claude-tool-call.tsx
+  - src/components/brainless/claude/claude-diff.tsx
+  - src/components/brainless/claude/claude-permission.tsx
+  - src/components/brainless/claude/claude-thinking.tsx
+  - src/components/brainless/claude/claude-prompt.tsx
+  - src/components/brainless/blocks/claude-session.tsx
+```
+
+Novecentoquarantatré righe in tutto, e **il `package.json` non si è mosso di una
+riga**. Nessuna dipendenza npm nuova: i file importano React e la `cn` del
+progetto, niente altro. Il progetto di prova aveva l'alias `utils` puntato su
+`@/utils/cn` invece del solito `@/lib/utils`, e la CLI ha riscritto gli import
+di conseguenza, senza che dovessi toccare niente.
+
+Il blocco è il pezzo grosso, ma non sei obbligato a prenderlo. Se ti serve solo
+la riga di messaggio di Grok, chiedi quella e arriva un file:
+
+```bash
+npx shadcn@latest add @brainless/grok-message
+```
+
+Questa è la differenza pratica con una UI library installata da npm. Non stai
+scaricando un catalogo per usarne tre pezzi: stai chiedendo tre pezzi. È lo
+stesso motivo per cui in questo sito le
+[icone Lucide animate](/blog/icone-lucide-animate) sono arrivate una alla volta
+invece che tutte insieme.
+
+Fra i nove file della sessione, solo tre hanno `"use client"`: il prompt, la
+riga di thinking e il pannello dei permessi, cioè quelli che hanno davvero un
+input o un timer. Gli altri sei restano Server Components e non finiscono nel
+bundle.
+
+## I componenti sono già WCAG-ready
+
+Non è finto HTML che assomiglia a un terminale. Sotto ci sono gli elementi
+giusti:
+
+- l'header di Claude Code è un `<fieldset>` con un `<legend>`, non un div con un
+  `::before` che finge il bordo interrotto;
+- la chiamata a un tool collassata è un `<details>` vero, quindi si apre con
+  Invio ed entra nel tab order da sola;
+- i glifi decorativi sono `aria-hidden`;
+- la riga di lavorazione è un `role="status"` con `aria-live`;
+- il testo sotto l'onda di luce usa `background-clip: text`, quindi resta testo
+  selezionabile invece di diventare un'immagine.
+
+E l'animazione si spegne da sola:
+
+```tsx title="claude-thinking.tsx"
+const GLYPHS = ["·", "✢", "✳", "✶", "✻", "✽", "✻", "✶", "✳", "✢"];
+
+React.useEffect(() => {
+  if (!running || prefersReduced) return;
+  const id = setInterval(() => setGlyph((g) => (g + 1) % GLYPHS.length), 110);
+  return () => clearInterval(id);
+}, [running, prefersReduced]);
+```
+
+`prefers-reduced-motion` non è gestito a metà: il `setInterval` non parte
+proprio, invece di girare a vuoto sotto un'animazione ferma. E i centodieci
+millisecondi non sono un'ipotesi, vengono dalle catture.
+
+## È codice tuo, non un tema da combattere
+
+Con una UI library classica, prendi MUI, la personalizzazione è una
+negoziazione. Scrivi un tema, scopri che quel componente legge un token che non
+avevi previsto, finisci a specializzare selettori o a passare `sx` ovunque, e
+ogni major ti rimette in discussione il lavoro. Stai chiedendo il permesso a
+codice che non è tuo.
+
+Un registry shadcn ribalta il rapporto. Il codice atterra dentro il tuo
+repository, in chiaro, e da quel momento è tuo esattamente come il resto: lo
+apri, lo cambi, lo rinomini, ne butti metà. Non c'è una versione che ti passa
+sotto ai piedi, perché non c'è nessuna versione.
+
+Su brainless questo si vede subito, perché i colori sono scritti come valori hex
+dentro i file:
+
+```tsx title="claude-thinking.tsx"
+const CLAUDE = "#cd694a"; // terracotta base
+const HILITE = "#e79475"; // the highlight the wave carries
+const DIM = "#7d7d7d";
+```
+
+Nel blocco della sessione ne ho contati sessantuno, ventotto distinti, e nessuna
+`var(--...)`. Ha senso: l'obiettivo dichiarato è la fedeltà alla CLI originale,
+e un colore che segue il tuo tema smetterebbe di essere quello di Claude Code.
+Se il tuo prodotto vuole il feel del terminale ma con i tuoi colori, quelle
+costanti sono in cima al file e stanno lì per essere cambiate.
+
+Vale anche per i contenuti, con un'avvertenza che va detta subito:
+`ClaudeSession` è una schermata già scritta, senza props e senza children. Serve
+a vedere il risultato in due minuti, non a costruirci sopra. La tua sessione la
+componi con i pezzi singoli, che le props ce le hanno:
+
+```tsx title="app/page.tsx"
+<ClaudeHeader user="Andrea" cwd="~/dev/acme-app" model="Fable 5 · Claude Max" />
+
+<ClaudeMessage role="user">aggiungi il blocco pricing alla landing</ClaudeMessage>
+
+<ClaudeToolCall
+  tool="Bash"
+  arg="bunx shadcn add brainless/pricing"
+  result="Added 1 block · 2 files"
+/>
+
+<ClaudeThinking />
+<ClaudePrompt mode="plan" effort="high" />
+```
+
+## Dove lo userei
+
+Su un progetto personale, prima di tutto. Un portfolio più tecnico, rivolto a
+persone tecniche, dove la homepage non è un hero con una foto ma una sessione
+che racconta cosa fai nel linguaggio di chi legge. Chi arriva da un repository o
+da un thread capisce dove è finito nel primo secondo, senza leggere una riga di
+copy.
+
+E poi nelle dashboard che hanno un agent dentro. Se il tuo prodotto ha una parte
+che parla con un modello, e la stai disegnando come una chat con le bolle, stai
+dicendo all'utente che è un giocattolo. Una CLI dice il contrario: dice che
+sotto c'è un processo, con dei tool, dei permessi da concedere e un diff da
+approvare. brainless ti dà quel vocabolario già montato, e a quel punto il
+lavoro tuo torna a essere quello vero, cioè far funzionare l'agent.
