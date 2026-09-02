@@ -39,8 +39,7 @@
       "checkDesign": "See the design",
       "checkWebsite": "Visit the website",
       "checkGitHub": "Go to GitHub",
-      "clientSite": "Client website",
-      "readCaseStudy": "Read the case study"
+      "clientSite": "Client website"
     },
     "quido": {
       "name": "Quido S.r.l.",
@@ -96,17 +95,6 @@
       "name": "Coffee Notes Lab",
       "context": "A log of espresso tastings and home experiments",
       "contribution": "A personal project with no goal: somewhere to work on the interface without a deadline, the /photos section especially. Next.js 16, nothing more."
-    }
-  },
-  "caseStudy": {
-    "period": "Period",
-    "roles": "Role",
-    "stack": "Stack",
-    "backToProjects": "Back to projects",
-    "cta": {
-      "title": "Got a problem that looks like this one?",
-      "description": "Tell me about it. If I can help I'll say so, and if I can't I'll tell you who can.",
-      "action": "Get in touch"
     }
   }
 }

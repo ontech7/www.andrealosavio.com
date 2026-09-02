@@ -1,5 +1,4 @@
 import { SERVICE_PRICES, type ServiceId } from "@/constants/services";
-import { getCaseStudies } from "@/libs/case-studies/source";
 import { formatEuro } from "@/utils/format-price";
 
 export const dynamic = "force-static";
@@ -24,21 +23,6 @@ function priceOf(id: ServiceId): string {
   const amount = `${formatEuro(price.amount, "en")}${PRICE_UNIT_LABEL[price.unit]}`;
 
   return price.from ? `from ${amount}` : amount;
-}
-
-function caseStudyLinks(): string {
-  const entries = getCaseStudies("en");
-
-  if (entries.length === 0) {
-    return "";
-  }
-
-  return `\n\nIn-depth case studies:\n\n${entries
-    .map(
-      (entry) =>
-        `- [${entry.frontmatter.title}](${SITE_URL}/en/projects/${entry.slug}) — ${entry.frontmatter.summary}`
-    )
-    .join("\n")}`;
 }
 
 function buildLlmsTxt(): string {
@@ -139,7 +123,7 @@ Both products are designed, built, shipped and maintained by Andrea alone, and e
 - **Brainplatform S.r.l.** — Full rework of a legacy back-office with Fluent UI, then two dashboards, the first reused as the whitelabel base for the second. Mentored a junior engineer along the way.
 - **Tobacconist Management Platform** (client under NDA) — Platform with interactive map of 7,000+ tobacconists in Lombardy, agent assignments, admin dashboard.
 
-- [Full portfolio](${SITE_URL}/en/projects)${caseStudyLinks()}
+- [Full portfolio](${SITE_URL}/en/projects)
 
 ## Open Source
 

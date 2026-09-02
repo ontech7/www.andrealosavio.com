@@ -1,7 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import type { Project } from "@/constants/projects";
-import { Link } from "@/libs/i18n/navigation";
 import { cn } from "@/utils/cn";
 import { ArrowUpRightIcon, CircleQuestionMarkIcon } from "lucide-react";
 import { getTranslations } from "next-intl/server";
@@ -9,15 +7,10 @@ import Image from "next/image";
 
 interface ProjectCardProps {
   project: Project;
-  caseStudySlug?: string | null;
   className?: string;
 }
 
-export async function ProjectCard({
-  project,
-  caseStudySlug = null,
-  className,
-}: ProjectCardProps) {
+export async function ProjectCard({ project, className }: ProjectCardProps) {
   const t = await getTranslations();
 
   const name = t(`projects.items.${project.id}.name`);
@@ -104,14 +97,6 @@ export async function ProjectCard({
         </p>
 
         <div className="mt-auto flex flex-wrap items-center gap-4 pt-1">
-          {caseStudySlug && (
-            <Button variant="gradient-outline" asChild>
-              <Link href={`/projects/${caseStudySlug}`}>
-                {t("projects.items.common.readCaseStudy")}
-              </Link>
-            </Button>
-          )}
-
           {externalUrl && (
             <a
               href={externalUrl}

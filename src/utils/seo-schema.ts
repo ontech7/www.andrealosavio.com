@@ -2,7 +2,6 @@ import type {
   Blog,
   BlogPosting,
   BreadcrumbList,
-  CreativeWork,
   FAQPage,
   ItemList,
   OfferCatalog,
@@ -490,77 +489,6 @@ export function generateBlogSchema({
   };
 }
 
-interface GenerateCaseStudySchemaProps {
-  url: string;
-  name: string;
-  description: string;
-  datePublished: string;
-  dateModified?: string;
-  image: string;
-  author: SchemaEntityReference;
-  publisher: SchemaEntityReference;
-  about: { name: string; url?: string };
-  inLanguage: string;
-  keywords: readonly string[];
-}
-
-/**
- * Schema di un case study: il lavoro consegnato, non un articolo. `author` e
- * `publisher` sono inlineati con nome e url per la stessa ragione di
- * `generateBlogPostingSchema` — ogni pagina viene valutata da sola, e un
- * `@id` verso un nodo dichiarato altrove risulta privo di `name` e `url`.
- */
-export function generateCaseStudySchema({
-  url,
-  name,
-  description,
-  datePublished,
-  dateModified,
-  image,
-  author,
-  publisher,
-  about,
-  inLanguage,
-  keywords,
-}: GenerateCaseStudySchemaProps): CreativeWork {
-  return {
-    "@type": "CreativeWork",
-    "@id": `${url}#casestudy`,
-    mainEntityOfPage: url,
-    url,
-    name,
-    description,
-    datePublished: toIsoDateTime(datePublished),
-    dateModified: toIsoDateTime(dateModified ?? datePublished),
-    image,
-    inLanguage,
-    author: {
-      "@type": "Person",
-      "@id": author.id,
-      name: author.name,
-      url: author.url,
-    },
-    publisher: {
-      "@type": "Organization",
-      "@id": publisher.id,
-      name: publisher.name,
-      url: publisher.url,
-    },
-    about: {
-      "@type": "Organization",
-      name: about.name,
-      ...(about.url && { url: about.url }),
-    },
-    ...(keywords.length > 0 && { keywords: keywords.join(", ") }),
-  };
-}
-
-/**
- * Convert a schema object (or array of schemas) to a JSON-LD string.
- * When an array is passed, emits a single `@graph` block — which is the
- * recommended way to declare multiple connected entities on a single page
- * (e.g. Person + Organization + WebSite on the homepage).
- */
 export function schemaToJsonLd<T>(schema: T | T[]): string {
   if (Array.isArray(schema)) {
     return JSON.stringify({

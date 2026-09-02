@@ -1,8 +1,6 @@
 import { PROJECTS, type ProjectKind } from "@/constants/projects";
-import { getCaseStudyForProject } from "@/libs/case-studies/source";
-import type { AppLocale } from "@/libs/i18n/utils";
 import { cn } from "@/utils/cn";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { ProjectCard } from "../components/project-card";
 import { ProjectGroup } from "../components/project-group";
 import { ProjectGroupHeading } from "../components/project-group-heading";
@@ -34,7 +32,6 @@ const ALL_ROLES = [
 
 export async function ProjectsSection({ id, className }: ProjectsSectionProps) {
   const t = await getTranslations();
-  const locale = (await getLocale()) as AppLocale;
 
   const sortKeys = FILTERABLE_PROJECTS.map((project) => ({
     id: project.id,
@@ -89,12 +86,7 @@ export async function ProjectsSection({ id, className }: ProjectsSectionProps) {
                     }
                     total={FILTERABLE_PROJECTS.length}
                   >
-                    <ProjectCard
-                      project={project}
-                      caseStudySlug={
-                        getCaseStudyForProject(locale, project.id)?.slug ?? null
-                      }
-                    />
+                    <ProjectCard project={project} />
                   </ProjectItem>
                 ))}
               </div>

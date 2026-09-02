@@ -1,7 +1,5 @@
 import { PROJECTS } from "@/constants/projects";
-import { getCaseStudyForProject } from "@/libs/case-studies/source";
 import { PageMessages } from "@/libs/i18n/messages";
-import type { AppLocale } from "@/libs/i18n/utils";
 import {
   generateBreadcrumbSchema,
   generateItemListSchema,
@@ -76,23 +74,13 @@ export default async function ProjectsPage({ params }: PageProps) {
   const itemListSchema = generateItemListSchema({
     name: t("projects.metadata.title"),
     description: t("projects.metadata.description"),
-    items: PROJECTS.map((project) => {
-      const caseStudy = getCaseStudyForProject(locale as AppLocale, project.id);
-
-      return {
-        name: tItems(`projects.items.${project.id}.name` as never),
-        description: tItems(
-          `projects.items.${project.id}.contribution` as never
-        ),
-        url: caseStudy
-          ? `${pageUrl}/${caseStudy.slug}`
-          : (project.websiteUrl ??
-            project.githubUrl ??
-            project.designUrl ??
-            pageUrl),
-        image: `${siteUrl}${project.image}`,
-      };
-    }),
+    items: PROJECTS.map((project) => ({
+      name: tItems(`projects.items.${project.id}.name` as never),
+      description: tItems(`projects.items.${project.id}.contribution` as never),
+      url:
+        project.websiteUrl ?? project.githubUrl ?? project.designUrl ?? pageUrl,
+      image: `${siteUrl}${project.image}`,
+    })),
   });
 
   return (

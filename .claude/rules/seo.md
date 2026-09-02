@@ -417,35 +417,6 @@ curl -s https://www.andrealosavio.com/llms.txt | grep -c "## Articles"
 
 ---
 
-### 11. Case Study Structured Data
-
-**What it does**: Each case study page emits `BreadcrumbList` + `CreativeWork`.
-
-**Implementation**:
-
-- Helper: `generateCaseStudySchema` in `src/utils/seo-schema.ts`.
-- `CreativeWork`, not `Article`: a case study is delivered work, not a
-  journalistic piece, and `BlogPosting` belongs to the blog.
-- `author` is inlined with name and url — the same lesson as `BlogPosting`:
-  crawlers evaluate each page on its own, so an `@id` pointing at a node
-  declared on another page resolves to nothing.
-- The client sits in `about` as an `Organization`.
-- Covers are validated as raster in `parseFrontmatter` (`.webp`, `.png`,
-  `.jpg`, `.jpeg`). Unlike the blog there is no `opengraph-image` route to
-  rasterise an SVG here, so the frontmatter guard is what stops a blank social
-  preview from shipping.
-- Sitemap: one URL pair per published case study, `lastModified` from
-  frontmatter, `samePath` because the slug is shared across locales.
-- `/projects`' `ItemList` points at the case study when one exists, and now
-  carries the contribution text rather than the client's own description.
-- Drafts emit nothing anywhere: no page, no sitemap entry, no `llms.txt` line.
-
-**How to test**: open a case study, copy the JSON-LD block, and check it on
-the Rich Results Test. Confirm `@type` includes `BreadcrumbList` and
-`CreativeWork`.
-
----
-
 ## Testing and Verification
 
 ### Full Pre-deploy Checklist
@@ -486,14 +457,6 @@ Before considering the site "SEO-ready", verify:
   - [ ] Every article reachable at its `.md` URL with `text/markdown` and
         `X-Robots-Tag: noindex, follow`
   - [ ] `/llms.txt` lists published articles
-
-- [ ] **Case Studies**
-  - [ ] Every published case study's cover is a raster file that actually
-        exists (`.webp`, `.png`, `.jpg`, `.jpeg`) — the build fails naming the
-        file if one is missing, but confirm the image itself loads
-  - [ ] `BreadcrumbList` + `CreativeWork` are both valid on the Rich Results
-        Test
-  - [ ] Drafts emit nothing: no page, no sitemap entry, no `llms.txt` line
 
 - [ ] **Performance**
   - [ ] PageSpeed score > 90
