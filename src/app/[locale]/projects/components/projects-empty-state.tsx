@@ -1,20 +1,26 @@
 "use client";
 
+import type { ProjectRole } from "@/constants/projects";
 import { useProjectsFilter } from "./projects-filter-provider";
 
 interface ProjectsEmptyStateProps {
-  projectTags: readonly (readonly string[])[];
+  projects: readonly {
+    tags: readonly string[];
+    roles: readonly ProjectRole[];
+  }[];
   message: string;
 }
 
 export function ProjectsEmptyState({
-  projectTags,
+  projects,
   message,
 }: ProjectsEmptyStateProps) {
-  const { selectedTags } = useProjectsFilter();
+  const { selectedTags, selectedRoles } = useProjectsFilter();
 
-  const hasMatch = projectTags.some((tags) =>
-    selectedTags.every((tag) => tags.includes(tag))
+  const hasMatch = projects.some(
+    (project) =>
+      selectedTags.every((tag) => project.tags.includes(tag)) &&
+      selectedRoles.every((role) => project.roles.includes(role as ProjectRole))
   );
 
   if (hasMatch) {

@@ -76,7 +76,7 @@ export default async function ProjectsPage({ params }: PageProps) {
     description: t("projects.metadata.description"),
     items: PROJECTS.map((project) => ({
       name: tItems(`projects.items.${project.id}.name` as never),
-      description: tItems(`projects.items.${project.id}.description` as never),
+      description: tItems(`projects.items.${project.id}.contribution` as never),
       url:
         project.websiteUrl ?? project.githubUrl ?? project.designUrl ?? pageUrl,
       image: `${siteUrl}${project.image}`,
@@ -93,8 +93,8 @@ export default async function ProjectsPage({ params }: PageProps) {
       />
       <PageMessages namespaces={["projects"]}>
         <HeroSection id="hero" />
-        <FeaturedProductsSection id="featured" />
         <ProjectsSection id="projects" />
+        <FeaturedProductsSection id="featured" />
       </PageMessages>
     </>
   );

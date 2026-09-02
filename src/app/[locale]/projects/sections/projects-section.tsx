@@ -1,7 +1,8 @@
-import { PROJECTS } from "@/constants/projects";
+import { PROJECTS, type ProjectKind } from "@/constants/projects";
 import { cn } from "@/utils/cn";
 import { getTranslations } from "next-intl/server";
 import { ProjectCard } from "../components/project-card";
+import { ProjectGroupHeading } from "../components/project-group-heading";
 import { ProjectItem } from "../components/project-item";
 import { ProjectsEmptyState } from "../components/projects-empty-state";
 import { ProjectsFilter } from "../components/projects-filter";
@@ -12,7 +13,13 @@ interface ProjectsSectionProps {
   className?: string;
 }
 
+const GROUPS: { kind: ProjectKind; key: string }[] = [
+  { kind: "client", key: "clients" },
+  { kind: "personal", key: "experiments" },
+];
+
 const ALL_TAGS = [...new Set(PROJECTS.flatMap((p) => p.tags))].sort();
+const ALL_ROLES = [...new Set(PROJECTS.flatMap((p) => p.roles))].sort();
 
 export async function ProjectsSection({ id, className }: ProjectsSectionProps) {
   const t = await getTranslations();
@@ -35,25 +42,52 @@ export async function ProjectsSection({ id, className }: ProjectsSectionProps) {
     >
       <h2 className="sr-only">{t("projects.list.title")}</h2>
 
-      <ProjectsFilterProvider availableTags={ALL_TAGS}>
-        <ProjectsFilter tags={ALL_TAGS} />
+      <ProjectsFilterProvider
+        availableTags={ALL_TAGS}
+        availableRoles={ALL_ROLES}
+      >
+        <ProjectsFilter tags={ALL_TAGS} roles={ALL_ROLES} />
 
-        <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2">
-          {PROJECTS.map((project, index) => (
-            <ProjectItem
-              key={project.id}
-              tags={project.tags}
-              sourceIndex={index}
-              alphabeticalIndex={alphabeticalIndexById.get(project.id) ?? index}
-              total={PROJECTS.length}
-            >
-              <ProjectCard project={project} />
-            </ProjectItem>
-          ))}
-        </div>
+        {GROUPS.map(({ kind, key }) => {
+          const projects = PROJECTS.filter((project) => project.kind === kind);
+
+          return (
+            <div key={kind} className="mb-12 last:mb-0">
+              <ProjectGroupHeading
+                title={t(`projects.groups.${key}.title`)}
+                subtitle={t(`projects.groups.${key}.subtitle`)}
+              />
+
+              <div
+                className={cn(
+                  "grid grid-cols-1 gap-6",
+                  kind === "personal" && "md:grid-cols-2"
+                )}
+              >
+                {projects.map((project) => (
+                  <ProjectItem
+                    key={project.id}
+                    tags={project.tags}
+                    roles={project.roles}
+                    sourceIndex={PROJECTS.indexOf(project)}
+                    alphabeticalIndex={
+                      alphabeticalIndexById.get(project.id) ?? 0
+                    }
+                    total={PROJECTS.length}
+                  >
+                    <ProjectCard project={project} />
+                  </ProjectItem>
+                ))}
+              </div>
+            </div>
+          );
+        })}
 
         <ProjectsEmptyState
-          projectTags={PROJECTS.map((project) => project.tags)}
+          projects={PROJECTS.map((project) => ({
+            tags: project.tags,
+            roles: project.roles,
+          }))}
           message={t("projects.items.common.noResults")}
         />
       </ProjectsFilterProvider>
