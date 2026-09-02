@@ -498,16 +498,17 @@ interface GenerateCaseStudySchemaProps {
   dateModified?: string;
   image: string;
   author: SchemaEntityReference;
+  publisher: SchemaEntityReference;
   about: { name: string; url?: string };
   inLanguage: string;
   keywords: readonly string[];
 }
 
 /**
- * Schema di un case study: il lavoro consegnato, non un articolo. `author` è
- * inlineato con nome e url per la stessa ragione di `generateBlogPostingSchema`
- * — ogni pagina viene valutata da sola, e un `@id` verso un nodo dichiarato
- * altrove risulta privo di `name` e `url`.
+ * Schema di un case study: il lavoro consegnato, non un articolo. `author` e
+ * `publisher` sono inlineati con nome e url per la stessa ragione di
+ * `generateBlogPostingSchema` — ogni pagina viene valutata da sola, e un
+ * `@id` verso un nodo dichiarato altrove risulta privo di `name` e `url`.
  */
 export function generateCaseStudySchema({
   url,
@@ -517,6 +518,7 @@ export function generateCaseStudySchema({
   dateModified,
   image,
   author,
+  publisher,
   about,
   inLanguage,
   keywords,
@@ -537,6 +539,12 @@ export function generateCaseStudySchema({
       "@id": author.id,
       name: author.name,
       url: author.url,
+    },
+    publisher: {
+      "@type": "Organization",
+      "@id": publisher.id,
+      name: publisher.name,
+      url: publisher.url,
     },
     about: {
       "@type": "Organization",

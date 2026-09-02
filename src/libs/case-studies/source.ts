@@ -41,11 +41,14 @@ function readForLocale(locale: AppLocale): CaseStudy[] {
 /**
  * Invarianti che coinvolgono piu file: ogni case study pubblicato ha il
  * gemello nell'altra lingua sotto lo stesso slug, punta a un progetto che
- * esiste, ed e l'unico a puntare a quel progetto. Le bozze sono escluse.
+ * esiste, ed e l'unico a puntare a quel progetto, e la sua cover esiste
+ * davvero sul filesystem. Le bozze sono escluse da tutti questi controlli:
+ * gli scheletri committati puntano deliberatamente a cover non ancora create.
  */
 export function assertConsistency(
   byLocale: Record<AppLocale, CaseStudy[]>,
-  projectIds: readonly string[]
+  projectIds: readonly string[],
+  coverExists: (coverPath: string) => boolean
 ): void {
   const slugsByLocale = {} as Record<AppLocale, Set<string>>;
 
@@ -58,7 +61,7 @@ export function assertConsistency(
         continue;
       }
 
-      const { project } = caseStudy.frontmatter;
+      const { project, cover } = caseStudy.frontmatter;
 
       if (!projectIds.includes(project)) {
         throw new Error(
@@ -69,6 +72,12 @@ export function assertConsistency(
       if (projects.has(project)) {
         throw new Error(
           `[case-studies] il progetto "${project}" ha piu di un case study nel locale "${locale}"`
+        );
+      }
+
+      if (!coverExists(cover)) {
+        throw new Error(
+          `[case-studies] ${locale}/${caseStudy.slug}.mdx: cover "${cover}" non esiste`
         );
       }
 
@@ -107,7 +116,8 @@ function loadAll(): Record<AppLocale, CaseStudy[]> {
 
   assertConsistency(
     loaded,
-    PROJECTS.map((project) => project.id)
+    PROJECTS.map((project) => project.id),
+    (cover) => fs.existsSync(path.join(process.cwd(), "public", cover))
   );
   cache = loaded;
 

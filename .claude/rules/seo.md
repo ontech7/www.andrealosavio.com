@@ -487,6 +487,14 @@ Before considering the site "SEO-ready", verify:
         `X-Robots-Tag: noindex, follow`
   - [ ] `/llms.txt` lists published articles
 
+- [ ] **Case Studies**
+  - [ ] Every published case study's cover is a raster file that actually
+        exists (`.webp`, `.png`, `.jpg`, `.jpeg`) — the build fails naming the
+        file if one is missing, but confirm the image itself loads
+  - [ ] `BreadcrumbList` + `CreativeWork` are both valid on the Rich Results
+        Test
+  - [ ] Drafts emit nothing: no page, no sitemap entry, no `llms.txt` line
+
 - [ ] **Performance**
   - [ ] PageSpeed score > 90
   - [ ] LCP < 2.5s

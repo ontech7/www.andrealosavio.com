@@ -112,7 +112,7 @@ export const PROJECTS: Project[] = [
     roles: ["ui-ux", "product"],
     logo: "/images/clients/forfettario-control.svg",
     image: "/images/projects/forfettario-control.webp",
-    tags: ["design", "mvp", "mobile"],
+    tags: ["design", "mvp"],
     designUrl: "https://www.behance.net/gallery/209115303/Forfettario-Control",
   },
   {

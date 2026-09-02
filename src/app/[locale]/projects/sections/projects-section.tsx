@@ -4,6 +4,7 @@ import type { AppLocale } from "@/libs/i18n/utils";
 import { cn } from "@/utils/cn";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ProjectCard } from "../components/project-card";
+import { ProjectGroup } from "../components/project-group";
 import { ProjectGroupHeading } from "../components/project-group-heading";
 import { ProjectItem } from "../components/project-item";
 import { ProjectsEmptyState } from "../components/projects-empty-state";
@@ -65,7 +66,7 @@ export async function ProjectsSection({ id, className }: ProjectsSectionProps) {
           );
 
           return (
-            <div key={kind} className="mb-12 last:mb-0">
+            <ProjectGroup key={kind} projects={projects}>
               <ProjectGroupHeading
                 title={t(`projects.groups.${key}.title`)}
                 subtitle={t(`projects.groups.${key}.subtitle`)}
@@ -97,7 +98,7 @@ export async function ProjectsSection({ id, className }: ProjectsSectionProps) {
                   </ProjectItem>
                 ))}
               </div>
-            </div>
+            </ProjectGroup>
           );
         })}
 

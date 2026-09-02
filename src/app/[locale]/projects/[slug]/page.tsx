@@ -118,6 +118,11 @@ export default async function CaseStudyPage({ params }: PageProps) {
       name: "Andrea Losavio",
       url: siteUrl,
     },
+    publisher: {
+      id: `${siteUrl}#organization`,
+      name: "Andrea Losavio",
+      url: siteUrl,
+    },
     about: { name, ...(project.websiteUrl && { url: project.websiteUrl }) },
     inLanguage: locale === "it" ? "it-IT" : "en-US",
     keywords: [...project.roles, ...project.tags],

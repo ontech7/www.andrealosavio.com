@@ -53,7 +53,7 @@ describe("parseFrontmatter", () => {
     ).toThrow(/updatedAt/);
   });
 
-  it("pretende coverAlt quando c'è cover", () => {
+  it("rifiuta coverAlt mancante", () => {
     const { coverAlt: _coverAlt, ...withoutAlt } = valid;
 
     expect(() => parseFrontmatter(withoutAlt, "it/quido.mdx")).toThrow(
@@ -81,6 +81,15 @@ describe("parseFrontmatter", () => {
     expect(() =>
       parseFrontmatter({ ...valid, summary: "x".repeat(170) }, "it/quido.mdx")
     ).not.toThrow();
+  });
+
+  it("normalizza publishedAt quando gray-matter lo converte in Date", () => {
+    expect(
+      parseFrontmatter(
+        { ...valid, publishedAt: new Date("2026-09-02T00:00:00Z") },
+        "it/quido.mdx"
+      ).publishedAt
+    ).toBe("2026-09-02");
   });
 
   it("rifiuta una data ben formata ma inesistente", () => {

@@ -25,6 +25,8 @@ function build(
 }
 
 const projectIds = ["quido", "recrowd"];
+const coverAlwaysExists = () => true;
+const coverNeverExists = () => false;
 
 describe("assertConsistency", () => {
   it("accetta una coppia completa", () => {
@@ -34,7 +36,8 @@ describe("assertConsistency", () => {
           it: [build("it", "quido", "quido")],
           en: [build("en", "quido", "quido")],
         },
-        projectIds
+        projectIds,
+        coverAlwaysExists
       )
     ).not.toThrow();
   });
@@ -43,7 +46,8 @@ describe("assertConsistency", () => {
     expect(() =>
       assertConsistency(
         { it: [build("it", "quido", "quido")], en: [] },
-        projectIds
+        projectIds,
+        coverAlwaysExists
       )
     ).toThrow(/manca in "en"/);
   });
@@ -55,7 +59,8 @@ describe("assertConsistency", () => {
           it: [build("it", "fantasma", "fantasma")],
           en: [build("en", "fantasma", "fantasma")],
         },
-        projectIds
+        projectIds,
+        coverAlwaysExists
       )
     ).toThrow(/fantasma/);
   });
@@ -67,7 +72,8 @@ describe("assertConsistency", () => {
           it: [build("it", "quido", "quido"), build("it", "quido-2", "quido")],
           en: [build("en", "quido", "quido"), build("en", "quido-2", "quido")],
         },
-        projectIds
+        projectIds,
+        coverAlwaysExists
       )
     ).toThrow(/piu di un case study/);
   });
@@ -76,7 +82,31 @@ describe("assertConsistency", () => {
     expect(() =>
       assertConsistency(
         { it: [build("it", "quido", "quido", true)], en: [] },
-        projectIds
+        projectIds,
+        coverAlwaysExists
+      )
+    ).not.toThrow();
+  });
+
+  it("lancia quando un case study non-draft ha una cover che non esiste", () => {
+    expect(() =>
+      assertConsistency(
+        {
+          it: [build("it", "quido", "quido")],
+          en: [build("en", "quido", "quido")],
+        },
+        projectIds,
+        coverNeverExists
+      )
+    ).toThrow(/cover/);
+  });
+
+  it("non lancia quando una bozza ha una cover che non esiste", () => {
+    expect(() =>
+      assertConsistency(
+        { it: [build("it", "quido", "quido", true)], en: [] },
+        projectIds,
+        coverNeverExists
       )
     ).not.toThrow();
   });
