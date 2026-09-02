@@ -24,13 +24,14 @@ export async function ProjectCard({
   const externalUrl =
     project.websiteUrl ?? project.designUrl ?? project.githubUrl ?? null;
 
-  const externalLabel = project.designUrl
-    ? t("projects.items.common.checkDesign")
-    : project.githubUrl && !project.websiteUrl
-      ? t("projects.items.common.checkGitHub")
-      : project.kind === "client"
-        ? t("projects.items.common.clientSite")
-        : t("projects.items.common.checkWebsite");
+  const externalLabel =
+    project.designUrl && !project.websiteUrl
+      ? t("projects.items.common.checkDesign")
+      : project.githubUrl && !project.websiteUrl
+        ? t("projects.items.common.checkGitHub")
+        : project.kind === "client"
+          ? t("projects.items.common.clientSite")
+          : t("projects.items.common.checkWebsite");
 
   return (
     <Card
