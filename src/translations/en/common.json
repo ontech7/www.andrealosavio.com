@@ -24,7 +24,8 @@
       "title": "Did you decide yet?",
       "descriptionPart1": "Don't worry, take your time... in the meantime, give ",
       "descriptionLink": "this cat",
-      "descriptionPart2": " a vote"
+      "descriptionPart2": " a vote",
+      "easterEgg": "And if you fancy it, here's my very first website."
     },
     "copyright": "Copyright © 2018 - {year} Andrea Losavio. All rights reserved.",
     "vat": "VAT: {vatNumber}",

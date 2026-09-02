@@ -93,6 +93,16 @@ export async function Footer() {
                   {t("common.footer.cta.title")}
                 </h4>
                 <FooterCatCta />
+                <p className="text-muted-foreground mt-3 text-sm">
+                  <a
+                    href="https://old.andrealosavio.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-foreground focus-visible:ring-ring/50 rounded-sm underline underline-offset-2 transition-colors outline-none focus-visible:ring-[3px]"
+                  >
+                    {t("common.footer.cta.easterEgg")}
+                  </a>
+                </p>
               </div>
             </div>
           </div>
