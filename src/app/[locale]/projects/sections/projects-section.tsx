@@ -4,10 +4,10 @@ import { getTranslations } from "next-intl/server";
 import { ProjectCard } from "../components/project-card";
 import { ProjectGroup } from "../components/project-group";
 import { ProjectGroupHeading } from "../components/project-group-heading";
-import { ProjectItem } from "../components/project-item";
 import { ProjectsEmptyState } from "../components/projects-empty-state";
 import { ProjectsFilter } from "../components/projects-filter";
 import { ProjectsFilterProvider } from "../components/projects-filter-provider";
+import { ProjectsGrid } from "../components/projects-grid";
 
 interface ProjectsSectionProps {
   id: string;
@@ -18,6 +18,8 @@ const GROUPS: { kind: ProjectKind; key: string }[] = [
   { kind: "client", key: "clients" },
   { kind: "personal", key: "experiments" },
 ];
+
+const CLIENTS_VISIBLE = 3;
 
 const FILTERABLE_PROJECTS = PROJECTS.filter(
   (project) => project.kind !== "product"
@@ -69,27 +71,23 @@ export async function ProjectsSection({ id, className }: ProjectsSectionProps) {
                 subtitle={t(`projects.groups.${key}.subtitle`)}
               />
 
-              <div
-                className={cn(
-                  "grid grid-cols-1 gap-6",
-                  kind === "personal" && "md:grid-cols-2"
-                )}
+              <ProjectsGrid
+                projects={projects.map((project) => ({
+                  tags: project.tags,
+                  roles: project.roles,
+                  alphabeticalIndex: alphabeticalIndexById.get(project.id) ?? 0,
+                }))}
+                collapseAfter={kind === "client" ? CLIENTS_VISIBLE : undefined}
+                className={cn(kind === "personal" && "md:grid-cols-2")}
               >
                 {projects.map((project) => (
-                  <ProjectItem
+                  <ProjectCard
                     key={project.id}
-                    tags={project.tags}
-                    roles={project.roles}
-                    sourceIndex={FILTERABLE_PROJECTS.indexOf(project)}
-                    alphabeticalIndex={
-                      alphabeticalIndexById.get(project.id) ?? 0
-                    }
-                    total={FILTERABLE_PROJECTS.length}
-                  >
-                    <ProjectCard project={project} />
-                  </ProjectItem>
+                    project={project}
+                    layout={kind === "personal" ? "stacked" : "split"}
+                  />
                 ))}
-              </div>
+              </ProjectsGrid>
             </ProjectGroup>
           );
         })}

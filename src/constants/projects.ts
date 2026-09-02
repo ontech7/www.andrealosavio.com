@@ -1,11 +1,13 @@
 export const PROJECT_ROLES = [
-  "ui-ux",
+  "discovery",
   "product",
-  "frontend",
-  "fullstack",
-  "mobile",
-  "architecture",
+  "ui-ux",
   "design-system",
+  "frontend",
+  "mobile",
+  "fullstack",
+  "architecture",
+  "dev-tooling",
   "mentoring",
 ] as const;
 
@@ -29,7 +31,7 @@ export const PROJECTS: Project[] = [
   {
     id: "quido",
     kind: "client",
-    roles: ["ui-ux", "product", "mobile", "frontend"],
+    roles: ["product", "ui-ux", "frontend", "mobile", "dev-tooling"],
     logo: "/images/clients/quido.svg",
     image: "/images/projects/quido_v2.webp",
     tags: ["nextjs", "react", "expo-sdk", "react-native", "design"],
@@ -38,7 +40,7 @@ export const PROJECTS: Project[] = [
   {
     id: "recrowd",
     kind: "client",
-    roles: ["fullstack", "frontend", "architecture"],
+    roles: ["fullstack", "architecture"],
     logo: "/images/clients/recrowd.svg",
     image: "/images/projects/recrowd.webp",
     tags: ["nextjs", "react", "nodejs", "prisma", "postgresql"],
@@ -47,7 +49,7 @@ export const PROJECTS: Project[] = [
   {
     id: "othersideTechnology",
     kind: "client",
-    roles: ["ui-ux", "frontend"],
+    roles: ["ui-ux", "frontend", "architecture"],
     logo: "/images/clients/otherside-technology.svg",
     image: "/images/projects/otherside-technology.webp",
     tags: ["nextjs", "react", "ai"],
@@ -56,7 +58,7 @@ export const PROJECTS: Project[] = [
   {
     id: "brainplatform",
     kind: "client",
-    roles: ["fullstack", "design-system", "frontend", "mentoring"],
+    roles: ["frontend", "design-system", "mentoring"],
     logo: "/images/clients/brainplatform.svg",
     image: "/images/projects/brainplatform.webp",
     tags: ["nextjs", "react", "fluent-ui", "ant-design"],
@@ -65,7 +67,7 @@ export const PROJECTS: Project[] = [
   {
     id: "studioBargiggia",
     kind: "client",
-    roles: ["ui-ux", "fullstack", "design-system"],
+    roles: ["discovery", "ui-ux", "fullstack", "architecture"],
     logo: "/images/clients/studio-bargiggia.svg",
     image: "/images/projects/studiobargiggia.webp",
     tags: ["nextjs", "react", "strapi", "design"],
@@ -74,7 +76,7 @@ export const PROJECTS: Project[] = [
   {
     id: "anonymous",
     kind: "client",
-    roles: ["fullstack", "architecture", "product"],
+    roles: ["discovery", "fullstack", "architecture"],
     logo: null,
     image: "/images/projects/anonymous_tabacconists.webp",
     tags: ["nextjs", "react", "prisma", "postgresql"],
@@ -82,7 +84,7 @@ export const PROJECTS: Project[] = [
   {
     id: "ravenn",
     kind: "client",
-    roles: ["fullstack", "frontend"],
+    roles: ["fullstack"],
     logo: "/images/clients/ravenn.svg",
     image: "/images/projects/ravenn.webp",
     tags: ["nextjs", "react", "prisma", "postgresql"],

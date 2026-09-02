@@ -7,10 +7,15 @@ import Image from "next/image";
 
 interface ProjectCardProps {
   project: Project;
+  layout?: "split" | "stacked";
   className?: string;
 }
 
-export async function ProjectCard({ project, className }: ProjectCardProps) {
+export async function ProjectCard({
+  project,
+  layout = "split",
+  className,
+}: ProjectCardProps) {
   const t = await getTranslations();
 
   const name = t(`projects.items.${project.id}.name`);
@@ -29,17 +34,28 @@ export async function ProjectCard({ project, className }: ProjectCardProps) {
   return (
     <Card
       className={cn(
-        "gap-0 overflow-hidden md:grid md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]",
+        "gap-0 overflow-hidden",
+        layout === "split" &&
+          "md:grid md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]",
         className
       )}
     >
-      <div className="relative aspect-3/2 overflow-hidden md:aspect-auto md:h-full">
+      <div
+        className={cn(
+          "relative aspect-3/2 overflow-hidden",
+          layout === "split" && "md:aspect-auto md:h-full"
+        )}
+      >
         <Image
           src={project.image}
           alt=""
           width={600}
           height={400}
-          sizes="(max-width: 768px) 100vw, 380px"
+          sizes={
+            layout === "split"
+              ? "(max-width: 768px) 100vw, 380px"
+              : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 480px"
+          }
           className="size-full object-cover object-top"
           aria-hidden="true"
         />
@@ -78,7 +94,7 @@ export async function ProjectCard({ project, className }: ProjectCardProps) {
               style={{ background: "var(--border-gradient)" }}
             >
               <span className="bg-card text-foreground block rounded-md px-1.5 py-0.5 text-[10px] font-medium">
-                {role}
+                {t(`projects.roleLabels.${role}`)}
               </span>
             </span>
           ))}

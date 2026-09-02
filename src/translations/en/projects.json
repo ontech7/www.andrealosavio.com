@@ -5,13 +5,13 @@
   },
   "hero": {
     "title": "Works <highlight>for clients</highlight> and <highlight>side projects</highlight>",
-    "description": "What I've done for companies and startups: product, interfaces, architecture. Plus the projects I built on my own.",
+    "description": "What I actually did for the companies I worked with, and the projects I built on my own.",
     "ctaCheckOut": "Check out"
   },
   "groups": {
     "clients": {
       "title": "Client work",
-      "subtitle": "What I built, and what I left behind when I walked away."
+      "subtitle": "I come in where a technical piece is missing: I propose, I argue it out, and what I cost has to come back to them."
     },
     "experiments": {
       "title": "Experiments",
@@ -30,8 +30,22 @@
     "rolesLabel": "Type of work",
     "tagsLabel": "Technologies"
   },
+  "roleLabels": {
+    "discovery": "Discovery",
+    "product": "Product",
+    "ui-ux": "UI/UX",
+    "design-system": "Design system",
+    "frontend": "Frontend",
+    "mobile": "Mobile",
+    "fullstack": "Fullstack",
+    "architecture": "Architecture",
+    "dev-tooling": "Dev tooling",
+    "mentoring": "Mentoring"
+  },
   "list": {
-    "title": "Project list"
+    "title": "Project list",
+    "showMore": "{count, plural, one {Show 1 more project} other {Show # more projects}}",
+    "showLess": "Show less"
   },
   "items": {
     "common": {
@@ -44,57 +58,57 @@
     "quido": {
       "name": "Quido S.r.l.",
       "context": "AI platform for private equity, M&A and investment banking",
-      "contribution": "I rebuilt the platform's UI/UX from scratch in Figma and shipped it with Next.js and Expo. Over time I became their forward deployed engineer: internal tooling, sharper agentic development, and calls on what to build first."
+      "contribution": "I came in to help with the frontend and the interface, and within days I was proposing bigger changes. I rebuilt the platform from scratch and we shipped it in time for the investor call: they gave the go-ahead, and the projects that followed started from there. Now I decide with them what is worth building, and I set up the tooling the team works with."
     },
     "recrowd": {
       "name": "Recrowd S.r.l.",
       "context": "Real-estate crowdfunding platform",
-      "contribution": "A long collaboration across several platforms: I built the entire backoffice with Next.js, Node.js and PostgreSQL, and also worked on the public landing page. Frontend, backend and technical decisions alongside their team."
+      "contribution": "Two years across their platforms, from the landing page to the investor area. The back-office already existed and we rebuilt it: we wanted marketing and customer success to work in it without asking a developer, and sensitive operations to go through 2FA. Their designer owned the design system; I took features end to end, frontend and backend."
     },
     "othersideTechnology": {
       "name": "Otherside Technology S.r.l.",
       "context": "Software house building tailored AI solutions",
-      "contribution": "I never touched their website: I worked on CloTU, the multi-agent system they were building for organisations. Frontend and UI/UX were mine — the problem of making an agent orchestration something a person can actually steer."
+      "contribution": "I worked on CloTU, the product companies use to query their own documents through dedicated agents. I handled the frontend and the interface: permissions across four levels, from the administrator down to a single member of a department, company access through SSO, and a different theme per customer. I designed the permission model together with the backend engineer."
     },
     "brainplatform": {
       "name": "Brainplatform S.r.l.",
       "context": "Development and design agency for digital products",
-      "contribution": "A full rework of a legacy back-office: Fluent UI to give the web the behaviour of a Microsoft tool, with typeahead search and quick actions. Then two dashboards, the first becoming the whitelabel base of the second. I mentored a junior and left everything documented."
+      "contribution": "I rebuilt a client's internal platform from scratch, with Fluent UI because the people using it all day already live inside Microsoft tools. Then two smaller dashboards, the first becoming the reusable base for the second. Their technicians make far fewer mistakes now, and they kept asking me for more. A colleague owned the backend; I taught the intern the frontend side."
     },
     "studioBargiggia": {
       "name": "Studio Bargiggia",
       "context": "Condominium management firm",
-      "contribution": "From the discovery call to the handover: needs analysis, two design routes for the client to choose from, Figma, then Next.js and on-premise Strapi. I migrated the content from the old site myself. They keep it updated on their own today."
+      "contribution": "They needed to update collaborators and managed buildings constantly, so I proposed a CMS instead of a site someone has to touch every time. They already had a VPS, so I put Strapi on it and added no running cost. I migrated the old site's content myself. Today they update it on their own."
     },
     "anonymous": {
       "name": "Anonymous",
       "context": "Private platform for a field sales network",
-      "contribution": "A tool used daily from tablets: 7,000 Lombardy tobacconists on a map, check-in valid only within 500 metres, and a PDF quote generated to send over WhatsApp. Next.js with server components, serverless PostgreSQL, sessions and RBAC."
+      "contribution": "The client brought the requirements, and we went through them together to work out what was feasible and what it would cost. The agents work from a tablet, so a check-in only counts if you are actually standing in front of the shop, and the quote comes out as a PDF ready for WhatsApp. Today domain, hosting and database cost them nothing, and they already know the threshold where that stops."
     },
     "ravenn": {
       "name": "Ravenn S.r.l.",
       "context": "Logistics and hospitality platform for events",
-      "contribution": "I stepped in to cover for an absent CTO, then came back a second time to build the area reserved for event staff: password-gated access and dedicated flows, kept separate from the attendees'."
+      "contribution": "I came in as a fullstack developer to support the product: maintenance, bugs, and whatever came down from the CEO. I came back a second time for something bigger, the area reserved for event staff, password-protected and with a path of its own, separate from the attendees'. I built it with another developer and closed the collaboration when it was done."
     },
     "fastmemo": {
       "name": "Fast Memo - Notes in one click",
       "context": "Cross-platform note-taking app, open source",
-      "contribution": "Born because notes end up on someone else's servers and the useful features sit behind a paywall. It has webhooks, voice recognition and local AI, runs on mobile and desktop, and can be self-hosted. Over 1,000 downloads and 30+ stars on GitHub."
+      "contribution": "A notes app that runs on mobile and desktop and that you can keep on a server of your own. It has webhooks, dictation, and a model that runs locally. Open source, over a thousand downloads."
     },
     "coolifyManager": {
       "name": "Coolify Manager",
       "context": "Mobile app and Chrome extension for Coolify servers",
-      "contribution": "Coolify in your pocket: restart a server, read the logs, follow a deploy while you're away from the desk. Built on Coolify's REST APIs, it works with both the hosted and the self-hosted setup. Over 1,000 downloads."
+      "contribution": "An app for keeping an eye on a Coolify server from your phone, when you are away from the desk. Built on its REST API, it works with both the hosted and the self-hosted version. Over a thousand downloads."
     },
     "forfettarioControl": {
       "name": "Forfettario Control",
       "context": "App concept for Italian flat-tax freelancers",
-      "contribution": "It never left the design stage: invoices, deadlines and notifications ordered by urgency, drawn in Figma. It solved nothing others weren't already solving — I wanted to see what it would look like done well."
+      "contribution": "A concept that stopped at the design. Invoices and deadlines sorted by urgency rather than by date, drawn in Figma. It never became an app."
     },
     "coffeeNotesLab": {
       "name": "Coffee Notes Lab",
       "context": "A log of espresso tastings and home experiments",
-      "contribution": "A personal project with no goal: somewhere to work on the interface without a deadline, the /photos section especially. Next.js 16, nothing more."
+      "contribution": "Where I write down the espressos I try. I built it to work on an interface with no client attached, mostly the /photos section."
     }
   }
 }

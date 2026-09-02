@@ -35,6 +35,8 @@ function FilterChipGroup({
       <div className="flex flex-wrap gap-1.5" role="group" aria-label={label}>
         {values.map((value) => {
           const isSelected = selected.includes(value);
+          const display =
+            variant === "role" ? t(`projects.roleLabels.${value}`) : value;
 
           return (
             <button
@@ -42,7 +44,9 @@ function FilterChipGroup({
               type="button"
               onClick={() => onToggle(value)}
               aria-pressed={isSelected}
-              aria-label={t("common.accessibility.filterByTag", { tag: value })}
+              aria-label={t("common.accessibility.filterByTag", {
+                tag: display,
+              })}
               className={cn(
                 "cursor-pointer rounded-md px-2 py-1 text-xs font-medium transition-colors lg:text-[10px]",
                 isSelected
@@ -52,7 +56,7 @@ function FilterChipGroup({
                     : "bg-muted text-muted-foreground hover:bg-muted/80"
               )}
             >
-              {value}
+              {display}
             </button>
           );
         })}
