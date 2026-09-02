@@ -12,14 +12,70 @@ const SORT_OPTIONS = [
   { value: "desc", labelKey: "projects.filter.sortOrderDesc" },
 ] as const satisfies readonly { value: SortOrder; labelKey: string }[];
 
-interface ProjectsFilterProps {
-  tags: readonly string[];
+interface FilterChipGroupProps {
+  label: string;
+  values: readonly string[];
+  selected: readonly string[];
+  onToggle: (value: string) => void;
+  variant: "role" | "tag";
 }
 
-export function ProjectsFilter({ tags }: ProjectsFilterProps) {
+function FilterChipGroup({
+  label,
+  values,
+  selected,
+  onToggle,
+  variant,
+}: FilterChipGroupProps) {
   const t = useTranslations();
-  const { selectedTags, sortOrder, toggleTag, changeSortOrder } =
-    useProjectsFilter();
+
+  return (
+    <div className="flex flex-col gap-2">
+      <span className="text-muted-foreground text-sm">{label}</span>
+      <div className="flex flex-wrap gap-1.5" role="group" aria-label={label}>
+        {values.map((value) => {
+          const isSelected = selected.includes(value);
+
+          return (
+            <button
+              key={value}
+              type="button"
+              onClick={() => onToggle(value)}
+              aria-pressed={isSelected}
+              aria-label={t("common.accessibility.filterByTag", { tag: value })}
+              className={cn(
+                "cursor-pointer rounded-md px-2 py-1 text-xs font-medium transition-colors lg:text-[10px]",
+                isSelected
+                  ? "bg-foreground text-background"
+                  : variant === "role"
+                    ? "bg-muted text-foreground hover:bg-muted/80"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+              )}
+            >
+              {value}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+interface ProjectsFilterProps {
+  tags: readonly string[];
+  roles: readonly string[];
+}
+
+export function ProjectsFilter({ tags, roles }: ProjectsFilterProps) {
+  const t = useTranslations();
+  const {
+    selectedTags,
+    selectedRoles,
+    sortOrder,
+    toggleTag,
+    toggleRole,
+    changeSortOrder,
+  } = useProjectsFilter();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,8 +100,8 @@ export function ProjectsFilter({ tags }: ProjectsFilterProps) {
   };
 
   return (
-    <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-      <div className="order-1 flex flex-col gap-2">
+    <div className="mb-8 flex flex-col gap-6">
+      <div className="flex flex-col gap-2">
         <span id="sort-label" className="text-muted-foreground text-sm">
           {t("projects.filter.sortLabel")}
         </span>
@@ -112,37 +168,21 @@ export function ProjectsFilter({ tags }: ProjectsFilterProps) {
         </div>
       </div>
 
-      <div className="order-2 flex flex-col gap-2">
-        <span className="text-muted-foreground text-sm">
-          {t("projects.filter.tagsLabel")}
-        </span>
-        <div
-          className="flex flex-wrap gap-1.5"
-          role="group"
-          aria-label={t("projects.filter.tagsLabel")}
-        >
-          {tags.map((tag) => {
-            const isSelected = selectedTags.includes(tag);
-            return (
-              <button
-                key={tag}
-                type="button"
-                onClick={() => toggleTag(tag)}
-                aria-pressed={isSelected}
-                aria-label={t("common.accessibility.filterByTag", { tag })}
-                className={cn(
-                  "cursor-pointer rounded-md px-2 py-1 text-xs font-medium transition-colors lg:text-[10px]",
-                  isSelected
-                    ? "bg-foreground text-background"
-                    : "bg-muted text-muted-foreground hover:bg-muted/80"
-                )}
-              >
-                {tag}
-              </button>
-            );
-          })}
-        </div>
-      </div>
+      <FilterChipGroup
+        label={t("projects.filter.rolesLabel")}
+        values={roles}
+        selected={selectedRoles}
+        onToggle={toggleRole}
+        variant="role"
+      />
+
+      <FilterChipGroup
+        label={t("projects.filter.tagsLabel")}
+        values={tags}
+        selected={selectedTags}
+        onToggle={toggleTag}
+        variant="tag"
+      />
     </div>
   );
 }
