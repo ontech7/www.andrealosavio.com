@@ -1,16 +1,19 @@
 import { PROJECTS, type ProjectKind } from "@/constants/projects";
 import { cn } from "@/utils/cn";
 import { getTranslations } from "next-intl/server";
+import { Fragment } from "react";
 import { ProjectCard } from "../components/project-card";
 import { ProjectGroup } from "../components/project-group";
 import { ProjectGroupHeading } from "../components/project-group-heading";
 import { ProjectsEmptyState } from "../components/projects-empty-state";
 import { ProjectsFilter } from "../components/projects-filter";
+import { HideWhileFiltering } from "../components/hide-while-filtering";
 import { ProjectsFilterProvider } from "../components/projects-filter-provider";
 import { ProjectsGrid } from "../components/projects-grid";
 
 interface ProjectsSectionProps {
   id: string;
+  featured?: React.ReactNode;
   className?: string;
 }
 
@@ -32,7 +35,11 @@ const ALL_ROLES = [
   ...new Set(FILTERABLE_PROJECTS.flatMap((p) => p.roles)),
 ].sort();
 
-export async function ProjectsSection({ id, className }: ProjectsSectionProps) {
+export async function ProjectsSection({
+  id,
+  featured,
+  className,
+}: ProjectsSectionProps) {
   const t = await getTranslations();
 
   const sortKeys = FILTERABLE_PROJECTS.map((project) => ({
@@ -65,30 +72,39 @@ export async function ProjectsSection({ id, className }: ProjectsSectionProps) {
           );
 
           return (
-            <ProjectGroup key={kind} projects={projects}>
-              <ProjectGroupHeading
-                title={t(`projects.groups.${key}.title`)}
-                subtitle={t(`projects.groups.${key}.subtitle`)}
-              />
+            <Fragment key={kind}>
+              <ProjectGroup projects={projects}>
+                <ProjectGroupHeading
+                  title={t(`projects.groups.${key}.title`)}
+                  subtitle={t(`projects.groups.${key}.subtitle`)}
+                />
 
-              <ProjectsGrid
-                projects={projects.map((project) => ({
-                  tags: project.tags,
-                  roles: project.roles,
-                  alphabeticalIndex: alphabeticalIndexById.get(project.id) ?? 0,
-                }))}
-                collapseAfter={kind === "client" ? CLIENTS_VISIBLE : undefined}
-                className={cn(kind === "personal" && "md:grid-cols-2")}
-              >
-                {projects.map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    project={project}
-                    layout={kind === "personal" ? "stacked" : "split"}
-                  />
-                ))}
-              </ProjectsGrid>
-            </ProjectGroup>
+                <ProjectsGrid
+                  projects={projects.map((project) => ({
+                    tags: project.tags,
+                    roles: project.roles,
+                    alphabeticalIndex:
+                      alphabeticalIndexById.get(project.id) ?? 0,
+                  }))}
+                  collapseAfter={
+                    kind === "client" ? CLIENTS_VISIBLE : undefined
+                  }
+                  className={cn(kind === "personal" && "md:grid-cols-2")}
+                >
+                  {projects.map((project) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      layout={kind === "personal" ? "stacked" : "split"}
+                    />
+                  ))}
+                </ProjectsGrid>
+              </ProjectGroup>
+
+              {kind === "client" && featured && (
+                <HideWhileFiltering>{featured}</HideWhileFiltering>
+              )}
+            </Fragment>
           );
         })}
 

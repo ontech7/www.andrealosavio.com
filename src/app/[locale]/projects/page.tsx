@@ -93,8 +93,15 @@ export default async function ProjectsPage({ params }: PageProps) {
       />
       <PageMessages namespaces={["projects"]}>
         <HeroSection id="hero" />
-        <ProjectsSection id="projects" />
-        <FeaturedProductsSection id="featured" />
+        <ProjectsSection
+          id="projects"
+          featured={
+            <FeaturedProductsSection
+              id="featured"
+              className="mb-12 max-w-none px-0 pb-0"
+            />
+          }
+        />
       </PageMessages>
     </>
   );
