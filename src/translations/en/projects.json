@@ -8,6 +8,16 @@
     "description": "Developing custom solutions for clients and personal projects to deliver value and explore new ideas",
     "ctaCheckOut": "Check out"
   },
+  "groups": {
+    "clients": {
+      "title": "Client work",
+      "subtitle": "What I built, and what I left behind when I walked away."
+    },
+    "experiments": {
+      "title": "Experiments",
+      "subtitle": "Personal projects, no clients and no deadlines."
+    }
+  },
   "featured": {
     "title": "My own products",
     "subtitle": "Two apps I designed, built and shipped on my own."
@@ -17,65 +27,75 @@
     "sortOrderNone": "No sorting",
     "sortOrderAsc": "Sort A to Z",
     "sortOrderDesc": "Sort Z to A",
-    "tagsLabel": "Choose tags"
+    "rolesLabel": "Type of work",
+    "tagsLabel": "Technologies"
   },
   "list": {
     "title": "Project list"
   },
   "items": {
     "common": {
-      "noResults": "No projects found with selected filters",
-      "checkDesign": "Check the design",
+      "noResults": "No project matches the selected filters",
+      "checkDesign": "See the design",
       "checkWebsite": "Visit the website",
-      "checkGitHub": "Go to GitHub"
-    },
-    "othersideTechnology": {
-      "name": "Otherside Technology S.r.l.",
-      "description": "Otherside Technology is a company that designs and develops custom software and artificial intelligence solutions for businesses: it helps organizations automate processes, analyze data, and improve decision-making through tailored digital tools and scalable AI systems."
-    },
-    "coolifyManager": {
-      "name": "Coolify Manager",
-      "description": "Coolify Manager is a mobile app that lets you manage your self-hosted Coolify servers wherever you are, plus a Chrome extension to do the same directly from your browser toolbar."
+      "checkGitHub": "Go to GitHub",
+      "clientSite": "Client website",
+      "readCaseStudy": "Read the case study"
     },
     "quido": {
       "name": "Quido S.r.l.",
-      "description": "Quido.ai is an artificial intelligence platform dedicated to the world of private equity and M&A transactions in Italy, designed to provide reliable analysis and insights to professionals and investors."
-    },
-    "forfettarioControl": {
-      "name": "Forfettario Control",
-      "description": "This mobile app helps freelancers under the regime forfettario manage their business autonomously. Users can create invoices, upload fiscal documents, and receive reminders for deadlines, including pension contributions. The design focuses on simplicity and clarity, making complex administrative tasks easy to handle directly from their smartphone."
-    },
-    "fastmemo": {
-      "name": "Fast Memo - Notes in one click",
-      "description": "An application for taking notes that aims to condense everything you need for organization, security, and reliability, with full data transparency and self-managed storage, without relying on third-party services."
-    },
-    "anonymous": {
-      "name": "Anonymous",
-      "description": "A platform to manage tobacconists and agents, featuring an interactive map of over 7000 tobacconists in Lombardy."
-    },
-    "ravenn": {
-      "name": "Ravenn S.r.l.",
-      "description": "Ravenn.io is an intuitive platform for managing logistics and hospitality in events: it identifies suitable accommodation for participants and streamlines hotel bookings, cancellations, and modifications in a simplified and efficient way."
+      "context": "AI platform for private equity, M&A and investment banking",
+      "contribution": "I rebuilt the platform's UI/UX from scratch in Figma and shipped it with Next.js and Expo. Over time I became their forward deployed engineer: internal tooling, sharper agentic development, and calls on what to build first."
     },
     "recrowd": {
       "name": "Recrowd S.r.l.",
-      "description": "Recrowd is a real estate crowdfunding platform that allows you to invest your savings in an alternative way, even if you don't have large amounts of capital."
+      "context": "Real-estate crowdfunding platform",
+      "contribution": "A long collaboration across several platforms: I built the entire backoffice with Next.js, Node.js and PostgreSQL, and also worked on the public landing page. Frontend, backend and technical decisions alongside their team."
     },
-    "andreaLosavio": {
-      "name": "Andrea Losavio",
-      "description": "The previous version of my personal website, showcasing my projects and skills as a developer."
+    "othersideTechnology": {
+      "name": "Otherside Technology S.r.l.",
+      "context": "Software house building tailored AI solutions",
+      "contribution": "I never touched their website: I worked on CloTU, the multi-agent system they were building for organisations. Frontend and UI/UX were mine — the problem of making an agent orchestration something a person can actually steer."
     },
     "brainplatform": {
       "name": "Brainplatform S.r.l.",
-      "description": "Brain S.R.L. transforms your website or app into a powerful marketing asset, combining eye-catching design with high performance and communicating your brand's values with authority to keep you ahead of the competition. With many years of experience in the industry, the company is skilled in a wide range of technologies suitable for every type of client."
+      "context": "Development and design agency for digital products",
+      "contribution": "A full rework of a legacy back-office: Fluent UI to give the web the behaviour of a Microsoft tool, with typeahead search and quick actions. Then two dashboards, the first becoming the whitelabel base of the second. I mentored a junior and left everything documented."
     },
     "studioBargiggia": {
       "name": "Studio Bargiggia",
-      "description": "Studio Bargiggia is a condominium management firm that combines expertise, availability, and passion to ensure the best possible administration of your building."
+      "context": "Condominium management firm",
+      "contribution": "From the discovery call to the handover: needs analysis, two design routes for the client to choose from, Figma, then Next.js and on-premise Strapi. I migrated the content from the old site myself. They keep it updated on their own today."
+    },
+    "anonymous": {
+      "name": "Anonymous",
+      "context": "Private platform for a field sales network",
+      "contribution": "A tool used daily from tablets: a map of every tobacconist in Lombardy, check-in valid only within 500 metres, and a PDF quote generated to send over WhatsApp. Next.js with server components, serverless PostgreSQL, sessions and RBAC."
+    },
+    "ravenn": {
+      "name": "Ravenn S.r.l.",
+      "context": "Logistics and hospitality platform for events",
+      "contribution": "I stepped in to cover for an absent CTO, then came back a second time to build the area reserved for event staff: password-gated access and dedicated flows, kept separate from the attendees'."
+    },
+    "fastmemo": {
+      "name": "Fast Memo - Notes in one click",
+      "context": "Cross-platform note-taking app, open source",
+      "contribution": "Born because notes end up on someone else's servers and the useful features sit behind a paywall. It has webhooks, voice recognition and local AI, runs on mobile and desktop, and can be self-hosted. Over 1,000 downloads and 30+ stars on GitHub."
+    },
+    "coolifyManager": {
+      "name": "Coolify Manager",
+      "context": "Mobile app and Chrome extension for Coolify servers",
+      "contribution": "Coolify in your pocket: restart a server, read the logs, follow a deploy while you're away from the desk. Built on Coolify's REST APIs, it works with both the hosted and the self-hosted setup. Over 1,000 downloads."
+    },
+    "forfettarioControl": {
+      "name": "Forfettario Control",
+      "context": "App concept for Italian flat-tax freelancers",
+      "contribution": "It never left the design stage: invoices, deadlines and notifications ordered by urgency, drawn in Figma. It solved nothing others weren't already solving — I wanted to see what it would look like done well."
     },
     "coffeeNotesLab": {
       "name": "Coffee Notes Lab",
-      "description": "Coffee Notes Lab is a personal project documenting a journey through the world of espresso: tastings around the globe and experiments at home, captured through photo and film in a minimal, design-focused interface."
+      "context": "A log of espresso tastings and home experiments",
+      "contribution": "A personal project with no goal: somewhere to work on the interface without a deadline, the /photos section especially. Next.js 16, nothing more."
     }
   }
 }

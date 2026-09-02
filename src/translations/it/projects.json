@@ -5,8 +5,18 @@
   },
   "hero": {
     "title": "Lavori <highlight>per clienti</highlight> e <highlight>progetti personali</highlight>",
-    "description": "Sviluppo soluzioni personalizzate per clienti e progetti personali per offrire valore ed esplorare nuove idee",
+    "description": "Cosa ho fatto per aziende e startup: prodotto, interfacce, architettura. E i progetti che ho costruito da solo.",
     "ctaCheckOut": "Dai un'occhiata"
+  },
+  "groups": {
+    "clients": {
+      "title": "Lavoro per clienti",
+      "subtitle": "Cosa ho costruito, e cosa ho lasciato quando me ne sono andato."
+    },
+    "experiments": {
+      "title": "Esperimenti",
+      "subtitle": "Progetti personali, senza clienti e senza scadenze."
+    }
   },
   "featured": {
     "title": "I miei prodotti",
@@ -17,7 +27,8 @@
     "sortOrderNone": "Nessun ordinamento",
     "sortOrderAsc": "Ordina da A a Z",
     "sortOrderDesc": "Ordina da Z a A",
-    "tagsLabel": "Scegli i tag"
+    "rolesLabel": "Tipo di lavoro",
+    "tagsLabel": "Tecnologie"
   },
   "list": {
     "title": "Elenco dei progetti"
@@ -27,55 +38,64 @@
       "noResults": "Nessun progetto trovato con i filtri selezionati",
       "checkDesign": "Guarda il design",
       "checkWebsite": "Visita il sito",
-      "checkGitHub": "Vai su GitHub"
-    },
-    "othersideTechnology": {
-      "name": "Otherside Technology S.r.l.",
-      "description": "Otherside Technology è un'azienda che progetta e sviluppa soluzioni software personalizzate e di intelligenza artificiale per le imprese: aiuta le organizzazioni ad automatizzare i processi, analizzare i dati e migliorare il processo decisionale attraverso strumenti digitali su misura e sistemi di intelligenza artificiale scalabili."
-    },
-    "coolifyManager": {
-      "name": "Coolify Manager",
-      "description": "Coolify Manager è un'app mobile che ti permette di gestire i tuoi server Coolify self-hosted ovunque ti trovi, con in più un'estensione per Chrome per farlo direttamente dalla barra degli strumenti del browser."
+      "checkGitHub": "Vai su GitHub",
+      "clientSite": "Sito del cliente",
+      "readCaseStudy": "Leggi il case study"
     },
     "quido": {
       "name": "Quido S.r.l.",
-      "description": "Quido.ai è una piattaforma di intelligenza artificiale dedicata al mondo del private equity e delle operazioni M&A in Italia, progettata per fornire analisi affidabili e insight a professionisti e investitori."
-    },
-    "forfettarioControl": {
-      "name": "Forfettario Control",
-      "description": "Questa app mobile aiuta i freelancer in regime forfettario a gestire la propria attività in autonomia. Gli utenti possono creare fatture, caricare documenti fiscali e ricevere promemoria per le scadenze, inclusi i contributi pensionistici. Il design si concentra su semplicità e chiarezza, rendendo facile gestire attività amministrative complesse direttamente dallo smartphone."
-    },
-    "fastmemo": {
-      "name": "Fast Memo - Note in un click",
-      "description": "Un'applicazione per prendere appunti che mira a condensare tutto ciò di cui hai bisogno per organizzazione, sicurezza e affidabilità, con totale trasparenza dei dati e archiviazione autogestita, senza affidarsi a servizi di terze parti."
-    },
-    "anonymous": {
-      "name": "Anonimo",
-      "description": "Una piattaforma per gestire tabacchini e agenti, con una mappa interattiva di oltre 7000 tabacchini della Lombardia."
-    },
-    "ravenn": {
-      "name": "Ravenn S.r.l.",
-      "description": "Ravenn.io è una piattaforma intuitiva per gestire la logistica e l'ospitalità negli eventi: identifica alloggi adatti per i partecipanti e semplifica prenotazioni, cancellazioni e modifiche alberghiere in modo semplificato ed efficiente."
+      "context": "Piattaforma AI per private equity, M&A e investment banking",
+      "contribution": "Ho rifatto da zero la UI/UX della piattaforma su Figma e l'ho portata in produzione con Next.js ed Expo. Col tempo sono diventato il loro forward deployed engineer: tool interni, sviluppo agentico più preciso, e decisioni su cosa costruire prima."
     },
     "recrowd": {
       "name": "Recrowd S.r.l.",
-      "description": "Recrowd è una piattaforma di crowdfunding immobiliare che ti permette di investire i tuoi risparmi in modo alternativo, anche se non disponi di grandi capitali."
+      "context": "Piattaforma di crowdfunding immobiliare",
+      "contribution": "Collaborazione lunga su più piattaforme: ho sviluppato l'intero backoffice con Next.js, Node.js e PostgreSQL, e ho lavorato anche sulla landing pubblica. Frontend, backend e decisioni tecniche insieme al loro team."
     },
-    "andreaLosavio": {
-      "name": "Andrea Losavio",
-      "description": "La versione precedente del mio sito personale, che mostra i miei progetti e le mie competenze come sviluppatore."
+    "othersideTechnology": {
+      "name": "Otherside Technology S.r.l.",
+      "context": "Software house specializzata in soluzioni AI su misura",
+      "contribution": "Il loro sito non l'ho mai toccato: ho lavorato su CloTU, il sistema multi-agentico che stavano costruendo per le organizzazioni. Mio il frontend e la UI/UX, cioè il problema di rendere governabile un'orchestrazione di agenti."
     },
     "brainplatform": {
       "name": "Brainplatform S.r.l.",
-      "description": "Brain S.R.L. trasforma il tuo sito web o app in un potente asset di marketing, combinando un design accattivante con alte prestazioni e comunicando i valori del tuo brand con autorevolezza per tenerti un passo avanti rispetto alla concorrenza. Con molti anni di esperienza nel settore, l'azienda è esperta in un'ampia gamma di tecnologie adatte a ogni tipo di cliente."
+      "context": "Agenzia di sviluppo e design per prodotti digitali",
+      "contribution": "Rework completo di un gestionale legacy: Fluent UI per dare al web il comportamento di un tool Microsoft, con ricerca a suggeriti e azioni rapide. Poi due dashboard, la prima diventata base whitelabel della seconda. Ho seguito un junior lasciando tutto documentato."
     },
     "studioBargiggia": {
       "name": "Studio Bargiggia",
-      "description": "Studio Bargiggia è uno studio di amministrazione condominiale che combina competenza, disponibilità e passione per garantire la migliore amministrazione possibile del tuo edificio."
+      "context": "Studio di amministrazione condominiale",
+      "contribution": "Dalla call di discovery al passaggio di consegne: analisi dei bisogni, due proposte di design tra cui far scegliere, Figma, poi Next.js e Strapi on-premise. I contenuti dal vecchio sito li ho migrati io. Oggi lo aggiornano da soli."
+    },
+    "anonymous": {
+      "name": "Anonimo",
+      "context": "Piattaforma privata per una rete di agenti sul territorio",
+      "contribution": "Strumento usato ogni giorno da tablet: mappa di tutte le tabaccherie lombarde, check-in valido solo entro 500 metri, preventivo generato in PDF da mandare su WhatsApp. Next.js con server components, PostgreSQL serverless, sessioni e RBAC."
+    },
+    "ravenn": {
+      "name": "Ravenn S.r.l.",
+      "context": "Piattaforma per la logistica e l'ospitalità negli eventi",
+      "contribution": "Entrato per coprire l'assenza del CTO, e tornato una seconda volta per costruire l'area riservata allo staff degli eventi: accesso a password e flussi dedicati, separati da quelli dei partecipanti."
+    },
+    "fastmemo": {
+      "name": "Fast Memo - Note in un click",
+      "context": "App di note multipiattaforma, open source",
+      "contribution": "Nata perché le note finiscono su server altrui e le funzioni utili dietro un paywall. Ha webhook, riconoscimento vocale e AI locale, gira su mobile e desktop e si può self-hostare. Oltre 1.000 download e 30+ stelle su GitHub."
+    },
+    "coolifyManager": {
+      "name": "Coolify Manager",
+      "context": "App mobile ed estensione Chrome per server Coolify",
+      "contribution": "Coolify in tasca: riavviare un server, leggere i log, seguire un deploy mentre non sei alla scrivania. Costruita sulle REST API di Coolify, funziona sia con l'hosted che con il self-hosted. Oltre 1.000 download."
+    },
+    "forfettarioControl": {
+      "name": "Forfettario Control",
+      "context": "Concept di app per freelance in regime forfettario",
+      "contribution": "Fermo al design: fatture, scadenze e notifiche ordinate per urgenza, disegnate su Figma. Non risolveva niente che altri non facessero già — mi interessava vedere come sarebbe stato se fosse stato fatto bene."
     },
     "coffeeNotesLab": {
       "name": "Coffee Notes Lab",
-      "description": "Coffee Notes Lab è un progetto personale che documenta un viaggio nel mondo dell'espresso: degustazioni in giro per il mondo ed esperimenti fatti in casa, raccontati attraverso foto e video in un'interfaccia minimale e curata nel design."
+      "context": "Diario di degustazioni ed esperimenti sull'espresso",
+      "contribution": "Progetto personale senza obiettivi: un posto dove curare l'interfaccia con calma, soprattutto la sezione /photos. Next.js 16, niente di più."
     }
   }
 }
