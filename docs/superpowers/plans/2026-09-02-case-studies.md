@@ -1409,6 +1409,28 @@ describe("parseFrontmatter", () => {
   it("tratta draft come booleano opzionale", () => {
     expect(parseFrontmatter({ ...valid, draft: true }, "it/quido.mdx").draft)
       .toBe(true);
+    expect(parseFrontmatter(valid, "it/quido.mdx").draft).toBe(false);
+  });
+
+  it("rifiuta un draft che non e' un booleano", () => {
+    expect(() =>
+      parseFrontmatter({ ...valid, draft: "yes" }, "it/quido.mdx")
+    ).toThrow(/draft/);
+  });
+
+  it("accetta un summary sui bordi della fascia", () => {
+    expect(() =>
+      parseFrontmatter({ ...valid, summary: "x".repeat(120) }, "it/quido.mdx")
+    ).not.toThrow();
+    expect(() =>
+      parseFrontmatter({ ...valid, summary: "x".repeat(170) }, "it/quido.mdx")
+    ).not.toThrow();
+  });
+
+  it("rifiuta una data ben formata ma inesistente", () => {
+    expect(() =>
+      parseFrontmatter({ ...valid, publishedAt: "2026-02-31" }, "it/quido.mdx")
+    ).toThrow(/publishedAt/);
   });
 });
 ```
@@ -1524,6 +1546,10 @@ export function parseFrontmatter(
     updatedAt = parsed;
   }
 
+  if (raw.draft !== undefined && typeof raw.draft !== "boolean") {
+    fail(source, "draft deve essere true o false");
+  }
+
   const cover = requireString(raw.cover, "cover", source);
   const coverAlt = requireString(
     raw.coverAlt,
@@ -1548,7 +1574,7 @@ export function parseFrontmatter(
 - [ ] **Step 4: Eseguire i test**
 
 Run: `npx vitest run src/libs/case-studies/frontmatter.test.ts`
-Expected: PASS, 8 test.
+Expected: PASS, 11 test.
 
 `vitest.config.ts` elenca le directory dei test una per una (`include:
 ["src/libs/blog/**/*.test.ts"]`), quindi finché non si aggiunge
