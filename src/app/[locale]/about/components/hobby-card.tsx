@@ -6,10 +6,10 @@ import { HOBBY_ITEMS } from "../constants/hobby-items";
 
 interface HobbyCardProps {
   hobby: (typeof HOBBY_ITEMS)[number];
-  animateDirectly?: boolean;
+  instant?: boolean;
 }
 
-export function HobbyCard({ hobby, animateDirectly }: HobbyCardProps) {
+export function HobbyCard({ hobby, instant }: HobbyCardProps) {
   const t = useTranslations();
 
   const hasLink = "href" in hobby && hobby.href;
@@ -48,11 +48,8 @@ export function HobbyCard({ hobby, animateDirectly }: HobbyCardProps) {
     </>
   );
 
-  const motionProps = animateDirectly
-    ? {
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
-      }
+  const motionProps = instant
+    ? { initial: false as const }
     : {
         variants: {
           hidden: { opacity: 0, y: 20 },

@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import type { ProjectRole } from "@/constants/projects";
 import { cn } from "@/utils/cn";
-import { ChevronDownIcon } from "lucide-react";
+import { CopyMinus, CopyPlus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Children, useState } from "react";
 import { useProjectsFilter } from "./projects-filter-provider";
@@ -51,7 +51,6 @@ export function ProjectsGrid({
     !expanded && collapseAfter !== undefined && matching.length > collapseAfter;
 
   const visible = isCollapsed ? matching.slice(0, collapseAfter) : matching;
-  const remaining = matching.length - visible.length;
 
   return (
     <>
@@ -64,20 +63,18 @@ export function ProjectsGrid({
       {(isCollapsed || expanded) && (
         <div className="mt-6 flex justify-center">
           <Button
-            variant="ghost"
+            variant="primary"
             onClick={() => setExpanded(!expanded)}
             aria-expanded={expanded}
           >
             {expanded
               ? t("projects.list.showLess")
-              : t("projects.list.showMore", { count: remaining })}
-            <ChevronDownIcon
-              className={cn(
-                "size-4 transition-transform",
-                expanded && "rotate-180"
-              )}
-              aria-hidden="true"
-            />
+              : t("projects.list.showMore")}
+            {expanded ? (
+              <CopyMinus className="size-4" aria-hidden="true" />
+            ) : (
+              <CopyPlus className="size-4" aria-hidden="true" />
+            )}
           </Button>
         </div>
       )}

@@ -44,7 +44,7 @@
   },
   "list": {
     "title": "Project list",
-    "showMore": "{count, plural, one {Show 1 more project} other {Show # more projects}}",
+    "showMore": "Show more",
     "showLess": "Show less"
   },
   "items": {

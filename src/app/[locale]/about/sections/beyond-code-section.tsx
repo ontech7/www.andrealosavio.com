@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";
 import { cn } from "@/utils/cn";
 import { CopyMinus, CopyPlus } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { HobbyCard } from "../components/hobby-card";
@@ -113,23 +113,13 @@ export function BeyondCodeSection({ id, className }: BeyondCodeSectionProps) {
           ))}
         </div>
 
-        <AnimatePresence initial={false}>
-          {isExpanded && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="overflow-hidden"
-            >
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                {HOBBY_ITEMS.slice(2).map((hobby) => (
-                  <HobbyCard key={hobby.id} hobby={hobby} animateDirectly />
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {isExpanded && (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {HOBBY_ITEMS.slice(2).map((hobby) => (
+              <HobbyCard key={hobby.id} hobby={hobby} instant />
+            ))}
+          </div>
+        )}
 
         <motion.div
           className="mt-4 flex justify-center"
