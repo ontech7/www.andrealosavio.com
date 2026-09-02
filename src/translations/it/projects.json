@@ -97,5 +97,16 @@
       "context": "Diario di degustazioni ed esperimenti sull'espresso",
       "contribution": "Progetto personale senza obiettivi: un posto dove curare l'interfaccia con calma, soprattutto la sezione /photos. Next.js 16, niente di più."
     }
+  },
+  "caseStudy": {
+    "period": "Periodo",
+    "roles": "Ruolo",
+    "stack": "Stack",
+    "backToProjects": "Torna ai progetti",
+    "cta": {
+      "title": "Hai un problema che somiglia a questo?",
+      "description": "Raccontamelo. Se posso aiutarti te lo dico, e se non posso ti dico chi può.",
+      "action": "Scrivimi"
+    }
   }
 }
