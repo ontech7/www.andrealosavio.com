@@ -24,7 +24,7 @@ export function ProjectItem({
 
   const isMatching =
     selectedTags.every((tag) => tags.includes(tag)) &&
-    selectedRoles.every((role) => roles.includes(role as ProjectRole));
+    selectedRoles.every((role) => (roles as readonly string[]).includes(role));
 
   const order =
     sortOrder === "asc"

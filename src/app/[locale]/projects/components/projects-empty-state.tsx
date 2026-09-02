@@ -20,7 +20,9 @@ export function ProjectsEmptyState({
   const hasMatch = projects.some(
     (project) =>
       selectedTags.every((tag) => project.tags.includes(tag)) &&
-      selectedRoles.every((role) => project.roles.includes(role as ProjectRole))
+      selectedRoles.every((role) =>
+        (project.roles as readonly string[]).includes(role)
+      )
   );
 
   if (hasMatch) {
