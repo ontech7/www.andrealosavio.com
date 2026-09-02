@@ -238,7 +238,7 @@ EOF
 - Modify: `src/translations/en/projects.json`
 
 **Interfaces:**
-- Produces: chiavi `projects.items.<id>.{name,context,contribution}`, `projects.groups.{clients,products,experiments}.{title,subtitle}`, `projects.items.common.{clientSite,readCaseStudy,checkDesign,checkGitHub,checkWebsite,noResults}`, `projects.filter.{rolesLabel,tagsLabel,sortLabel,sortOrder*}`.
+- Produces: chiavi `projects.items.<id>.{name,context,contribution}`, `projects.groups.{clients,experiments}.{title,subtitle}`, `projects.items.common.{clientSite,readCaseStudy,checkDesign,checkGitHub,checkWebsite,noResults}`, `projects.filter.{rolesLabel,tagsLabel,sortLabel,sortOrder*}`.
 - `description` viene rimossa da tutti gli item.
 
 > **Nota per chi esegue:** il copy qui sotto è redatto a partire da quello che Andrea ha raccontato durante il design. È il punto del piano che va riletto con lui prima del commit: sono affermazioni sulla sua carriera, non stringhe di interfaccia.
@@ -307,7 +307,7 @@ EOF
     "anonymous": {
       "name": "Anonimo",
       "context": "Piattaforma privata per una rete di agenti sul territorio",
-      "contribution": "Strumento usato ogni giorno da tablet: mappa di tutte le tabaccherie lombarde, check-in valido solo entro 500 metri, preventivo generato in PDF da mandare su WhatsApp. Next.js con server components, PostgreSQL serverless, sessioni e RBAC."
+      "contribution": "Strumento usato ogni giorno da tablet: 7.000 tabaccherie lombarde su mappa, check-in valido solo entro 500 metri, preventivo generato in PDF da mandare su WhatsApp. Next.js con server components, PostgreSQL serverless, sessioni e RBAC."
     },
     "ravenn": {
       "name": "Ravenn S.r.l.",
@@ -403,7 +403,7 @@ Stesse regole: `metadata`, `list` e `featured` si ricopiano invariati, e non esi
     "anonymous": {
       "name": "Anonymous",
       "context": "Private platform for a field sales network",
-      "contribution": "A tool used daily from tablets: a map of every tobacconist in Lombardy, check-in valid only within 500 metres, and a PDF quote generated to send over WhatsApp. Next.js with server components, serverless PostgreSQL, sessions and RBAC."
+      "contribution": "A tool used daily from tablets: 7,000 Lombardy tobacconists on a map, check-in valid only within 500 metres, and a PDF quote generated to send over WhatsApp. Next.js with server components, serverless PostgreSQL, sessions and RBAC."
     },
     "ravenn": {
       "name": "Ravenn S.r.l.",
