@@ -204,10 +204,12 @@ export const PROJECTS: Project[] = [
 
 Tre cose cambiano rispetto a oggi, oltre ai due campi nuovi. `customer` e `personal` spariscono dai `tags`, perché ora sono `kind`. Il progetto `andreaLosavio` esce dall'elenco: diventa un easter egg nel footer al Task 6. E l'ordine dell'array è quello di lettura della pagina — i clienti per peso del contributo, poi i prodotti, poi i personali.
 
-- [ ] **Step 2: Verificare che il type check fallisca dove serve**
+- [ ] **Step 2: Type check**
 
 Run: `npx tsc --noEmit`
-Expected: FAIL. `src/app/[locale]/projects/page.tsx` e `project-card.tsx` referenziano ancora `projects.items.andreaLosavio.*` e il tag `customer` che non esistono più. È il segnale che i consumatori vanno aggiornati nei task successivi.
+Expected: PASS. Le chiavi di traduzione passano per cast `as never` in `page.tsx`, quindi TypeScript non vede che `projects.items.andreaLosavio.*` è rimasto orfano: la rottura sarebbe a runtime.
+
+Per questo **il Task 1 e il Task 2 sono una sola unità spedibile**: non eseguire `npm run build` fra i due e non fermarsi qui. Fra un task e l'altro la pagina è in uno stato incoerente — traduzioni per un progetto che non esiste più, e nessuna traduzione `context`/`contribution` per quelli che restano.
 
 - [ ] **Step 3: Commit**
 
@@ -254,10 +256,6 @@ EOF
     "clients": {
       "title": "Lavoro per clienti",
       "subtitle": "Cosa ho costruito, e cosa ho lasciato quando me ne sono andato."
-    },
-    "products": {
-      "title": "I miei prodotti",
-      "subtitle": "Due app che ho pensato, costruito e pubblicato da solo."
     },
     "experiments": {
       "title": "Esperimenti",
@@ -340,9 +338,13 @@ EOF
 }
 ```
 
-`metadata` e `list` restano invariati rispetto al file attuale: vanno ricopiati, non cancellati.
+`metadata`, `list` e **`featured`** restano invariati rispetto al file attuale: vanno ricopiati, non cancellati. `featured` in particolare: `featured-products-section.tsx:38,45` legge `projects.featured.title` e `projects.featured.subtitle`, e toglierle romperebbe la sezione dei prodotti a runtime senza che il type check dica niente. Per la stessa ragione **non** esiste un `groups.products`: quella sezione ha già le sue chiavi, e duplicarle creerebbe due fonti per la stessa intestazione.
+
+`context` e `contribution` vanno scritti anche per `fastmemo` e `coolifyManager`, che nella pagina non compaiono come card: li consuma l'`ItemList` in `page.tsx`, che mappa su tutto `PROJECTS`.
 
 - [ ] **Step 2: Rispecchiare la struttura in `src/translations/en/projects.json`**
+
+Stesse regole: `metadata`, `list` e `featured` si ricopiano invariati, e non esiste `groups.products`.
 
 ```json
 {
@@ -350,10 +352,6 @@ EOF
     "clients": {
       "title": "Client work",
       "subtitle": "What I built, and what I left behind when I walked away."
-    },
-    "products": {
-      "title": "My products",
-      "subtitle": "Two apps I designed, built and shipped on my own."
     },
     "experiments": {
       "title": "Experiments",
