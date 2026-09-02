@@ -2,6 +2,7 @@ import type {
   Blog,
   BlogPosting,
   BreadcrumbList,
+  CreativeWork,
   FAQPage,
   ItemList,
   OfferCatalog,
@@ -486,6 +487,63 @@ export function generateBlogSchema({
       headline: post.headline,
       datePublished: toIsoDateTime(post.datePublished),
     })),
+  };
+}
+
+interface GenerateCaseStudySchemaProps {
+  url: string;
+  name: string;
+  description: string;
+  datePublished: string;
+  dateModified?: string;
+  image: string;
+  author: SchemaEntityReference;
+  about: { name: string; url?: string };
+  inLanguage: string;
+  keywords: readonly string[];
+}
+
+/**
+ * Schema di un case study: il lavoro consegnato, non un articolo. `author` è
+ * inlineato con nome e url per la stessa ragione di `generateBlogPostingSchema`
+ * — ogni pagina viene valutata da sola, e un `@id` verso un nodo dichiarato
+ * altrove risulta privo di `name` e `url`.
+ */
+export function generateCaseStudySchema({
+  url,
+  name,
+  description,
+  datePublished,
+  dateModified,
+  image,
+  author,
+  about,
+  inLanguage,
+  keywords,
+}: GenerateCaseStudySchemaProps): CreativeWork {
+  return {
+    "@type": "CreativeWork",
+    "@id": `${url}#casestudy`,
+    mainEntityOfPage: url,
+    url,
+    name,
+    description,
+    datePublished: toIsoDateTime(datePublished),
+    dateModified: toIsoDateTime(dateModified ?? datePublished),
+    image,
+    inLanguage,
+    author: {
+      "@type": "Person",
+      "@id": author.id,
+      name: author.name,
+      url: author.url,
+    },
+    about: {
+      "@type": "Organization",
+      name: about.name,
+      ...(about.url && { url: about.url }),
+    },
+    ...(keywords.length > 0 && { keywords: keywords.join(", ") }),
   };
 }
 
