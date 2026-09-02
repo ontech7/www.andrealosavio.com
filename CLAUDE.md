@@ -61,9 +61,9 @@ npm run indexnow   # ping IndexNow (Bing/Yandex/Seznam/Naver, NOT Google) with
   `sitemap.xml`, `llms.txt`, `BingSiteAuth.xml` and root-level `*.txt` (the
   IndexNow key) are all listed there. Search-engine ownership proofs fail
   silently when this is missed.
-- `src/app/llms.txt/route.ts` generates the LLM briefing dynamically (it lists
-  published articles). There is no `public/llms.txt` anymore — do not add one
-  back as a static file.
+- `src/app/llms.txt/route.ts` generates the LLM briefing dynamically. It does
+  not enumerate articles; it does list published case studies. There is no
+  `public/llms.txt` anymore — do not add one back as a static file.
 - `src/mdx-components.tsx` **must** stay at exactly that path (project root or
   `src` root — Next only looks in those two places for MDX component overrides).
   Moving it into `src/components/` silently breaks MDX rendering.
