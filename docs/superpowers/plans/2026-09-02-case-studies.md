@@ -1869,7 +1869,7 @@ export function getAllCaseStudyParams(): {
 - [ ] **Step 4: Eseguire i test**
 
 Run: `npx vitest run src/libs/case-studies/`
-Expected: PASS, 13 test in totale.
+Expected: PASS, 16 test in totale (11 dal Task 8, 5 da questo).
 
 - [ ] **Step 5: Commit**
 
@@ -2778,7 +2778,7 @@ EOF
 
 - [ ] `npx tsc --noEmit` pulito
 - [ ] `npm run lint` pulito
-- [ ] `npx vitest run` verde, 13 test nuovi in `src/libs/case-studies/`
+- [ ] `npx vitest run` verde, 16 test nuovi in `src/libs/case-studies/`
 - [ ] `npm run build` completo, con quattro pagine di case study generate
 - [ ] `/it/projects` e `/en/projects`: tre blocchi, card a riga intera, filtro su ruoli e stack funzionante, URL che sopravvive al ricaricamento
 - [ ] Nessuna traccia di `projects.items.andreaLosavio` nel codice; il link al sito vecchio vive solo nel footer
