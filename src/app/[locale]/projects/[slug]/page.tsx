@@ -1,6 +1,9 @@
 import { ContentCta } from "@/components/content-cta";
 import { PROJECTS } from "@/constants/projects";
-import { getCaseStudy, getAllCaseStudyParams } from "@/libs/case-studies/source";
+import {
+  getCaseStudy,
+  getAllCaseStudyParams,
+} from "@/libs/case-studies/source";
 import { PageMessages } from "@/libs/i18n/messages";
 import type { AppLocale } from "@/libs/i18n/utils";
 import {
@@ -96,7 +99,10 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: t("common.navigation.home"), url: `${siteUrl}/${locale}` },
-    { name: t("projects.metadata.title"), url: `${siteUrl}/${locale}/projects` },
+    {
+      name: t("projects.metadata.title"),
+      url: `${siteUrl}/${locale}/projects`,
+    },
     { name, url: pageUrl },
   ]);
 
@@ -126,7 +132,10 @@ export default async function CaseStudyPage({ params }: PageProps) {
         }}
       />
       <PageMessages namespaces={["projects", "blog"]}>
-        <CaseStudyHeader project={project} frontmatter={caseStudy.frontmatter} />
+        <CaseStudyHeader
+          project={project}
+          frontmatter={caseStudy.frontmatter}
+        />
         <article className="mx-auto max-w-3xl px-6 pb-20">
           <div className="prose-article">
             <Content />

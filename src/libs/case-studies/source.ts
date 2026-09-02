@@ -115,9 +115,7 @@ function loadAll(): Record<AppLocale, CaseStudy[]> {
 }
 
 function isVisible(caseStudy: CaseStudy): boolean {
-  return (
-    !caseStudy.frontmatter.draft || process.env.NODE_ENV === "development"
-  );
+  return !caseStudy.frontmatter.draft || process.env.NODE_ENV === "development";
 }
 
 /** Case study visibili di un locale. Le bozze compaiono solo in sviluppo. */
