@@ -213,6 +213,25 @@ never reach `openGraph.images` or the `BlogPosting` schema (social platforms
 cannot render them): those keep pointing at the `opengraph-image` route, which
 rasterises the same SVG through satori.
 
+Inlining only happens on the article page, which shows one cover. The index
+cards get the same drawing as WebP, from the route at
+`src/app/images/blog-cover/[variant]/[key]/route.tsx`. It lives under
+`app/images/` on purpose: that prefix is already excluded from the `src/proxy.ts`
+matcher, so the route needs no matcher change and no locale segment (the scene is
+seeded on `translationKey`, which both locales share). It renders `CoverScene` to
+an SVG string and pipes it through `sharp`, statically at build time
+(`force-static` + `generateStaticParams`), for both variants of every article
+without a raster `cover:`. `react-dom/server` has to be imported dynamically
+inside the handler: a static import of it anywhere under `app/` fails the build.
+
+Two reasons the cards take the raster and not the SVG. An SVG loaded through
+`<img>` is an isolated document, so it cannot see the page's fonts and any
+`<text>` in a bespoke cover would fall back to a generic face. And the scenes
+lean on `feGaussianBlur` over large areas, which the browser would repaint for
+every visible card. The `<Image>` carries `unoptimized`, because the route
+already emits the final format and size and running it through the Vercel image
+optimizer would only bill a second transformation.
+
 The index (`blog/page.tsx`) reuses the page grammar of `/projects`: a centred
 hero (eyebrow, gradient headline, `GridLayers` backdrop, RSS button), then two
 clearly separated blocks. First the newest article, under an `In evidenza` /
@@ -249,9 +268,25 @@ slots rendered as ellipses. The page number is the third piece of URL state in
 `blog-filter-provider.tsx`, written as `?page=N` and omitted on page 1. Changing
 a tag or the query resets it to 1, and a page number that outlives its result set
 (a stale `?page=7` in a shared link) is clamped during render and written back to
-the URL, rather than showing an empty grid. Because pagination is client-side,
-every article stays in the prerendered HTML: there is no per-page route to
-crawl, and the canonical URL remains `/{locale}/blog`.
+the URL, rather than showing an empty grid. Because pagination is client-side
+there is no per-page route to crawl, and the canonical URL remains
+`/{locale}/blog`. Only the featured card and the current page of six render into
+the HTML, though: the other articles reach the browser as data, and crawlers
+discover them through the sitemap and the `Blog` JSON-LD, not by walking the
+index.
+
+That data is the reason `page.tsx` hands `ArticlesSection` a plain
+`ArticleCardData` per article (`article-card-data.ts`) instead of a rendered
+`<ArticleCard>`. Passing a server-rendered node puts the whole element tree,
+inline cover included, into the RSC payload of every article, whether or not it
+is ever shown: measured on 507 articles per locale that was 13.3 MB of HTML,
+26 KB per article, against 728 KB and 1.1 KB per article once the cards became
+client components fed by data. `ArticleCard`, `ArticleFeatured` and
+`ArticleStamp` are therefore `"use client"`, and one card object carries both
+cover URLs (`coverThumbUrl`, `coverHeroUrl`) so the featured article does not
+need a second serialized object per article. Anything added to
+`ArticleCardData` is paid once per article on every visit to the index, so keep
+it to what a card actually draws.
 
 `article-quick-actions.tsx` is the floating control that appears bottom-right
 once the reader is past 60% of the viewport height. Collapsed it is a single

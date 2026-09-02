@@ -8,8 +8,7 @@ import {
 } from "@/utils/seo-schema";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { ArticleCard } from "./components/article-card";
-import { ArticleFeatured } from "./components/article-featured";
+import { toCardData } from "./components/article-card-data";
 import { BlogFilterProvider } from "./components/blog-filter-provider";
 import { ArticlesSection } from "./sections/articles-section";
 import { HeroSection } from "./sections/hero-section";
@@ -113,7 +112,6 @@ export default async function BlogPage({ params }: PageProps) {
           <ArticlesSection
             tagCounts={tagCounts}
             articles={articles.map((article) => ({
-              slug: article.slug,
               tags: article.frontmatter.tags,
               haystack: [
                 article.frontmatter.title,
@@ -122,8 +120,7 @@ export default async function BlogPage({ params }: PageProps) {
               ]
                 .join(" ")
                 .toLowerCase(),
-              featured: <ArticleFeatured article={article} />,
-              card: <ArticleCard article={article} />,
+              article: toCardData(article),
             }))}
             className="pb-20 md:pb-24"
           />

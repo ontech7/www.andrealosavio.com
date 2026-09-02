@@ -1,24 +1,26 @@
+"use client";
+
 import { ArrowRightIcon } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Card } from "@/components/ui/card";
-import type { BlogArticle } from "@/libs/blog/source";
+import {
+  COVER_RASTER_HEIGHT,
+  COVER_RASTER_WIDTH,
+} from "@/libs/blog/cover-image";
 import { Link } from "@/libs/i18n/navigation";
 import { cn } from "@/utils/cn";
-import { ArticleCover } from "./article-cover";
+import type { ArticleCardData } from "./article-card-data";
 import { ArticleStamp } from "./article-stamp";
 import { ArticleTag } from "./article-tag";
 
 interface ArticleFeaturedProps {
-  article: BlogArticle;
+  article: ArticleCardData;
   className?: string;
 }
 
-export async function ArticleFeatured({
-  article,
-  className,
-}: ArticleFeaturedProps) {
-  const t = await getTranslations({ locale: article.locale });
-  const { frontmatter } = article;
+export function ArticleFeatured({ article, className }: ArticleFeaturedProps) {
+  const t = useTranslations();
 
   return (
     <Card
@@ -27,15 +29,19 @@ export async function ArticleFeatured({
         className
       )}
     >
-      <ArticleCover
-        frontmatter={frontmatter}
+      <Image
+        src={article.coverHeroUrl}
+        alt={article.coverAlt}
+        width={COVER_RASTER_WIDTH}
+        height={COVER_RASTER_HEIGHT}
+        unoptimized
         priority
-        className="transition-transform duration-500 group-hover:scale-[1.02]"
+        className="border-border aspect-[1200/630] w-full overflow-hidden rounded-xl border object-cover transition-transform duration-500 group-hover:scale-[1.02]"
       />
 
       <div className="flex flex-col items-start gap-4">
         <div className="flex flex-wrap items-center gap-2">
-          {frontmatter.tags.map((tag) => (
+          {article.tags.map((tag) => (
             <ArticleTag key={tag}>{t(`blog.tags.${tag}` as never)}</ArticleTag>
           ))}
         </div>
@@ -45,15 +51,18 @@ export async function ArticleFeatured({
             href={`/blog/${article.slug}`}
             className="focus-visible:ring-ring/50 rounded-sm outline-none after:absolute after:inset-0 focus-visible:ring-[3px]"
           >
-            {frontmatter.title}
+            {article.title}
           </Link>
         </h2>
 
         <p className="text-muted-foreground leading-relaxed md:text-lg">
-          {frontmatter.subtitle}
+          {article.subtitle}
         </p>
 
-        <ArticleStamp article={article} />
+        <ArticleStamp
+          publishedAt={article.publishedAt}
+          readingTime={article.readingTime}
+        />
 
         <span className="text-muted-foreground group-hover:text-secondary mt-1 inline-flex items-center gap-2 text-sm font-medium transition-colors">
           {t("blog.index.readMore")}

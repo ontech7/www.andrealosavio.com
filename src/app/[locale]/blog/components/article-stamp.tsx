@@ -1,17 +1,24 @@
+"use client";
+
 import { CalendarIcon, ClockIcon } from "lucide-react";
-import { getTranslations } from "next-intl/server";
-import type { BlogArticle } from "@/libs/blog/source";
+import { useLocale, useTranslations } from "next-intl";
+import type { AppLocale } from "@/libs/i18n/utils";
 import { cn } from "@/utils/cn";
 import { formatArticleDate } from "@/utils/format-date";
 
 interface ArticleStampProps {
-  article: BlogArticle;
+  publishedAt: string;
+  readingTime: number;
   className?: string;
 }
 
-export async function ArticleStamp({ article, className }: ArticleStampProps) {
-  const t = await getTranslations({ locale: article.locale });
-  const { publishedAt } = article.frontmatter;
+export function ArticleStamp({
+  publishedAt,
+  readingTime,
+  className,
+}: ArticleStampProps) {
+  const t = useTranslations();
+  const locale = useLocale() as AppLocale;
 
   return (
     <p
@@ -23,12 +30,12 @@ export async function ArticleStamp({ article, className }: ArticleStampProps) {
       <span className="inline-flex items-center gap-1.5">
         <CalendarIcon className="size-3.5 shrink-0" aria-hidden="true" />
         <time dateTime={publishedAt}>
-          {formatArticleDate(publishedAt, article.locale)}
+          {formatArticleDate(publishedAt, locale)}
         </time>
       </span>
       <span className="inline-flex items-center gap-1.5">
         <ClockIcon className="size-3.5 shrink-0" aria-hidden="true" />
-        {t("blog.article.readingTime", { minutes: article.readingTime })}
+        {t("blog.article.readingTime", { minutes: readingTime })}
       </span>
     </p>
   );

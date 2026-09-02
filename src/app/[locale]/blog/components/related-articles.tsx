@@ -3,6 +3,7 @@ import type { BlogArticle } from "@/libs/blog/source";
 import type { AppLocale } from "@/libs/i18n/utils";
 import { cn } from "@/utils/cn";
 import { ArticleCard } from "./article-card";
+import { toCardData } from "./article-card-data";
 
 interface RelatedArticlesProps {
   articles: readonly BlogArticle[];
@@ -29,7 +30,7 @@ export async function RelatedArticles({
 
       <div className="grid auto-rows-fr grid-cols-1 gap-6 sm:grid-cols-2">
         {articles.map((article) => (
-          <ArticleCard key={article.slug} article={article} />
+          <ArticleCard key={article.slug} article={toCardData(article)} />
         ))}
       </div>
     </section>

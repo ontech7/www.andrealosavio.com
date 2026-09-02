@@ -6,17 +6,18 @@ import { BLOG_PAGE_SIZE } from "@/constants/blog";
 import { clampPage, pageCount, pageSlice } from "@/libs/blog/pagination";
 import type { TagCount } from "@/libs/blog/source";
 import { cn } from "@/utils/cn";
+import type { ArticleCardData } from "../components/article-card-data";
+import { ArticleCard } from "../components/article-card";
+import { ArticleFeatured } from "../components/article-featured";
 import { BlogEmptyState } from "../components/blog-empty-state";
 import { BlogFilter } from "../components/blog-filter";
 import { useBlogFilter } from "../components/blog-filter-provider";
 import { BlogPagination } from "../components/blog-pagination";
 
 export interface ArticleEntry {
-  slug: string;
   tags: readonly string[];
   haystack: string;
-  featured: React.ReactNode;
-  card: React.ReactNode;
+  article: ArticleCardData;
 }
 
 interface ArticlesSectionProps {
@@ -94,7 +95,7 @@ export function ArticlesSection({
               <p className="text-secondary mb-3 text-xs tracking-[0.2em] uppercase">
                 {t("blog.index.featuredLabel")}
               </p>
-              {first.featured}
+              <ArticleFeatured article={first.article} />
             </div>
           )}
 
@@ -110,7 +111,10 @@ export function ArticlesSection({
             {pageArticles.length > 0 && (
               <div className="grid auto-rows-fr grid-cols-1 gap-6 md:grid-cols-2">
                 {pageArticles.map((article) => (
-                  <div key={article.slug}>{article.card}</div>
+                  <ArticleCard
+                    key={article.article.slug}
+                    article={article.article}
+                  />
                 ))}
               </div>
             )}
