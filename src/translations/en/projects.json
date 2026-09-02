@@ -70,7 +70,7 @@
     "anonymous": {
       "name": "Anonymous",
       "context": "Private platform for a field sales network",
-      "contribution": "A tool used daily from tablets: a map of every tobacconist in Lombardy, check-in valid only within 500 metres, and a PDF quote generated to send over WhatsApp. Next.js with server components, serverless PostgreSQL, sessions and RBAC."
+      "contribution": "A tool used daily from tablets: 7,000 Lombardy tobacconists on a map, check-in valid only within 500 metres, and a PDF quote generated to send over WhatsApp. Next.js with server components, serverless PostgreSQL, sessions and RBAC."
     },
     "ravenn": {
       "name": "Ravenn S.r.l.",

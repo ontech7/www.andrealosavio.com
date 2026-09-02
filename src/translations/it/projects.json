@@ -70,7 +70,7 @@
     "anonymous": {
       "name": "Anonimo",
       "context": "Piattaforma privata per una rete di agenti sul territorio",
-      "contribution": "Strumento usato ogni giorno da tablet: mappa di tutte le tabaccherie lombarde, check-in valido solo entro 500 metri, preventivo generato in PDF da mandare su WhatsApp. Next.js con server components, PostgreSQL serverless, sessioni e RBAC."
+      "contribution": "Strumento usato ogni giorno da tablet: 7.000 tabaccherie lombarde su mappa, check-in valido solo entro 500 metri, preventivo generato in PDF da mandare su WhatsApp. Next.js con server components, PostgreSQL serverless, sessioni e RBAC."
     },
     "ravenn": {
       "name": "Ravenn S.r.l.",
