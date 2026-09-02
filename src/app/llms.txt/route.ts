@@ -136,7 +136,7 @@ Both products are designed, built, shipped and maintained by Andrea alone, and e
 - **Coolify Manager** — Mobile app to manage self-hosted Coolify servers, with a companion Chrome extension. 1,000+ downloads. Available on Google Play Store (https://play.google.com/store/apps/details?id=com.ontech7.coolifyManager&hl=it) and Chrome Web Store (https://chromewebstore.google.com/detail/coolify-manager/dmcclgoafojpjaflnggcnmhbenplnmpi).
 - **Forfettario Control** — Mobile app for Italian freelancers under the "regime forfettario" to manage invoices, fiscal documents, and deadlines.
 - **Otherside Technology S.r.l.** — Custom software and AI solutions for businesses.
-- **Brainplatform S.r.l.** — Full rework of a legacy back-office with Fluent UI, then two dashboards built as a whitelabel base. Mentored a junior engineer along the way.
+- **Brainplatform S.r.l.** — Full rework of a legacy back-office with Fluent UI, then two dashboards, the first reused as the whitelabel base for the second. Mentored a junior engineer along the way.
 - **Tobacconist Management Platform** (client under NDA) — Platform with interactive map of 7,000+ tobacconists in Lombardy, agent assignments, admin dashboard.
 
 - [Full portfolio](${SITE_URL}/en/projects)${caseStudyLinks()}
