@@ -370,8 +370,10 @@ raggio diverso). Gli altri quando c'è occasione.
 
 ## 9. Modifiche collaterali
 
-`old.andrealosavio.com` esce da `PROJECTS` e diventa un link easter egg nel
-footer, nella colonna che ospita già `FooterCatCta`.
+`old.andrealosavio.com` esce da `PROJECTS`. L'idea di retrocederlo a link easter
+egg nel footer è stata implementata e poi ritirata da Andrea il 2026-09-02: il sito
+vecchio semplicemente non compare più da nessuna parte, coerentemente con
+l'intenzione di spegnerlo prima o poi.
 
 ## 10. Validazione
 

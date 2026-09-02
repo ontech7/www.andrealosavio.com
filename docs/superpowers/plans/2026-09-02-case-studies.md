@@ -1205,7 +1205,12 @@ EOF
 
 ---
 
-## Task 6: Easter egg del sito vecchio
+## Task 6: Easter egg del sito vecchio — RITIRATO
+
+> **Ritirato da Andrea il 2026-09-02**, dopo l'implementazione: "ho deciso di non
+> metterlo più". `old.andrealosavio.com` esce dai progetti e basta, senza guadagnare
+> un posto nel footer. Gli step qui sotto restano solo come traccia di cosa era
+> stato fatto e poi rimosso; non vanno eseguiti.
 
 **Files:**
 - Modify: `src/components/layout/footer.tsx`
