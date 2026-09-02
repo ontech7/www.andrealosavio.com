@@ -362,24 +362,75 @@ nothing appears twice.
 Group headings collapse while a filter is active, the same way the blog index
 suspends its featured block — a filtered page is just the result list.
 
+### Case studies
+
+A client project can carry a long-form case study under
+`content/case-studies/{it,en}/<slug>.mdx`, served at
+`/{locale}/projects/[slug]`. They are additive: a project without one stays
+the card it already was, so the page is never waiting to be filled.
+
+The slug is the same in both locales — unlike blog articles, whose identity is
+a title that translates. A case study's identity is the client, which does
+not, so the filename is the key, the twin check replaces `translationKey`, and
+the sitemap uses `samePath` with no per-locale resolution.
+
+Frontmatter carries only what belongs to the case study (`title`, `summary`,
+`period`, dates, cover). Roles, stack and the short contribution line stay in
+`PROJECTS` and `projects.json`, because projects without a case study need
+them too: the card reads them there and the case-study header reads the same
+source, so the two cannot drift.
+
+`src/libs/case-studies/` deliberately imports nothing from `src/libs/blog/`.
+The two have opposite constraints — a handful of case studies that never
+paginate against an archive that does — and the blog moves as it grows.
+Duplicating a small pattern costs less than coupling two subsystems on
+different trajectories. Extract only if a third content type shows up.
+
+Three build-time guards in `assertConsistency`: a published case study needs
+its twin in the other locale, `project:` must resolve to an id in `PROJECTS`,
+and no project may carry two case studies. Drafts are skipped by all three.
+
+Covers must be raster — `.webp`, `.png`, `.jpg` or `.jpeg`, enforced by
+`parseFrontmatter`. They go straight into `openGraph.images`, `twitter.images`
+and the `CreativeWork` schema, with none of the satori rasterisation the blog
+needs for its SVG covers — so nothing here would save an SVG, and one would
+ship a blank preview to every social platform. The validator is the single
+choke point precisely because those three consumers all read the same field.
+
+**The directory must never be empty.** Turbopack builds the module map for the
+page's dynamic import at build time, and with no `.mdx` matching
+`@content/case-studies/<locale>/<slug>.mdx` it fails to resolve — creating the
+directories empty does not help, the error is identical. At least one file
+must exist, even one that is only a draft. That is why skeleton files are
+committed while their copy is still unwritten.
+
+`draft: true` keeps a case study out of `generateStaticParams`, the sitemap,
+`llms.txt` and the card's button, and shows it only under
+`NODE_ENV === "development"` — which is what makes the draft the file its
+author writes against.
+
 ## SEO
 
 - `src/app/sitemap.ts` generates the multi-locale sitemap from the route table
   and `routing.locales`, plus one entry pair per published article (real
   `lastModified` dates from frontmatter, not a per-build `new Date()`; each
-  locale gets its own localized path instead of assuming identical slugs).
+  locale gets its own localized path instead of assuming identical slugs) and
+  one pair per published case study (`samePath`, since the slug is shared).
 - `src/app/robots.ts` switches between allow/disallow based on
   `NEXT_PUBLIC_SITE_URL`.
 - Per-page metadata (title, description, OpenGraph, Twitter, hreflang) lives in
   `generateMetadata` inside each `page.tsx`.
 - JSON-LD helpers in `src/utils/seo-schema.ts` produce typed `schema-dts`
   objects for `Person`, `Organization`, `WebSite`, `BreadcrumbList`,
-  `OfferCatalog`, `ItemList`, `ProfilePage`, `Blog`, `BlogPosting`, and
-  `FAQPage` (the last emitted only when an article's frontmatter has a `faq`
-  entry). Combine them with `schemaToJsonLd([...])` to emit a single `@graph`.
-- `src/app/llms.txt/route.ts` generates the LLM briefing dynamically, including
-  an "Articles" section built from published posts. There is no
-  `public/llms.txt` static file anymore.
+  `OfferCatalog`, `ItemList`, `ProfilePage`, `Blog`, `BlogPosting`,
+  `CreativeWork`, and `FAQPage` (the last emitted only when an article's
+  frontmatter has a `faq` entry). Combine them with `schemaToJsonLd([...])` to
+  emit a single `@graph`.
+- `src/app/llms.txt/route.ts` generates the LLM briefing dynamically. It does
+  not enumerate articles — they grow without limit, and the briefing links the
+  blog, the sitemap and the feed instead. It does list published case studies,
+  which are a closed set under a dozen and are literally what Andrea does.
+  There is no `public/llms.txt` static file anymore.
 
 ## Contact Form Flow
 

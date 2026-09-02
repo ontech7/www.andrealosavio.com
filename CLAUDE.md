@@ -78,6 +78,10 @@ npm run indexnow   # ping IndexNow (Bing/Yandex/Seznam/Naver, NOT Google) with
   → CSRF → field validation → email send). Keep it that way.
 - When touching translations, update **both** `src/translations/en/*.json` and
   `src/translations/it/*.json`.
+- **`content/case-studies/` must never be empty.** Turbopack resolves the case
+  study page's dynamic MDX import at build time; with no `.mdx` matching the
+  pattern the build fails, and empty directories fail identically. Keep at least
+  one file, even a `draft: true` skeleton.
 
 ## Quick orientation map
 
@@ -91,6 +95,7 @@ npm run indexnow   # ping IndexNow (Bing/Yandex/Seznam/Naver, NOT Google) with
 | Update OG metadata          | `generateMetadata` inside the relevant `page.tsx`                                                                                   |
 | Touch URL-driven filters    | hand-rolled context provider near the consumer, e.g. `projects-filter-provider.tsx` or `blog-filter-provider.tsx` (see below)       |
 | Write a blog article        | `blog-ghostwriter` skill, or hand-write the `content/blog/{it,en}/` MDX pair                                                        |
+| Write a case study          | `content/case-studies/{it,en}/` — MDX pair sharing one slug; `project:` must exist in `PROJECTS`                                    |
 | Design an article cover     | `blog-cover-designer` skill; the automatic fallback lives in `blog/components/article-cover.tsx`                                    |
 | Change how articles render  | `src/mdx-components.tsx`                                                                                                            |
 
