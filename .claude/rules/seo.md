@@ -365,6 +365,10 @@ addition to the `BreadcrumbList` every non-homepage page already emits.
 - Route: `src/app/[locale]/blog/rss.xml/route.ts`, statically generated
   (`dynamic = "force-static"`, `dynamicParams = false`).
 - One feed per locale: `/it/blog/rss.xml`, `/en/blog/rss.xml`.
+- Capped at the `BLOG_RECENT_SIZE` newest articles (20, in
+  `src/constants/blog.ts`). A feed is a "what's new" surface, not an archive:
+  readers poll it and only ever show the top of it, so letting it grow with the
+  archive costs bandwidth on every poll and buys nothing.
 - Linked from each article's metadata via
   `alternates.types["application/rss+xml"]`.
 
@@ -374,7 +378,8 @@ addition to the `BreadcrumbList` every non-homepage page already emits.
 curl -s https://www.andrealosavio.com/it/blog/rss.xml | grep -c "<item>"
 ```
 
-Should return the number of published Italian articles.
+Should return the number of published Italian articles, or 20 once there are
+more than that.
 
 ---
 
@@ -392,9 +397,12 @@ over HTML parsing.
   `Content-Type: text/markdown; charset=utf-8` and
   `X-Robots-Tag: noindex, follow` — indexable pages stay the HTML versions;
   this is a machine-readable mirror, not a duplicate to rank.
-- `src/app/llms.txt/route.ts` lists every published article with links to
-  both the HTML and the `.md` version (replaces the old static
-  `public/llms.txt` — that file no longer exists).
+- `src/app/llms.txt/route.ts` points at `/en/blog` and at the feed, and does
+  not enumerate articles (it replaces the old static `public/llms.txt`, which no
+  longer exists). The briefing exists so a model can say who Andrea is and what
+  he does; a list of every article title grows without limit and answers a
+  question nobody asked it. Crawlers that want the articles follow the blog
+  link, the sitemap or the feed.
 
 **How to test**:
 
@@ -404,7 +412,7 @@ curl -sI https://www.andrealosavio.com/it/blog/<slug>.md | grep -i "content-type
 #         X-Robots-Tag: noindex, follow
 
 curl -s https://www.andrealosavio.com/llms.txt | grep -c "## Articles"
-# Expect: 1
+# Expect: 0 — the briefing links the blog, it does not list articles
 ```
 
 ---

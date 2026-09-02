@@ -1,5 +1,5 @@
 import type { BlogTag } from "@/constants/blog";
-import { coverImageUrl } from "@/libs/blog/cover-image";
+import { coverImageUrl } from "@/libs/blog/cover-source";
 import type { BlogArticle } from "@/libs/blog/source";
 
 /**

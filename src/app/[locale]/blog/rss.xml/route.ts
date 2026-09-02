@@ -1,3 +1,4 @@
+import { BLOG_RECENT_SIZE } from "@/constants/blog";
 import { getArticles } from "@/libs/blog/source";
 import { locales, type AppLocale } from "@/libs/i18n/utils";
 
@@ -36,7 +37,7 @@ export async function GET(
     return new Response("Not found", { status: 404 });
   }
 
-  const articles = getArticles(locale);
+  const articles = getArticles(locale).slice(0, BLOG_RECENT_SIZE);
   const feedUrl = `${siteUrl}/${locale}/blog/rss.xml`;
 
   const items = articles

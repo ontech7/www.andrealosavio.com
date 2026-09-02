@@ -1,5 +1,3 @@
-import type { BlogFrontmatter } from "./frontmatter";
-
 export type CoverVariant = "hero" | "thumb";
 
 export const COVER_RASTER_WIDTH = 1200;
@@ -9,22 +7,17 @@ export const COVER_RASTER_HEIGHT = 630;
 export const COVER_RASTER_QUALITY = 78;
 
 /**
- * L'URL dell'immagine di copertina da mettere in un `<img>`.
+ * Il path servito dalla route delle cover.
  *
- * Le cover vettoriali, sia quelle disegnate a mano sia le scene generate dallo
- * `translationKey`, passano dalla route che le rasterizza in WebP: cosi non
- * dipendono dai font della pagina e non costano nulla da disegnare. Una cover
- * gia raster nel frontmatter viene servita com'e.
+ * `version` e un hash di cio che disegna la scena, non un numero di build: e
+ * quello che rende onesto l'header `immutable`. Cambiare i tag di un articolo
+ * cambia il glifo, quindi cambia l'hash, quindi cambia l'URL, e chi ha gia
+ * l'immagine vecchia in cache ne chiede una nuova invece di tenersela un anno.
  */
-export function coverImageUrl(
-  frontmatter: Pick<BlogFrontmatter, "cover" | "translationKey">,
-  variant: CoverVariant
+export function coverImagePath(
+  variant: CoverVariant,
+  version: string,
+  translationKey: string
 ): string {
-  const { cover, translationKey } = frontmatter;
-
-  if (cover && !cover.endsWith(".svg")) {
-    return cover;
-  }
-
-  return `/images/blog-cover/${variant}/${translationKey}`;
+  return `/images/blog-cover/${variant}/${version}/${translationKey}`;
 }

@@ -1,3 +1,4 @@
+import { BLOG_RECENT_SIZE } from "@/constants/blog";
 import { PageMessages } from "@/libs/i18n/messages";
 import type { AppLocale } from "@/libs/i18n/utils";
 import { getArticles, getTagCounts, getUsedTags } from "@/libs/blog/source";
@@ -89,7 +90,7 @@ export default async function BlogPage({ params }: PageProps) {
       url: siteUrl,
     },
     inLanguage: locale,
-    posts: articles.map((article) => ({
+    posts: articles.slice(0, BLOG_RECENT_SIZE).map((article) => ({
       url: `${siteUrl}/${locale}/blog/${article.slug}`,
       headline: article.frontmatter.title,
       datePublished: article.frontmatter.publishedAt,

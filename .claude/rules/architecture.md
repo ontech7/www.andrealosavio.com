@@ -215,7 +215,7 @@ rasterises the same SVG through satori.
 
 Inlining only happens on the article page, which shows one cover. The index
 cards get the same drawing as WebP, from the route at
-`src/app/images/blog-cover/[variant]/[key]/route.tsx`. It lives under
+`src/app/images/blog-cover/[variant]/[version]/[key]/route.tsx`. It lives under
 `app/images/` on purpose: that prefix is already excluded from the `src/proxy.ts`
 matcher, so the route needs no matcher change and no locale segment (the scene is
 seeded on `translationKey`, which both locales share). It renders `CoverScene` to
@@ -231,6 +231,14 @@ lean on `feGaussianBlur` over large areas, which the browser would repaint for
 every visible card. The `<Image>` carries `unoptimized`, because the route
 already emits the final format and size and running it through the Vercel image
 optimizer would only bill a second transformation.
+
+The `version` segment is a hash of everything that decides the drawing
+(`cover-source.ts`): the `translationKey` that seeds the geometry, the primary
+tag that picks the glyph, and the file contents when the cover is hand-drawn.
+It is what makes the route's `immutable` cache header honest. Without it the URL
+would stay the same after a retag or a redraw, and every returning visitor would
+keep the old image for a year. Adding a tag that does not win the vocabulary
+order leaves the hash alone, which is correct: the drawing did not change.
 
 The index (`blog/page.tsx`) reuses the page grammar of `/projects`: a centred
 hero (eyebrow, gradient headline, `GridLayers` backdrop, RSS button), then two
@@ -286,7 +294,10 @@ client components fed by data. `ArticleCard`, `ArticleFeatured` and
 cover URLs (`coverThumbUrl`, `coverHeroUrl`) so the featured article does not
 need a second serialized object per article. Anything added to
 `ArticleCardData` is paid once per article on every visit to the index, so keep
-it to what a card actually draws.
+it to what a card actually draws. The `Blog` JSON-LD on the same page lists
+only the `BLOG_RECENT_SIZE` newest posts, for the same reason: it grew by a
+`BlogPosting` node per article and was the second heaviest thing on the index
+once the cards stopped being the first.
 
 `article-quick-actions.tsx` is the floating control that appears bottom-right
 once the reader is past 60% of the viewport height. Collapsed it is a single

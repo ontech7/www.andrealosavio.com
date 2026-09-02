@@ -7,6 +7,7 @@ import {
   COVER_RASTER_WIDTH,
   type CoverVariant,
 } from "@/libs/blog/cover-image";
+import { coverVersion } from "@/libs/blog/cover-source";
 import { getArticles } from "@/libs/blog/source";
 import { locales } from "@/libs/i18n/utils";
 
@@ -16,24 +17,24 @@ export const dynamicParams = false;
 const VARIANTS: CoverVariant[] = ["hero", "thumb"];
 
 interface RouteParams {
-  params: Promise<{ variant: string; key: string }>;
+  params: Promise<{ variant: string; version: string; key: string }>;
 }
 
 export function generateStaticParams() {
-  const seen = new Map<string, { tags: string[]; cover?: string }>();
+  const seen = new Map<string, string>();
 
   for (const locale of locales) {
     for (const article of getArticles(locale)) {
-      const { translationKey, tags, cover } = article.frontmatter;
+      const { translationKey, cover } = article.frontmatter;
 
       if (!cover || cover.endsWith(".svg")) {
-        seen.set(translationKey, { tags: [...tags], cover });
+        seen.set(translationKey, coverVersion(article.frontmatter));
       }
     }
   }
 
   return VARIANTS.flatMap((variant) =>
-    [...seen.keys()].map((key) => ({ variant, key }))
+    [...seen.entries()].map(([key, version]) => ({ variant, version, key }))
   );
 }
 
