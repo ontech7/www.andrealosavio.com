@@ -23,7 +23,7 @@ export async function CaseStudyHeader({
       <Button variant="ghost" size="sm" asChild className="mb-8 -ml-2">
         <Link href="/projects">
           <ArrowLeftIcon className="size-4" aria-hidden="true" />
-          {t("projects.metadata.title")}
+          {t("projects.caseStudy.backToProjects")}
         </Link>
       </Button>
 

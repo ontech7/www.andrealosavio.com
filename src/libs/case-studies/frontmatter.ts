@@ -13,6 +13,7 @@ export interface CaseStudyFrontmatter {
 const SUMMARY_MIN_LENGTH = 120;
 const SUMMARY_MAX_LENGTH = 170;
 const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+const ALLOWED_COVER_EXTENSIONS = [".webp", ".png", ".jpg", ".jpeg"];
 
 function fail(source: string, message: string): never {
   throw new Error(`[case-studies] ${source}: ${message}`);
@@ -112,9 +113,21 @@ export function parseFrontmatter(
   }
 
   const cover = requireString(raw.cover, "cover", source);
+
+  if (
+    !ALLOWED_COVER_EXTENSIONS.some((extension) =>
+      cover.toLowerCase().endsWith(extension)
+    )
+  ) {
+    fail(
+      source,
+      `cover deve avere estensione ${ALLOWED_COVER_EXTENSIONS.join(", ")}: le piattaforme social non renderizzano SVG e la cover di un case study è una schermata reale`
+    );
+  }
+
   const coverAlt = requireString(
     raw.coverAlt,
-    "coverAlt (obbligatorio quando è presente cover)",
+    "coverAlt (obbligatorio, non opzionale come nel blog)",
     source
   );
 

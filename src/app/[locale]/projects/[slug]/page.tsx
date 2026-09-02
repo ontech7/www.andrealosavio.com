@@ -125,7 +125,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
           __html: schemaToJsonLd([breadcrumbSchema, caseStudySchema]),
         }}
       />
-      <PageMessages namespaces={["projects"]}>
+      <PageMessages namespaces={["projects", "blog"]}>
         <CaseStudyHeader project={project} frontmatter={caseStudy.frontmatter} />
         <article className="mx-auto max-w-3xl px-6 pb-20">
           <div className="prose-article">

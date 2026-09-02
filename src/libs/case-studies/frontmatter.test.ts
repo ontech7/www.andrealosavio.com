@@ -88,4 +88,25 @@ describe("parseFrontmatter", () => {
       parseFrontmatter({ ...valid, publishedAt: "2026-02-31" }, "it/quido.mdx")
     ).toThrow(/publishedAt/);
   });
+
+  it("rifiuta una cover SVG", () => {
+    expect(() =>
+      parseFrontmatter(
+        { ...valid, cover: "/images/case-studies/quido/cover.svg" },
+        "it/quido.mdx"
+      )
+    ).toThrow(/cover/);
+  });
+
+  it.each([".webp", ".png", ".jpg", ".jpeg", ".WEBP", ".PNG", ".JPG", ".JPEG"])(
+    "accetta una cover con estensione %s",
+    (extension) => {
+      expect(() =>
+        parseFrontmatter(
+          { ...valid, cover: `/images/case-studies/quido/cover${extension}` },
+          "it/quido.mdx"
+        )
+      ).not.toThrow();
+    }
+  );
 });
