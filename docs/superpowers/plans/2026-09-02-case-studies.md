@@ -822,7 +822,7 @@ export function ProjectItem({
 
   const isMatching =
     selectedTags.every((tag) => tags.includes(tag)) &&
-    selectedRoles.every((role) => roles.includes(role));
+    selectedRoles.every((role) => (roles as readonly string[]).includes(role));
 
   const order =
     sortOrder === "asc"
@@ -864,7 +864,9 @@ export function ProjectsEmptyState({
   const hasMatch = projects.some(
     (project) =>
       selectedTags.every((tag) => project.tags.includes(tag)) &&
-      selectedRoles.every((role) => project.roles.includes(role))
+      selectedRoles.every((role) =>
+        (project.roles as readonly string[]).includes(role)
+      )
   );
 
   if (hasMatch) {

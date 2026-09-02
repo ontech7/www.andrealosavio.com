@@ -308,13 +308,22 @@ si usano.
 Hero invariato. Poi tre blocchi, in quest'ordine:
 
 1. **Lavoro per clienti** — sette card a riga intera
-2. **I miei prodotti** — la sezione `FEATURED_PRODUCTS` esistente
-3. **Esperimenti** — Coffee Notes Lab e Forfettario Control, card compatte a
+2. **Esperimenti** — Coffee Notes Lab e Forfettario Control, card compatte a
    due o tre per riga
+3. **I miei prodotti** — la sezione `FEATURED_PRODUCTS` esistente
 
 L'ordine attuale mette i prodotti personali sopra l'elenco. Si inverte: il
 problema da risolvere è la credibilità sul lavoro cliente, e quella va per
 prima.
+
+I prodotti chiudono invece di stare in mezzo, ed è un vincolo di struttura più
+che una preferenza. Clienti ed esperimenti vivono dentro lo stesso
+`ProjectsFilterProvider`; i prodotti no, perché `FeaturedProductsSection` è una
+sezione a sé che il filtro non tocca. Infilarla fra i due gruppi filtrabili
+significherebbe che, filtrando, i titoli collassano ma il blocco prodotti resta
+piantato in mezzo ai risultati. Fuori dalla regione filtrata può stare solo
+prima di tutto o dopo tutto, e "prima di tutto" è esattamente l'ordine che
+stiamo correggendo.
 
 Il filtro sopravvive su ruoli e stack (non più su `customer`/`personal`, che
 ora sono il raggruppamento). Quando un filtro è attivo i blocchi collassano in
