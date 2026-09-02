@@ -621,7 +621,7 @@ Tre cose da notare. Il link esterno non è più un `Button` primario: era il ter
 - [ ] **Step 2: Type check**
 
 Run: `npx tsc --noEmit`
-Expected: restano errori solo in `projects-section.tsx` e `page.tsx` (Task 4), non in questo file.
+Expected: PASS. `projects-section.tsx` continua a passare solo `project`, e `caseStudySlug` e' opzionale. Come per il Task 1, le chiavi di traduzione ormai orfane in `page.tsx` passano per cast `as never` e non danno errore di tipo: restano visibili solo come `MISSING_MESSAGE` in console finche' il Task 4 non riscrive quel file.
 
 - [ ] **Step 3: Commit**
 
