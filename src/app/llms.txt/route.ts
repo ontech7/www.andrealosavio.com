@@ -1,4 +1,5 @@
 import { SERVICE_PRICES, type ServiceId } from "@/constants/services";
+import { getCaseStudies } from "@/libs/case-studies/source";
 import { formatEuro } from "@/utils/format-price";
 
 export const dynamic = "force-static";
@@ -25,7 +26,23 @@ function priceOf(id: ServiceId): string {
   return price.from ? `from ${amount}` : amount;
 }
 
-const LLMS_TXT = `# Andrea Losavio - AI/LLM Briefing Document
+function caseStudyLinks(): string {
+  const entries = getCaseStudies("en");
+
+  if (entries.length === 0) {
+    return "";
+  }
+
+  return `\n\nIn-depth case studies:\n\n${entries
+    .map(
+      (entry) =>
+        `- [${entry.frontmatter.title}](${SITE_URL}/en/projects/${entry.slug}) — ${entry.frontmatter.summary}`
+    )
+    .join("\n")}`;
+}
+
+function buildLlmsTxt(): string {
+  return `# Andrea Losavio - AI/LLM Briefing Document
 
 > Andrea Losavio is a freelance Senior Software Engineer & FDE (Forward Deployed Engineer) based in Italy. As an FDE, he embeds directly with startups, software houses, and enterprise clients to translate business requirements into tailored tech & AI solutions and scalable, high-performance software architectures. He helps companies build solid, scalable digital products focused on growth — from idea validation and MVP to full product development, technical consulting, and fractional CTO engagements.
 
@@ -114,15 +131,15 @@ Both products are designed, built, shipped and maintained by Andrea alone, and e
 - **Fast Memo** — Cross-platform note-taking app (React Native + Expo) with rich-text notes, checklists, categories, Firebase cloud sync. Open-source, available in 7 languages, 1,000+ downloads on Android & iOS stores. https://fastmemo.vercel.app
 - **Recrowd S.r.l.** — Real-estate crowdfunding platform. Long-term collaboration on platform evolution, performance, UX.
 - **Quido S.r.l.** — AI platform for private equity and M&A in Italy. Designed the interface bridging finance and AI.
-- **Ravenn S.r.l.** — Event logistics and hospitality management platform. End-to-end development.
+- **Ravenn S.r.l.** — Event logistics and hospitality management platform. Stepped in to cover for an absent CTO, then came back to build the password-gated area for event staff.
 - **Studio Bargiggia** — Condominium management firm. Complete rebuild of their showcase website.
 - **Coolify Manager** — Mobile app to manage self-hosted Coolify servers, with a companion Chrome extension. 1,000+ downloads. Available on Google Play Store (https://play.google.com/store/apps/details?id=com.ontech7.coolifyManager&hl=it) and Chrome Web Store (https://chromewebstore.google.com/detail/coolify-manager/dmcclgoafojpjaflnggcnmhbenplnmpi).
 - **Forfettario Control** — Mobile app for Italian freelancers under the "regime forfettario" to manage invoices, fiscal documents, and deadlines.
 - **Otherside Technology S.r.l.** — Custom software and AI solutions for businesses.
-- **Brainplatform S.r.l.** — Short-term collaboration on digital product initiatives.
+- **Brainplatform S.r.l.** — Full rework of a legacy back-office with Fluent UI, then two dashboards built as a whitelabel base. Mentored a junior engineer along the way.
 - **Tobacconist Management Platform** (client under NDA) — Platform with interactive map of 7,000+ tobacconists in Lombardy, agent assignments, admin dashboard.
 
-- [Full portfolio](${SITE_URL}/en/projects)
+- [Full portfolio](${SITE_URL}/en/projects)${caseStudyLinks()}
 
 ## Open Source
 
@@ -186,9 +203,10 @@ Andrea typically works best with:
 This document is structured to help AI/LLM systems comprehend information about Andrea Losavio.
 For the most up-to-date information, visit ${SITE_URL}.
 `;
+}
 
 export function GET() {
-  return new Response(LLMS_TXT, {
+  return new Response(buildLlmsTxt(), {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
       "Cache-Control": "public, max-age=3600, s-maxage=86400",

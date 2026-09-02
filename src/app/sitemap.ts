@@ -1,4 +1,5 @@
 import { getArticles, getTranslatedSlug } from "@/libs/blog/source";
+import { getCaseStudies } from "@/libs/case-studies/source";
 import { routing } from "@/libs/i18n/routing";
 import { locales, type AppLocale } from "@/libs/i18n/utils";
 import type { MetadataRoute } from "next";
@@ -67,6 +68,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
+  const caseStudyRoutes: SitemapRoute[] = getCaseStudies(
+    routing.defaultLocale as AppLocale
+  ).map((caseStudy) => {
+    const { updatedAt, publishedAt } = caseStudy.frontmatter;
+
+    return {
+      pathByLocale: samePath(`/projects/${caseStudy.slug}`),
+      priority: 0.7,
+      changeFrequency: "monthly" as const,
+      lastModified: new Date(`${updatedAt ?? publishedAt}T00:00:00Z`),
+    };
+  });
+
   const staticRoutes: SitemapRoute[] = [
     {
       pathByLocale: samePath(""),
@@ -103,36 +117,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  return [...staticRoutes, ...articleRoutes].flatMap((route) =>
-    locales
-      .filter((locale) => route.pathByLocale[locale] !== undefined)
-      .map((locale) => {
-        const defaultPath =
-          route.pathByLocale[routing.defaultLocale as AppLocale];
+  return [...staticRoutes, ...caseStudyRoutes, ...articleRoutes].flatMap(
+    (route) =>
+      locales
+        .filter((locale) => route.pathByLocale[locale] !== undefined)
+        .map((locale) => {
+          const defaultPath =
+            route.pathByLocale[routing.defaultLocale as AppLocale];
 
-        return {
-          url: `https://${siteUrl}/${locale}${route.pathByLocale[locale]}`,
-          lastModified: route.lastModified,
-          changeFrequency: route.changeFrequency,
-          priority: route.priority,
-          alternates: {
-            languages: {
-              ...Object.fromEntries(
-                locales
-                  .filter((alt) => route.pathByLocale[alt] !== undefined)
-                  .map((alt) => [
-                    alt,
-                    `https://${siteUrl}/${alt}${route.pathByLocale[alt]}`,
-                  ])
-              ),
-              ...(defaultPath !== undefined
-                ? {
-                    "x-default": `https://${siteUrl}/${routing.defaultLocale}${defaultPath}`,
-                  }
-                : {}),
+          return {
+            url: `https://${siteUrl}/${locale}${route.pathByLocale[locale]}`,
+            lastModified: route.lastModified,
+            changeFrequency: route.changeFrequency,
+            priority: route.priority,
+            alternates: {
+              languages: {
+                ...Object.fromEntries(
+                  locales
+                    .filter((alt) => route.pathByLocale[alt] !== undefined)
+                    .map((alt) => [
+                      alt,
+                      `https://${siteUrl}/${alt}${route.pathByLocale[alt]}`,
+                    ])
+                ),
+                ...(defaultPath !== undefined
+                  ? {
+                      "x-default": `https://${siteUrl}/${routing.defaultLocale}${defaultPath}`,
+                    }
+                  : {}),
+              },
             },
-          },
-        };
-      })
+          };
+        })
   );
 }
