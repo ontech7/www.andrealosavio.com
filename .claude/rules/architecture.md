@@ -386,9 +386,13 @@ paginate against an archive that does — and the blog moves as it grows.
 Duplicating a small pattern costs less than coupling two subsystems on
 different trajectories. Extract only if a third content type shows up.
 
-Three build-time guards in `assertConsistency`: a published case study needs
+Four build-time guards in `assertConsistency`: a published case study needs
 its twin in the other locale, `project:` must resolve to an id in `PROJECTS`,
-and no project may carry two case studies. Drafts are skipped by all three.
+no project may carry two case studies, and the cover file must exist on disk.
+Drafts are skipped by all four. The cover check takes an injected
+`coverExists` predicate rather than reaching for `fs` itself, so the guard is
+reachable from a unit test — an unreachable guard is the defect it exists to
+prevent.
 
 Covers must be raster — `.webp`, `.png`, `.jpg` or `.jpeg`, enforced by
 `parseFrontmatter`. They go straight into `openGraph.images`, `twitter.images`
