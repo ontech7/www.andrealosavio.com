@@ -20,7 +20,25 @@
   },
   "featured": {
     "title": "I miei prodotti",
-    "subtitle": "Due app che ho pensato, costruito e pubblicato da solo."
+    "subtitle": "Due app che ho pensato, costruito e pubblicato da solo.",
+    "openSource": {
+      "title": "Open source",
+      "subtitle": "Altri progetti open source che ho pubblicato su GitHub.",
+      "items": {
+        "reactNativeDialog": {
+          "description": "Dialog semplice e multi-funzione, portalizzato, con blur su Android e iOS."
+        },
+        "claudeOmniRc": {
+          "description": "Remote control per la CLI di Claude Code dal telefono, anche con modelli Ollama o altri LLM."
+        },
+        "ollamaUsage": {
+          "description": "CLI che tiene d'occhio i consumi di Ollama Cloud, senza API ufficiali."
+        },
+        "figmaNodeQuery": {
+          "description": "Interroga i nodi di un file Figma da URL e token, con output JSON."
+        }
+      }
+    }
   },
   "filter": {
     "sortLabel": "Ordinamento",

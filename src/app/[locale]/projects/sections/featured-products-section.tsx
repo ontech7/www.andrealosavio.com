@@ -2,10 +2,11 @@
 
 import { ProductHighlightCard } from "@/components/product-highlight-card";
 import { fadeInUpAnim, staggerContainerAnim } from "@/constants/motion";
-import { FEATURED_PRODUCTS } from "@/constants/products";
+import { FEATURED_PRODUCTS, OPEN_SOURCE_REPOS } from "@/constants/products";
 import { cn } from "@/utils/cn";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
+import { RepoCard } from "../components/repo-card";
 
 interface FeaturedProductsSectionProps {
   id: string;
@@ -63,6 +64,42 @@ export function FeaturedProductsSection({
             <ProductHighlightCard product={product} />
           </motion.div>
         ))}
+      </motion.div>
+
+      <motion.div
+        className="border-border/60 mt-10 border-t pt-6"
+        variants={staggerContainerAnim}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <motion.p
+          className="text-secondary text-xs tracking-[0.2em] uppercase"
+          variants={fadeInUpAnim}
+          transition={{ duration: 0.5 }}
+        >
+          {t("projects.featured.openSource.title")}
+        </motion.p>
+        <motion.p
+          className="text-muted-foreground mt-2 max-w-md text-sm"
+          variants={fadeInUpAnim}
+          transition={{ duration: 0.5 }}
+        >
+          {t("projects.featured.openSource.subtitle")}
+        </motion.p>
+
+        <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {OPEN_SOURCE_REPOS.map((repo) => (
+            <motion.div
+              key={repo.id}
+              className="h-full"
+              variants={fadeInUpAnim}
+              transition={{ duration: 0.5 }}
+            >
+              <RepoCard repo={repo} />
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
     </section>
   );
