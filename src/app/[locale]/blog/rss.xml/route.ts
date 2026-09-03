@@ -67,8 +67,8 @@ export async function GET(
     `    <link>${siteUrl}/${locale}/blog</link>`,
     `    <description>${escapeXml(
       locale === "it"
-        ? "Note di lavoro su codice, architettura e prodotto."
-        : "Working notes on code, architecture and product."
+        ? "Appunti di sviluppo, librerie provate, notizie e pensieri sparsi."
+        : "Development notes, libraries I have tried, news and scattered thoughts."
     )}</description>`,
     `    <language>${locale}</language>`,
     `    <atom:link href="${feedUrl}" rel="self" type="application/rss+xml" />`,

@@ -160,7 +160,7 @@ There is no separate services page: the homepage is the single entry point and c
 - [Projects](${SITE_URL}/en/projects): own products in the spotlight, then client work and personal projects
 - [About](${SITE_URL}/en/about): background, experience and skills
 - [Privacy Policy](${SITE_URL}/en/privacy): data handling for the contact form, plus a note on AI-assisted copywriting
-- [Blog](${SITE_URL}/en/blog): working notes on code, architecture and product. Every article is also served as plain Markdown at its .md URL, and the feed is at ${SITE_URL}/en/blog/rss.xml
+- [Blog](${SITE_URL}/en/blog): development notes, libraries he has tried, news worth reading and scattered thoughts on the craft. Every article is also served as plain Markdown at its .md URL, and the feed is at ${SITE_URL}/en/blog/rss.xml
 
 ## Site Content
 

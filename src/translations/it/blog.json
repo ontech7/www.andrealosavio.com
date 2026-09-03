@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "title": "Blog - Andrea Losavio",
-    "description": "Articoli su sviluppo software, architettura, performance e su come le scelte tecniche diventano risultati di business."
+    "title": "Blog | Andrea Losavio",
+    "description": "Appunti di sviluppo, librerie che ho provato, notizie che meritano dieci minuti e qualche pensiero sul mestiere. Quello che mi passa per le mani mentre lavoro."
   },
   "index": {
     "title": "Blog",
-    "subtitle": "Nessuna teoria che non abbia già incontrato in produzione: problemi veri, numeri veri e i compromessi che ho scelto.",
+    "subtitle": "Librerie che ho provato, modi di lavorare, notizie che valgono i dieci minuti e pensieri sparsi. Se mi passa per le mani e mi lascia qualcosa, finisce qui.",
     "empty": "Nessun articolo corrisponde alla ricerca. Prova con altre parole o togli qualche filtro.",
     "noArticlesYet": "Non ho ancora pubblicato nulla qui. Torna presto.",
     "readMore": "Leggi l'articolo",
@@ -18,7 +18,7 @@
     },
     "seriesPart": "Parte {part}",
     "eyebrow": "Blog",
-    "headline": "Note di lavoro su <highlight>codice e architettura</highlight>",
+    "headline": "Appunti, prove e <highlight>qualche opinione</highlight>",
     "rss": "Feed RSS",
     "featuredLabel": "In evidenza",
     "allArticles": "Tutti gli articoli",

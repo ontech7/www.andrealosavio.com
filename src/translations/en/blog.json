@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "title": "Blog - Andrea Losavio",
-    "description": "Articles on software development, architecture, performance, and how technical decisions turn into business outcomes."
+    "title": "Blog | Andrea Losavio",
+    "description": "Development notes, libraries I have tried, news worth ten minutes and the odd thought about the craft. Whatever passes through my hands while I work."
   },
   "index": {
     "title": "Blog",
-    "subtitle": "No theory I have not already met in production: real problems, real numbers and the trade-offs I picked.",
+    "subtitle": "Libraries I have tried, ways of working, news worth the ten minutes and scattered thoughts. If it passes through my hands and leaves something, it ends up here.",
     "empty": "No article matches your search. Try other words or drop a filter.",
     "noArticlesYet": "I haven't published anything here yet. Check back soon.",
     "readMore": "Read the article",
@@ -18,7 +18,7 @@
     },
     "seriesPart": "Part {part}",
     "eyebrow": "Blog",
-    "headline": "Working notes on <highlight>code and architecture</highlight>",
+    "headline": "Notes, experiments and <highlight>the odd opinion</highlight>",
     "rss": "RSS feed",
     "featuredLabel": "Featured",
     "allArticles": "All articles",
