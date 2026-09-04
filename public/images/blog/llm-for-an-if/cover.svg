@@ -1,0 +1,178 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img">
+  <defs>
+    <radialGradient id="llm-for-an-if-sky" cx="50%" cy="48%" r="86%">
+      <stop offset="0%" stop-color="#08203f" />
+      <stop offset="55%" stop-color="#050912" />
+      <stop offset="100%" stop-color="#03060c" />
+    </radialGradient>
+
+    <radialGradient id="llm-for-an-if-bloom" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0d7ef2" stop-opacity="0.55" />
+      <stop offset="45%" stop-color="#0d7ef2" stop-opacity="0.17" />
+      <stop offset="100%" stop-color="#0d7ef2" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="llm-for-an-if-orb" cx="39%" cy="33%" r="74%">
+      <stop offset="0%" stop-color="#9fd0ff" />
+      <stop offset="22%" stop-color="#4ba3f8" />
+      <stop offset="52%" stop-color="#0d7ef2" />
+      <stop offset="80%" stop-color="#0a2d55" />
+      <stop offset="100%" stop-color="#071c36" />
+    </radialGradient>
+
+    <linearGradient id="llm-for-an-if-plate" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#0b1526" />
+      <stop offset="100%" stop-color="#060a14" />
+    </linearGradient>
+
+    <linearGradient
+      id="llm-for-an-if-lead"
+      gradientUnits="userSpaceOnUse"
+      x1="100"
+      y1="0"
+      x2="480"
+      y2="0"
+    >
+      <stop offset="0%" stop-color="#1b4d8f" stop-opacity="0.45" />
+      <stop offset="60%" stop-color="#0d7ef2" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#7cc0ff" stop-opacity="1" />
+    </linearGradient>
+
+    <linearGradient
+      id="llm-for-an-if-strand"
+      gradientUnits="userSpaceOnUse"
+      x1="700"
+      y1="0"
+      x2="1010"
+      y2="0"
+    >
+      <stop offset="0%" stop-color="#7cc0ff" stop-opacity="0.95" />
+      <stop offset="30%" stop-color="#0d7ef2" stop-opacity="0.55" />
+      <stop offset="70%" stop-color="#1b4d8f" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#1b4d8f" stop-opacity="0" />
+    </linearGradient>
+
+    <radialGradient id="llm-for-an-if-depth" cx="50%" cy="48%" r="74%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+
+    <mask id="llm-for-an-if-depth-mask">
+      <rect width="1200" height="630" fill="url(#llm-for-an-if-depth)" />
+    </mask>
+
+    <filter id="llm-for-an-if-far-blur">
+      <feGaussianBlur stdDeviation="3.5" />
+    </filter>
+
+    <filter id="llm-for-an-if-wire-glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="7" />
+    </filter>
+
+    <filter id="llm-for-an-if-strand-haze" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="10" />
+    </filter>
+
+    <filter id="llm-for-an-if-subject-glow" x="-55%" y="-55%" width="210%" height="210%">
+      <feGaussianBlur stdDeviation="26" result="blurred" />
+      <feMerge>
+        <feMergeNode in="blurred" />
+        <feMergeNode in="blurred" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="llm-for-an-if-plate-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#03102a" flood-opacity="0.6" />
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#llm-for-an-if-sky)" />
+
+  <g mask="url(#llm-for-an-if-depth-mask)">
+    <g
+      fill="none"
+      stroke="#7cc0ff"
+      stroke-width="1"
+      opacity="0.05"
+      filter="url(#llm-for-an-if-far-blur)"
+    >
+      <path d="M100 0 L100 630" />
+      <path d="M300 0 L300 630" />
+      <path d="M500 0 L500 630" />
+      <path d="M700 0 L700 630" />
+      <path d="M900 0 L900 630" />
+      <path d="M1100 0 L1100 630" />
+      <path d="M0 90 L1200 90" />
+      <path d="M0 180 L1200 180" />
+      <path d="M0 270 L1200 270" />
+      <path d="M0 360 L1200 360" />
+      <path d="M0 450 L1200 450" />
+      <path d="M0 540 L1200 540" />
+    </g>
+
+    <g fill="none" stroke-linecap="round">
+      <path
+        d="M112 442 L338 376 L600 300"
+        stroke="url(#llm-for-an-if-lead)"
+        stroke-width="10"
+        opacity="0.45"
+        filter="url(#llm-for-an-if-wire-glow)"
+      />
+      <path d="M112 442 L338 376 L600 300" stroke="url(#llm-for-an-if-lead)" stroke-width="2.6" />
+    </g>
+
+    <g fill="none" stroke="url(#llm-for-an-if-strand)" stroke-linecap="round">
+      <g stroke-width="11" opacity="0.55" filter="url(#llm-for-an-if-strand-haze)">
+        <path d="M600 300 C752 292 826 248 940 202" />
+        <path d="M600 300 C754 308 830 338 944 372" />
+      </g>
+      <g stroke-width="6" opacity="0.3" filter="url(#llm-for-an-if-strand-haze)">
+        <path d="M600 300 C740 288 800 232 856 156" />
+        <path d="M600 300 C738 314 794 372 848 436" />
+      </g>
+      <g stroke-width="2.4" stroke-dasharray="16 11">
+        <path d="M600 300 C752 292 826 248 940 202" />
+        <path d="M600 300 C754 308 830 338 944 372" />
+      </g>
+      <g stroke-width="2" stroke-dasharray="11 13" opacity="0.55">
+        <path d="M600 300 C740 288 800 232 856 156" />
+        <path d="M600 300 C738 314 794 372 848 436" />
+      </g>
+    </g>
+
+    <g filter="url(#llm-for-an-if-plate-shadow)">
+      <g fill="url(#llm-for-an-if-plate)" stroke="#1b4d8f" stroke-width="1.5" opacity="0.94">
+        <rect x="60" y="404" width="104" height="76" rx="13" />
+        <rect x="286" y="338" width="104" height="76" rx="13" />
+      </g>
+      <g fill="url(#llm-for-an-if-plate)" stroke="#1b4d8f" stroke-width="1.5" opacity="0.5">
+        <rect x="944" y="156" width="104" height="76" rx="13" />
+        <rect x="948" y="342" width="104" height="76" rx="13" />
+      </g>
+      <g fill="none" stroke="#7cc0ff" stroke-width="1.5" stroke-linecap="round">
+        <g opacity="0.3">
+          <path d="M82 432 L142 432" />
+          <path d="M82 454 L122 454" />
+          <path d="M308 366 L368 366" />
+          <path d="M308 388 L348 388" />
+        </g>
+        <g opacity="0.14">
+          <path d="M966 184 L1026 184" />
+          <path d="M966 206 L1006 206" />
+          <path d="M970 370 L1030 370" />
+          <path d="M970 392 L1010 392" />
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <circle cx="600" cy="300" r="320" fill="url(#llm-for-an-if-bloom)" />
+
+  <g filter="url(#llm-for-an-if-subject-glow)">
+    <circle cx="600" cy="300" r="106" fill="url(#llm-for-an-if-orb)" />
+  </g>
+
+  <circle cx="600" cy="300" r="106" fill="none" stroke="#cbe6ff" stroke-width="1.2" opacity="0.28" />
+</svg>

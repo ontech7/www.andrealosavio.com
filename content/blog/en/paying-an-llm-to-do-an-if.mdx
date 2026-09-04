@@ -1,0 +1,211 @@
+---
+title: "You are paying an LLM to do an if"
+subtitle:
+  "Code where there is one right answer, reasoning where there is not: the
+  diagram nobody draws anymore"
+description:
+  "The test I run at design time to see which nodes of an agent system deserve a
+  model, why temperature 0 is not enough, and what getting it wrong costs."
+publishedAt: 2026-09-04
+translationKey: llm-for-an-if
+tags: [architecture, ai, business]
+cover: /images/blog/llm-for-an-if/cover.svg
+coverAlt:
+  "A single crisp line runs through two unlit code blocks into a glowing sphere,
+  and comes out the other side frayed into four dashed strands that fade away"
+takeaways:
+  - "The design-time test: if two competent developers would produce the same
+    output from the same input, that node is code, not a prompt."
+  - "temperature 0 is not determinism. A thousand identical requests return
+    eighty different completions, because reduction kernels are not batch
+    invariant."
+  - "Structured output guarantees the shape of the answer, never its content. A
+    value inside the enum can still be the wrong value, and it passes every
+    check you wrote."
+  - "In a multi-agent graph accuracy multiplies, latency adds up and cost is
+    billed per node: six nodes at 95% make a system at 73%."
+faq:
+  - q: "How do I decide whether a block should be code or an LLM call?"
+    a:
+      "Ask whether two competent developers, given the same input, would produce
+      the same output. If they would, that block has exactly one right answer
+      and it is code. If they would argue about it, you need a model."
+  - q: "Does temperature 0 make an LLM deterministic?"
+    a:
+      "No. Reduction kernels are not batch invariant, so the result depends on
+      the size of the batch your request lands in, which depends on who else is
+      calling that server at the same moment. You never see it locally, you see
+      it in production under load."
+  - q: "Do structured outputs solve reliability?"
+    a:
+      "They solve half of it. They guarantee the answer has the declared shape,
+      not that its content is correct. A formally valid but semantically wrong
+      value passes every validation you wrote."
+---
+
+## I open the graph and every node is an LLM
+
+I join a product that is already running, ask for the architecture diagram, and
+they pull it up. Seven boxes, six arrows. Every box is a model call.
+
+One normalizes phone numbers. One decides whether a string is a date. One routes
+the request to the right team by looking at a field with three possible values.
+One takes a JSON payload and rewrites it as a different JSON payload. And then
+there is one, at the end, doing the thing the product exists for: it reads
+something a human wrote and works out what they want.
+
+That last one is irreplaceable. The other four were code two years ago.
+
+I am not pointing at anyone, and that is the point. I have found this in every
+AI product I have opened, some worse than others. The reason is not even a bad
+one. When you have something in the house that answers everything, you stop
+asking whether you needed everything answered.
+
+## The question that gets skipped
+
+I run one test, and it comes before any architecture is drawn.
+
+**Two competent developers, same input: would they write the same output?**
+
+If yes, that node is code. "Pull the order number out of this string" has one
+right answer. Put two people in separate rooms and they come back with the same
+result. "Is this message angry or just blunt?" does not. Those two people
+disagree, and both are right. The first one is a regex. The second one is
+reasoning, and that is where the model earns what it costs.
+
+Written down it sounds obvious. It still gets skipped, because the question
+people actually ask at that moment is a different one: "can an LLM do this?" And
+the answer is always yes. It stopped filtering anything a long time ago.
+
+<Callout>
+  "It can do this" and "this is the right place for it" are two different
+  questions. A modern model can do the `if`. There is no reason for it to be the
+  one doing it.
+</Callout>
+
+## Not even at `temperature: 0`
+
+Here comes the objection, and I know it well because I made it myself. Set
+temperature to zero, add a structured output, and the node is deterministic
+again.
+
+It is not, and this is not a matter of taste. Thinking Machines
+[measured it](https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/):
+a thousand identical requests, same prompt, `temperature: 0`. Eighty different
+completions come back. The most frequent one shows up seventy-eight times out of
+a thousand.
+
+The cause is not floating point, which is the story everyone told for years. It
+is that reduction kernels are not batch invariant. The server groups requests
+into batches of varying size, a different batch means a different reduction
+tree, and a different reduction tree means different numbers. Which means **your
+output depends on who else is calling that server at that instant.** Locally,
+one request at a time, you never see it. In production under load it is right
+there.
+
+Structured output is the second half-truth. It guarantees the shape of the
+answer, never the content. If the enum has three values you get one of the
+three, and that part is genuinely guaranteed. Nobody guarantees it is the right
+one, and the wrong one walks straight through every check you wrote, because it
+is formally valid. The type is correct. The semantics are not. It is the exact
+bug that survives review, since in review the field is there and it has the
+right type.
+
+## The arithmetic nobody redoes
+
+For a single node you can still argue. For a graph you cannot, because three
+things compound and none of them work for you.
+
+- **Accuracy multiplies.** Six nodes at 95% in series do not make a system at
+  95%. They make `0.95^6`, which is 73.5%. One request in four comes out wrong
+  somewhere, and the annoying part is that you do not know where.
+- **Latency adds up.** Every call is hundreds of milliseconds on a good day and
+  seconds on a normal one. Six calls in series is a product that feels slow even
+  when it is right.
+- **Cost is billed per node, per run.** And billed again on every retry, which
+  is what the first bullet produces.
+
+A deterministic node costs nothing, answers in microseconds, and is correct 100%
+of the time. Not "almost always". 100%. Taking two of those six out of the graph
+is not an optimization, it is an order of magnitude on total reliability.
+
+Taking them out does not mean writing a monster either. It means sending the
+model only what the code cannot already decide on its own:
+
+```ts title="lib/route-request.ts"
+const DIRECT_ROUTES: Record<string, Team> = {
+  refund: "billing",
+  invoice: "billing",
+  password_reset: "account",
+};
+
+export async function routeRequest(input: RequestInput): Promise<Team> {
+  const known = input.category ? DIRECT_ROUTES[input.category] : undefined;
+
+  if (known) {
+    return known;
+  }
+
+  return classifyWithModel(input.freeText);
+}
+```
+
+Five lines of logic. The `category` field comes from a select, it has three
+known values and exactly one destination each. That is a lookup table, and
+putting a model on top of it means paying money for less certainty than you
+started with. The free text does go to the model, because there the single right
+answer does not exist and never will.
+
+## The model writes, the code decides
+
+The line, it turns out, is not where I expected it. It does not separate easy
+tasks from hard ones. It separates **generating** from **accepting**.
+
+A model is writing this article, inside a skill I wrote. It produces two MDX
+files, one Italian and one English, with about twenty frontmatter fields. That
+is ambiguous work and it belongs to the model. What does not belong to it is
+deciding whether the frontmatter is valid:
+
+```ts title="src/libs/blog/frontmatter.ts"
+function requireString(value: unknown, field: string, source: string): string {
+  if (typeof value !== "string" || value.trim() === "") {
+    return fail(source, `${field} è obbligatorio e deve essere una stringa`);
+  }
+
+  return value.trim();
+}
+```
+
+Everything goes through there. The `description`, which has to land between 120
+and 170 characters. The tags, which have to exist in the vocabulary. The date,
+which has to be a real date. Get one of them wrong and the build fails naming
+the file and the field. One level up, `assertConsistency` checks that an article
+published in one language has its twin in the other, and fails the build instead
+of leaving a 404 behind.
+
+None of these checks is a prompt. None of them says "have a look and tell me if
+the frontmatter seems fine". They are `if` statements, and their virtue is that
+they never have an off day. **The model proposes, the code ratifies.** That
+shape survives a change of model underneath, and it is the one part of the setup
+I have never had to rebuild.
+
+## Meanwhile, Astra shipped
+
+OpenAI announced [GPT-6 Astra](https://openai.com/index/gpt-6-astra/) yesterday,
+and Brockman used the word AGI. However you take that, the jump is real: what an
+agent does today looked ten years away twelve months ago. I have no interest in
+being the guy who misses hand-written `for` loops.
+
+But a better model does not turn a probabilistic node into a certain one. It
+makes it wrong less often. The curve goes up and stays a curve: 99.5% is a
+beautiful number and it is not 100%, and six of those in series still land at
+97%. If anything, the faster models get, the better the hybrid looks, because
+you spend all that reasoning where it cannot be replaced instead of burning it
+on a lookup table.
+
+I come back to this at the same moment every time: when there is a diagram to
+draw, or one already drawn to read. Before writing the first prompt I walk the
+boxes one by one and ask whether that box has exactly one right answer. The ones
+that do become functions, and functions get tested. It is the same reason
+[I go slower on purpose](/blog/i-go-slower-on-purpose): the time that looks
+wasted at design time is the only time that does not come back as a hotfix.

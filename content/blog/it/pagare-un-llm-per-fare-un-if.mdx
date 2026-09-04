@@ -1,0 +1,212 @@
+---
+title: "Stai pagando un LLM per fare un if"
+subtitle:
+  "Determinismo dove la risposta è una sola, reasoning dove non lo è:
+  l'architettura che nessuno disegna più"
+description:
+  "Il test che uso in analisi per capire quali nodi di un sistema agentico
+  meritano un modello, perché temperature 0 non basta, e quanto costa sbagliare."
+publishedAt: 2026-09-04
+translationKey: llm-for-an-if
+tags: [architecture, ai, business]
+cover: /images/blog/llm-for-an-if/cover.svg
+coverAlt:
+  "Una linea netta attraversa due riquadri di codice spenti fino a una sfera
+  luminosa, e dall'altro lato ne esce sfilacciata in quattro tratti tratteggiati
+  che sbiadiscono"
+takeaways:
+  - "Il test in analisi: se due sviluppatori competenti, con lo stesso input,
+    scriverebbero lo stesso output, quel nodo è codice e non un prompt."
+  - "temperature 0 non è determinismo: mille richieste identiche producono
+    ottanta risposte diverse, perché i kernel di riduzione non sono
+    batch-invarianti."
+  - "Lo structured output garantisce la forma della risposta, mai il suo
+    contenuto: un valore dentro l'enum può essere quello sbagliato e passa ogni
+    validazione."
+  - "In un grafo multi-agent l'accuratezza si moltiplica, la latenza si somma e
+    il costo si paga per nodo: sei nodi al 95% fanno un sistema al 73%."
+faq:
+  - q: "Come decido se un blocco va scritto in codice o affidato a un LLM?"
+    a:
+      "Chiediti se due sviluppatori competenti, davanti allo stesso input,
+      produrrebbero lo stesso output. Se sì, quel blocco ha una risposta giusta
+      sola ed è codice. Se litigherebbero, serve il reasoning di un modello."
+  - q: "temperature 0 non rende deterministico un LLM?"
+    a:
+      "No. I kernel di riduzione non sono batch-invarianti, quindi il risultato
+      dipende dalla dimensione del batch in cui la tua richiesta finisce, cioè
+      da chi altro sta chiamando quel server nello stesso momento. In locale non
+      si vede, in produzione sotto carico sì."
+  - q: "Gli structured output non risolvono il problema dell'affidabilità?"
+    a:
+      "Risolvono metà del problema. Garantiscono che la risposta abbia la forma
+      dichiarata, non che il contenuto sia corretto. Un valore formalmente
+      valido ma semanticamente sbagliato passa ogni validazione che hai scritto."
+---
+
+## Apro il grafo e sono tutti nodi LLM
+
+Entro in un prodotto già avviato, chiedo il diagramma dell'architettura, me lo
+aprono. Sette box, sei frecce. Ogni box è una chiamata a un modello.
+
+Uno normalizza numeri di telefono. Uno decide se una stringa è una data. Uno
+smista la richiesta verso il team giusto guardando un campo che ha tre valori
+possibili. Uno prende un JSON e lo riscrive in un altro JSON. E poi ce n'è uno,
+in fondo, che fa la cosa per cui il prodotto esiste: legge un testo scritto da
+una persona e capisce cosa vuole.
+
+Quest'ultimo è insostituibile. Gli altri quattro, fino a due anni fa, erano
+codice.
+
+Non sto puntando il dito su nessuno, ed è proprio il punto: l'ho trovato in ogni
+prodotto AI che ho aperto, chi più chi meno. La spiegazione non è nemmeno
+stupida. Quando ti entra in casa una cosa che risponde a tutto, smetti di
+chiederti se ti serviva rispondere a tutto.
+
+## La domanda che salta in analisi
+
+Uso un test solo, e sta prima di ogni riga di architettura.
+
+**Due sviluppatori competenti, stesso input, scriverebbero lo stesso output?**
+
+Se sì, quel nodo è codice. "Tirami fuori la partita IVA da questa stringa" ha
+una risposta sola: due persone chiuse in due stanze diverse tornano con lo
+stesso risultato. "Questo messaggio è arrabbiato o solo diretto?" no: le due
+persone discutono, e hanno ragione tutte e due. Il primo è una regex. Il secondo
+è reasoning, ed è lì che il modello vale quello che costa.
+
+Detta così sembra ovvia. In analisi salta lo stesso, perché la domanda che ci si
+fa davvero in quel momento è un'altra: "un LLM sa fare questa cosa?". E la
+risposta è sempre sì. È diventata una domanda che non seleziona più niente.
+
+<Callout>
+  "Sa farlo" e "è il posto giusto per farlo" sono due domande diverse. Un
+  modello moderno sa fare l'`if`. Non esiste un motivo perché lo faccia lui.
+</Callout>
+
+## Nemmeno a `temperature: 0`
+
+Qui arriva l'obiezione, e la conosco perché me la sono fatta anch'io: metti la
+temperatura a zero, aggiungi uno structured output, e il nodo torna
+deterministico.
+
+Non torna deterministico, e non è una questione di opinioni. Thinking Machines
+lo ha
+[misurato](https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/):
+mille richieste identiche, stesso prompt, `temperature: 0`. Tornano ottanta
+completion diverse, e la più frequente esce settantotto volte su mille.
+
+La causa non è il floating point, come si è raccontato per anni. È che i kernel
+di riduzione non sono batch-invarianti: il server raggruppa le richieste in
+batch di dimensione variabile, al variare del batch cambia l'albero delle
+riduzioni, e quindi cambiano i numeri. Vuol dire che **il tuo output dipende da
+chi altro sta chiamando quel server nello stesso istante.** In locale, una
+richiesta alla volta, non lo vedi mai. In produzione sotto carico è lì.
+
+Lo structured output è la seconda mezza verità. Ti garantisce la forma della
+risposta, mai il contenuto. Se l'enum ha tre valori ne ricevi uno dei tre, ed è
+garantito davvero. Che sia quello giusto non te lo garantisce nessuno, e il
+valore sbagliato attraversa ogni validazione che hai scritto, perché è
+formalmente valido. Il tipo è corretto. La semantica no. Ed è esattamente il bug
+che non trovi in review, visto che in review il campo c'è ed è del tipo giusto.
+
+## L'aritmetica che si moltiplica
+
+Su un nodo singolo si può ancora discutere. Su un grafo no, perché tre cose si
+compongono e nessuna gioca a tuo favore.
+
+- **L'accuratezza si moltiplica.** Sei nodi al 95% in serie non fanno un sistema
+  al 95%. Fanno `0.95^6`, cioè il 73,5%. Una richiesta su quattro esce sbagliata
+  da qualche parte, e la parte fastidiosa è che non sai da dove.
+- **La latenza si somma.** Ogni chiamata sono centinaia di millisecondi nel caso
+  buono e secondi in quello normale. Sei chiamate in serie sono un prodotto che
+  sembra lento anche quando risponde giusto.
+- **Il costo si paga per nodo, a ogni run.** E si ripaga a ogni retry, che è la
+  conseguenza diretta del primo punto.
+
+Un nodo deterministico costa zero, risponde in microsecondi ed è corretto il
+100% delle volte. Non "quasi sempre". Il 100%. Toglierne due su sei da quel
+grafo non è un'ottimizzazione, è un ordine di grandezza sull'affidabilità
+complessiva.
+
+E toglierli non vuol dire scrivere un mostro. Vuol dire far passare dal modello
+solo quello che il codice non sa già decidere da sé:
+
+```ts title="lib/route-request.ts"
+const DIRECT_ROUTES: Record<string, Team> = {
+  refund: "billing",
+  invoice: "billing",
+  password_reset: "account",
+};
+
+export async function routeRequest(input: RequestInput): Promise<Team> {
+  const known = input.category ? DIRECT_ROUTES[input.category] : undefined;
+
+  if (known) {
+    return known;
+  }
+
+  return classifyWithModel(input.freeText);
+}
+```
+
+Cinque righe di logica. Il campo `category` arriva da una select, ha tre valori
+noti e una destinazione sola per valore: quella è una lookup table, e metterci
+sopra un modello significa pagare per avere meno certezza di prima. Il testo
+libero invece al modello ci va, perché lì una risposta sola non c'è e non ci
+sarà mai.
+
+## Il modello scrive, il codice decide
+
+Il confine, alla fine, non passa dove me lo aspettavo. Non separa i compiti
+facili da quelli difficili. Separa **generare** da **accettare**.
+
+Questo articolo lo scrive un modello, dentro una skill che ho scritto io. Genera
+due file MDX, uno italiano e uno inglese, con una ventina di campi di
+frontmatter. È lavoro ambiguo, ed è giusto che sia suo. Ma a decidere se quel
+frontmatter è valido non è lui:
+
+```ts title="src/libs/blog/frontmatter.ts"
+function requireString(value: unknown, field: string, source: string): string {
+  if (typeof value !== "string" || value.trim() === "") {
+    return fail(source, `${field} è obbligatorio e deve essere una stringa`);
+  }
+
+  return value.trim();
+}
+```
+
+Da lì passano la `description`, che deve stare tra 120 e 170 caratteri, i tag,
+che devono esistere nel vocabolario, la data, che deve essere una data vera. Se
+uno solo è sbagliato il build fallisce citando il file e il campo. Un livello
+sopra, `assertConsistency` verifica che ogni articolo pubblicato in una lingua
+abbia il gemello nell'altra, e fa fallire il build invece di lasciare in giro
+un 404.
+
+Nessuno di questi controlli è un prompt. Nessuno dice "guarda se il frontmatter
+ti sembra a posto". Sono `if`, e il loro pregio è che non hanno giornate storte.
+**Il modello propone, il codice ratifica.** È uno schema che regge anche quando
+il modello sotto cambia, ed è l'unica parte dell'impianto che non ho mai dovuto
+rifare.
+
+## E intanto è uscito Astra
+
+Ieri OpenAI ha annunciato [GPT-6 Astra](https://openai.com/index/gpt-6-astra/),
+e Brockman ha usato la parola AGI. Al di là di come la si prende, il salto è
+vero: quello che si fa oggi con un agente, un anno fa sembrava a dieci anni di
+distanza. Non ho nessuna intenzione di fare il vecchio che rimpiange il `for`
+scritto a mano.
+
+Solo che un modello più bravo non trasforma un nodo probabilistico in un nodo
+certo. Lo fa sbagliare più di rado. La curva si alza e resta una curva: il 99,5%
+è un numero magnifico e non è il 100%, e su sei nodi in serie fa comunque 97%.
+Anzi, più i modelli corrono più conviene l'ibrido, perché tutto quel reasoning
+lo spendi dove è insostituibile invece di bruciarlo su una tabella di lookup.
+
+Io questa cosa la riapro sempre nello stesso momento: quando c'è un diagramma da
+disegnare, o uno già disegnato da leggere. Prima di scrivere il primo prompt
+passo sui box uno per uno e mi chiedo se quel box ha una risposta giusta sola.
+Quelli che ce l'hanno diventano funzioni, e le funzioni si testano. È la stessa
+ragione per cui
+[vado più lento di proposito](/blog/vado-piu-lento-di-proposito): il tempo che
+sembra perso in analisi è l'unico che non torna indietro sotto forma di hotfix.
