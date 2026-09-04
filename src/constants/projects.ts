@@ -115,7 +115,8 @@ export const PROJECTS: Project[] = [
     logo: "/images/clients/forfettario-control.svg",
     image: "/images/projects/forfettario-control.webp",
     tags: ["design", "mvp"],
-    designUrl: "https://www.behance.net/gallery/209115303/Forfettario-Control",
+    designUrl:
+      "https://www.figma.com/design/hZwJJY3dw6Q9cCXn8mEC0k/Forfettario-Control---Design?node-id=0-1",
   },
   {
     id: "coffeeNotesLab",
