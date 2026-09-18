@@ -101,7 +101,7 @@ Areas covered, beyond frontend work:
 - **Mobile apps** — iOS and Android, from the first screen to the release on the stores.
 - **AI and automation** — agents, integrations and custom tools.
 - **Product decisions** — what to build first, with which technology, with which team.
-- **Enterprise projects** — from 2018 to 2022 at IBM, Deloitte Digital, DOING and Minsait.
+- **Enterprise projects** — from 2018 to 2022 at Deloitte Digital, DOING and Minsait.
 
 ## Own Products
 
@@ -135,7 +135,7 @@ Both products are designed, built, shipped and maintained by Andrea alone, and e
 ## Professional Experience
 
 - **2023 - Present**: Senior Software Engineer & FDE (Forward Deployed Engineer) — Freelance (andrealosavio.com)
-- **2018 - 2023**: Full-stack AEM Developer at Minisait, Back-end AEM Developer at Doing, Junior AEM Developer at Deloitte, IT Specialist at IBM.
+- **2018 - 2022**: Full-stack Developer at Minsait (part of Indra), Full-stack Developer at Doing (part of Capgemini), Junior Full-stack Developer at Deloitte Digital Italia.
 
 ## How to Contact
 

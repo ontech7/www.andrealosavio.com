@@ -45,10 +45,8 @@
     },
     "roles": {
       "softwareEngineerTechPartner": "Senior Software Engineer & FDE",
-      "fullStackAemDeveloper": "Full-stack AEM Developer",
-      "backEndAemDeveloper": "Back-end AEM Developer",
-      "juniorAemDeveloper": "Junior AEM Developer",
-      "itSpecialist": "IT Specialist"
+      "fullStackDeveloper": "Full-stack Developer",
+      "juniorFullStackDeveloper": "Junior Full-stack Developer"
     },
     "items": {
       "andrealosavio": {
@@ -67,42 +65,28 @@
         "note": ""
       },
       "minsait": {
-        "description": "During my time as an Adobe Experience Manager Developer, I contributed end-to-end to large-scale digital projects for major multinational clients. My work involved full-stack development across AEM, combining modern front-end engineering (HTML, CSS, JavaScript, jQuery) with robust back-end development using Java Sling and AEM core technologies.",
+        "description": "Worked as a Full-stack Developer on an international e-commerce product, in a continuous feedback loop with the client to simplify funnels, reduce friction and improve flow completion.",
         "achievements": [
-          "Built scalable AEM components using HTML, CSS, JavaScript/jQuery, and Java Sling.",
-          "Improved UI performance and collaborated directly with clients on technical solutions.",
-          "Worked across Agile/Waterfall environments and supported technical decision-making.",
-          "Managed AEM Dispatchers and contributed to CI/CD pipelines (GitLab, Jenkins)."
+          "Built full-stack features with React and Node.js, automating backend data retrieval and validation to simplify the frontend and make user journeys faster and more reliable.",
+          "Worked with PostgreSQL, Redis, Docker, AWS and Azure, analyzing queries and indexes and improving development environments.",
+          "Contributed to deployment and cloud configuration in enterprise contexts."
         ],
         "note": ""
       },
       "doing": {
-        "description": "During my time as an Adobe Experience Manager Developer, I focused on backend development with Java Sling, building and extending CIF components for a high-traffic e-commerce platform. I collaborated closely with the tech lead to make key architectural decisions and managed multi-site development using AEM's multitenant capabilities.",
+        "description": "Designed and evolved enterprise multi-tenant and multilingual platforms as a Full-stack Developer, focusing on scalability, component reuse and performance as sites and markets grew.",
         "achievements": [
-          "Implemented backend features in Java Sling and extended CIF components for a large e-commerce platform.",
-          "Supported architectural decisions with the tech lead and worked on multi-site AEM structures.",
-          "Handled AEM Dispatcher configuration and troubleshooting."
+          "Developed reusable full-stack components and features with React, Java and Adobe Experience Manager, reducing duplication.",
+          "Made the platform easier to extend across new tenants and new content."
         ],
         "note": ""
       },
       "deloitte": {
-        "description": "During my time working with Adobe Experience Manager, I engineered both front-end experiences and backend systems that supported large-scale content platforms. I specialized in AEM 6.4, Java Sling, and CRM integrations, building reliable, high-performing components used daily by enterprise teams.",
+        "description": "Became productive quickly as a Junior Full-stack Developer across multiple enterprise projects, working with HTML5, CSS3, JavaScript, jQuery, React and Adobe Experience Manager to help improve delivery speed and team autonomy.",
         "achievements": [
-          "Delivered scalable CMS components using AEM (frontend + backend).",
-          "Collaborated closely with an international client, including periodic on-site work.",
-          "Built SPAs/MPAs with JavaScript, Handlebars, HTML/CSS, and HTL.",
-          "Managed testing, debugging, and integrations (CRM, SOQL).",
-          "Configured components, templates, workflows, and content authoring tools."
-        ],
-        "note": ""
-      },
-      "ibm": {
-        "description": "In this role, I contributed to both front-end and backend development across multiple projects and platforms, supporting application delivery and system migrations. I worked with several technologies and databases, helping improve internal tools and streamline existing workflows. I also participated in analysis, testing, and debugging to ensure stable, high-quality releases.",
-        "achievements": [
-          "Developed Cordova-based mobile/desktop applications (JavaScript, HTML5, CSS3).",
-          "Supported backend migrations in C, C++, Java, and C#, and worked with Oracle DB.",
-          "Performed PDF manipulation with FrameMaker and executed multi-level testing.",
-          "Built internal dealer-facing applications and contributed to technical analysis."
+          "Built a strong direct relationship with the client, gaining increasing autonomy over implementation decisions and proposing solutions that balanced budget, delivery time and long-term maintainability.",
+          "Collaborated with backend engineers on APIs, validation and data security while also working with Node.js and MongoDB.",
+          "Supported Deloitte Amsterdam on an international React delivery with fixed deadlines."
         ],
         "note": ""
       }
