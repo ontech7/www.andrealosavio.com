@@ -52,15 +52,10 @@
       "andrealosavio": {
         "description": "Come Senior Software Engineer & FDE (Forward Deployed Engineer) freelance, mi integro nei contesti dei clienti per tradurre requisiti di business complessi in soluzioni tech & AI personalizzate e architetture software scalabili e ad alte prestazioni.",
         "achievements": [
-          "Sviluppo prodotti digitali end-to-end su web e mobile: frontend con React, Next.js e TypeScript, backend con Node.js, Express e Prisma ORM (PostgreSQL, MongoDB, Redis, Firebase, Supabase), app mobile con React Native ed Expo SDK, e product design UI/UX completo con Figma, dal prototipo al codice di produzione.",
-          "Progetto sistemi agentic e soluzioni di AI Engineering usando LLM come Anthropic Claude, OpenAI ChatGPT, Google Gemini e Ollama per modelli locali: orchestrazione multi-agent, delegazione a subagent, decomposizione dei task, custom tool/function calling, skill modulari, prompt engineering, output JSON strutturati, gestione del contesto e integrazione di API esterne.",
-          "Sviluppato Fast Memo, un'applicazione cross-platform per memo costruita con React Native ed Expo, con note rich-text, checklist, organizzazione per categorie, sincronizzazione cloud Firebase e molte altre funzionalità. Open-source, disponibile in 7 lingue e scaricata da oltre 1.000 utenti.",
-          "Costruito e mantenuto diverse librerie open-source—come react-native-dialog e figma-node-query—fornendo strumenti affidabili e developer-friendly adottati dalla community.",
-          "Aiutato un cliente a sviluppare una forte brand identity che gli ha permesso di raggiungere un pubblico più ampio e attrarre più clienti.",
-          "Supportato un'azienda nella costruzione di un'infrastruttura robusta, gettando solide basi per progetti futuri.",
-          "Collaborato a lungo termine con un'azienda per sviluppare alcune delle piattaforme più utilizzate oggi.",
-          "Assistito una startup durante una fase critica di transizione del prodotto, garantendo un'evoluzione fluida.",
-          "Aiutato una startup a ottenere un round di investimento di quasi €2M attraverso lo sviluppo del prodotto e la strategia tecnica."
+          "Ho lavorato con oltre 10 startup e piccoli team di prodotto per colmare gap tecnici critici e trasformare requisiti early-stage in MVP, prodotti pronti per la produzione e fondamenta tecniche scalabili, seguendo discovery, architettura, UI/UX, sviluppo, testing e delivery.",
+          "Progettato e costruito piattaforme full-stack con Next.js, Node.js, PostgreSQL e Redis, introducendo flussi transazionali più robusti, controllo degli accessi granulare e processi automatizzati per migliorare affidabilità, sicurezza e operazioni.",
+          "Modernizzato prodotti legacy e standardizzato gli ambienti di sviluppo con Docker e GitHub Actions, creando workflow riproducibili e pipeline CI/CD; contribuito anche a prodotti AI coordinando le decisioni tra business, backend e design con ownership da tech lead.",
+          "Riprogettato da zero il sito e il prodotto di una startup, che ha poi raccolto quasi €2M, e mantengo autonomamente Fast Memo e Coolify Manager, entrambi con oltre 1.000 download, su mobile e desktop con Expo SDK e Tauri."
         ],
         "note": ""
       },
