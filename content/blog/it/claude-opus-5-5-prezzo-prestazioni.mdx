@@ -1,0 +1,183 @@
+---
+title: "Claude Opus 5.5: più bravo di Fable, e costa meno"
+subtitle:
+  "La cache di Opus al prezzo di Sonnet: il modello di punta che costa meno del
+  predecessore"
+description:
+  "Claude Opus 5.5 scende a 4 e 20 dollari per milione di token e sui benchmark
+  supera Fable 5.1. Cosa dicono i numeri, e cosa aspettarsi dal resto dei 5.5."
+publishedAt: 2026-09-22
+translationKey: claude-opus-5-5
+tags: [ai, business]
+cover: /images/blog/claude-opus-5-5/cover.svg
+coverAlt:
+  "La stella arancione di Claude accanto alla scritta Opus 5.5, sospese sopra un
+  orizzonte planetario curvo dove il cielo blu sfuma in una fascia arancio e il
+  sole sta per sorgere"
+takeaways:
+  - "Opus 5.5 costa 4 dollari per milione di token in input e 20 in output,
+    contro i 5 e 25 di Opus 5. Il cache read scende da 0.50 a 0.20 (-60%), lo
+    stesso prezzo di Sonnet 5."
+  - "Anthropic dichiara un costo più basso del 40% sui carichi tipici e un
+    output più veloce di oltre il 30%: più del taglio di listino, quindi per lo
+    stesso lavoro il modello usa anche meno token."
+  - "Sui benchmark pubblicati sta sopra Fable 5.1 (Terminal-Bench 4.0: 66.4%
+    contro 55.8%) costando meno della metà: 20 dollari in output contro 50."
+  - "Sonnet 5.5 e Haiku 5.5 arrivano nelle prossime settimane. Haiku è fermo
+    alla 4.5 da ottobre 2025."
+faq:
+  - q: "Quanto costa Claude Opus 5.5?"
+    a:
+      "4 dollari per milione di token in input e 20 in output. Il cache read
+      costa 0.20 dollari, la cache write a cinque minuti 5 dollari. Con la Batch
+      API si scende a 2 e 10."
+  - q: "Claude Opus 5.5 è meglio di Claude Fable 5.1?"
+    a:
+      "Anthropic lo dà al livello di Fable 5.1 sulla maggior parte del lavoro, e
+      sui benchmark che ha pubblicato è sopra: 66.4% contro 55.8% su
+      Terminal-Bench 4.0, 57.8% contro 51.8% su CursorBench 4.0. Fable 5.1 costa
+      10 dollari in input e 50 in output."
+  - q: "Quando escono Claude Sonnet 5.5 e Claude Haiku 5.5?"
+    a:
+      "Anthropic ha scritto solo che arriveranno nelle prossime settimane, con
+      molti degli stessi miglioramenti di Opus 5.5. Date e prezzi non sono
+      ancora stati annunciati."
+---
+
+Claude Opus 5.5 è uscito oggi, 22 settembre, e ci sto lavorando dentro Claude
+Code da quando è comparso nel selettore dei modelli. Costa **4 dollari per
+milione di token in input e 20 in output**, contro i 5 e 25 di Opus 5. Anthropic
+dice che lavora al livello di Claude Fable 5.1, che ne costa 10 e 50, e sui
+benchmark che ha pubblicato gli sta davanti. Il modello nuovo costa meno di
+quello che sostituisce e fa di più: non capitava da un pezzo.
+
+Dalle prime ore mi porto a casa una cosa sola, ma netta: le risposte sono più
+precise. I numeri che Anthropic ha pubblicato vanno nella stessa direzione, e
+raccontano più di quanto dica il titolo del comunicato.
+
+## Il listino di Opus non si muoveva da novembre 2025
+
+L'ultima volta che Opus ha cambiato prezzo è stata con la 4.5, quando è passato
+da 15 e 75 dollari a 5 e 25. Poi sono uscite la 4.6, la 4.7, la 4.8 e la 5,
+tutte allo stesso listino. Dieci mesi e quattro versioni senza toccare un
+centesimo.
+
+| Per 1M token        | Opus 5         | Opus 5.5 | Differenza |
+| ------------------- | -------------- | -------- | ---------- |
+| Input               | $5             | $4       | -20%       |
+| Output              | $25            | $20      | -20%       |
+| Cache write (5 min) | $6.25          | $5       | -20%       |
+| Cache read          | $0.50          | $0.20    | **-60%**   |
+| Fast mode (in/out)  | $10 / $50      | $8 / $40 | -20%       |
+| Batch (in/out)      | $2.50 / $12.50 | $2 / $10 | -20%       |
+
+Il taglio è un -20% uniforme su tutte le righe tranne una.
+
+<Callout type="info">
+  Se usi Claude Code con il Pro o il Max, questo listino non lo vedi: paghi
+  l'abbonamento. Insieme al taglio Anthropic ha però annunciato limiti più alti
+  sulla finestra delle cinque ore per Pro, Max, Team ed Enterprise a posti. Di
+  quanto, non l'ha detto.
+</Callout>
+
+## La cache di Opus ora costa quanto quella di Sonnet
+
+La riga che non segue il -20% è il **cache read**. Finora un cache hit costava
+un decimo del prezzo di input, su tutti i modelli. Per Opus 5.5 il
+moltiplicatore scende a 0.05x: su un input da 4 dollari fa 0.20.
+
+Messo accanto al resto del listino, il numero diventa strano:
+
+- **Sonnet 5** ha lo stesso cache read, 0.20 dollari;
+- **Fable 5.1** sta a 0.25, sopra Opus;
+- **Haiku 4.5** sta a 0.10, la metà.
+
+Quella colonna conta più di quanto sembri, perché in un agent è la voce che
+cresce con il numero di passi. System prompt, definizioni dei tool e cronologia
+vengono riletti a ogni tool call: una sessione da quaranta chiamate con un
+contesto medio di 150 mila token fa sei milioni di token letti dalla cache. Con
+Opus 5 erano 3 dollari, con Opus 5.5 sono 1.20. L'output resta la voce più
+pesante, ma è quella che cresce meno quando la sessione si allunga.
+
+## Il 40% che nel listino non c'è
+
+Nella pagina di lancio c'è una frase che vale più della tabella: con le
+impostazioni di default, Opus 5.5 costa **il 40% in meno di Opus 5 sui carichi
+tipici**. Il listino da solo fa il 20%. Il resto deve venire da qualche parte.
+
+Il conto a spanne è questo: 0.8 per 0.75 fa 0.6. Anche mettendo nel conto lo
+sconto sulla cache, resta un pezzo che si spiega solo con meno token per lo
+stesso task. E i clienti citati da Anthropic lo dicono in chiaro:
+
+- **Optiver**: stessa qualità di Opus 5 in circa metà dei turni, del tempo e dei
+  token di output, con un costo più basso del 40-50%;
+- **Kiro**: più task risolti con il 40% di chiamate in meno e metà dei token;
+- **GitHub**: in VS Code, più task da terminale risolti in meno della metà dei
+  passaggi.
+
+C'è poi una riga tecnica che dice la stessa cosa da un altro lato: su diversi
+benchmark Opus 5.5 con l'effort di default batte Opus 5 con l'effort al massimo.
+E genera l'output più veloce di oltre il 30%.
+
+La mia lettura, ed è una deduzione, non qualcosa che Anthropic spiega: non hanno
+solo ridotto il margine. Hanno un modello che arriva al risultato con meno
+passi, e meno token per risposta vuol dire meno calcolo per servirla. È quello
+che permette di abbassare il prezzo senza perderci. Spiegherebbe anche perché
+oggi, giorno di lancio, non l'ho trovato intasato: di solito i primi giorni di
+un modello nuovo sono i più lenti.
+
+## Sopra Fable sui benchmark, a meno della metà del prezzo
+
+| Benchmark            | Opus 5.5 | Fable 5.1 | Opus 5 |
+| -------------------- | -------- | --------- | ------ |
+| Terminal-Bench 4.0   | 66.4%    | 55.8%     | 52.3%  |
+| CursorBench 4.0      | 57.8%    | 51.8%     | 46.6%  |
+| GDPval-AA v2.1 (Elo) | 1846     | 1735      | 1708   |
+| OSWorld 2.0          | 81.8%    | 80.7%     | 74.0%  |
+
+Il distacco più largo è su Terminal-Bench, più di dieci punti. Su OSWorld sono
+praticamente pari. Il test interno che mi ha colpito di più è un altro: tradurre
+HAProxy da C a Rust. Entrambi i modelli hanno passato quasi tutti i test di
+regressione, ma Opus 5.5 ha finito in 9 ore e mezza contro le 12 di Fable 5.1, e
+**con un costo più basso del 51%**.
+
+Io benchmark non ne faccio: lo uso per lavorare, e le differenze le vedo lì.
+Trova il problema prima, e quando lo trova guarda anche cosa c'è intorno invece
+di fermarsi alla riga rotta. Si capisce meglio cosa sta facendo, perché scrive
+in modo più chiaro. Sono impressioni di poche ore, ma vanno nella stessa
+direzione della tabella.
+
+Fable 5.1 resta a 10 e 50 dollari. Nell'annuncio della famiglia 5.5 Fable non
+compare, e finché non si muove anche lui, per il lavoro di tutti i giorni fatico
+a trovare un motivo per pagarlo il doppio e mezzo.
+
+## Sonnet 5.5 e Haiku 5.5: si sposta tutta la scala
+
+Opus 5.5 è il primo modello della famiglia 5.5. Anthropic scrive che Sonnet 5.5
+e Haiku 5.5 arriveranno **nelle prossime settimane**, con molti degli stessi
+miglioramenti su prestazioni, efficienza e sicurezza. Niente date, niente
+prezzi.
+
+Il dato che mi interessa di più è Haiku. La 4.5 è di ottobre 2025, a 1 e 5
+dollari: in quasi un anno Opus ha avuto quattro versioni e Haiku nessuna. Eppure
+è il modello che finisce nei nodi che girano più spesso in un sistema agentico,
+la classificazione, il routing, l'estrazione di campi. Sono gli stessi nodi di
+cui ho scritto in
+[Stai pagando un LLM per fare un if](/blog/pagare-un-llm-per-fare-un-if): quelli
+a cui un modello serve davvero, ma piccolo. Se Haiku 5.5 fa lo stesso salto di
+efficienza di Opus, è lì che la bolletta cambia di più, perché è lì che le
+chiamate si contano a migliaia.
+
+Sonnet 5 sta a 2 e 10 dollari da quando il prezzo di lancio è diventato
+definitivo, il primo settembre. Se Sonnet 5.5 terrà quel listino, Anthropic non
+l'ha ancora detto.
+
+## Dove rimettere mano ai conti
+
+Il model ID è `claude-opus-5-5`. La prossima volta che scegli il modello per un
+progetto nuovo, o apri la dashboard della spesa API a fine mese, rifai la
+tabella con questi numeri. Se c'è qualcosa che avevi messo su Fable per
+sicurezza, è il primo nodo da riprovare su Opus 5.5.
+
+Il budget dei nodi piccoli invece non lo fisserei adesso. Tra qualche settimana
+cambia anche quello.
