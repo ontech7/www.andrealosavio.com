@@ -4,7 +4,7 @@
     "description": "Informativa sulla privacy e sul trattamento dei dati personali per andrealosavio.com"
   },
   "title": "Privacy Policy",
-  "lastUpdated": "Ultimo aggiornamento: 25 Agosto 2026",
+  "lastUpdated": "Ultimo aggiornamento: 8 Ottobre 2026",
   "sections": {
     "controller": {
       "title": "1. Titolare del trattamento",
@@ -12,58 +12,68 @@
     },
     "dataCollected": {
       "title": "2. Dati raccolti",
-      "content": "Attraverso il modulo di contatto presente su questo sito, raccogliamo i seguenti dati personali:",
+      "content": "Su questo sito tratto le seguenti categorie di dati personali:",
       "items": {
-        "fullname": "Nome e cognome",
-        "email": "Indirizzo email",
-        "message": "Contenuto del messaggio (descrizione della tua sfida o richiesta)"
+        "fullname": "Nome e cognome, inseriti nel modulo di contatto",
+        "email": "Indirizzo email, inserito nel modulo di contatto",
+        "message": "Contenuto del messaggio (descrizione della tua sfida o richiesta)",
+        "service": "Il servizio a cui sei interessato, se mi scrivi partendo da uno dei servizi presentati sul sito",
+        "technical": "Indirizzo IP e dati tecnici della richiesta (browser, pagina visitata, data e ora), trattati dal servizio di hosting e, per il modulo di contatto, dal limite anti-spam",
+        "analytics": "Statistiche di visita in forma aggregata e anonima: pagina visitata, sito di provenienza, paese, tipo di dispositivo e browser, metriche di velocità di caricamento"
       },
-      "note": "Questi dati vengono forniti volontariamente dall'utente al momento della compilazione e dell'invio del modulo di contatto."
+      "note": "I dati del modulo di contatto li fornisci tu volontariamente al momento dell'invio: senza nome, email e messaggio non posso risponderti. Gli altri dati vengono generati automaticamente dalla navigazione."
     },
     "purpose": {
       "title": "3. Finalità del trattamento",
       "content": "I tuoi dati personali vengono trattati esclusivamente per le seguenti finalità:",
       "items": {
         "respond": "Rispondere alla tua richiesta di contatto",
-        "confirmation": "Inviarti un'email di conferma della ricezione del tuo messaggio"
+        "confirmation": "Inviarti un'email di conferma della ricezione del tuo messaggio",
+        "security": "Proteggere il modulo di contatto da spam e abusi",
+        "statistics": "Capire, in forma aggregata, quali pagine vengono lette e quanto è veloce il sito"
       }
     },
     "legalBasis": {
       "title": "4. Base giuridica",
-      "content": "Il trattamento dei tuoi dati si basa sul tuo consenso esplicito, fornito selezionando la casella di consenso prima dell'invio del modulo di contatto (Art. 6(1)(a) GDPR)."
+      "content": "Il trattamento dei dati del modulo di contatto si basa sul tuo consenso esplicito, fornito selezionando la casella di consenso prima dell'invio (Art. 6(1)(a) GDPR). La protezione del modulo da spam e abusi e le statistiche anonime di visita si basano sul mio legittimo interesse a mantenere il sito sicuro e a capire come viene usato (Art. 6(1)(f) GDPR)."
     },
     "dataProcessing": {
-      "title": "5. Modalità di trattamento",
-      "content": "I dati inviati tramite il modulo di contatto vengono elaborati utilizzando Resend, un servizio di terze parti per l'invio di email, che viene utilizzato per inviare l'email di conferma all'utente e l'email di notifica al titolare del trattamento. Resend tratta i dati in conformità con la propria informativa sulla privacy e agisce come responsabile del trattamento per nostro conto."
+      "title": "5. Servizi di terze parti",
+      "content": "Il sito è ospitato su Vercel, che riceve le richieste del tuo browser e ne tratta i dati tecnici, compreso l'indirizzo IP, per servire le pagine. Vercel fornisce anche Web Analytics e Speed Insights, che raccolgono le statistiche anonime descritte nella sezione 2 senza usare cookie: Web Analytics riconosce le visite tramite un hash della richiesta che viene scartato dopo 24 ore, Speed Insights non identifica il visitatore in alcun modo. I dati del modulo di contatto vengono inviati tramite Resend, un servizio di invio email che recapita la conferma a te e la notifica a me, e arrivano nella mia casella di posta. Vercel e Resend agiscono come responsabili del trattamento per mio conto, secondo le rispettive informative sulla privacy. Infine, se apri la finestra per votare un gatto, il tuo browser si collega direttamente a The Cat API (thecatapi.com) per caricare l'immagine e registrare il voto: il voto è anonimo, ma come per qualsiasi sito The Cat API riceve il tuo indirizzo IP. Se non apri quella finestra, nessuna richiesta parte verso The Cat API."
+    },
+    "transfers": {
+      "title": "6. Trasferimento dei dati fuori dall'UE",
+      "content": "Vercel e Resend hanno sede negli Stati Uniti, quindi alcuni dati possono essere trattati fuori dall'Unione Europea. Questi trasferimenti avvengono sulla base delle garanzie previste dal GDPR, come le Clausole Contrattuali Standard approvate dalla Commissione Europea e, dove applicabile, l'EU-U.S. Data Privacy Framework."
     },
     "retention": {
-      "title": "6. Conservazione dei dati",
-      "content": "I tuoi dati personali vengono conservati solo per il tempo strettamente necessario a soddisfare la finalità per cui sono stati raccolti (ovvero rispondere alla tua richiesta). Una volta soddisfatta la finalità, i dati verranno cancellati, salvo che la conservazione sia richiesta per legge."
+      "title": "7. Conservazione dei dati",
+      "content": "I dati del modulo di contatto vengono conservati solo per il tempo strettamente necessario a rispondere alla tua richiesta e a gestire l'eventuale collaborazione che ne nasce; poi vengono cancellati, salvo che la conservazione sia richiesta per legge. L'indirizzo IP usato dal limite anti-spam resta solo in memoria per 15 minuti e non viene salvato. I dati tecnici delle richieste sono conservati da Vercel per un periodo limitato, secondo le sue policy, e le statistiche di visita sono conservate solo in forma aggregata e anonima."
     },
     "rights": {
-      "title": "7. I tuoi diritti",
+      "title": "8. I tuoi diritti",
       "content": "Ai sensi del GDPR, hai i seguenti diritti:",
       "items": {
-        "access": "Diritto di accesso – per sapere quali dati abbiamo su di te",
+        "access": "Diritto di accesso – per sapere quali dati ho su di te",
         "rectification": "Diritto di rettifica – per correggere dati inesatti",
         "erasure": "Diritto alla cancellazione – per richiedere la cancellazione dei tuoi dati",
         "restriction": "Diritto alla limitazione del trattamento",
         "portability": "Diritto alla portabilità dei dati",
         "objection": "Diritto di opposizione al trattamento dei tuoi dati",
-        "withdraw": "Diritto di revocare il consenso in qualsiasi momento"
+        "withdraw": "Diritto di revocare il consenso in qualsiasi momento, senza che questo renda illecito il trattamento svolto prima della revoca",
+        "complaint": "Diritto di proporre reclamo al Garante per la protezione dei dati personali (garanteprivacy.it)"
       },
       "contact": "Per esercitare uno qualsiasi di questi diritti, contattami all'indirizzo info@andrealosavio.com."
     },
     "cookies": {
-      "title": "8. Cookie",
-      "content": "Questo sito non utilizza cookie di profilazione. Possono essere utilizzati esclusivamente cookie tecnici strettamente necessari per il corretto funzionamento del sito web."
+      "title": "9. Cookie",
+      "content": "Questo sito non usa cookie di profilazione né cookie di statistica: le statistiche di Vercel funzionano senza cookie. L'unico cookie che può essere impostato è un cookie tecnico, NEXT_LOCALE, che ricorda la lingua scelta: viene creato solo se passi a una lingua diversa da quella del tuo browser e scade quando chiudi il browser. Essendo strettamente necessario, non richiede il consenso."
     },
     "aiAssistance": {
-      "title": "9. Contenuti del sito e uso dell'AI",
+      "title": "10. Contenuti del sito e uso dell'AI",
       "content": "I testi di questo sito sono scritti da me e rifiniti con l'aiuto di strumenti di intelligenza artificiale, che uso per sistemare la forma e per la traduzione tra italiano e inglese. Contenuti, numeri ed esperienze descritte sono reali e verificati da me. L'AI non viene invece usata per trattare i dati che invii tramite il modulo di contatto: quelli passano solo dai servizi indicati nella sezione 5."
     },
     "changes": {
-      "title": "10. Modifiche a questa informativa",
+      "title": "11. Modifiche a questa informativa",
       "content": "Questa informativa sulla privacy potrebbe essere aggiornata di tanto in tanto. Eventuali modifiche saranno pubblicate su questa pagina con una data di revisione aggiornata."
     }
   }

@@ -20,7 +20,7 @@ function samePath(path: string): Record<AppLocale, string> {
 const HOMEPAGE_LAST_MODIFIED = new Date("2026-08-25T00:00:00Z");
 const PROJECTS_LAST_MODIFIED = new Date("2026-08-25T00:00:00Z");
 const ABOUT_LAST_MODIFIED = new Date("2026-08-17T00:00:00Z");
-const PRIVACY_LAST_MODIFIED = new Date("2026-08-25T00:00:00Z");
+const PRIVACY_LAST_MODIFIED = new Date("2026-10-08T00:00:00Z");
 const BLOG_INDEX_FALLBACK_LAST_MODIFIED = new Date("2026-08-31T00:00:00Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {

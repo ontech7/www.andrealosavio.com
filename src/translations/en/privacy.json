@@ -4,7 +4,7 @@
     "description": "Privacy policy and personal data processing information for andrealosavio.com"
   },
   "title": "Privacy Policy",
-  "lastUpdated": "Last updated: 25th August 2026",
+  "lastUpdated": "Last updated: 8th October 2026",
   "sections": {
     "controller": {
       "title": "1. Data Controller",
@@ -12,59 +12,69 @@
     },
     "dataCollected": {
       "title": "2. Data Collected",
-      "content": "Through the contact form on this website, we collect the following personal data:",
+      "content": "This website processes the following categories of personal data:",
       "items": {
-        "fullname": "Full name",
-        "email": "Email address",
-        "message": "Message content (description of your challenge or request)"
+        "fullname": "Full name, entered in the contact form",
+        "email": "Email address, entered in the contact form",
+        "message": "Message content (description of your challenge or request)",
+        "service": "The service you are interested in, if you write to me from one of the services presented on the site",
+        "technical": "IP address and technical request data (browser, page visited, date and time), processed by the hosting provider and, for the contact form, by the anti-spam rate limit",
+        "analytics": "Aggregated, anonymous visit statistics: page visited, referring site, country, device type and browser, page load speed metrics"
       },
-      "note": "This data is provided voluntarily by the user when filling out and submitting the contact form."
+      "note": "You provide the contact form data voluntarily when you submit it: without your name, email and message I cannot reply to you. The other data is generated automatically as you browse."
     },
     "purpose": {
-      "title": "3. Purpose of Data Processing",
+      "title": "3. Purpose of Processing",
       "content": "Your personal data is processed exclusively for the following purposes:",
       "items": {
-        "respond": "Responding to your contact request",
-        "confirmation": "Sending a confirmation email that your message has been received"
+        "respond": "To respond to your contact request",
+        "confirmation": "To send you a confirmation email acknowledging receipt of your message",
+        "security": "To protect the contact form from spam and abuse",
+        "statistics": "To understand, in aggregate, which pages are read and how fast the site is"
       }
     },
     "legalBasis": {
       "title": "4. Legal Basis",
-      "content": "The processing of your data is based on your explicit consent, provided by checking the consent checkbox before submitting the contact form (Art. 6(1)(a) GDPR)."
+      "content": "Processing of the contact form data is based on your explicit consent, given by ticking the consent checkbox before submitting (Art. 6(1)(a) GDPR). Protecting the form from spam and abuse and collecting anonymous visit statistics are based on my legitimate interest in keeping the site secure and understanding how it is used (Art. 6(1)(f) GDPR)."
     },
     "dataProcessing": {
-      "title": "5. How Data is Processed",
-      "content": "The data submitted through the contact form is processed using Resend, a third-party email delivery service, which is used to send the confirmation email to you and the notification email to the data controller. Resend processes data in accordance with its own privacy policy and acts as a data processor on our behalf."
+      "title": "5. Third-Party Services",
+      "content": "The site is hosted on Vercel, which receives your browser's requests and processes their technical data, including your IP address, to serve the pages. Vercel also provides Web Analytics and Speed Insights, which collect the anonymous statistics described in section 2 without using cookies: Web Analytics recognizes visits through a hash of the request that is discarded after 24 hours, and Speed Insights does not identify the visitor at all. Contact form data is sent through Resend, an email delivery service that delivers the confirmation to you and the notification to me, and it ends up in my mailbox. Vercel and Resend act as data processors on my behalf, in accordance with their respective privacy policies. Finally, if you open the window to vote for a cat, your browser connects directly to The Cat API (thecatapi.com) to load the image and record the vote: the vote is anonymous, but as with any website The Cat API receives your IP address. If you never open that window, no request is made to The Cat API."
+    },
+    "transfers": {
+      "title": "6. Transfers Outside the EU",
+      "content": "Vercel and Resend are based in the United States, so some data may be processed outside the European Union. These transfers rely on the safeguards provided by the GDPR, such as the Standard Contractual Clauses approved by the European Commission and, where applicable, the EU-U.S. Data Privacy Framework."
     },
     "retention": {
-      "title": "6. Data Retention",
-      "content": "Your personal data is retained only for the time strictly necessary to fulfill the purpose for which it was collected (i.e., responding to your request). Once the purpose has been fulfilled, the data will be deleted unless retention is required by law."
+      "title": "7. Data Retention",
+      "content": "Contact form data is kept only for as long as strictly necessary to respond to your request and to handle any collaboration that follows; it is then deleted, unless retention is required by law. The IP address used by the anti-spam rate limit is held in memory for 15 minutes only and is never saved. Technical request data is kept by Vercel for a limited period, according to its policies, and visit statistics are kept only in aggregated, anonymous form."
     },
     "rights": {
-      "title": "7. Your Rights",
+      "title": "8. Your Rights",
       "content": "Under the GDPR, you have the following rights:",
       "items": {
-        "access": "Right of access – to know what data we hold about you",
+        "access": "Right of access – to know what data I hold about you",
         "rectification": "Right to rectification – to correct inaccurate data",
         "erasure": "Right to erasure – to request deletion of your data",
         "restriction": "Right to restriction of processing",
         "portability": "Right to data portability",
         "objection": "Right to object to the processing of your data",
-        "withdraw": "Right to withdraw consent at any time"
+        "withdraw": "Right to withdraw consent at any time, without affecting the lawfulness of processing carried out before the withdrawal",
+        "complaint": "Right to lodge a complaint with a supervisory authority, in Italy the Garante per la protezione dei dati personali (garanteprivacy.it)"
       },
-      "contact": "To exercise any of these rights, please contact me at info@andrealosavio.com."
+      "contact": "To exercise any of these rights, contact me at info@andrealosavio.com."
     },
     "cookies": {
-      "title": "8. Cookies",
-      "content": "This website does not use profiling cookies. Only technical cookies strictly necessary for the proper functioning of the website may be used."
+      "title": "9. Cookies",
+      "content": "This website uses no profiling cookies and no analytics cookies: Vercel's statistics work without cookies. The only cookie that may be set is a technical one, NEXT_LOCALE, which remembers the language you picked: it is created only if you switch to a language other than your browser's, and it expires when you close the browser. Being strictly necessary, it does not require consent."
     },
     "aiAssistance": {
-      "title": "9. Site content and use of AI",
-      "content": "The texts on this site are written by me and refined with the help of artificial intelligence tools, which I use to polish the wording and to translate between Italian and English. The content, figures and experiences described are real and checked by me. AI is not used to process the data you send through the contact form: that data only goes through the services listed in section 5."
+      "title": "10. Site Content and Use of AI",
+      "content": "The text on this site is written by me and refined with the help of artificial intelligence tools, which I use to polish the wording and to translate between Italian and English. The content, figures and experiences described are real and verified by me. AI is not used to process the data you send through the contact form: that data only goes through the services listed in section 5."
     },
     "changes": {
-      "title": "10. Changes to This Policy",
-      "content": "This privacy policy may be updated from time to time. Any changes will be published on this page with an updated revision date."
+      "title": "11. Changes to This Policy",
+      "content": "This privacy policy may be updated from time to time. Any changes will be posted on this page with an updated revision date."
     }
   }
 }

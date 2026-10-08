@@ -56,6 +56,7 @@ const sectionKeys = [
   "purpose",
   "legalBasis",
   "dataProcessing",
+  "transfers",
   "retention",
   "rights",
   "cookies",
@@ -67,11 +68,18 @@ const listItemKeys: Record<string, { key: string; items: readonly string[] }> =
   {
     dataCollected: {
       key: "items",
-      items: ["fullname", "email", "message"],
+      items: [
+        "fullname",
+        "email",
+        "message",
+        "service",
+        "technical",
+        "analytics",
+      ],
     },
     purpose: {
       key: "items",
-      items: ["respond", "confirmation"],
+      items: ["respond", "confirmation", "security", "statistics"],
     },
     rights: {
       key: "items",
@@ -83,6 +91,7 @@ const listItemKeys: Record<string, { key: string; items: readonly string[] }> =
         "portability",
         "objection",
         "withdraw",
+        "complaint",
       ],
     },
   };
