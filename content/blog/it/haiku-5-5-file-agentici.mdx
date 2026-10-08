@@ -1,0 +1,199 @@
+---
+title: "Haiku 5.5 batte Sonnet 5: riscrivi i tuoi file agentici"
+subtitle: "Il modello piccolo che ha scavalcato quello medio"
+description:
+  "Claude Haiku 5.5 costa il 90% in meno di Haiku 4.5 e supera Sonnet 5. Cosa
+  cambiare in CLAUDE.md, skill e subagent per non pagare Opus per lavori da
+  Haiku."
+publishedAt: 2026-10-08
+translationKey: claude-haiku-5-5
+tags: [ai, architecture]
+cover: /images/blog/claude-haiku-5-5/cover.svg
+coverAlt:
+  "La stella arancione di Claude sopra la scritta Haiku 5.5, su un fondo blu
+  notte, attraversata da un'orbita ellittica inclinata con tre piccoli nodi
+  arancioni luminosi"
+takeaways:
+  - "Haiku 5.5 costa 0.10 dollari per milione di token in input e 0.50 in output
+    sotto i 100 mila token: il 90% in meno di Haiku 4.5. Sui benchmark che si
+    possono confrontare sta sopra Sonnet 5."
+  - "In Claude Code il subagent Explore e quelli senza campo model girano sul
+    modello della conversazione. Dare model: haiku ai lavori di ricerca è la
+    modifica che rende di più."
+  - "Haiku 5.5 è il primo Haiku con l'effort, e il campo effort si mette anche
+    nel frontmatter di agent e skill. Con low e un prompt lungo tende a fermarsi
+    prima."
+  - "Il CLAUDE.md viene caricato in ogni subagent custom. Tenerlo sotto le 200
+    righe è il presupposto per delegare a Haiku, non una questione di stile."
+faq:
+  - q: "Quanto costa Claude Haiku 5.5?"
+    a:
+      "Sotto i 100 mila token di input costa 0.10 dollari per milione in input e
+      0.50 in output, con il cache read a 0.01. Sopra i 100 mila sale a 0.50 e
+      2.50. Haiku 4.5 costava 1 e 5 dollari."
+  - q: "Claude Haiku 5.5 è meglio di Claude Sonnet 5?"
+    a:
+      "Sui benchmark pubblicati da Anthropic sì: 39.2% contro 10.3% su
+      Terminal-Bench 4.0, 1620 contro 1449 su GDPval-AA. Resta sotto Sonnet 5.5,
+      che su Terminal-Bench fa 70.6%."
+  - q: "Come si usa Haiku 5.5 per i subagent di Claude Code?"
+    a:
+      "Si mette model: haiku nel frontmatter del file in .claude/agents, o il
+      model ID completo claude-haiku-5-5 se usi Bedrock, Vertex o Foundry, dove
+      l'alias punta ancora a Haiku 4.5."
+---
+
+Claude Haiku 5.5 è uscito ieri, 7 ottobre, a quasi un anno dalla 4.5. Nel
+frattempo Opus ha avuto cinque versioni e Haiku nessuna. Adesso la famiglia 5.5
+è quasi completa: **Opus 5.5** costa meno di Opus 5 e fa di più, **Sonnet 5.5**
+ha lo stesso listino di Sonnet 5 ma un altro livello, e Haiku 5.5 chiude la
+scala dal basso. Manca Fable: si parla della settimana prossima, ma Anthropic
+non ha annunciato niente.
+
+Il punto che mi interessa è un altro. Le scelte di modello che stanno nei tuoi
+subagent, nelle skill e nel CLAUDE.md le hai fatte quando Haiku non bastava per
+quasi niente. Quella premessa non vale più, e **la configurazione che ne è
+uscita sta bruciando token** su lavori che un modello da dieci centesimi fa
+benissimo. Io i miei file non li ho ancora riaperti, è uscito ieri. Questa è la
+lista con cui lo farò.
+
+## Un anno senza Haiku, e adesso sta sopra Sonnet 5
+
+Mettendo accanto le pagine di lancio di Haiku 5.5 e di Sonnet 5.5, sui
+benchmark che si possono confrontare il modello piccolo nuovo supera quello medio
+vecchio:
+
+| Benchmark                 | Haiku 5.5 | Haiku 4.5 | Sonnet 5 | Sonnet 5.5     |
+| ------------------------- | --------- | --------- | -------- | -------------- |
+| Terminal-Bench 4.0        | **39.2%** | 0.0%      | 10.3%    | 70.6%          |
+| GDPval-AA v2.1 (Elo)      | **1620**  | 735       | 1449     | 1844           |
+| Humanity's Last Exam, tool | **57.4%** | 18.7%     | 54.9%    | 64.5%          |
+| Chartography, senza tool  | **46.4%** | 6.4%      | 15.6%    | 61.6%          |
+| FrontierCode 1.1          | **46.4%** | n/d       | 42.4%    | 52.1% (Xhigh)  |
+
+E il listino, per milione di token:
+
+| Per 1M token | Haiku 5.5 (fino a 100k) | Haiku 5.5 (oltre) | Haiku 4.5 | Sonnet 5.5 |
+| ------------ | ----------------------- | ----------------- | --------- | ---------- |
+| Input        | **$0.10**               | $0.50             | $1        | $2         |
+| Output       | **$0.50**               | $2.50             | $5        | $10        |
+| Cache read   | **$0.01**               | $0.05             | $0.10     | $0.10      |
+| Cache write  | $0.125                  | $0.625            | $1.25     | $2.50      |
+
+Sotto i 100 mila token di input è **il 90% in meno di Haiku 4.5**, e secondo
+Anthropic lì cadeva il 90% delle richieste. Il tokenizer nuovo usa qualche token
+in più per task, ma il conto lo include già.
+
+<Callout type="warning">
+  Il limite va detto: su Terminal-Bench Haiku 5.5 fa 39.2%, Sonnet 5.5 70.6%.
+  Anthropic stessa scrive che il coding agentico complesso resta lavoro per
+  Sonnet e Opus. Haiku 5.5 non sostituisce il modello principale: sostituisce
+  tutto quello che gli gira intorno.
+</Callout>
+
+## Le scelte fatte ai tempi di Haiku 4.5 sono scadute
+
+Il momento giusto è il prossimo progetto in cui apri `.claude/agents` per
+aggiungere un subagent. Prima di aggiungerlo, cerca `model:` in quelli che ci
+sono già. Ogni `sonnet` scritto lì è stato scelto contro un Haiku che sul
+Terminal-Bench faceva zero.
+
+La cosa che mi ha sorpreso è un'altra. **Il subagent Explore di Claude Code non
+gira su Haiku**: usa il modello della conversazione. Se lavori con Opus, ogni
+ricerca nel codice la fa Opus. Per cambiarlo basta un subagent di progetto con
+lo stesso nome, che sostituisce quello integrato:
+
+```md title=".claude/agents/explore.md"
+---
+name: Explore
+description: Ricerca in sola lettura nel codice. Usalo per trovare file, simboli e usi.
+model: haiku
+effort: low
+omitClaudeMd: true
+tools: Read, Grep, Glob
+---
+
+Trova quello che ti viene chiesto e rispondi con i percorsi e le righe.
+Non modificare niente.
+```
+
+Lo stesso campo `model` esiste nel frontmatter delle skill, insieme a
+`context: fork` per farle girare in un subagent separato. Una skill che genera un
+changelog o riformatta un JSON non ha bisogno del modello con cui stai
+ragionando sull'architettura.
+
+<Callout type="info">
+  Su Anthropic API l'alias `haiku` punta già a Haiku 5.5. Su Bedrock, Vertex e
+  Microsoft Foundry punta ancora a Haiku 4.5: lì scrivi `claude-haiku-5-5`.
+</Callout>
+
+## L'effort è la nuova manopola, anche nei subagent
+
+Haiku 5.5 è **il primo Haiku con l'effort**, da `low` a `max`, e in Claude Code
+il default è `medium`. Il campo `effort` si mette per agent e per skill, e
+sovrascrive quello della sessione.
+
+È qui che serve un minimo di attenzione. La guida di Anthropic dice che con
+`low` e un system prompt lungo Haiku 5.5 **a volte si ferma prima** e restituisce
+il task incompiuto. Passare a `medium` dimezza gli stop prematuri, ma più che
+raddoppia i token di output. La regola che mi do:
+
+- `low` per lookup, classificazione, ricerca nel codice, con un prompt corto;
+- `medium` per tutto quello che modifica file;
+- niente `xhigh` o `max` su Haiku: a quel punto conviene provare Sonnet 5.5.
+
+## Il CLAUDE.md lungo lo paghi in ogni subagent
+
+Questa è la ragione meno ovvia per riaprire i file. Il CLAUDE.md viene
+**caricato in ogni subagent custom** (Explore e Plan integrati lo saltano), e la
+documentazione di Claude Code indica di stare **sotto le 200 righe**: i file più
+lunghi consumano contesto e riducono l'aderenza.
+
+Con Haiku il costo non è solo in token. Il system prompt lungo è proprio la
+condizione in cui il modello piccolo si ferma prima e salta le ricerche. Un
+CLAUDE.md da 400 righe pensato per Opus diventa rumore per un subagent che deve
+solo trovare tre file. Quindi o lo sfoltisci, spostando le regole di dominio in
+file che si caricano solo quando servono, o metti `omitClaudeMd: true` sugli
+agent che non ne hanno bisogno.
+
+## Un prompt scritto per Opus non basta a Haiku
+
+Con Opus un prompt di delega vago di solito regge, perché i buchi li riempie da
+solo. Haiku 5.5 è molto più bravo del 4.5, ma il prompt con cui deleghi deve
+stare in piedi da solo. La guida ufficiale lo dice in modo pratico: quando vedi
+un comportamento storto, aggiungi **istruzioni esplicite**, e ne fornisce il
+testo. Quella che metterei in ogni subagent che tocca codice:
+
+```text
+When you change code that can be run, built, or type-checked, run a real check
+that exercises the change before reporting it done: the project's tests,
+type-checker, or build, or the changed command itself.
+```
+
+Due cose da sapere prima di spostare tutto:
+
+- Haiku 5.5 introduce **rifiuti che Haiku 4.5 non aveva**, con categorie come
+  `cyber`. Un subagent di security review spostato su Haiku può fermarsi dove
+  prima andava avanti: quello lo lascerei su Sonnet.
+- Il thinking è attivo di default e conta dentro `max_tokens`. Se hai script che
+  chiamano `claude-haiku-4-5` con un `max_tokens` stretto, cambiare solo il model
+  ID può tagliare le risposte.
+
+## Da dove partire domattina
+
+1. `grep -r "model:" .claude/` e `grep -r "claude-haiku-4-5"` nel repo.
+2. Override di Explore con `model: haiku`.
+3. Un `effort` esplicito su ogni agent e skill.
+4. Il CLAUDE.md sotto le 200 righe, o `omitClaudeMd` dove non serve.
+5. La riga di verifica nei subagent che modificano codice.
+
+L'architettura che ne esce è quella che Cognition ha descritto al lancio: Opus
+5.5 come lead e Haiku 5.5 come aiutante tengono un punteggio di primo livello su
+FrontierCode, 66.2, con meno costi e latenza. È la stessa idea di
+[Stai pagando un LLM per fare un if](/blog/pagare-un-llm-per-fare-un-if), un
+gradino più su: il modello grande dove serve ragionare, quello piccolo dove si
+ripete. Il listino di Opus l'ho letto in
+[Claude Opus 5.5: più bravo di Fable, e costa meno](/blog/claude-opus-5-5-prezzo-prestazioni).
+
+Il budget dei nodi piccoli che un mese fa non volevo fissare, adesso si può
+fissare. È un decimo di quello che era.
