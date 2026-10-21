@@ -13,7 +13,7 @@ export const FEATURED_PRODUCTS: FeaturedProduct[] = [
     logoFullBleed: true,
     image: "/images/products/fastmemo.webp",
     websiteUrl:
-      "https://fastmemo.vercel.app?utm_source=andrealosavio.com&utm_medium=referral",
+      "https://fastmemo.losav.cc?utm_source=andrealosavio.com&utm_medium=referral",
   },
   {
     id: "coolifyManager",
@@ -21,7 +21,7 @@ export const FEATURED_PRODUCTS: FeaturedProduct[] = [
     logoFullBleed: false,
     image: "/images/products/coolify-manager.webp",
     websiteUrl:
-      "https://coolify-manager.vercel.app?utm_source=andrealosavio.com&utm_medium=referral",
+      "https://coolify-manager.losav.cc?utm_source=andrealosavio.com&utm_medium=referral",
   },
 ];
 

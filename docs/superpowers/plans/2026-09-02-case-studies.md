@@ -164,7 +164,7 @@ export const PROJECTS: Project[] = [
     logo: "/images/clients/fastmemo_v3.svg",
     image: "/images/projects/fastmemo_v3.webp",
     tags: ["expo-sdk", "react-native", "tauri", "design"],
-    websiteUrl: "https://fastmemo.vercel.app",
+    websiteUrl: "https://fastmemo.losav.cc",
   },
   {
     id: "coolifyManager",
@@ -179,7 +179,7 @@ export const PROJECTS: Project[] = [
       "extension",
       "design",
     ],
-    websiteUrl: "https://coolify-manager.vercel.app",
+    websiteUrl: "https://coolify-manager.losav.cc",
   },
   {
     id: "forfettarioControl",

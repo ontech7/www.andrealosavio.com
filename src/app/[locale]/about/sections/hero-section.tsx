@@ -21,9 +21,9 @@ interface HeroSectionProps {
 const ENGINEER_REGISTER_URL =
   "https://www.cni.it/proxy.php?w=dett_albo&u=albounico.wp?internalServletActionPath=/ExtStr2/do/ricercaRegistro/dettaglio.action&internalServletFrameDest=0&log=false&idDettaglio=LSVNDR96C27L049B";
 
-const FAST_MEMO_URL = "https://fastmemo.vercel.app/";
+const FAST_MEMO_URL = "https://fastmemo.losav.cc/";
 
-const COOLIFY_MANAGER_URL = "https://coolify-manager.vercel.app";
+const COOLIFY_MANAGER_URL = "https://coolify-manager.losav.cc";
 
 export function HeroSection({ id, className }: HeroSectionProps) {
   const t = useTranslations();

@@ -107,12 +107,12 @@ Areas covered, beyond frontend work:
 
 Both products are designed, built, shipped and maintained by Andrea alone, and each has passed **1,000+ downloads**.
 
-- **Fast Memo** — Quick notes and lists on phone and desktop. The data stays with the user: no account, no third-party services. https://fastmemo.vercel.app
-- **Coolify Manager** — Manage self-hosted Coolify servers from a phone or from the browser toolbar. https://coolify-manager.vercel.app
+- **Fast Memo** — Quick notes and lists on phone and desktop. The data stays with the user: no account, no third-party services. https://fastmemo.losav.cc
+- **Coolify Manager** — Manage self-hosted Coolify servers from a phone or from the browser toolbar. https://coolify-manager.losav.cc
 
 ## Selected Projects & Clients
 
-- **Fast Memo** — Cross-platform note-taking app (React Native + Expo) with rich-text notes, checklists, categories, Firebase cloud sync. Open-source, available in 7 languages, 1,000+ downloads on Android & iOS stores. https://fastmemo.vercel.app
+- **Fast Memo** — Cross-platform note-taking app (React Native + Expo) with rich-text notes, checklists, categories, Firebase cloud sync. Open-source, available in 7 languages, 1,000+ downloads on Android & iOS stores. https://fastmemo.losav.cc
 - **Recrowd S.r.l.** — Real-estate crowdfunding platform. Long-term collaboration on platform evolution, performance, UX.
 - **Quido S.r.l.** — AI platform for private equity and M&A in Italy. Designed the interface bridging finance and AI.
 - **Ravenn S.r.l.** — Event logistics and hospitality management platform. Stepped in to cover for an absent CTO, then came back to build the password-gated area for event staff.
