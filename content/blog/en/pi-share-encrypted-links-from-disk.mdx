@@ -1,0 +1,200 @@
+---
+title: "pi-share: encrypted links to files already on your disk"
+subtitle:
+  "A Raspberry Pi and a link: the file leaves your disk and reaches only whoever
+  holds the key"
+description:
+  "pi-share turns a file or folder on your own disk into an end-to-end encrypted
+  link, self-hosted on a Raspberry Pi: no uploads, no third-party cloud."
+publishedAt: 2026-10-22
+translationKey: pi-share
+tags: [architecture, devops]
+cover: /images/blog/pi-share/cover.svg
+coverAlt:
+  "The lime-green pi-share tile with its black P, glowing on a dark blue
+  background: a lit wire runs from it through a dim box, dashed inside, and ends
+  at a single blue node"
+takeaways:
+  - "No uploads: the link points at the file on your disk, and the bytes leave
+    the machine only when the recipient downloads them."
+  - "The key lives in the link's #fragment, which browsers never send to a
+    server. Tunnels and CDNs only ever see ciphertext."
+  - "Each link gets a password, an expiry, a cap on how many people may
+    download, and a log of who opened what, when and from where."
+  - "It runs in Docker on a Raspberry Pi 4 or 5 (amd64 and arm64 images) behind
+    a Cloudflare Tunnel, with no open port on the router. MIT licensed."
+faq:
+  - q: "Do I need to open a port on my router?"
+    a:
+      "Not with a Cloudflare Tunnel: the Pi dials out to Cloudflare, and the
+      tunnel talks to pi-share through a unix socket. Any other reverse proxy
+      works too, as long as it can reach that socket."
+  - q: "Does the recipient need to install anything?"
+    a:
+      "No. They open the link in any browser, phones included. A service worker
+      on the page decrypts the files and writes them straight into the downloads
+      folder."
+  - q: "What happens if I lose the data folder?"
+    a:
+      "It holds the database and the master key that seals every link key.
+      Without it, the links you already sent stop working, so it belongs in your
+      backups."
+---
+
+## The file is confidential, and too big for chat
+
+This happens to me a lot, in two shapes. One is a work file for a client:
+confidential, and over the size limit of the chat app we use. The other is the
+folder for my accountant: scans, payslips, a tax return. It has to arrive
+intact, to one person, and a week later I have no reason to want it sitting
+anywhere.
+
+Everyone knows the default move. Drag the file into Google Drive or WeTransfer,
+wait for the upload, send the link. It works. It also means the file now lives
+in a bucket that isn't mine, for as long as somebody else decides, and anyone
+who gets the link forwarded can open it.
+
+**pi-share** is what I built instead: a self-hosted service that turns a file or
+folder on my disk into an end-to-end encrypted link. Nothing gets uploaded,
+nothing sits in third-party storage. I wrote it today, and it already runs on
+the Raspberry Pi 5 at my place.
+
+## You don't upload the file, you link it
+
+In the admin panel I browse the disk, tick a file or a folder and hit continue.
+Out comes a link. Nothing is copied anywhere: the bytes leave my machine **only
+when the recipient downloads them**.
+
+<Figure
+  src="/images/blog/pi-share/picker.webp"
+  alt="The New link dialog of the pi-share admin panel: a list of folders on the disk, Media and Work, with Work ticked, a Work chip among the selected items and a Continue button"
+  caption="You pick from the disk, you don't upload. Ticking a folder shares all of it."
+  width={780}
+  height={440}
+/>
+
+Size isn't a problem. Files stream off the disk, and the recipient can pull
+gigabytes without the browser holding them in memory. A folder shows up as a
+tree, and "download all" builds the zip on the fly.
+
+There's one choice Drive never made me think about: **what happens when the disk
+changes**. I set it per link. Paused, the link stops until I've reviewed the
+list of added, removed and changed files and accepted it. Following, it tracks
+the disk like a shared folder. The accountant's link is always paused: if I drop
+the wrong document in that folder, it shouldn't reach them before I notice.
+
+## The key sits after the hash
+
+A pi-share link looks like this:
+
+```text
+https://share.example.com/d/<id>#<key>
+```
+
+Everything after `#` is the **fragment**, and browsers never send it to the
+server. Every link gets its own random 256-bit key, and that key exists in
+exactly two places: the link I send, and the database on the Pi, sealed with a
+master key.
+
+The recipient's browser reads it from the fragment and decrypts the file names
+and sizes, then the files themselves, in 64 KiB records sealed with AES-256-GCM.
+Each record is verified. If something in the middle truncates, reorders or drops
+one, the download fails instead of handing over a broken file.
+
+<Figure
+  src="/images/blog/pi-share/recipient.webp"
+  alt="The recipient's page: the heading Files shared with you, the expiry date, three files with a Download button or a Downloaded and verified check, and an End-to-end badge at the bottom"
+  caption="What the recipient sees. Downloaded and verified means every record was checked in their browser."
+  width={640}
+  height={830}
+/>
+
+In practice, Cloudflare, which runs the tunnel, sees **ciphertext only**, plus
+link ids and rough sizes. Never file names, keys or passwords. If I set a
+password, that stays in the browser too: what travels is a proof derived from
+the key, not the password. Someone who only knows the link id can't open it,
+doesn't show up in the log and can't lock it by guessing.
+
+## One week, one person, and I know when they opened it
+
+For the accountant I set three things: a password, sent over a different
+channel, a **seven-day expiry** and a **limit of one person**.
+
+The limit counts people, not downloads. Whoever already downloaded can come back
+for the files as often as they like, and a cancelled download doesn't use up the
+slot. A second person opening the same forwarded link finds it exhausted. Ten
+wrong passwords and the link locks.
+
+<Figure
+  src="/images/blog/pi-share/activity.webp"
+  alt="A link's detail page in the admin panel: Active status, expiry, password set, the link to copy, counters for Opens, Downloads, Verified, Visitors and Wrong passwords, the files marked On disk and an Activity log with time, IP, browser and operating system"
+  caption="A link's detail page: counters, file state on disk and every event with time, IP, browser and language."
+  width={1016}
+  height={810}
+/>
+
+Then there's the log, which is the part I use most. Opens, wrong passwords,
+downloads started, completed, interrupted and verified, each with time, IP,
+country, browser and OS. The previews chat apps fetch when you paste a link are
+logged separately, so I don't mistake Slack's unfurler for a human. When someone
+tells me "nothing came through", I don't have to ask whether they checked spam.
+I already know if they opened it.
+
+## On a Pi 5, behind a Cloudflare Tunnel
+
+My setup is a Raspberry Pi 5 running Docker and a Cloudflare Tunnel. The
+[README](https://github.com/ontech7/pi-share#quick-start) has the full quick
+start. Here are the three things that matter while you install it.
+
+**There are three processes, and only one faces the internet.** The edge serves
+the public page and has no disk, no database and no network. In Docker it runs
+with `network_mode: none` and only talks to the broker over a unix socket. The
+broker reads the disk read-only and re-checks every request. The admin stays on
+the LAN, behind a password.
+
+**The tunnel points at a socket, not a port.** Nothing opens on the router; the
+Pi dials out to Cloudflare. In `cloudflared`'s `config.yml` this is all it
+takes:
+
+```yaml title="config.yml"
+ingress:
+  - hostname: share.example.com
+    service: unix:/run/pi-share/edge/edge.sock
+  - service: http_status:404
+```
+
+**`/run` is wiped on every boot.** The socket folders live there, so after the
+first reboot they're gone and the tunnel has nothing to connect to. One line per
+folder in `/etc/tmpfiles.d/pi-share.conf` fixes it for good:
+
+```text title="/etc/tmpfiles.d/pi-share.conf"
+d /run/pi-share/broker 0750 10001 10001 -
+d /run/pi-share/edge 0750 10001 10001 -
+```
+
+Images for `amd64` and `arm64` are on `ghcr.io`, so nothing gets compiled on the
+Pi. And back up the data folder: it holds the master key, and without it the
+links you already sent won't open.
+
+## What it doesn't do
+
+- **It doesn't hide sizes.** Anyone watching the encrypted stream can tell how
+  big the file is, even without knowing what's in it.
+- **It doesn't protect you from root on the Pi.** It guards data in transit and
+  at the edge, not from whoever owns the machine.
+- **It isn't faster than your upload.** The bottleneck is nearly always the
+  tunnel or your home connection's upstream, not the Pi.
+- **It doesn't have to stay on.** A switch takes the public page offline, and it
+  can turn itself off when no link is active.
+
+<Callout type="warning">
+  The data folder is the one thing you can't lose. The disk with the files can
+  be rebuilt. The master key can't.
+</Callout>
+
+You'll want this the next time you're about to drag a confidential PDF into
+Drive just to get it to one person. If there's a Pi in a drawer somewhere,
+installing it is seven commands plus the tunnel config. The code is
+[on GitHub](https://github.com/ontech7/pi-share) under MIT. The other half of my
+self-hosting lives on my phone, and it's
+[Coolify Manager](/blog/coolify-mobile-companion).

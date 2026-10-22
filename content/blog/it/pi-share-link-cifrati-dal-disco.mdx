@@ -1,0 +1,202 @@
+---
+title: "pi-share: link cifrati ai file che hai già sul disco"
+subtitle:
+  "Un Raspberry Pi e un link: il file parte dal tuo disco e arriva solo a chi ha
+  la chiave"
+description:
+  "pi-share trasforma un file o una cartella del tuo disco in un link cifrato
+  end-to-end, self-hosted su un Raspberry Pi: niente upload, niente cloud di
+  terzi."
+publishedAt: 2026-10-22
+translationKey: pi-share
+tags: [architecture, devops]
+cover: /images/blog/pi-share/cover.svg
+coverAlt:
+  "La tessera verde lime di pi-share con la P nera, accesa su fondo blu scuro:
+  ne parte un cavo luminoso che attraversa un riquadro spento, tratteggiato al
+  suo interno, e arriva a un solo nodo blu"
+takeaways:
+  - "Niente upload: il link punta al file sul tuo disco, e i byte escono dalla
+    macchina solo quando il destinatario scarica."
+  - "La chiave vive nel #fragment del link, che il browser non manda mai al
+    server: tunnel e CDN vedono solo dati cifrati."
+  - "Per ogni link: password, scadenza, un limite di persone e un log di chi ha
+    aperto cosa, quando e da dove."
+  - "Gira in Docker su un Raspberry Pi 4 o 5 (immagini amd64 e arm64) dietro un
+    Cloudflare Tunnel, senza porte aperte sul router. Licenza MIT."
+faq:
+  - q: "Devo aprire una porta sul router?"
+    a:
+      "No, se usi un Cloudflare Tunnel: è il Pi a collegarsi verso Cloudflare, e
+      il tunnel parla con pi-share attraverso un socket unix. Va bene anche un
+      altro reverse proxy, purché arrivi a quel socket."
+  - q: "Chi riceve il link deve installare qualcosa?"
+    a:
+      "No. Apre il link in un browser qualsiasi, anche dal telefono. La
+      decifratura la fa un service worker della pagina, che scrive il file
+      direttamente nella cartella dei download."
+  - q: "Cosa succede se perdo la cartella dei dati?"
+    a:
+      "Lì ci sono il database e la master key che sigilla le chiavi dei link.
+      Senza quella cartella i link già mandati smettono di funzionare, quindi va
+      inclusa nel backup."
+---
+
+## Il file è riservato, ed è troppo grosso per la chat
+
+Mi capita spesso, e in due forme. La prima è un file di lavoro per un cliente:
+riservato, e oltre il limite della chat che usiamo. La seconda è la cartella per
+il commercialista: scansioni, buste paga, una dichiarazione. Deve arrivare
+intatta a una persona sola, e dopo una settimana non mi serve che esista ancora
+da qualche parte.
+
+La soluzione di default la conosciamo tutti: trascini il file su Drive o su
+WeTransfer, aspetti l'upload, mandi il link. Funziona. Solo che a quel punto il
+file vive in un bucket che non è mio, per un tempo che non decido io, e quel
+link lo apre chiunque lo riceva inoltrato.
+
+**pi-share** è la mia risposta: un servizio self-hosted che trasforma un file o
+una cartella del mio disco in un link cifrato end-to-end. Niente upload, niente
+storage di terzi. L'ho scritto oggi, e gira già sul Raspberry Pi 5 che ho a
+casa.
+
+## Il file non si carica, si linka
+
+Dal pannello admin navigo il disco, spunto un file o una cartella e premo
+continua. Esce un link. Il file non viene copiato da nessuna parte: i byte
+lasciano la mia macchina **solo nel momento in cui il destinatario scarica**.
+
+<Figure
+  src="/images/blog/pi-share/picker.webp"
+  alt="La finestra New link del pannello admin di pi-share: una lista di cartelle del disco, Media e Work, con Work spuntata, il chip Work tra i selezionati e il bottone Continue"
+  caption="Si sceglie dal disco, non si carica niente. Spuntare una cartella la condivide tutta."
+  width={780}
+  height={440}
+/>
+
+Le dimensioni non sono un problema. Il file esce in streaming dal disco, e chi
+lo riceve può scaricare gigabyte senza che il browser li tenga in memoria. Una
+cartella si naviga come un albero, e "scarica tutto" costruisce lo zip al volo.
+
+C'è una scelta che con Drive non ho mai dovuto fare: **cosa succede se il disco
+cambia**. Per ogni link decido io. In pausa, il link si ferma finché non guardo
+la lista dei file aggiunti, tolti e modificati e la accetto. In follow, segue il
+disco come una cartella condivisa. Per il commercialista uso la pausa: se
+aggiungo un documento per sbaglio, non deve arrivargli senza che me ne accorga.
+
+## La chiave sta dopo il cancelletto
+
+Un link di pi-share ha questa forma:
+
+```text
+https://share.example.com/d/<id>#<chiave>
+```
+
+Tutto quello che sta dopo `#` è il **fragment**, e il browser non lo manda mai
+al server. Ogni link ha la sua chiave casuale da 256 bit, e quella chiave esiste
+in due posti: nel link che mando e, sigillata con una master key, nel database
+sul Pi.
+
+Il browser del destinatario la legge dal fragment, decifra nomi e dimensioni dei
+file e poi i file stessi, a blocchi da 64 KiB cifrati con AES-256-GCM. Ogni
+blocco viene verificato: se qualcuno in mezzo lo tronca, lo riordina o ne toglie
+uno, il download fallisce invece di consegnare un file rotto.
+
+<Figure
+  src="/images/blog/pi-share/recipient.webp"
+  alt="La pagina che vede il destinatario: il titolo Files shared with you, la scadenza, tre file con il bottone Download o la spunta Downloaded and verified, e in basso il badge End-to-end"
+  caption="Quello che vede chi riceve il link. Downloaded and verified vuol dire che ogni blocco è stato controllato nel suo browser."
+  width={640}
+  height={830}
+/>
+
+La conseguenza pratica è questa: Cloudflare, che fa da tunnel, vede **solo dati
+cifrati**, gli id dei link e le dimensioni approssimative. Mai i nomi dei file,
+le chiavi o le password. Anche la password, se la imposto, non lascia il
+browser: parte una prova derivata dalla chiave, non la password in chiaro. Chi
+conosce solo l'id del link non apre niente, non lascia tracce nel log e non può
+bloccarlo a forza di tentativi.
+
+## Una settimana, una persona, e so quando l'ha aperto
+
+Per il commercialista imposto tre cose: una password, che gli mando su un altro
+canale, una **scadenza** a sette giorni e un **limite di una persona**.
+
+Il limite conta le persone, non i download. Chi ha già scaricato può tornare a
+riprendere i file quante volte vuole; un download interrotto non consuma il
+posto. Una seconda persona che apre lo stesso link inoltrato lo trova esaurito.
+Dopo dieci password sbagliate il link si blocca.
+
+<Figure
+  src="/images/blog/pi-share/activity.webp"
+  alt="Il dettaglio di un link nel pannello admin: stato Active, scadenza, password impostata, il link da copiare, i contatori Opens, Downloads, Verified, Visitors e Wrong passwords, la lista dei file On disk e il log Activity con orario, IP, browser e sistema operativo"
+  caption="Il dettaglio di un link: contatori, stato dei file sul disco e ogni evento con orario, IP, browser e lingua."
+  width={1016}
+  height={810}
+/>
+
+Poi c'è il log, che è la parte che uso di più. Aperture, password sbagliate,
+download partiti, completati, interrotti e verificati, ciascuno con orario, IP,
+paese, browser e sistema operativo. Le anteprime che generano le app di chat
+quando incolli il link stanno in una riga a parte, così non le scambio per una
+persona che ha aperto. Quando il commercialista mi dice "non mi è arrivato
+niente", non devo chiedergli se ha controllato lo spam: so se l'ha aperto.
+
+## Sul Pi 5, dietro un Cloudflare Tunnel
+
+Il setup che ho a casa è un Raspberry Pi 5 con Docker e un Cloudflare Tunnel. Il
+[README](https://github.com/ontech7/pi-share#quick-start) ha la quick start
+completa; qui scrivo solo le tre cose che contano mentre lo installi.
+
+**I processi sono tre, e solo uno è su internet.** L'edge serve la pagina
+pubblica e non ha disco, né database, né rete: in Docker gira con
+`network_mode: none` e parla con il broker solo tramite un socket unix. Il
+broker legge il disco in sola lettura e ricontrolla ogni richiesta. L'admin sta
+sulla LAN, dietro password.
+
+**Il tunnel punta a un socket, non a una porta.** Non apro niente sul router: è
+il Pi a collegarsi a Cloudflare. Nel `config.yml` di `cloudflared` basta questo:
+
+```yaml title="config.yml"
+ingress:
+  - hostname: share.example.com
+    service: unix:/run/pi-share/edge/edge.sock
+  - service: http_status:404
+```
+
+**`/run` si svuota a ogni riavvio.** Le cartelle dei socket stanno lì, quindi
+dopo il primo reboot non esistono più e il tunnel non ha niente a cui
+collegarsi. Si risolve una volta per tutte con una riga per cartella in
+`/etc/tmpfiles.d/pi-share.conf`:
+
+```text title="/etc/tmpfiles.d/pi-share.conf"
+d /run/pi-share/broker 0750 10001 10001 -
+d /run/pi-share/edge 0750 10001 10001 -
+```
+
+Le immagini per `amd64` e `arm64` sono su `ghcr.io`, quindi sul Pi non compilo
+niente. E la cartella dei dati va nel backup: contiene la master key, e senza
+quella i link già mandati non si aprono più.
+
+## Quello che non fa
+
+- **Non nasconde le dimensioni.** Chi osserva il traffico cifrato capisce quanto
+  è grosso il file, anche se non sa cosa contiene.
+- **Non ti protegge da chi ha root sul Pi.** Protegge i dati in transito e
+  sull'edge, non dal proprietario della macchina.
+- **Non è più veloce del tuo upload.** Il collo di bottiglia è quasi sempre il
+  tunnel o la banda in uscita di casa, non il Pi.
+- **Non resta acceso per forza.** Un interruttore spegne la pagina pubblica, e
+  può spegnersi da solo quando nessun link è attivo.
+
+<Callout type="warning">
+  La cartella dei dati è l'unica cosa che non puoi perdere. Il disco con i file
+  si ricostruisce, la master key no.
+</Callout>
+
+Il momento in cui ti serve è il prossimo in cui stai per trascinare un PDF
+riservato dentro Drive solo per mandarlo a una persona. Se hai un Pi in un
+cassetto, l'installazione sono sette comandi più la configurazione del tunnel;
+il codice è [su GitHub](https://github.com/ontech7/pi-share), con licenza MIT.
+L'altro pezzo del mio self-hosting è sul telefono, ed è
+[Coolify Manager](/blog/coolify-companion-mobile).

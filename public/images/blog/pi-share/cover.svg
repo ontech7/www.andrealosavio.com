@@ -1,0 +1,128 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img">
+  <defs>
+    <radialGradient id="pi-share-sky" cx="50%" cy="50%" r="76%">
+      <stop offset="0%" stop-color="#101c3d" />
+      <stop offset="46%" stop-color="#050912" />
+      <stop offset="100%" stop-color="#03060c" />
+    </radialGradient>
+
+    <radialGradient id="pi-share-falloff" cx="54%" cy="50%" r="56%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="58%" stop-color="#ffffff" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+
+    <mask id="pi-share-depth">
+      <rect width="1200" height="630" fill="url(#pi-share-falloff)" />
+    </mask>
+
+    <linearGradient id="pi-share-tile" x1="0%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#e2ff8a" />
+      <stop offset="55%" stop-color="#c8f43d" />
+      <stop offset="100%" stop-color="#9cc61f" />
+    </linearGradient>
+
+    <linearGradient id="pi-share-wire" x1="715" y1="0" x2="972" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#c8f43d" />
+      <stop offset="22%" stop-color="#7cc0ff" />
+      <stop offset="100%" stop-color="#0d7ef2" />
+    </linearGradient>
+
+    <linearGradient id="pi-share-plate" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b1526" />
+      <stop offset="100%" stop-color="#060a14" />
+    </linearGradient>
+
+    <filter id="pi-share-bloom" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="40" />
+    </filter>
+
+    <filter id="pi-share-wireglow" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="630">
+      <feGaussianBlur stdDeviation="8" />
+    </filter>
+
+    <filter id="pi-share-haze" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="3.5" />
+    </filter>
+
+    <filter id="pi-share-seat" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#03060c" flood-opacity="0.8" />
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#pi-share-sky)" />
+
+  <g mask="url(#pi-share-depth)">
+    <g stroke="#0d7ef2" stroke-width="1.5" opacity="0.16" filter="url(#pi-share-haze)">
+      <path d="M0 105 H1200 M0 210 H1200 M0 420 H1200 M0 525 H1200" />
+      <path d="M120 0 V630 M280 0 V630 M440 0 V630 M760 0 V630 M920 0 V630 M1080 0 V630" />
+    </g>
+
+    <rect
+      x="770"
+      y="255"
+      width="112"
+      height="120"
+      rx="20"
+      fill="url(#pi-share-plate)"
+      stroke="#1b4d8f"
+      stroke-width="2"
+      opacity="0.85"
+    />
+    <g fill="#1b4d8f" opacity="0.7">
+      <rect x="790" y="280" width="72" height="8" rx="4" />
+      <rect x="790" y="342" width="48" height="8" rx="4" />
+    </g>
+  </g>
+
+  <g opacity="0.55" filter="url(#pi-share-wireglow)">
+    <path d="M715 315 H770" stroke="#c8f43d" stroke-width="12" />
+    <path d="M882 315 H948" stroke="#0d7ef2" stroke-width="12" />
+  </g>
+  <path d="M715 315 H770" stroke="url(#pi-share-wire)" stroke-width="4" stroke-linecap="round" />
+  <path
+    d="M780 315 H872"
+    stroke="#7cc0ff"
+    stroke-width="4"
+    stroke-dasharray="6 10"
+    stroke-linecap="round"
+    opacity="0.45"
+  />
+  <path d="M882 315 H948" stroke="url(#pi-share-wire)" stroke-width="4" stroke-linecap="round" />
+
+  <g opacity="0.5" filter="url(#pi-share-wireglow)">
+    <circle cx="972" cy="315" r="28" fill="#0d7ef2" />
+  </g>
+  <circle cx="972" cy="315" r="24" fill="url(#pi-share-plate)" stroke="#7cc0ff" stroke-width="3" />
+  <circle cx="972" cy="315" r="8" fill="#7cc0ff" />
+
+  <g opacity="0.42" filter="url(#pi-share-bloom)">
+    <rect x="490" y="205" width="220" height="220" rx="55" fill="#c8f43d" />
+  </g>
+
+  <g filter="url(#pi-share-seat)">
+    <g transform="translate(490 205) scale(3.4375)">
+      <rect width="64" height="64" rx="16" fill="url(#pi-share-tile)" />
+      <rect
+        x="0.5"
+        y="0.5"
+        width="63"
+        height="63"
+        rx="15.5"
+        fill="none"
+        stroke="#f4ffd0"
+        stroke-width="0.6"
+        stroke-opacity="0.7"
+      />
+      <path
+        d="M20 40V24a4 4 0 0 1 4-4h10a8 8 0 0 1 0 16h-8"
+        fill="none"
+        stroke="#0b0d10"
+        stroke-width="6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <circle cx="44" cy="44" r="4" fill="#0b0d10" />
+    </g>
+  </g>
+</svg>
