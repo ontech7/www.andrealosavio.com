@@ -11,7 +11,7 @@ export const FEATURED_PRODUCTS: FeaturedProduct[] = [
     id: "fastmemo",
     logo: "/images/clients/fastmemo_v3.svg",
     logoFullBleed: true,
-    image: "/images/products/fastmemo.webp",
+    image: "/images/products/fastmemo_v2.webp",
     websiteUrl:
       "https://fastmemo.losav.cc?utm_source=andrealosavio.com&utm_medium=referral",
   },
