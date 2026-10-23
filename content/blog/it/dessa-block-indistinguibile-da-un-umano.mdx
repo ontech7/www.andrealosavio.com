@@ -1,0 +1,182 @@
+---
+title: "Dessa di Block: ormai indistinguibile da un umano"
+subtitle:
+  "Speech-to-speech full-duplex: il silenzio smette di essere un timeout"
+description:
+  "Dessa è il modello vocale di Block addestrato solo su conversazioni umane.
+  Cosa si sente nei demo e cosa cambia per chi costruisce voice agent oggi."
+publishedAt: 2026-10-23
+translationKey: block-dessa
+tags: [ai]
+takeaways:
+  - "Dessa è un modello speech-to-speech full-duplex di Block, addestrato da
+    zero solo su conversazione umana: niente testo, niente modelli
+    preaddestrati."
+  - "Ascolta mentre parla: ride, fa backchannel, interrompe e si lascia
+    interrompere. Nei demo pubblicati è difficile distinguerlo da una persona."
+  - "Block dichiara inferenza più veloce del tempo reale, anche in locale su un
+    MacBook Pro M4 Max o superiore."
+  - "È una research preview: niente API pubblica, niente pesi, accesso solo a un
+    piccolo gruppo di ricercatori di AI safety."
+  - "Chi costruisce voice agent oggi resta sulla pipeline STT, LLM, TTS, ma il
+    turno deciso da una soglia di silenzio è il pezzo che invecchierà peggio."
+faq:
+  - q: "Cos'è Dessa di Block?"
+    a:
+      "Un modello speech-to-speech full-duplex presentato da Block il 23 ottobre
+      2026. Audio in ingresso, audio in uscita, senza passare dal testo, ed è
+      stato addestrato da zero solo su conversazioni umane registrate."
+  - q: "Si può usare Dessa oggi?"
+    a:
+      "No. È una research preview: non ci sono API pubbliche né pesi
+      scaricabili. Block ha aperto una waitlist e dà accesso anticipato solo a
+      un piccolo gruppo di ricercatori di AI safety."
+  - q: "Dessa gira in locale?"
+    a:
+      "Secondo Block sì, su un MacBook Pro M4 Max o superiore, e più veloce del
+      tempo reale. Finché i pesi non sono pubblici però non è verificabile da
+      fuori."
+  - q: "Che differenza c'è tra Dessa e Moshi di Kyutai?"
+    a:
+      "Anche Moshi è full-duplex, ma poggia su un LLM testuale da 7 miliardi di
+      parametri e genera un monologo interno in testo prima dell'audio. Dessa
+      dichiara di non avere testo né modelli preaddestrati da nessuna parte."
+---
+
+## Ho premuto play e ho smesso di cercare il trucco
+
+Dessa è un modello vocale che Block ha presentato oggi: audio in ingresso, audio
+in uscita, **addestrato da zero solo su conversazioni umane**, senza una riga di
+testo. E nei demo pubblicati, per quanto mi riguarda, non si distingue da una
+persona.
+
+Non ho molto altro da dichiarare sul metodo. Ho aperto la
+[pagina di Dessa](https://block.xyz/dessa), ho letto un po', e poi ho avviato
+gli audio uno dopo l'altro. Di solito con questi demo faccio un gioco: cerco il
+punto in cui si sente la macchina. La pausa troppo pulita prima della risposta,
+l'intonazione che risale uguale a fine frase, la risata che arriva mezzo secondo
+dopo la battuta. Qui ho smesso di giocare presto.
+
+Ride a metà frase quando qualcosa fa ridere. Mentre l'altro parla butta dentro i
+suoi "mh", "sì", "giusto", senza prendersi il turno. Si sovrappone, si ferma,
+riparte. **È il comportamento di una persona al telefono**, non di un assistente
+che aspetta il suo momento.
+
+L'unico inciampo che ho visto segnalato è in apertura di una registrazione, dove
+chiama l'interlocutore "Ronaldo" senza motivo. Lo cito perché è l'errore più
+umano che potesse fare.
+
+## Cosa sappiamo di Dessa, in cinque righe
+
+La pagina di Block la trovi linkata qui sopra e non ha senso riscriverla. I
+fatti che contano per chi sviluppa sono questi:
+
+- **niente testo e niente modelli preaddestrati**: tutto quello che sa viene da
+  conversazioni parlate;
+- **full-duplex**: ascolta mentre parla, quindi reagisce a interruzioni, pause e
+  risate;
+- **più veloce del tempo reale** in inferenza, secondo Block;
+- **gira in locale** su un MacBook Pro M4 Max o superiore;
+- **research preview**: niente API, niente pesi, accesso anticipato solo a un
+  piccolo gruppo di ricercatori di AI safety, più una waitlist.
+
+Ragavan Thurairatnam, che guida il laboratorio di ricerca AI di Block,
+[l'ha chiamato](https://x.com/RagavanThurair/status/2113671324400861645) "un
+momento GPT-3 per la voce". È una frase da annuncio, ma dopo gli audio capisco
+da dove arriva.
+
+## Perché i voice agent di oggi suonano come voice agent
+
+Se oggi un cliente ti chiede un assistente vocale, quasi sempre lo costruisci a
+cascata. Uno speech-to-text trascrive, un LLM risponde in testo, un
+text-to-speech legge la risposta. In mezzo c'è un pezzo piccolo che decide tutto
+il ritmo della conversazione: **il rilevamento del turno**.
+
+```ts title="turn-detector.ts" {6-7,9-11}
+export function createTurnDetector(onTurnEnd: () => void, silenceMs = 700) {
+  let silenceStartedAt: number | null = null;
+
+  return (isSpeech: boolean, now: number) => {
+    if (isSpeech) {
+      silenceStartedAt = null;
+      return;
+    }
+    silenceStartedAt ??= now;
+    if (now - silenceStartedAt >= silenceMs) {
+      silenceStartedAt = null;
+      onTurnEnd();
+    }
+  };
+}
+```
+
+Questo è il cuore, semplificato. Un VAD dice se nel frame c'è voce, e quando il
+silenzio supera la soglia l'utente "ha finito" e parte la pipeline. Il numero lo
+scegli tu, e qualunque numero scegli è sbagliato per qualcuno. Troppo basso e
+l'agent parla sopra chi si ferma a pensare. Troppo alto e ogni risposta arriva
+dopo un vuoto che al telefono sembra una linea caduta. Anche le API
+speech-to-speech dei grandi provider, come la Realtime di OpenAI, ti fanno
+configurare il rilevamento del turno, con tanto di `silence_duration_ms`: il
+modello è nativo, ma il turno lo decide ancora un pezzo a parte.
+
+Il secondo problema è cosa sopravvive al passaggio in testo. Il sospiro
+frustrato diventa niente. Il sarcasmo diventa la frase letterale. La voce che si
+incrina diventa una stringa identica a quella detta con calma. Block mette
+proprio questo al centro della presentazione: un assistente vocale che non sente
+che stai male e continua per la sua strada.
+
+Il full-duplex non l'ha inventato Dessa.
+[Moshi di Kyutai](https://arxiv.org/html/2410.00037v1), nel 2024, ascoltava e
+parlava già su due flussi paralleli. Ma poggiava su un LLM testuale da 7
+miliardi di parametri e generava un "monologo interno" in testo prima
+dell'audio. **La differenza che Block rivendica è che di testo, in Dessa, non ce
+n'è da nessuna parte.**
+
+## Cosa cambia se il turno lo decide il modello
+
+Se il modello ascolta mentre parla, la soglia di silenzio non serve più. Non c'è
+un momento in cui l'utente "ha finito": c'è un flusso continuo in entrambe le
+direzioni, e il modello ha imparato da conversazioni vere quando inserirsi e
+quando lasciar correre. È quello che si sente nei demo, ed è il motivo per cui
+non suonano come un agent.
+
+Quello che non so, e che Block non dice, è come si collega un modello così al
+resto di un sistema. Un voice agent vero deve controllare una prenotazione,
+leggere un ordine, aprire un ticket. Con una pipeline a cascata il testo è il
+punto di aggancio naturale: lo passi a una funzione, ricevi un risultato. Un
+modello che non ha mai visto testo da dove legge il numero d'ordine? Non lo so,
+e preferisco dirlo piuttosto che inventarmi un'architettura.
+
+Per questo, oggi, Dessa non cambia il tuo stack. Cambia il pezzo su cui conviene
+investire meno: quella funzione con il `silenceMs` in mezzo. Tienila dietro
+un'interfaccia sostituibile, perché è la prima cosa che un modello full-duplex
+rende inutile. Vale lo stesso ragionamento che faccio quando
+[decido dove serve un modello e dove basta un if](/blog/pagare-un-llm-per-fare-un-if):
+qui l'if è proprio la cosa che il modello sa fare meglio.
+
+## "Indistinguibile" è anche un problema
+
+Block non ha aperto Dessa a tutti, e dopo averlo ascoltato capisco perché. Ha
+dato l'accesso anticipato a ricercatori di AI safety con un obiettivo esplicito:
+trovare i rischi che non hanno previsto.
+
+Il più ovvio è al telefono. Oggi, quando un call center automatico ti chiama, lo
+capisci in due secondi. Con una voce come questa no. E la stessa qualità che
+rende piacevole un assistente rende credibile una truffa.
+
+<Callout type="warning">
+  Se costruisci un prodotto vocale, "tanto si sente che è un bot" non può più
+  essere la tua forma di trasparenza. L'AI Act chiede già di dire all'utente che
+  sta parlando con un sistema di AI: mettilo nella prima frase dell'agent, non
+  nei termini di servizio.
+</Callout>
+
+## Quando riaprirò quella pagina
+
+La prossima volta che qualcuno mi chiede un assistente vocale, prima di fissare
+la pipeline. Riascolterò due demo di Dessa e subito dopo il prototipo, uno dopo
+l'altro, per ricordarmi dove sta l'asticella. Poi scriverò il rilevamento del
+turno come un modulo che so già di dover buttare.
+
+Nel frattempo la waitlist è aperta. La domanda a cui voglio una risposta è una
+sola: quando arriverà un'API, ci sarà un modo per chiamare una funzione?
