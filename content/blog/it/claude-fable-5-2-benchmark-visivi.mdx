@@ -1,0 +1,180 @@
+---
+title: "Claude Fable 5.2: i modelli ora si misurano sulla grafica"
+subtitle:
+  "Il modello più grande di Anthropic: uno sparatutto in otto ore, e una pull
+  request che Opus avrebbe scritto uguale"
+description:
+  "Fable 5.2 e Mythos 5.2 sono lo stesso modello. Sul codice Opus 5.5 lo
+  pareggia a metà costo: il distacco ora si vede in animazioni, scene 3D e
+  giochi."
+publishedAt: 2026-11-10
+translationKey: claude-fable-5-2
+tags: [ai]
+cover: /images/blog/claude-fable-5-2/cover.svg
+coverAlt:
+  "La stella arancione di Claude sopra la scritta Fable 5.2, davanti a una sfera
+  low-poly in wireframe illuminata di blu, attraversata da una scia con tre
+  fotogrammi chiave a rombo, l'ultimo acceso"
+takeaways:
+  - "Claude Fable 5.2 e Claude Mythos 5.2 sono lo stesso modello: Fable è
+    disponibile a tutti con protezioni più strette su biologia e cybersecurity,
+    Mythos solo per organizzazioni verificate."
+  - "Fable 5.2 costa 8 dollari per milione di token in input e 40 in output, il
+    20% in meno di Fable 5.1, ed è fino al 30% più veloce."
+  - "Su FrontierCode 2.0 Opus 5.5 con effort max fa 45.5%, Fable 5.2 con effort
+    high 45.3%, a circa metà del costo per task: per il codice di tutti i
+    giorni Opus resta il default."
+  - "Fable 5.2 conviene per migrazioni grosse, refactor di architettura e run
+    lunghi senza supervisione."
+  - "I modelli ora si distinguono sull'output visivo: Saltline, uno sparatutto
+    3D giocabile nel browser, è uscito da Fable 5.2 in 8 ore per circa 550
+    dollari."
+faq:
+  - q: "Che differenza c'è tra Claude Fable 5.2 e Claude Mythos 5.2?"
+    a:
+      "Secondo Anthropic sono lo stesso modello. Fable 5.2 è disponibile a tutti
+      e ha protezioni più strette sulle richieste pericolose in ambito biologico
+      e di cybersecurity. Mythos 5.2 è riservato alle organizzazioni approvate
+      nei programmi Life Sciences e Cyber Verification."
+  - q: "Quanto costa Claude Fable 5.2?"
+    a:
+      "8 dollari per milione di token in input e 40 in output, con il cache
+      read a 0.20 dollari. Fable 5.1 costava 10 e 50."
+  - q: "Per programmare conviene Fable 5.2 o Opus 5.5?"
+    a:
+      "Per il lavoro di tutti i giorni Opus 5.5, che sui benchmark di coding lo
+      pareggia a circa metà del costo. Fable 5.2 ha senso per migrazioni
+      grosse, refactor di architettura e run lunghi senza supervisione, o
+      quando Opus 5.5 con effort high non basta."
+---
+
+Ieri, 9 novembre, Anthropic ha rilasciato Claude Fable 5.2 e Claude Mythos 5.2.
+Mi sono letto l'annuncio e la guida che lo accompagna, e il numero che mi è
+rimasto in testa non riguarda Fable. Su FrontierCode 2.0 **Opus 5.5 con
+l'effort al massimo fa 45.5%, Fable 5.2 a `high` fa 45.3%**, e Opus costa circa
+la metà per task. Sul codice di tutti i giorni il modello di punta non ti dà più
+niente che Opus non ti dia già. Dove la differenza si vede ancora, e si vede a
+occhio, è altrove: animazioni, scene 3D, giochi interi.
+
+## Fable e Mythos sono lo stesso modello, con due porte diverse
+
+Anthropic lo dice in chiaro: sotto c'è un modello solo. Cambia chi può entrare.
+
+- **Fable 5.2** è disponibile a tutti, con protezioni più strette sulle
+  richieste pericolose in ambito biologico e di cybersecurity.
+- **Mythos 5.2** è riservato alle organizzazioni approvate nei programmi Life
+  Sciences e Cyber Verification. Secondo Anthropic ha trovato più vulnerabilità
+  di qualsiasi altro suo modello.
+
+Per chi scrive codice, quindi, la versione che conta è Fable. Costa **8 dollari
+per milione di token in input e 40 in output**, contro i 10 e 50 di Fable 5.1:
+il 20% in meno. Il cache read sta a 0.20, come Opus 5.5, e l'output arriva fino
+al 30% più veloce della versione precedente. Finestra di contesto da un milione
+di token e 128 mila in uscita, le stesse di Opus.
+
+## Sul codice di tutti i giorni il distacco non c'è più
+
+A settembre, scrivendo di
+[Opus 5.5 e del suo prezzo](/blog/claude-opus-5-5-prezzo-prestazioni), avevo
+detto che faticavo a trovare un motivo per pagare Fable 5.1 due volte e mezzo
+tanto. Con la 5.2 il moltiplicatore scende a due, e il ragionamento regge lo
+stesso. La
+[guida di Anthropic su quale modello scegliere](https://claude.dev/blog/which-claude-model-should-you-build-with/)
+chiama Opus 5.5 «our daily driver for complex coding», e mette i numeri accanto:
+Fable 5.2 e Opus 5.5 finiscono a due decimi di distanza su FrontierCode, con
+Opus a metà del costo.
+
+Dall'altra parte succede la stessa cosa. OpenAI presenta
+[GPT 6.1 Sol](https://thenewstack.io/openai-gpt-6-1-sol/) come un modello che si
+avvicina a GPT 6 Astra sul coding agentico a un quinto del prezzo, 2 e 10
+dollari per milione di token. Sono quasi tutti numeri di OpenAI, e il test
+indipendente di
+[Sonar](https://www.sonarsource.com/blog/openai-gpt-6-1-sol-evaluation/) li
+ridimensiona: più task passati di GPT 6 Sol, ma anche più bug in totale da
+smistare. La direzione però è quella: il modello che basta per il codice costa
+meno ogni trimestre.
+
+C'è una condizione, e non sta nelle tabelle. Il margine d'errore è minimo **se
+dall'altra parte c'è qualcuno che sa cosa sta chiedendo**. La spec la scrivi
+tu. Il diff che torna lo leggi tu, e sei tu a riconoscere l'astrazione sbagliata
+che passa tutti i test. Sei sempre tu a fermare l'agent quando sta risolvendo il
+problema sbagliato con grande impegno. Un modello più forte, in mano a chi
+questo non lo sa fare, produce codice sbagliato più convincente.
+
+## Quando conviene pagare Fable: la migrazione grossa e il run che nessuno guarda
+
+La stessa guida è onesta su dove Fable si guadagna il doppio. Nella tabella dei
+task gli assegna «major refactors and migrations, architecture planning, and
+leading many subagents», e dice di salire a Fable quando «Opus 5.5 at `high`
+still falls short, or for long unattended runs». L'esempio che fanno è
+concreto: Fable migra un codebase intero a TypeScript, e poi Opus 5.5 ci
+costruisce sopra la feature.
+
+La mia lettura è questa:
+
+- il ticket, il bug, la feature su tre PR: **Opus 5.5**;
+- il progetto legacy che nessuno tocca da anni, il framework rimasto tre major
+  indietro, la migrazione che a un team costerebbe settimane: **Fable 5.2**.
+
+Lì il prezzo doppio si ripaga, perché il lavoro è un piano che deve reggere per
+ore e coordinare decine di subagent senza perdere il filo. Su un task da
+mezz'ora paghi il doppio per lo stesso diff.
+
+## Il benchmark che conta adesso si guarda
+
+Quando due modelli finiscono a 45.3 e 45.5, la tabella smette di dirti quale
+scegliere. I test che separano ancora i modelli si stanno spostando dove
+l'output si vede.
+
+[MotionGraphicsBench](https://arxiv.org/abs/2611.10592), pubblicato su arXiv
+il 7 novembre, chiede di animare un SVG statico a partire da una richiesta
+scritta, su 100 casi verificati da programmi deterministici. Su 32 modelli il
+pass@1 va **dal 6.0% al 67.7%**: sessanta punti di distanza, dove i benchmark di
+codice si giocano sui decimali. Poi ci sono i confronti informali, come
+[questo sulle animazioni in pixel art](https://github.com/adityaimamz/pixel-animation-comparison-gpt-cluade-gemini)
+fra Opus 5.5, GPT 6 Astra e Gemini 4 Argon: Canvas 2D, audio procedurale, e un
+giudizio che si dà guardando.
+
+Il caso che ha girato di più è Saltline. Felix Rieseberg, ingegnere di
+Anthropic, ha chiesto a Fable 5.2 uno sparatutto in prima persona: «Insanely
+detailed quality pls, something that looks visually like it can keep up with
+AAA». Un livello solo, un porto container sotto la pioggia, tre relay da
+tagliare. Modelli, suoni e texture sono tutti generati da zero.
+
+<VideoFigure
+  mp4="/images/blog/claude-fable-5-2/saltline.mp4"
+  webm="/images/blog/claude-fable-5-2/saltline.webm"
+  poster="/images/blog/claude-fable-5-2/saltline-poster.webp"
+  alt="Uno sparatutto in prima persona dentro un magazzino portuale: scaffali arancioni, un muletto, una luce calda che entra dal portone, un fucile con mirino red dot in primo piano e l'obiettivo «Cut the three uplink relays» in alto a sinistra"
+  caption="Saltline, costruito da Claude Fable 5.2 in circa otto ore. Video di Felix Rieseberg, dal suo post su X."
+  width={960}
+  height={532}
+/>
+
+I numeri li ha messi lui
+[nel post](https://x.com/felixrieseberg/status/2119925633564463609): **circa 8
+ore e 550 dollari** a prezzi di API, 445 milioni di token in input e 2.7 in
+output, quasi tutti dalla cache. E
+[si gioca nel browser](https://claude.ai/artifact/BGY1SztrAYcJQHSsnHHGmp).
+
+<Callout type="warning">
+  «Un prompt solo» va letto bene: è un'istruzione che ha lavorato per otto ore,
+  non una risposta. E il prompt comincia con «you should also build me a FPS»,
+  quindi stava dentro una conversazione già avviata. Non tutti i giochi
+  costano così poco: Matthew Berman racconta di un multiplayer in stile Fall
+  Guys costruito da Fable 5.2 in circa 71 ore, per 13 mila dollari stimati.
+</Callout>
+
+Ottenere il gioco non è più il problema. Lo sono il conto e la dimensione del
+livello. Per chi fa frontend la conseguenza è più vicina di quanto sembri:
+l'animazione della hero, la scena 3D della landing, il motion che prima
+passavi a un designer, sono esattamente il tipo di lavoro in cui questi modelli
+oggi si distinguono.
+
+## Cosa tengo nel mio setup
+
+In Claude Code il modello di default resta Opus 5.5. Fable 5.2 su un progetto
+mio non l'ho ancora acceso, e non ho fretta. Lo apro il giorno in cui arriva il
+progetto legacy da portare avanti di tre major, o il cliente che vuole la scena
+3D sulla landing e non ha budget per uno studio. Lì il doppio del prezzo si
+vede nel risultato, non nella fattura.
