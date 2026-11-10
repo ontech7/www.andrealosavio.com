@@ -1,0 +1,136 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img">
+  <defs>
+    <radialGradient id="discord-rust-gpui-sky" gradientUnits="userSpaceOnUse" cx="760" cy="315" r="760">
+      <stop offset="0%" stop-color="#08203f" />
+      <stop offset="45%" stop-color="#050912" />
+      <stop offset="100%" stop-color="#03060c" />
+    </radialGradient>
+
+    <radialGradient id="discord-rust-gpui-bloom" gradientUnits="userSpaceOnUse" cx="760" cy="315" r="360">
+      <stop offset="0%" stop-color="#0d7ef2" stop-opacity="0.34" />
+      <stop offset="45%" stop-color="#0d7ef2" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#0d7ef2" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="discord-rust-gpui-ember" gradientUnits="userSpaceOnUse" cx="760" cy="330" r="230">
+      <stop offset="0%" stop-color="#f08a5d" stop-opacity="0.42" />
+      <stop offset="55%" stop-color="#d9673f" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#d9673f" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="discord-rust-gpui-old-halo" gradientUnits="userSpaceOnUse" cx="330" cy="315" r="200">
+      <stop offset="0%" stop-color="#5865f2" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#5865f2" stop-opacity="0" />
+    </radialGradient>
+
+    <linearGradient id="discord-rust-gpui-old-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8e98f7" />
+      <stop offset="100%" stop-color="#5865f2" />
+    </linearGradient>
+
+    <linearGradient id="discord-rust-gpui-new-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#eba183" />
+      <stop offset="55%" stop-color="#d9714b" />
+      <stop offset="100%" stop-color="#c4552f" />
+    </linearGradient>
+
+    <linearGradient id="discord-rust-gpui-new-rim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffe2d2" stop-opacity="0.75" />
+      <stop offset="100%" stop-color="#ffb08c" stop-opacity="0.15" />
+    </linearGradient>
+
+    <linearGradient id="discord-rust-gpui-arrow" gradientUnits="userSpaceOnUse" x1="478" y1="315" x2="600" y2="315">
+      <stop offset="0%" stop-color="#0d7ef2" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#7cc0ff" />
+    </linearGradient>
+
+    <pattern id="discord-rust-gpui-dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="14" cy="14" r="1.3" fill="#7cc0ff" />
+    </pattern>
+
+    <radialGradient id="discord-rust-gpui-depth" gradientUnits="userSpaceOnUse" cx="700" cy="315" r="560">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+
+    <mask id="discord-rust-gpui-depth-mask">
+      <rect width="1200" height="630" fill="url(#discord-rust-gpui-depth)" />
+    </mask>
+
+    <clipPath id="discord-rust-gpui-new-clip">
+      <rect x="650" y="205" width="220" height="220" rx="58" />
+    </clipPath>
+
+    <filter id="discord-rust-gpui-soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3.5" />
+    </filter>
+
+    <filter id="discord-rust-gpui-defocus" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.2" />
+    </filter>
+
+    <filter id="discord-rust-gpui-glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="26" result="blurred" />
+      <feFlood flood-color="#f08a5d" flood-opacity="0.55" />
+      <feComposite in2="blurred" operator="in" result="glow" />
+      <feMerge>
+        <feMergeNode in="glow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="discord-rust-gpui-arrow-glow" x="-30%" y="-200%" width="160%" height="500%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blurred" />
+      <feMerge>
+        <feMergeNode in="blurred" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="discord-rust-gpui-mark-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#7a2a10" flood-opacity="0.45" />
+    </filter>
+
+    <path
+      id="discord-rust-gpui-clyde"
+      d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+    />
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#discord-rust-gpui-sky)" />
+  <rect width="1200" height="630" fill="url(#discord-rust-gpui-bloom)" />
+
+  <g mask="url(#discord-rust-gpui-depth-mask)">
+    <rect width="1200" height="630" fill="url(#discord-rust-gpui-dots)" opacity="0.16" filter="url(#discord-rust-gpui-soft)" />
+  </g>
+
+  <rect width="1200" height="630" fill="url(#discord-rust-gpui-old-halo)" />
+
+  <g opacity="0.5" filter="url(#discord-rust-gpui-defocus)">
+    <rect x="230" y="215" width="200" height="200" rx="52" fill="url(#discord-rust-gpui-old-fill)" />
+    <use href="#discord-rust-gpui-clyde" fill="#ffffff" transform="translate(271 256) scale(4.9)" />
+  </g>
+
+  <g filter="url(#discord-rust-gpui-arrow-glow)" fill="none" stroke="url(#discord-rust-gpui-arrow)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M478 315 H598" />
+    <path d="M566 283 L600 315 L566 347" stroke="#7cc0ff" />
+  </g>
+
+  <circle cx="760" cy="330" r="230" fill="url(#discord-rust-gpui-ember)" />
+
+  <g filter="url(#discord-rust-gpui-glow)">
+    <rect x="650" y="205" width="220" height="220" rx="58" fill="url(#discord-rust-gpui-new-fill)" />
+  </g>
+
+  <g clip-path="url(#discord-rust-gpui-new-clip)" fill="none" stroke="#eba184" stroke-width="1.5">
+    <path d="M723.3 205 V425 M796.7 205 V425 M650 278.3 H870 M650 351.7 H870" />
+    <path d="M650 205 L870 425 M870 205 L650 425" />
+    <circle cx="760" cy="315" r="86" />
+    <rect x="677" y="232" width="166" height="166" rx="40" />
+  </g>
+
+  <rect x="650.75" y="205.75" width="218.5" height="218.5" rx="57.25" fill="none" stroke="url(#discord-rust-gpui-new-rim)" stroke-width="1.5" />
+
+  <use href="#discord-rust-gpui-clyde" fill="#fbf0e8" filter="url(#discord-rust-gpui-mark-shadow)" transform="translate(694 249) scale(5.5)" />
+</svg>

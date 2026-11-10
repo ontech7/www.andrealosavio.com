@@ -1,0 +1,175 @@
+---
+title: "Discord is rewriting its client in Rust, and it isn't Tauri"
+subtitle:
+  "The CTO showed a 290 MB build with two accounts signed in, in private testing
+  next to the Electron app. I stopped at Tauri for Fast Memo, and the gap is the
+  webview."
+description:
+  "Discord is building a Rust client on GPUI next to its Electron app. What the
+  CTO showed, what is still unproven, and what it means when you pick a stack."
+publishedAt: 2026-11-10
+translationKey: discord-rust-gpui
+tags: [performance, architecture, ai]
+cover: /images/blog/discord-rust-gpui/cover.svg
+coverAlt:
+  "The blue Discord icon, dim and out of focus, with an arrow pointing to the
+  same icon redrawn in Rust orange, lit up over a blueprint grid"
+takeaways:
+  - "Discord is building a new client in Rust: GPUI on desktop, native UI on
+    mobile, one shared core. Electron and React Native leave the stack."
+  - "Today it is a build heading into private testing, with no release date, and
+    the Electron app keeps getting updates in parallel."
+  - "The 290 MB figure comes from one screenshot with two accounts open, not
+    from a repeatable benchmark."
+  - "Tauri drops the bundled Chromium but keeps a webview. GPUI drops the
+    webview too, and the price is rewriting the UI."
+  - "Cross-platform is still the right call most of the time. AI lowers the cost
+    of the exception, when the runtime itself is what slows the app down."
+faq:
+  - q: "Is Discord dropping Electron?"
+    a:
+      "That is the direction CTO Stanislav Vishnevskiy announced on November 4,
+      2026. Today the Rust client is heading into private testing with no
+      release date, and the Electron app is still being developed in parallel."
+  - q: "What is GPUI?"
+    a:
+      "GPUI is the Rust UI framework built by the team behind the Zed editor. It
+      draws the interface directly on the GPU, with no HTML, CSS or webview.
+      Discord uses it for the new desktop client, with patches of its own."
+  - q: "What is the difference between Tauri and GPUI?"
+    a:
+      "Tauri has a Rust backend but renders the interface in the operating
+      system's webview, so the UI is still HTML and CSS. GPUI has no webview:
+      the interface is written in Rust and drawn by the GPU."
+---
+
+## What Discord showed on November 4
+
+On November 4, Discord cofounder and CTO Stanislav Vishnevskiy posted
+[on X](https://x.com/svishnevskiy/status/2118081920194203799) that the client is
+being rebuilt in Rust. Discord has used Rust since 2018 for infrastructure,
+voice and parts of the current app, and moving the whole client over was, in his
+words, "the holy grail". The line everyone shared came next: _"That means
+Electron goes away, and so does React Native"_.
+
+The plan:
+
+- **desktop**: Rust on **GPUI**, the UI framework that came out of the Zed
+  editor. Discord carries its own patches on top;
+- **mobile**: native UI, sharing application code with desktop through Rust;
+- **webview**: kept only where it earns its place, for video and Activities.
+
+To everyone in the replies guessing Tauri, he answered _"it's not Tauri, it's
+GPUI"_. I'll come back to that, because it's the part that hits close to home.
+
+The number that went around is **290.2 MB**: Task Manager on a Windows build
+labelled "Discord Phoenix", with two accounts signed in at once. Alongside it, a
+fifteen-second video on two laptops where the Rust client shows the friends list
+before the Electron one finishes loading.
+
+<Callout type="warning">
+  That's a screenshot, not a benchmark. Discord hasn't published a repeatable
+  comparison or any CPU numbers. For context, an employee wrote on Reddit that
+  normal usage of the current app stays under 1 GB, and that they were testing
+  an automatic restart above 4 GB.
+</Callout>
+
+And Electron hasn't gone anywhere. The new client is about to enter private
+testing, with no release date, and the app we all use keeps shipping updates.
+For now there are two clients growing side by side. The direction is stated. The
+timeline isn't.
+
+## Why the webview is the problem
+
+I've long thought Discord needed to get off Electron. Electron is a heavy
+wrapper. Every app ships **a full copy of Chromium** plus Node.js, and what you
+see is a web page inside a window. Open Discord, Slack and Notion together and
+you're running three browsers.
+
+If you've shipped WebViews inside React Native, you know. A WebView there is a
+separate rendering engine that talks to the rest of the app by passing strings
+through `postMessage`. Scrolling and touch don't behave like the rest of the UI,
+and memory climbs as soon as the page gets rich. Fine for a checkout form. For a
+whole app like Discord, you pay that on every screen.
+
+Tauri and GPUI fix different parts of the problem:
+
+| Stack    | What draws the interface       | UI language   |
+| -------- | ------------------------------ | ------------- |
+| Electron | Chromium, bundled with the app | HTML, CSS, JS |
+| Tauri    | The operating system's webview | HTML, CSS, JS |
+| GPUI     | The GPU, directly              | Rust          |
+
+Tauri removes the bundled browser, and that alone shrinks the app by an order of
+magnitude. But the interface is still a web page. GPUI removes that too, and the
+price is rewriting the UI from scratch.
+
+## Fast Memo: where I stopped
+
+If you follow my work, you know the desktop version of [Fast Memo](/projects) is
+built on Tauri, not Electron. You feel the difference right away:
+
+- the app is **6 MB** instead of the 100+ MB an Electron build would weigh;
+- it opens instantly;
+- it uses a fraction of the RAM.
+
+But the UI is still the **React Native** one, the same code as iOS and Android,
+loaded inside Tauri's webview. That's deliberate. I maintain Fast Memo on my
+own, and one codebase for three platforms is the only way one person ships a
+feature without writing it three times. I took everything Tauri had to give. I
+didn't take what GPUI offers, because it would cost me the shared UI.
+
+Discord went where I stopped: Rust core, desktop drawn by the GPU, native
+mobile. The CTO doesn't say which frameworks iOS and Android will use. SwiftUI
+and Jetpack Compose seem likely, but that's my guess.
+
+## Cross-platform is still right
+
+React Native, Flutter, Electron and Tauri exist for concrete reasons, and those
+reasons haven't gone away:
+
+- **one team** instead of a Swift team for iOS and a Kotlin team for Android;
+- **each feature written once**, not two or three times, with the same logic and
+  the same bugs;
+- **maintenance cost** that doesn't multiply per platform.
+
+That holds for agentic development too. One codebase is easier for a model to
+work in: less context, one place to change, one test suite. For most of the apps
+I see with clients, cross-platform is still the right call, and Discord's
+announcement doesn't change that.
+
+## Where I think AI comes in
+
+This part is my read, not something Discord said. Discord talks about RAM and
+speed.
+
+A couple of years ago a rewrite like this was hard to justify, even for a
+company with Discord's resources. Three interfaces to keep in sync, one per
+platform, for every new feature. Today the repetitive part of that work, porting
+the same screen across frameworks on top of a core that exposes the same
+functions, is exactly what an agent does well. The shared Rust core becomes the
+contract that keeps the three UIs aligned.
+
+AI is an accelerator, as I wrote in
+[AI won't replace you](/blog/developers-ai-value), when it's in the hands of
+someone who already knows where they're going. I don't know how much of Phoenix
+was written with an agent, and Discord hasn't said. But the cost that made this
+choice unthinkable has dropped, and anyone who uses Discord every day has felt
+the app getting slower for a while.
+
+## When it makes sense for you
+
+The moment is when your app has gotten slow and users start telling you. Before
+you think about Rust, open the profiler and see where the time goes.
+
+- If it goes into **your code** (wasted renders, unvirtualized lists, oversized
+  stores), rewriting the runtime won't save you. You'll carry the same problems
+  into a new language.
+- If it goes into **the runtime** (the bundled browser booting, the webview
+  bridge, memory that climbs while the screen sits still), you're in Discord's
+  situation. The first step can be Tauri, like I did. The second is a UI drawn
+  without a webview.
+
+If you get to that second step, copy the strategy and not just the stack. The
+new client grows next to the old one, goes into private testing, and the app
+your users run today keeps shipping until the new one has caught up.
