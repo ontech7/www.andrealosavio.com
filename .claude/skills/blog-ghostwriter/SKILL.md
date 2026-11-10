@@ -58,8 +58,10 @@ Verifica ogni affermazione tecnica prima di scriverla.
 
 ### 3. Scaletta
 
-Presenta: titolo proposto (italiano e inglese), sottotitolo, gli H2 in ordine,
-dove va il codice, i punti del TL;DR. Chiedi conferma. Fermati.
+Presenta: tre coppie titolo + sottotitolo (italiano e inglese), scritte
+seguendo la sezione "Titolo e sottotitolo" di `references/voice-and-tone.md`,
+poi gli H2 in ordine, dove va il codice, i punti del TL;DR. Chiedi conferma.
+Fermati.
 
 ### 4. Scrittura
 

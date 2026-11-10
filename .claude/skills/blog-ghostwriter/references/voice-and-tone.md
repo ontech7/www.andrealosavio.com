@@ -44,47 +44,91 @@ Se una frase non e nessuna delle due, quasi sempre e aria.
   forma piu comune di riempitivo: sembra profonda e non lascia niente da fare.
   Se stai per scrivere "il vero valore non e X, e Y", fermati.
 
-## Il sottotitolo
+## Titolo e sottotitolo
 
-Il sottotitolo non spiega: colpisce. La forma che funziona e sempre la stessa.
+Sono le due righe che decidono se il pezzo viene aperto, e le due in cui un
+testo generato si riconosce prima. Si scrivono insieme, come una coppia, e si
+giudicano insieme.
 
-**Sintagma nominale + due punti + un'immagine compressa.**
+### Il test
 
-Due sottotitoli approvati, da usare come metro:
+Leggi la coppia ad alta voce, come se la stessi scrivendo in un messaggio a un
+collega sviluppatore che stimi. Se ti imbarazzerebbe, o se lui dovrebbe
+chiederti "ok, ma cosa e successo?", la coppia non e pronta.
 
-- "Un agent skill da installare una volta sola: il pilota automatico per la
-  struttura del codice"
-- "Motion graphics scritte da un prompt: roba da studio di produzione, senza lo
-  studio di produzione"
-- "An agent skill you install once: the diagram you would have drawn yourself,
-  if you had the afternoon"
+Un titolo umano e catchy non perche gioca con le parole, ma perche e
+**specifico**: un nome proprio, un numero, un fatto che sorprende, una presa di
+posizione che potrebbe essere sbagliata. Lo slogan e il segnale opposto.
 
-L'ultimo mostra anche il vincolo che si dimentica piu spesso: il sottotitolo non
-puo riusare le parole della `description`, perche le due righe si leggono a
-pochi pixel di distanza. Quella di Archify diceva gia "navigable HTML file, not
-a screenshot", quindi il sottotitolo ha dovuto trovarsi un'altra immagine.
+### Cosa deve contenere la coppia
 
-Il titolo dice l'argomento, il corpo dice il meccanismo. Al sottotitolo resta
-**il risultato**: cosa ottieni, mai come funziona.
+Titolo e sottotitolo insieme devono portare tutte e tre queste cose. Il titolo
+ne porta una o due, il sottotitolo completa:
 
-Cosa lo rovina, in ordine di frequenza:
+1. **Il soggetto con il suo nome**: Discord, Opus 5.5, Tauri. Mai "un'app
+   famosa", "il nuovo modello".
+2. **Il fatto concreto**: cosa e successo o cosa fa, con il numero se c'e.
+3. **L'angolo di Andrea**: perche ne scrive lui, cosa ha provato, cosa ne pensa.
+   E la parte che rende il pezzo non sostituibile da una notizia.
 
-- **Verbi rivolti al lettore.** "Descrivi il video a parole e ottieni..." e copy
-  da onboarding, non un sottotitolo.
-- **Quantificatori che si scusano.** "Buono abbastanza", "quasi come",
-  "abbastanza veloce". Nessuno vende con "abbastanza", e in italiano suona
-  infantile.
-- **Il momento di lavoro.** "Quando la feature e pronta e il post no" e roba da
-  prima sezione. Nel sottotitolo diventa generico.
-- **Liste di astrazioni.** "Il prodotto, il sito e il marketing" senza
-  un'immagine che le tenga insieme non e un sottotitolo, e un tag cloud.
+### Il titolo
 
-Se non hai trovato l'immagine compressa, il sottotitolo non e pronto. Non
-ripiegare su una frase che descrive il flusso: e sempre peggio di niente.
+- Una frase che diresti a voce: un fatto ("Discord sta riscrivendo il client in
+  Rust"), una tesi ("Stai pagando un LLM per fare un if"), un'ammissione in
+  prima persona.
+- La forma "Nome: slogan" e il default da evitare. I due punti nel titolo vanno
+  bene solo se dopo c'e un fatto ("DeepSeek V4-Flash al posto di Opus: dove
+  regge"), mai una metafora.
+- Sotto i 60 caratteri, con la keyword dentro.
 
-Quando lo proponi all'utente, porta **tre o quattro varianti in un colpo solo**,
-con angoli diversi fra loro, non varianti della stessa. Una alla volta e un
-ping-pong che costa a lui e non converge.
+### Il sottotitolo
+
+Una o due frasi normali, con soggetto e verbo, che dicono cio che il titolo non
+ci stava a dire: il numero, il contesto, il limite, l'esperienza di Andrea.
+Deve essere informativo prima che brillante.
+
+Il metro, da articoli approvati:
+
+- "Tre settimane col preview dentro Claude Code, e stamattina i pesi 0731 sotto
+  licenza MIT" (cosa ho fatto io, piu il fatto di oggi);
+- "Perche l'illusione di chiudere 10 PR al giorno sta distruggendo la qualita
+  del codice" (una tesi con un numero).
+
+Non puo riusare le parole della `description`: le due righe si leggono a pochi
+pixel di distanza.
+
+### Cosa fa sembrare la coppia scritta da un'AI
+
+In ordine di frequenza, e tutti gia visti su questo blog:
+
+- **Due punti in entrambe le righe.** Titolo "X: Y" sopra un sottotitolo "A:
+  B" e la firma piu riconoscibile. Al massimo un due punti in tutta la coppia, e
+  meglio zero.
+- **La metafora compressa al posto del fatto.** "Il silenzio smette di essere un
+  timeout", "il server smette di richiedere una scrivania", "a negozio aperto",
+  "il conto della webview, pagato a rate". Suonano bene e non dicono niente:
+  chi legge non sa cosa e successo.
+- **Le formule ricorrenti.** "X, senza lo X", "smette di", "quello che
+  mancava", "quando X non basta piu", "la differenza fra X e Y", "perche X
+  conta", "l'architettura che nessuno disegna piu".
+- **Le astrazioni in fila.** "Il prodotto, il sito e il marketing", "il core,
+  la UI e i costi": un tag cloud, non una frase.
+- **I verbi da onboarding rivolti al lettore.** "Descrivi il video e
+  ottieni...".
+- **I quantificatori che si scusano.** "Abbastanza", "quasi come".
+- **L'esagerazione che il corpo deve poi smentire.** Se nel pezzo scriverai che
+  un numero e uno screenshot e non un benchmark, il titolo non puo venderlo
+  come un benchmark. E il modo piu rapido per far sembrare l'autore uno che non
+  ha letto la fonte.
+
+### Come proporla
+
+Porta **tre coppie in un colpo solo**, con angoli diversi (la notizia, la tesi,
+l'esperienza in prima persona), non tre varianti della stessa. Per ognuna
+scrivi in mezza riga quale delle tre informazioni porta il titolo e quale il
+sottotitolo. Prima di mostrarle, rileggi la lista qui sopra e scarta quelle che
+ci cascano: e piu utile all'utente vederne tre buone che quattro di cui una
+sola regge.
 
 ## Cose da non scrivere mai
 
