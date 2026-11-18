@@ -109,7 +109,7 @@ All three products are designed, built and maintained by Andrea alone. Fast Memo
 
 - **Fast Memo** — Quick notes and lists on phone and desktop. The data stays with the user: no account, no third-party services. https://fastmemo.losav.cc
 - **Coolify Manager** — Manage self-hosted Coolify servers from a phone or from the browser toolbar. https://coolify-manager.losav.cc
-- **Dìllo bène** — Android app for students of Italian diction: where the stress falls, open or closed vowels, voiced or voiceless s and z, with rules, exceptions and a daily quiz. Works offline, no account. Coming soon to Google Play. https://dillobene.losav.cc
+- **Dìllo bène** — Android app for students of Italian diction: a 100,000-word pronunciation dictionary (stress, open or closed vowels, voiced or voiceless s and z), plus lessons, a daily quiz and articulation exercises. Works offline, no account, no ads. Coming soon to Google Play. https://dillobene.losav.cc
 
 ## Selected Projects & Clients
 

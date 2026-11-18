@@ -33,7 +33,7 @@ export const FEATURED_PRODUCTS: FeaturedProduct[] = [
     status: "comingSoon",
     logo: "/images/clients/dillobene.svg",
     logoFullBleed: true,
-    image: "/images/products/dillobene.webp",
+    image: "/images/products/dillobene_v2.webp",
     websiteUrl:
       "https://dillobene.losav.cc?utm_source=andrealosavio.com&utm_medium=referral",
   },

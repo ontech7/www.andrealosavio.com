@@ -113,7 +113,7 @@ export const PROJECTS: Project[] = [
     kind: "product",
     roles: ["ui-ux", "mobile", "product"],
     logo: "/images/clients/dillobene.svg",
-    image: "/images/products/dillobene.webp",
+    image: "/images/products/dillobene_v2.webp",
     tags: ["expo-sdk", "react-native", "design"],
     websiteUrl: "https://dillobene.losav.cc",
   },
