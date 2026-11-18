@@ -360,7 +360,8 @@ products and the `product` kind is therefore skipped by `ProjectsSection`, so
 nothing appears twice. The products sit three per row, on the homepage too: a
 fourth would wrap alone onto a new line, so adding one means rethinking that
 grid. Each product carries a `status` that picks the card badge, download count
-for a shipped app, "coming soon" for one not yet on the store, so an unreleased
+for a shipped app with a track record, "on Google Play" for one just released,
+"coming soon" for one not yet on the store, so an unreleased
 app never inherits a download claim it has not earned.
 
 Group headings collapse while a filter is active, the same way the blog index

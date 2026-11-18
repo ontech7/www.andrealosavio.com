@@ -20,7 +20,7 @@
   },
   "featured": {
     "title": "I miei prodotti",
-    "subtitle": "Tre app che ho pensato e costruito da solo: due già pubblicate, la terza in arrivo.",
+    "subtitle": "Tre app che ho pensato e costruito da solo, tutte pubblicate: la terza è appena uscita.",
     "openSource": {
       "title": "Open source",
       "subtitle": "Altri progetti open source che ho pubblicato su GitHub.",
@@ -120,8 +120,8 @@
     },
     "dillobene": {
       "name": "Dìllo bène",
-      "context": "App Android per chi studia dizione, in arrivo",
-      "contribution": "Dizionario di pronuncia che funziona offline: accento, vocali aperte o chiuse, s e z sorde o sonore. Insegna i suoni con le lezioni, allena con un quiz al giorno e scalda la voce con gli esercizi di articolazione. In arrivo su Google Play."
+      "context": "App Android per chi studia dizione",
+      "contribution": "Dizionario di pronuncia che funziona offline: accento, vocali aperte o chiuse, s e z sorde o sonore. Insegna i suoni con le lezioni, allena con un quiz al giorno e scalda la voce con gli esercizi di articolazione. Su Google Play da novembre 2026."
     },
     "forfettarioControl": {
       "name": "Forfettario Control",

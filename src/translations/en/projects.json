@@ -20,7 +20,7 @@
   },
   "featured": {
     "title": "My own products",
-    "subtitle": "Three apps I designed and built on my own: two already shipped, the third on its way.",
+    "subtitle": "Three apps I designed and built on my own, all shipped: the third just came out.",
     "openSource": {
       "title": "Open source",
       "subtitle": "Other open source projects I've published on GitHub.",
@@ -120,8 +120,8 @@
     },
     "dillobene": {
       "name": "Dìllo bène",
-      "context": "Android app for students of Italian diction, coming soon",
-      "contribution": "An offline pronunciation dictionary: stress, open or closed vowels, voiced or voiceless s and z. It teaches the sounds through lessons, trains you with a daily quiz and warms up your voice with articulation exercises. Coming soon to Google Play."
+      "context": "Android app for students of Italian diction",
+      "contribution": "An offline pronunciation dictionary: stress, open or closed vowels, voiced or voiceless s and z. It teaches the sounds through lessons, trains you with a daily quiz and warms up your voice with articulation exercises. On Google Play since November 2026."
     },
     "forfettarioControl": {
       "name": "Forfettario Control",

@@ -2,9 +2,20 @@
 
 import type { FeaturedProduct } from "@/constants/products";
 import { cn } from "@/utils/cn";
-import { ArrowUpRightIcon, DownloadIcon, HourglassIcon } from "lucide-react";
+import {
+  ArrowUpRightIcon,
+  DownloadIcon,
+  HourglassIcon,
+  SmartphoneIcon,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+
+const STATUS_ICONS = {
+  downloads: DownloadIcon,
+  available: SmartphoneIcon,
+  comingSoon: HourglassIcon,
+} satisfies Record<FeaturedProduct["status"], unknown>;
 
 interface ProductHighlightCardProps {
   product: FeaturedProduct;
@@ -17,8 +28,7 @@ export function ProductHighlightCard({
 }: ProductHighlightCardProps) {
   const t = useTranslations();
   const name = t(`common.products.items.${product.id}.name`);
-  const StatusIcon =
-    product.status === "downloads" ? DownloadIcon : HourglassIcon;
+  const StatusIcon = STATUS_ICONS[product.status];
 
   return (
     <a

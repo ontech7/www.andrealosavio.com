@@ -1,4 +1,4 @@
-export type FeaturedProductStatus = "downloads" | "comingSoon";
+export type FeaturedProductStatus = "downloads" | "available" | "comingSoon";
 
 export interface FeaturedProduct {
   id: string;
@@ -30,7 +30,7 @@ export const FEATURED_PRODUCTS: FeaturedProduct[] = [
   },
   {
     id: "dillobene",
-    status: "comingSoon",
+    status: "available",
     logo: "/images/clients/dillobene.svg",
     logoFullBleed: true,
     image: "/images/products/dillobene_v2.webp",
