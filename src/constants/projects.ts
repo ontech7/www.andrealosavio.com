@@ -109,6 +109,15 @@ export const PROJECTS: Project[] = [
     websiteUrl: "https://coolify-manager.losav.cc",
   },
   {
+    id: "dillobene",
+    kind: "product",
+    roles: ["ui-ux", "mobile", "product"],
+    logo: "/images/clients/dillobene.svg",
+    image: "/images/products/dillobene.webp",
+    tags: ["expo-sdk", "react-native", "design"],
+    websiteUrl: "https://dillobene.losav.cc",
+  },
+  {
     id: "forfettarioControl",
     kind: "personal",
     roles: ["ui-ux", "product"],

@@ -20,7 +20,7 @@
   },
   "featured": {
     "title": "My own products",
-    "subtitle": "Two apps I designed, built and shipped on my own.",
+    "subtitle": "Three apps I designed and built on my own: two already shipped, the third on its way.",
     "openSource": {
       "title": "Open source",
       "subtitle": "Other open source projects I've published on GitHub.",
@@ -28,14 +28,14 @@
         "reactNativeDialog": {
           "description": "A simple, multi-purpose dialog rendered through a portal, with blur on Android and iOS."
         },
-        "claudeOmniRc": {
-          "description": "Remote control for the Claude Code CLI from your phone, with Ollama models or other LLMs too."
+        "piShare": {
+          "description": "Private, end-to-end encrypted links to the files on your disk, self-hosted on a Raspberry Pi."
         },
-        "ollamaUsage": {
-          "description": "A CLI that keeps an eye on your Ollama Cloud usage, with no official API."
+        "drezimoSoundboard": {
+          "description": "Physical soundboard for Voicemod: 36 pads, an encoder and an OLED display on an RP2040, in Rust."
         },
-        "figmaNodeQuery": {
-          "description": "Query the nodes of a Figma file from a URL and a token, as JSON."
+        "fastmemoServer": {
+          "description": "Self-hosted sync server for Fast Memo: end-to-end encrypted notes in a single Docker container."
         }
       }
     }
@@ -117,6 +117,11 @@
       "name": "Coolify Manager",
       "context": "Mobile app and Chrome extension for Coolify servers",
       "contribution": "An app for keeping an eye on a Coolify server from your phone, when you are away from the desk. Built on its REST API, it works with both the hosted and the self-hosted version. Over a thousand downloads."
+    },
+    "dillobene": {
+      "name": "Dìllo bène",
+      "context": "Android app for students of Italian diction, coming soon",
+      "contribution": "An offline pronunciation dictionary: stress, open or closed vowels, voiced or voiceless s and z. It explains the rules together with their exceptions and serves a daily quiz. Coming soon to Google Play."
     },
     "forfettarioControl": {
       "name": "Forfettario Control",

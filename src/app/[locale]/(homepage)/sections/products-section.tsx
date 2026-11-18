@@ -52,7 +52,7 @@ export function ProductsSection({ id, className }: ProductsSectionProps) {
       </motion.div>
 
       <motion.div
-        className="grid grid-cols-1 gap-4 md:grid-cols-2"
+        className="grid grid-cols-1 gap-4 md:grid-cols-3"
         variants={staggerContainerAnim}
         initial="hidden"
         whileInView="visible"

@@ -1,5 +1,8 @@
+export type FeaturedProductStatus = "downloads" | "comingSoon";
+
 export interface FeaturedProduct {
   id: string;
+  status: FeaturedProductStatus;
   logo: string;
   logoFullBleed: boolean;
   image: string;
@@ -9,6 +12,7 @@ export interface FeaturedProduct {
 export const FEATURED_PRODUCTS: FeaturedProduct[] = [
   {
     id: "fastmemo",
+    status: "downloads",
     logo: "/images/clients/fastmemo_v3.svg",
     logoFullBleed: true,
     image: "/images/products/fastmemo_v2.webp",
@@ -17,11 +21,21 @@ export const FEATURED_PRODUCTS: FeaturedProduct[] = [
   },
   {
     id: "coolifyManager",
+    status: "downloads",
     logo: "/images/clients/coolify-manager.svg",
     logoFullBleed: false,
     image: "/images/products/coolify-manager.webp",
     websiteUrl:
       "https://coolify-manager.losav.cc?utm_source=andrealosavio.com&utm_medium=referral",
+  },
+  {
+    id: "dillobene",
+    status: "comingSoon",
+    logo: "/images/clients/dillobene.svg",
+    logoFullBleed: true,
+    image: "/images/products/dillobene.webp",
+    websiteUrl:
+      "https://dillobene.losav.cc?utm_source=andrealosavio.com&utm_medium=referral",
   },
 ];
 
@@ -40,21 +54,21 @@ export const OPEN_SOURCE_REPOS: OpenSourceRepo[] = [
     url: "https://github.com/ontech7/react-native-dialog",
   },
   {
-    id: "claudeOmniRc",
+    id: "piShare",
     owner: "ontech7",
-    name: "claude-omni-rc",
-    url: "https://github.com/ontech7/claude-omni-rc",
+    name: "pi-share",
+    url: "https://github.com/ontech7/pi-share",
   },
   {
-    id: "ollamaUsage",
+    id: "drezimoSoundboard",
     owner: "ontech7",
-    name: "ollama-usage",
-    url: "https://github.com/ontech7/ollama-usage",
+    name: "drezimo-soundboard",
+    url: "https://github.com/ontech7/drezimo-soundboard",
   },
   {
-    id: "figmaNodeQuery",
+    id: "fastmemoServer",
     owner: "ontech7",
-    name: "figma-node-query",
-    url: "https://github.com/ontech7/figma-node-query",
+    name: "fastmemo-server",
+    url: "https://github.com/ontech7/fastmemo-server",
   },
 ];

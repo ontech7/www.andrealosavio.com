@@ -2,7 +2,7 @@
 
 import type { FeaturedProduct } from "@/constants/products";
 import { cn } from "@/utils/cn";
-import { ArrowUpRightIcon, DownloadIcon } from "lucide-react";
+import { ArrowUpRightIcon, DownloadIcon, HourglassIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
@@ -17,6 +17,8 @@ export function ProductHighlightCard({
 }: ProductHighlightCardProps) {
   const t = useTranslations();
   const name = t(`common.products.items.${product.id}.name`);
+  const StatusIcon =
+    product.status === "downloads" ? DownloadIcon : HourglassIcon;
 
   return (
     <a
@@ -36,18 +38,15 @@ export function ProductHighlightCard({
           alt=""
           width={904}
           height={603}
-          sizes="(max-width: 768px) 100vw, 460px"
+          sizes="(max-width: 768px) 100vw, 320px"
           className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
           aria-hidden="true"
         />
         <div className="from-card absolute inset-x-0 bottom-0 h-24 bg-linear-to-t to-transparent" />
 
         <span className="bg-background/80 text-foreground absolute top-3 right-3 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs backdrop-blur-md">
-          <DownloadIcon
-            className="text-secondary size-3.5"
-            aria-hidden="true"
-          />
-          {t("common.products.downloads")}
+          <StatusIcon className="text-secondary size-3.5" aria-hidden="true" />
+          {t(`common.products.status.${product.status}`)}
         </span>
       </div>
 

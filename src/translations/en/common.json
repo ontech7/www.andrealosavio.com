@@ -108,7 +108,10 @@
     "directLinkedin": "Reach me on LinkedIn"
   },
   "products": {
-    "downloads": "Over 1,000 downloads",
+    "status": {
+      "downloads": "Over 1,000 downloads",
+      "comingSoon": "Soon on Google Play"
+    },
     "visitSite": "Visit the site",
     "items": {
       "fastmemo": {
@@ -118,6 +121,10 @@
       "coolifyManager": {
         "name": "Coolify Manager",
         "tagline": "Manage your Coolify servers from your phone or from the browser toolbar, wherever you are."
+      },
+      "dillobene": {
+        "name": "Dìllo bène",
+        "tagline": "Where the stress falls, whether an e is open or closed, whether an s is voiced. Standard Italian diction in your pocket, offline too."
       }
     }
   }

@@ -105,10 +105,11 @@ Areas covered, beyond frontend work:
 
 ## Own Products
 
-Both products are designed, built, shipped and maintained by Andrea alone, and each has passed **1,000+ downloads**.
+All three products are designed, built and maintained by Andrea alone. Fast Memo and Coolify Manager are shipped and have each passed **1,000+ downloads**; Dìllo bène is coming soon to Google Play.
 
 - **Fast Memo** — Quick notes and lists on phone and desktop. The data stays with the user: no account, no third-party services. https://fastmemo.losav.cc
 - **Coolify Manager** — Manage self-hosted Coolify servers from a phone or from the browser toolbar. https://coolify-manager.losav.cc
+- **Dìllo bène** — Android app for students of Italian diction: where the stress falls, open or closed vowels, voiced or voiceless s and z, with rules, exceptions and a daily quiz. Works offline, no account. Coming soon to Google Play. https://dillobene.losav.cc
 
 ## Selected Projects & Clients
 
@@ -128,7 +129,9 @@ Both products are designed, built, shipped and maintained by Andrea alone, and e
 ## Open Source
 
 - **react-native-dialog** — Developer-friendly dialog component for React Native.
-- **figma-node-query** — Utility to query Figma nodes.
+- **pi-share** — Private, end-to-end encrypted links to files on your disk, self-hosted on a Raspberry Pi.
+- **drezimo-soundboard** — Physical soundboard for Voicemod on an RP2040, written in Rust.
+- **fastmemo-server** — Self-hosted, end-to-end encrypted sync server for Fast Memo, in a single Docker container.
 - **Coolify Manager** — Chrome extension and mobile app to manage self-hosted Coolify servers.
 - **Fast Memo** — Open-source cross-platform memo application.
 
@@ -154,7 +157,7 @@ There is no separate services page: the homepage is the single entry point and c
 - [Homepage](${SITE_URL}/en): the full story, from who Andrea is to the contact form
   - [How he works](${SITE_URL}/en#how-i-work): three things a CV cannot say
   - [Real impact](${SITE_URL}/en#impact): the numbers and the areas he covers
-  - [Own products](${SITE_URL}/en#products): Fast Memo and Coolify Manager
+  - [Own products](${SITE_URL}/en#products): Fast Memo, Coolify Manager and Dìllo bène
   - [Client feedback](${SITE_URL}/en#feedback): what past clients say
   - [Contact](${SITE_URL}/en#contact): the contact form and direct channels
 - [Projects](${SITE_URL}/en/projects): own products in the spotlight, then client work and personal projects

@@ -108,7 +108,10 @@
     "directLinkedin": "Contattami su LinkedIn"
   },
   "products": {
-    "downloads": "Oltre 1.000 download",
+    "status": {
+      "downloads": "Oltre 1.000 download",
+      "comingSoon": "Presto su Google Play"
+    },
     "visitSite": "Vai al sito",
     "items": {
       "fastmemo": {
@@ -118,6 +121,10 @@
       "coolifyManager": {
         "name": "Coolify Manager",
         "tagline": "Gestisci i tuoi server Coolify dal telefono o dalla barra del browser, ovunque ti trovi."
+      },
+      "dillobene": {
+        "name": "Dìllo bène",
+        "tagline": "Dove cade l'accento, se la e è aperta o chiusa, se la s è sorda o sonora. La dizione standard in tasca, anche offline."
       }
     }
   }

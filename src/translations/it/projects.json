@@ -20,7 +20,7 @@
   },
   "featured": {
     "title": "I miei prodotti",
-    "subtitle": "Due app che ho pensato, costruito e pubblicato da solo.",
+    "subtitle": "Tre app che ho pensato e costruito da solo: due già pubblicate, la terza in arrivo.",
     "openSource": {
       "title": "Open source",
       "subtitle": "Altri progetti open source che ho pubblicato su GitHub.",
@@ -28,14 +28,14 @@
         "reactNativeDialog": {
           "description": "Dialog semplice e multi-funzione, portalizzato, con blur su Android e iOS."
         },
-        "claudeOmniRc": {
-          "description": "Remote control per la CLI di Claude Code dal telefono, anche con modelli Ollama o altri LLM."
+        "piShare": {
+          "description": "Link privati e cifrati end-to-end ai file del tuo disco, in self-hosting su un Raspberry Pi."
         },
-        "ollamaUsage": {
-          "description": "CLI che tiene d'occhio i consumi di Ollama Cloud, senza API ufficiali."
+        "drezimoSoundboard": {
+          "description": "Soundboard fisica per Voicemod: 36 pad, encoder e display OLED su RP2040, in Rust."
         },
-        "figmaNodeQuery": {
-          "description": "Interroga i nodi di un file Figma da URL e token, con output JSON."
+        "fastmemoServer": {
+          "description": "Server di sync self-hosted per Fast Memo: note cifrate end-to-end in un solo container Docker."
         }
       }
     }
@@ -117,6 +117,11 @@
       "name": "Coolify Manager",
       "context": "App mobile ed estensione Chrome per server Coolify",
       "contribution": "App per tenere d'occhio un server Coolify dal telefono, quando non sei alla scrivania. Costruita sulle sue API REST, funziona sia con l'hosted sia con il self-hosted. Oltre mille download."
+    },
+    "dillobene": {
+      "name": "Dìllo bène",
+      "context": "App Android per chi studia dizione, in arrivo",
+      "contribution": "Dizionario di pronuncia che funziona offline: accento, vocali aperte o chiuse, s e z sorde o sonore. Spiega le regole insieme alle loro eccezioni e propone un quiz al giorno. In arrivo su Google Play."
     },
     "forfettarioControl": {
       "name": "Forfettario Control",

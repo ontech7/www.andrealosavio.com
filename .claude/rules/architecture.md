@@ -355,9 +355,13 @@ screenshot.
 
 Client cards are full-width with a horizontal split, because at two per row
 there was no room for anything but a description and a button. Personal
-experiments stay two per row. `FeaturedProductsSection` renders the two own
+experiments stay two per row. `FeaturedProductsSection` renders the own
 products and the `product` kind is therefore skipped by `ProjectsSection`, so
-nothing appears twice.
+nothing appears twice. The products sit three per row, on the homepage too: a
+fourth would wrap alone onto a new line, so adding one means rethinking that
+grid. Each product carries a `status` that picks the card badge, download count
+for a shipped app, "coming soon" for one not yet on the store, so an unreleased
+app never inherits a download claim it has not earned.
 
 Group headings collapse while a filter is active, the same way the blog index
 suspends its featured block — a filtered page is just the result list.
